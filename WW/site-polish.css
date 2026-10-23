@@ -106,3 +106,11 @@ main .prose .kv-line>.sq-sub.wyatt{color:#19c5d8}
 #openings .ww-openings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 #openings .ww-opening-card-head{min-height:66px}
 @media(max-width:620px){#openings .ww-openings-grid{grid-template-columns:minmax(0,1fr)}#openings .ww-opening-card-head{min-height:56px}}
+
+/* Guide navigation is a wrapping button grid, never a horizontal rail. */
+#guide .ww-guide .wg-groups{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;overflow:visible;height:auto;max-width:100%;padding:0 0 6px}
+#guide .ww-guide .wg-groups button{width:100%;min-width:0;min-height:48px;height:auto;flex:none;padding:10px 8px;gap:6px;white-space:normal;line-height:1.5;border-bottom-width:1px}
+#guide .ww-guide .wg-item-selector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;overflow:visible;height:auto;min-height:0;max-width:100%;padding:0;margin-bottom:24px}
+#guide .ww-guide .wg-item-selector button{width:100%;min-width:0;min-height:48px;height:auto;flex:none;padding:10px 8px;white-space:normal;line-height:1.5;word-break:keep-all;overflow-wrap:anywhere}
+#guide .ww-hscroll-controls{display:none!important}
+@media(max-width:600px){#guide .ww-guide .wg-groups,#guide .ww-guide .wg-item-selector{grid-template-columns:repeat(2,minmax(0,1fr))}#guide .ww-guide .wg-groups button{font-size:13px}#guide .ww-guide .wg-item-selector button{font-size:14px}}

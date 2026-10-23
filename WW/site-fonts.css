@@ -13,7 +13,7 @@ body{font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.7
 body :is(button,summary,input,select,textarea){font-family:var(--font-body)!important}
 :is(.prose,.source-body,.intro-whole-body,.ww-openings-prose,.ww-npc-details,.head-desc,.wwtruck-detail,.wwtruck-spec,.wg-value,.wg-support-value,.wg-support-statement){font-family:var(--font-body);letter-spacing:0}
 :is(.sq-sub,.sq-label,.piece-title,.kv-heading,.ww-opening-card h3,.ww-npc-name,.wwtruck-caption h3,.ww-profile-traits,.brand-name,.character-menu,.chapter-nav,.ww-key-action){font-family:var(--font-label);letter-spacing:0}
-:is(.ww-npc-edition,.ww-npc-heading,.ww-npc-polaroid figcaption,.ww-npc-english,.ww-npc-thumb-number,.ww-npc-counter,.ww-radio-time,.ww-radio-volume-value,.ww-radio-track-count,.ww-radio-track-number){font-family:var(--font-label)}
+:is(.ww-npc-edition,.ww-npc-polaroid figcaption,.ww-npc-english,.ww-npc-thumb-number,.ww-npc-counter,.ww-radio-time,.ww-radio-volume-value,.ww-radio-track-count,.ww-radio-track-number){font-family:var(--font-label)}
 :is(code,pre){font-family:var(--font-mono)}
 ::selection{background:var(--brass);color:var(--tar)}
 input,textarea{caret-color:var(--cyan)}
@@ -35,7 +35,7 @@ main :is(.prose,.ww-opening-body,.wg-value,.wg-support-value,.wg-support-stateme
 body{font-synthesis:none}
 body :is(p,span,a,button,summary,input,select,textarea,li,th,td,code,pre,small,em,mark,label):not(h1 *,h2 *,h3 *,h4 *,h5 *,h6 *,.brand-mark,.brand-mark *,.poster-twins,.poster-twins *,.poster-title,.poster-title *,#intro-title,#intro-title *,.hero-copy h1,.hero-copy h1 *){font-weight:400!important;-webkit-text-stroke:0!important}
 body :is(strong,b,.kw-chip,.tc-title,.wg-model-highlight):not(.brand-mark *,.poster-title *,#intro-title *,h1 *,h2 *,h3 *,h4 *,h5 *,h6 *,.hero-copy h1 *){font-weight:500!important;-webkit-text-stroke:0!important}
-body :is(.kw-chip,.sq-label,.mono-code,.ww-npc-english,.ww-npc-edition,.ww-npc-heading,.ww-radio-time,.ww-radio-volume-value,.ww-radio-track-count,.ww-radio-track-number,.tp-name strong,.portrait,.portrait span,.portrait small){font-family:var(--font-body)!important}
+body :is(.kw-chip,.sq-label,.mono-code,.ww-npc-english,.ww-npc-edition,.ww-radio-time,.ww-radio-volume-value,.ww-radio-track-count,.ww-radio-track-number,.tp-name strong,.portrait,.portrait span,.portrait small){font-family:var(--font-body)!important}
 body .kw-chip{font-size:14px;line-height:1.5}
 body :is(.tp-name strong,.portrait span){letter-spacing:0}
 

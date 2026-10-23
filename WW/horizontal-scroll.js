@@ -3,7 +3,7 @@
   if (window.WWHorizontalScroll) return;
   var instances = new Map(), serial = 0, observer, pending = 0, started = false;
   var selectors = '[data-horizontal-scroll],.chapter-nav,.wwtruck-thumbnail-strip,.wwtruck-categories,.wg-groups,.wg-item-selector';
-  var excluded = '.ww-hscroll-controls,.ww-npc-film,#contact-list,[data-horizontal-scroll="off"]';
+  var excluded = '#guide,.ww-hscroll-controls,.ww-npc-film,#contact-list,[data-horizontal-scroll="off"]';
   var reduced = function () { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; };
   function visible(element) {
     return element.isConnected && element.getClientRects().length > 0 &&

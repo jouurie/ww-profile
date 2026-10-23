@@ -62,7 +62,7 @@
 #guide .wg-status-guide .wg-status-field-notes{margin-top:16px;padding-top:14px;border-top:1px solid var(--wg-line)}
 @media(max-width:600px){#guide .wg-status-guide{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:650px){#guide .wg-status-guide .wg-status-card{padding:14px}#guide .wg-status-guide .wg-status-field-table th:first-child{width:94px}#guide .wg-status-guide .wg-status-field-table :is(th,td){padding-top:8px;padding-bottom:8px}}
-@media(hover:hover){#guide .ww-guide button:hover{border-color:var(--wg-ink);text-decoration:underline;text-underline-offset:4px}}
+@media(hover:hover){#guide .ww-guide button:hover{filter:brightness(1.08);text-decoration:none}}
 @media(max-width:850px){#guide .wg-command-row{grid-template-columns:minmax(0,1fr);gap:12px}#guide .wg-control-panel{padding:18px}}
 @media(max-width:650px){#guide .wg-command-pair{grid-template-columns:minmax(0,1fr);gap:12px}#guide .wg-control-panel{padding:14px}#guide .wg-groups button{min-width:220px}#guide .wg-status-preview-body{padding:6px}}
 #guide .wg-content,#guide .wg-item{width:100%;min-width:0;box-sizing:border-box}
