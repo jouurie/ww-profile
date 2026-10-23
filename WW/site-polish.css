@@ -172,3 +172,15 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 #brothers .profile-section+.profile-section{margin-top:12px}
 #profile-0 .kv-heading>.sq-sub{display:block;width:100%;max-width:100%;box-sizing:border-box}
 #profile-0 .kv-entity .kv-section-body{padding-inline:6px;box-sizing:border-box}
+
+/* Both overview identities use the same height / role line structure. */
+#intro .twin-polaroid .tp-summary{display:grid;gap:3px;margin-top:4px}
+#intro .twin-polaroid .tp-summary>span{display:block;white-space:nowrap}
+@media(max-width:720px){
+ #intro .twin-mini-grid{grid-template-columns:minmax(0,1fr)}
+ #intro .twin-polaroid{grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:center}
+ #intro .twin-polaroid .portrait.tiny{grid-column:1;grid-row:1}
+ #intro .twin-polaroid .tp-body{display:contents}
+ #intro .twin-polaroid .tp-name{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin:0}
+ #intro .twin-polaroid .tp-summary{grid-column:1/-1;grid-row:2;margin:0}
+}

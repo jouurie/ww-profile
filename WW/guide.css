@@ -247,3 +247,28 @@
 
 #guide .ww-guide .wg-directory-wrap{display:inline}
 @media(max-width:600px){#guide .ww-guide .wg-directory-wrap{display:block}}
+
+/* Prompt copy controls share one compact geometry. */
+#guide .ww-guide .wg-copy-control{display:inline-grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:8px;max-width:100%;background:transparent;color:var(--ink)}
+#guide .ww-guide .wg-copy-control>button[data-copy-block]{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:60px;min-width:60px;max-width:60px;height:28px;min-height:28px;max-height:28px;padding:0;margin:0;background:var(--brass);color:var(--ink);font-size:12px;line-height:1;white-space:nowrap}
+#guide .ww-guide .wg-copy-control>[role=status]{display:block;min-width:0;min-height:28px;margin:0;line-height:28px;font-size:12px}
+
+#guide .ww-guide .wg-model-defaults>h5{margin:0 0 8px;font-family:var(--font-label);font-weight:400;font-size:14px;line-height:1.5}
+
+/* Keep every common-setting value inside its own metric column. */
+#guide .ww-guide .wg-start-metrics{grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:20px}
+#guide .ww-guide .wg-start-metrics article{box-sizing:border-box;min-width:0;padding-right:16px}
+#guide .ww-guide .wg-start-metrics .wg-value{font-size:24px;line-height:1.3;white-space:nowrap}
+@media(max-width:700px){#guide .ww-guide .wg-start-metrics{grid-template-columns:minmax(0,1fr);gap:18px}#guide .ww-guide .wg-start-metrics article{padding-right:0;border-right:0}#guide .ww-guide .wg-start-metrics .wg-inline-label{margin-bottom:8px}}
+
+/* Guidance and examples use the same framed body and copy-control row. */
+#guide .ww-guide .wg-copy-block{box-sizing:border-box;min-width:0;max-width:100%;margin:0;border:1px solid var(--brass);background:var(--paper)}
+#guide .ww-guide .wg-copy-block-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;box-sizing:border-box;min-width:0;padding:10px 14px;border-bottom:1px solid var(--brass);background:var(--paper-deep);color:var(--ink)}
+#guide .ww-guide .wg-copy-block-head>span{font-family:var(--font-label);font-size:13px;line-height:1.5}
+#guide .ww-guide .wg-copy-block-head .wg-copy-control{margin:0}
+#guide .ww-guide .wg-copy-block-body{box-sizing:border-box;min-width:0;max-width:100%;padding:16px;overflow-wrap:anywhere;word-break:normal}
+#guide .ww-guide .wg-copy-block-body :is(p,pre,code){max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
+#guide .ww-guide .wg-copy-block-body .wg-code{box-sizing:border-box;min-width:0;margin:0;padding:0;border:0;background:transparent;overflow:visible}
+#guide .ww-guide .wg-copy-block-body>.wg-fragment{padding:0;border:0}
+#guide .ww-guide .wg-copy-block-body p:last-child{margin-bottom:0}
+@media(max-width:600px){#guide .ww-guide .wg-copy-block-head{padding:10px 12px}#guide .ww-guide .wg-copy-block-body{padding:12px}}

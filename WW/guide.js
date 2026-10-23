@@ -15,7 +15,7 @@
     return raw.split('\n').filter(line=>line.trim()).map(line=>{
       const text=clean(line.replace(/^[·↳] /,''));
       if(/^\s*#{1,6}\s+/.test(line))return '<h4>'+links(text)+'</h4>';
-      if(text.startsWith('<RStatus'))return '<pre class="wg-code"><code>'+esc(text)+'</code></pre>'+copyControl(text,'예시 복사');
+      if(text.startsWith('<RStatus'))return copyPanel('<pre class="wg-code"><code>'+esc(text)+'</code></pre>',text,'예시 복사');
       return '<p'+(line.startsWith('↳ ')?' class="wg-note"':'')+'>'+links(text)+'</p>';
     }).join('');
   }
@@ -45,7 +45,10 @@
   }
   function copyControl(payload,label='복사'){
     const id='wg-copy-'+(++copyIndex);payloads.set(id,payload);
-    return '<div class="wg-copy-control"><button type="button" data-copy-block="'+id+'">'+label+'</button><span role="status"></span></div>';
+    return '<div class="wg-copy-control"><button type="button" data-copy-block="'+id+'" aria-label="'+esc(label)+'">COPY</button><span role="status"></span></div>';
+  }
+  function copyPanel(content,payload,label){
+    return '<section class="wg-copy-block"><header class="wg-copy-block-head"><span>본문</span>'+copyControl(payload,label)+'</header><div class="wg-copy-block-body">'+content+'</div></section>';
   }
   function modelTitle(name){
     return esc(name).replace(/3\.8 Flash|4 Argon|Opus|GPT 5\.6 Sol(?: \(SFW\))?/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
@@ -55,7 +58,12 @@
     const metrics='<section class="wg-item-setting"><h4>'+esc(common.heading)+'</h4><div class="wg-start-metrics">'+common.units.slice(0,3).map(raw=>'<article>'+unit(raw)+'</article>').join('')+'</div><div class="wg-start-plan">'+body(common.units.slice(3).join(''))+'</div></section>';
     const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4>'+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
     const support=item.sections.slice(1).filter(part=>part.heading!=='모델별 특징 · 개별 추론');
-    return metrics+cards+'<div class="wg-model-support">'+support.map(part=>'<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><table class="wg-model-support-table"><tbody>'+part.units.map(modelUnit).join('')+'</tbody></table></section>').join('')+'</div>';
+    return metrics+cards+'<div class="wg-model-support">'+support.map(modelSupport).join('')+'</div>';
+  }
+  function modelSupport(part){
+    const defaults=[];
+    const units=part.units.map(raw=>part.heading==='추론 조절'?raw.split('\n').filter(line=>{if(/^↳ (?:기본 |설명이 길어지면)/.test(line)){defaults.push(line);return false;}return true;}).join('\n'):raw);
+    return '<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><table class="wg-model-support-table"><tbody>'+units.map(modelUnit).join('')+'</tbody></table>'+(defaults.length?'<aside class="wg-model-defaults wg-support-notes"><h5>기본값</h5>'+body(defaults.join('\n'))+'</aside>':'')+'</section>';
   }
   function modelUnit(raw){
     const rows=raw.split('\n'),first=rows.shift().replace(/^· /,'');
@@ -110,13 +118,13 @@
     ];
     const values=Object.fromEntries(fields.map(([key])=>[key,key==='n'?'1':key==='duration'?'0':'']));
     const template='```status\n'+JSON.stringify(values,null,2)+'\n```';
-    const input='<p>노디는 status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 아래는 장면 정보를 넣지 않은 최소 예시입니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p><pre class="wg-code"><code>'+esc(template.replace(/\n  /g,'\n'))+'</code></pre>'+copyControl(template,'노디 예시 복사');
+    const input='<p>노디는 status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 아래는 장면 정보를 넣지 않은 최소 예시입니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p>'+copyPanel('<pre class="wg-code"><code>'+esc(template.replace(/\n  /g,'\n'))+'</code></pre>',template,'노디 예시 복사');
     const settings='<h4>값 형식</h4><p>21개 값은 모두 문자열입니다. n과 duration도 따옴표 안에 적습니다. 빈 문자열에는 현재 확인된 값을 넣고, 바뀌지 않은 유효한 상태는 유지합니다.</p><p>loreKeys는 현재 duration, month, weather와 맞춰 갱신합니다.</p>';
     return statusGuide(input,settings,'항목별 의미 · JSON 키',fields);
   }
   function statusPreview(){
     const tabs=['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" id="wg-status-tab-'+platform+'" aria-controls="wg-status-preview-'+platform+'" data-wg-status-platform="'+platform+'" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('');
-    return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="'+platform.toUpperCase()+' 상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=ui19',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
+    return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="'+platform.toUpperCase()+' 상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=ui20',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
   }
   function itemBody(item){
     if(item.index===0){
@@ -131,11 +139,11 @@
       const rendered=section(part,item,0);
       if(!part.heading)return rendered;
       const payload=part.body.trim().replace(/\n+\(선택 사항\)\s*$/,'');
-      return '<div class="wg-prompt-block">'+rendered+copyControl(payload,'영어 본문 전체 복사')+'</div>';
+      return '<div class="wg-prompt-block">'+copyPanel(rendered,payload,'영어 본문 전체 복사')+'</div>';
     }).join('')+'</div>';
     if(item.index===8){
       const offset=item.text.indexOf('Use only supplied evidence.');
-      return offset<0?pieces(item):body(item.text.slice(0,offset))+'<div class="wg-summary-prompt">'+body(item.text.slice(offset))+copyControl(item.text.slice(offset).trim(),'요약 지침 전체 복사')+'</div>';
+      return offset<0?pieces(item):body(item.text.slice(0,offset))+'<div class="wg-summary-prompt">'+copyPanel(body(item.text.slice(offset)),item.text.slice(offset).trim(),'요약 지침 전체 복사')+'</div>';
     }
     return pieces(item);
   }

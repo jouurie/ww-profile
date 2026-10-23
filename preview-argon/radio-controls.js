@@ -46,7 +46,7 @@
         host.replaceChildren(track);host.classList.add('radio-title-runner');
         entry={track,first,copy};titleEntries.set(host,entry);titleResize?.observe(host);titleIntersection?.observe(host);
       }
-      const overflow=host.id==='radio-current-title'||entry.first.scrollWidth>host.clientWidth+1;
+      const overflow=host.id==='radio-current-title'||(host.closest('.track-card')?.getAttribute('aria-current')==='true'&&entry.first.scrollWidth>host.clientWidth+1);
       host.classList.toggle('has-overflow',overflow);
       if(overflow){
         const distance=entry.first.scrollWidth+24;
@@ -69,7 +69,7 @@
     titleObserver?.disconnect();titleResize?.disconnect();titleIntersection?.disconnect();titleEntries.clear();titleRoot=radio;
     titleResize=typeof ResizeObserver==='function'?new ResizeObserver(queueTitles):null;
     titleIntersection=typeof IntersectionObserver==='function'?new IntersectionObserver(entries=>{entries.forEach(entry=>entry.target.classList.toggle('is-offscreen',!entry.isIntersecting));queueTitles();}):null;
-    titleObserver=new MutationObserver(queueTitles);titleObserver.observe(radio,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden']});
+    titleObserver=new MutationObserver(queueTitles);titleObserver.observe(radio,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','aria-current']});
     ['pointerover','pointerout','focusin','focusout'].forEach(type=>radio.addEventListener(type,queueTitles));
     document.fonts?.ready.then(queueTitles);queueTitles();
   }
