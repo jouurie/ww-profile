@@ -164,7 +164,8 @@ window.WWRender = (() => {
     const card=(item,id='')=>`<article class="paper-piece guide-source-card" ${id?`id="${id}"`:''}><h3 class="piece-title">${heading(item)}</h3><div class="prose" data-raw="${escapeHTML(item.text)}">${renderStructuredText(item.text)}</div>${/가이던스|요약 지침|^상태창$/.test(item.title)?`<button type="button" class="copy-line" data-copy="${id}">원문 복사</button>`:''}</article>`;
     const rows=(items,prefix)=>Array.from({length:Math.ceil(items.length/2)},(_,row)=>`<div class="mosaic-row-2">${items.slice(row*2,row*2+2).map((item,offset)=>card(item,prefix?`${prefix}-${row*2+offset}`:'')).join('')}</div>`).join('');
     put('character-menu',`<a href="https://jouurie.github.io/">소개 페이지<small>전체 캐릭터 ↗</small></a><a href="#intro">와이어트, 웨이드<small>현재 소개</small></a><a href="https://jouurie.github.io/ig-profile/">이결<small>소개 바로가기 ↗</small></a>`);
-    put('platforms',[['elyn','엘린'],['nody','노디']].filter(([id])=>WW.platforms[id]).map(([id,name])=>`<a href="${escapeHTML(WW.platforms[id])}" target="_blank" rel="noreferrer">${name}에서 보기 ↗</a>`).join(''));
+    const dispatchPlatforms=document.getElementById('platforms');
+    if(dispatchPlatforms)dispatchPlatforms.remove();
     const introLines=WW.intro.split('\n\n');
     put('intro-story-grid','<div class="intro-whole-body">'+introLines.map(text=>`<p>${linkify(text).replace(/\n/g,'<br>')}</p>`).join('')+'</div>');
     const sourceLine=$('#intro-source-line');if(sourceLine)sourceLine.textContent=WW.intro.split('\n')[0];
