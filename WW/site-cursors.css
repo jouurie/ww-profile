@@ -1,7 +1,7 @@
 /* Pixel cursor pair uses the accepted Rhodes palette; native text/resize cursors remain semantic. */
 @media (hover:hover) and (pointer:fine){
- html,body,main,.panel{cursor:url('assets/cursors/rhodes-arrow.png') 2 2,auto}
- :is(a,button,summary,[role="button"],[role="tab"],input[type="range"],.ww-viewable-image):not(:disabled){cursor:url('assets/cursors/rhodes-link.png') 2 2,pointer!important}
+ html,body,main,.panel{cursor:url('assets/cursors/rhodes-arrow.png?v=ui16') 9 1,auto}
+ :is(a,button,summary,[role="button"],[role="tab"],input[type="range"],.ww-viewable-image):not(:disabled){cursor:url('assets/cursors/rhodes-link.png?v=ui16') 13 1,pointer!important}
  :is(a,button,summary,[role="button"],[role="tab"],.ww-viewable-image):not(:disabled) *{cursor:inherit!important}
- button:disabled,[aria-disabled="true"]{cursor:url('assets/cursors/rhodes-arrow.png') 2 2,default!important}
+ button:disabled,[aria-disabled="true"]{cursor:url('assets/cursors/rhodes-arrow.png?v=ui16') 9 1,default!important}
 }

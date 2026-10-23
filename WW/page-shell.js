@@ -44,6 +44,16 @@
     if (normalized.href !== location.href) history.replaceState(history.state, '', normalized.href);
   }
   document.body.classList.toggle('ww-landing', initial?.view === 'home');
+  var footer = document.querySelector('body > footer');
+  if (footer) {
+    function sizeFooter() {
+      var height = footer.getBoundingClientRect().height;
+      if (height > 0) document.documentElement.style.setProperty('--site-footer-height', height + 'px');
+    }
+    sizeFooter();
+    if (global.ResizeObserver) new ResizeObserver(sizeFooter).observe(footer);
+    else global.addEventListener('resize', sizeFooter, { passive: true });
+  }
   document.addEventListener('click', function (event) {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     var anchor = event.target.closest && event.target.closest('a[href]');

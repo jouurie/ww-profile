@@ -1,15 +1,19 @@
-/* Preserve display and label faces; use HallimGothic only for reader text. */
+/* Preserve display and label faces; use Sweet only for reader text. */
 @font-face{font-family:Taenada;src:url('fonts/Tenada.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:Mujeokhaebeong;src:url('fonts/MarinesRegular.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
 @font-face{font-family:Mujeokhaebeong;src:url('fonts/MarinesBold.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
 @font-face{font-family:YUniverse;src:url('fonts/YUniverse-L.woff2') format('woff2');font-style:normal;font-weight:300 600;font-display:swap}
 @font-face{font-family:YUniverse;src:url('fonts/YUniverse-B.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
 @font-face{font-family:PureJeonnam;src:url('fonts/PureunJeonnam.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:HallimGothic;src:url('fonts/HallymGothic-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
-@font-face{font-family:HallimGothic;src:url('fonts/HallymGothic-Medium.woff2') format('woff2');font-style:normal;font-weight:500;font-display:swap}
-@font-face{font-family:HallimGothic;src:url('fonts/HallymGothic-Bold.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
-:root{--font-body:HallimGothic,sans-serif;--font-label:Mujeokhaebeong,sans-serif;--font-kr-title:Taenada,sans-serif;--font-mono:HallimGothic,sans-serif}
-body{font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.7;letter-spacing:0}
+@font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Light.woff2') format('woff2');font-style:normal;font-weight:300;font-display:swap}
+@font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2');font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2');font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-ExtraBold.woff2') format('woff2');font-style:normal;font-weight:800;font-display:swap}
+@font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Heavy.woff2') format('woff2');font-style:normal;font-weight:900;font-display:swap}
+:root{--font-body:Sweet,sans-serif;--font-label:Mujeokhaebeong,sans-serif;--font-kr-title:Taenada,sans-serif;--font-mono:Sweet,sans-serif}
+body{font-family:var(--font-body);font-size:var(--ww-body-size,14px);font-weight:400;line-height:1.7;letter-spacing:0}
 body :is(button,summary,input,select,textarea){font-family:var(--font-body)!important}
 :is(.prose,.source-body,.intro-whole-body,.ww-openings-prose,.ww-npc-details,.head-desc,.wwtruck-detail,.wwtruck-spec,.wg-value,.wg-support-value,.wg-support-statement){font-family:var(--font-body);letter-spacing:0}
 :is(.sq-sub,.sq-label,.piece-title,.kv-heading,.ww-opening-card h3,.ww-npc-name,.wwtruck-caption h3,.ww-profile-traits,.brand-name,.character-menu,.chapter-nav,.ww-key-action){font-family:var(--font-label);letter-spacing:0}

@@ -1,5 +1,5 @@
 /* The same two-row header stays available on every Rhodes page. */
-.ww-site-header{--ww-header-type:400 var(--ww-body-size,16px)/1.7 var(--font-body);--header-tar:#0d0b09;--header-panel:#181411;--header-line:rgba(183,135,61,.42);position:sticky;top:0;z-index:60;flex-shrink:0;width:100%;background:var(--header-tar);color:var(--paper);font-family:var(--font-body)}
+.ww-site-header{--ww-header-type:400 var(--ww-body-size,14px)/1.7 var(--font-label);--header-tar:#0d0b09;--header-panel:#181411;--header-line:rgba(183,135,61,.42);position:sticky;top:0;z-index:60;flex-shrink:0;width:100%;background:var(--header-tar);color:var(--paper);font-family:var(--font-body)}
 .ww-site-header *{box-sizing:border-box}
 .ww-site-header>.masthead{position:relative;top:auto;z-index:40;display:flex;align-items:center;justify-content:space-between;grid-template-columns:none;gap:20px;height:76px;min-height:76px;padding:0 max(24px,calc((100% - 1240px)/2));background:var(--header-tar);border-top:3px solid var(--brass);border-bottom:1px solid var(--header-line)}
 .ww-site-header .brand{display:inline-flex;align-items:center;gap:16px;min-width:0;color:var(--paper);text-decoration:none}
@@ -29,7 +29,11 @@
 .ww-site-header>.chapter-nav a[aria-current=page]{background:var(--stamp-red);color:var(--paper);border-bottom-color:var(--paper)}
 .ww-site-header>.chapter-nav a[aria-current=page] small{color:var(--paper)}
 .ww-site-header>.ww-hscroll-controls{position:relative;top:auto;z-index:20;background:var(--header-tar)}
+.ww-site-header>.ww-hscroll-shell{background:var(--header-panel);box-shadow:inset 0 -1px 0 var(--brass)}
 .ww-site-header :is(a,summary):focus-visible{outline:2px solid var(--cyan);outline-offset:-3px}
 .ww-landing .ww-home-hero{min-height:calc(100svh - var(--site-header-height,124px))}
 html{scroll-padding-top:var(--site-header-height,124px)}
 @media(max-width:600px){.ww-site-header>.masthead{padding:0 12px;gap:12px}.ww-site-header .brand{gap:12px}.ww-site-header .brand-mark .twin-w{font-size:20px}.ww-site-header .brand-mark strong{font-size:17px}.ww-site-header .brand-name{padding-left:11px}.ww-site-header .brand-name br{display:inline}.ww-site-header>.chapter-nav{padding-inline:0}.ww-site-header>.chapter-nav a{padding-inline:12px}}
+
+/* Menu type retains the established label face at the shared reading size. */
+.ww-site-header :is(.chapter-nav a,.characters summary,.character-menu a,.brand-name){font-family:var(--font-label)!important}

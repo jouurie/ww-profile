@@ -4,7 +4,7 @@
   const scriptURL = document.currentScript?.src || new URL('../WW/image-viewer.js', location.href).href;
   const portraits = new URL('assets/portraits/', scriptURL);
   const functional = 'a,button,label,summary,[role="button"],[role="tab"],[data-no-image-viewer],.ww-image-viewer';
-  let dialog, image, stage, sizeButton, caption, dimensions, status, opener;
+  let dialog, image, opener;
   let previousOverflow = null;
   let mounted = false;
   let scheduled = false;
@@ -49,15 +49,6 @@
     scheduled = true;
     queueMicrotask(() => { scheduled = false; register(); });
   }
-  function nativeSize(enabled) {
-    dialog.classList.toggle('wwiv-native', enabled);
-    sizeButton.textContent = enabled ? '화면에 맞추기' : '원본 크기';
-    sizeButton.setAttribute('aria-label', enabled ? '이미지를 화면에 맞추기' : '이미지를 원본 크기로 보기');
-    sizeButton.setAttribute('aria-pressed', String(enabled));
-    image.style.width = enabled ? image.naturalWidth + 'px' : '';
-    image.style.height = enabled ? image.naturalHeight + 'px' : '';
-    stage.scrollTo(0, 0);
-  }
   function restorePage() {
     if (!previousOverflow) return;
     const saved = previousOverflow;
@@ -76,31 +67,19 @@
     dialog = document.createElement('dialog');
     dialog.className = 'ww-image-viewer';
     dialog.dataset.horizontalScroll = 'off';
-    dialog.setAttribute('aria-labelledby', 'wwiv-caption');
-    dialog.innerHTML = '<header class="wwiv-bar"><div class="wwiv-heading"><h2 id="wwiv-caption">이미지 보기</h2><span class="wwiv-dimensions"></span></div><button type="button" class="wwiv-size" aria-pressed="false">원본 크기</button><button type="button" class="wwiv-close" aria-label="이미지 닫기">닫기 ×</button></header><div class="wwiv-stage"><img class="wwiv-image" alt=""><p class="wwiv-status" role="status" hidden>이미지를 불러오지 못했습니다.</p></div>';
+    dialog.innerHTML = '<button type="button" class="wwiv-close" aria-label="이미지 닫기">×</button>';
+    image = document.createElement('img');
+    image.className = 'wwiv-image';
+    image.alt = '';
+    dialog.append(image);
     document.body.append(dialog);
-    image = dialog.querySelector('.wwiv-image');
-    stage = dialog.querySelector('.wwiv-stage');
-    stage.tabIndex = 0;
-    stage.setAttribute('role', 'region');
-    stage.setAttribute('aria-label', '확대 이미지');
-    sizeButton = dialog.querySelector('.wwiv-size');
-    caption = dialog.querySelector('#wwiv-caption');
-    dimensions = dialog.querySelector('.wwiv-dimensions');
-    status = dialog.querySelector('.wwiv-status');
-    sizeButton.addEventListener('click', () => nativeSize(!dialog.classList.contains('wwiv-native')));
     dialog.querySelector('.wwiv-close').addEventListener('click', closeViewer);
     dialog.addEventListener('cancel', event => { event.preventDefault(); closeViewer(); });
-    image.addEventListener('load', () => {
-      dimensions.textContent = image.naturalWidth + ' × ' + image.naturalHeight + ' px';
-      sizeButton.disabled = false;
-      status.hidden = true;
-    });
-    image.addEventListener('error', () => { status.hidden = false; sizeButton.disabled = true; });
+    image.addEventListener('error', closeViewer);
     dialog.addEventListener('click', event => {
       const bounds = dialog.getBoundingClientRect();
       const outside = event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
-      if ((event.target === dialog && outside) || event.target === stage) closeViewer();
+      if (event.target === dialog && outside) closeViewer();
     });
     dialog.addEventListener('close', () => { if (!dialog.open) restorePage(); });
   }
@@ -109,11 +88,7 @@
     createViewer();
     if (dialog.open) return;
     opener = photo;
-    caption.textContent = photo.alt || '이미지 보기';
-    dimensions.textContent = '';
-    status.hidden = true;
-    sizeButton.disabled = true;
-    nativeSize(false);
+    dialog.setAttribute('aria-label', (photo.alt || '이미지') + ' 확대 보기');
     image.alt = photo.alt || '';
     image.src = photo.dataset.fullSrc || photo.currentSrc || photo.src;
     previousOverflow = { html: document.documentElement.style.overflow, body: document.body.style.overflow };

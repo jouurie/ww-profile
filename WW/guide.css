@@ -1,6 +1,6 @@
 /* One selected source at a time, with item-local folder tabs. */
 #guide.ww-guide-ready{width:calc(100% - 80px);max-width:1360px;margin-inline:auto;padding:32px;box-sizing:border-box;min-height:0;background:var(--paper);color:var(--ink)}
-#guide .ww-guide{--wg-paper:var(--paper);--wg-ink:var(--ink);--wg-line:var(--brass,var(--line));display:flex;flex-direction:column;min-width:0;background:var(--paper);color:var(--ink);font:16px/1.75 var(--font-body)}
+#guide .ww-guide{--wg-paper:var(--paper);--wg-ink:var(--ink);--wg-line:var(--brass,var(--line));display:flex;flex-direction:column;min-width:0;background:var(--paper);color:var(--ink);font:var(--ww-body-size,14px)/1.75 var(--font-body)}
 #guide .ww-guide [hidden]{display:none!important}
 #guide .ww-guide button{cursor:pointer;font:inherit;color:inherit}
 #guide .ww-guide button:focus-visible,#guide .ww-guide a:focus-visible{outline:2px solid var(--wg-ink);outline-offset:3px}
@@ -17,8 +17,8 @@
 #guide .wg-category-platforms button{height:44px;box-sizing:border-box;min-width:112px;font-weight:600}
 #guide .wg-control-panel{border:1px solid transparent;padding:22px;min-width:0;background:var(--paper)}
 #guide .wg-control-panel.wg-folder-panel{border-color:var(--wg-ink)}
-#guide .wg-preparing{margin:0;font-size:16px;line-height:1.8}
-#guide .wg-neutral-platform{box-sizing:border-box;min-height:240px;padding:24px 0;font-size:16px;line-height:1.8}
+#guide .wg-preparing{margin:0;font-size:var(--ww-body-size,14px);line-height:1.8}
+#guide .wg-neutral-platform{box-sizing:border-box;min-height:240px;padding:24px 0;font-size:var(--ww-body-size,14px);line-height:1.8}
 #guide .wg-neutral-platform h3,#guide .wg-neutral-platform h4{margin:0 0 12px;font:600 20px/1.5 var(--font-label)}
 #guide .wg-neutral-platform p{margin:0}
 #guide .wg-copy-control{display:inline-flex;gap:9px;align-items:center;margin-top:12px;vertical-align:middle}
@@ -28,18 +28,18 @@
 #guide .wg-linked-source .wg-copy-control{margin-top:0}
 #guide .wg-prompt-block{min-width:0}
 #guide .wg-summary-prompt{margin-top:20px;padding-top:18px;border-top:1px solid var(--wg-line);max-width:95ch}
-#guide .wg-summary-prompt p{font-size:16px;line-height:1.85;margin:0 0 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+#guide .wg-summary-prompt p{font-size:var(--ww-body-size,14px);line-height:1.85;margin:0 0 16px;white-space:pre-wrap;overflow-wrap:anywhere}
 #guide .wg-command-group{margin-top:28px}
 #guide .wg-command-group>h4{margin:0 0 14px;font-size:19px;line-height:1.5}
 #guide .wg-command-row{display:grid;grid-template-columns:minmax(200px,.85fr) minmax(0,1.5fr);gap:18px;align-items:center;padding:18px 0;border-top:1px solid var(--wg-line)}
-#guide .wg-command-description{font-size:16px;line-height:1.8}
+#guide .wg-command-description{font-size:var(--ww-body-size,14px);line-height:1.8}
 #guide .wg-command-description small{display:block;margin-top:7px;font-size:13px;line-height:1.6}
 #guide .wg-command-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 #guide .wg-command-token{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
 #guide .wg-platform-label{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:42px;box-sizing:border-box;border:1px solid currentColor;padding:1px 7px;background:var(--wg-ink);font:600 12px/1.5 var(--font-label)}
 #guide .wg-platform-label.wg-elyn{color:var(--cyan,var(--paper))}
 #guide .wg-platform-label.wg-nody{color:var(--red)}
-#guide .wg-command-token code{font-size:16px;white-space:nowrap;color:var(--wg-ink)}
+#guide .wg-command-token code{font-size:var(--ww-body-size,14px);white-space:nowrap;color:var(--wg-ink)}
 #guide .wg-status-preview{margin-bottom:28px}
 #guide .wg-status-preview-body{padding:12px;border:1px solid var(--wg-ink);background:var(--paper);min-width:0}
 #guide .wg-status-frame{color-scheme:normal;display:block;width:100%;height:560px;border:0;overflow:hidden}
@@ -49,7 +49,7 @@
 #guide .wg-status-guide .wg-status-card{min-width:0;padding:18px;border:1px solid var(--wg-line);background:var(--paper)}
 #guide .wg-status-guide .wg-status-card h4{margin:0 0 14px;font:600 19px/1.5 var(--font-label)}
 #guide .wg-status-guide .wg-status-card h5{margin:16px 0 8px;font:600 15px/1.6 var(--font-label)}
-#guide .wg-status-guide .wg-status-card p{margin:0 0 10px;font:16px/1.65 var(--font-body);word-break:keep-all;overflow-wrap:anywhere}
+#guide .wg-status-guide .wg-status-card p{margin:0 0 10px;font:var(--ww-body-size,14px)/1.65 var(--font-body);word-break:keep-all;overflow-wrap:anywhere}
 #guide .wg-status-guide .wg-status-card p:last-child{margin-bottom:0}
 #guide .wg-status-guide .wg-code{min-width:0;max-width:100%;margin:12px 0 0;padding:12px;border:1px solid var(--wg-line);box-sizing:border-box;font:14px/1.65 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
 #guide .wg-status-guide .wg-copy-control{margin-top:10px}
@@ -75,17 +75,17 @@
 #guide .wg-local-tabs button{position:relative;min-width:76px;padding:8px 17px;border:1px solid var(--wg-line);border-radius:5px 5px 0 0;background:var(--paper);font-weight:600}
 #guide .wg-local-tabs button[aria-selected=true]{border-color:var(--wg-ink);border-bottom-color:var(--paper);color:var(--red);z-index:2}
 #guide .wg-local-platform>[data-wg-local-page]{padding:24px;border:1px solid var(--wg-ink);min-width:0;box-sizing:border-box;background:var(--paper)}
-#guide .wg-local-empty p{margin:0;font-size:16px}
+#guide .wg-local-empty p{margin:0;font-size:var(--ww-body-size,14px)}
 #guide .wg-pieces{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 #guide .wg-section,#guide .wg-fragment{min-width:0;border-top:1px solid var(--wg-line);padding-top:18px}
 #guide .wg-section>h4,#guide .wg-fragment>h4,#guide .wg-item-setting>h4,#guide .wg-model-section>h4,#guide .wg-model-support-section>h4{margin:0 0 16px;font-size:19px;line-height:1.5}
 #guide .wg-pieces h5{margin:0 0 10px;font-size:17px;line-height:1.5}
-#guide .wg-pieces p,#guide .wg-start-plan p,#guide .wg-support-unit p{margin:0 0 12px;font-size:16px;line-height:1.8;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
+#guide .wg-pieces p,#guide .wg-start-plan p,#guide .wg-support-unit p{margin:0 0 12px;font-size:var(--ww-body-size,14px);line-height:1.8;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
 #guide .wg-pieces p:last-child,#guide .wg-support-unit p:last-child{margin-bottom:0}
 #guide .wg-units{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;padding-left:16px}
 #guide .wg-unit+.wg-unit{padding-top:16px;border-top:1px solid var(--wg-line)}
 #guide .wg-inline-label{margin-right:10px;font-weight:600}
-#guide .wg-value{font-size:16px}
+#guide .wg-value{font-size:var(--ww-body-size,14px)}
 #guide .wg-preface{min-width:0}
 #guide .wg-summary-pieces{display:grid;gap:22px}
 #guide .wg-short-pieces{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -96,17 +96,17 @@
 #guide .wg-copy-row button{padding:8px 13px;border:1px solid var(--wg-line);background:transparent}
 #guide .wg-copy-row span{font-size:13px}
 #guide .wg-progress-lines{display:grid;gap:22px}
-#guide .wg-progress-lines p{margin:0;display:grid;grid-template-columns:110px minmax(0,1fr);column-gap:16px;font-size:16px;line-height:1.9;padding-bottom:22px;border-bottom:1px solid var(--wg-line)}
+#guide .wg-progress-lines p{margin:0;display:grid;grid-template-columns:110px minmax(0,1fr);column-gap:16px;font-size:var(--ww-body-size,14px);line-height:1.9;padding-bottom:22px;border-bottom:1px solid var(--wg-line)}
 #guide .wg-progress-lines .wg-inline-label{margin-right:0}
 #guide .wg-play-list{columns:2;column-gap:48px;margin:0;padding-left:30px}
-#guide .wg-play-list li{break-inside:avoid;margin:0 0 17px;padding-left:8px;font-size:16px;line-height:1.85}
+#guide .wg-play-list li{break-inside:avoid;margin:0 0 17px;padding-left:8px;font-size:var(--ww-body-size,14px);line-height:1.85}
 #guide .wg-play-list li::marker{color:var(--red);font-weight:600}
 #guide .wg-item-setting{margin-bottom:30px}
 #guide .wg-start-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 #guide .wg-start-metrics article{min-width:0;padding-right:18px;border-right:1px solid var(--wg-line)}
 #guide .wg-start-metrics article:last-child{border-right:0}
 #guide .wg-start-metrics .wg-keyvalue{margin:0}
-#guide .wg-start-metrics .wg-inline-label{display:block;font-size:16px;margin-bottom:12px}
+#guide .wg-start-metrics .wg-inline-label{display:block;font-size:var(--ww-body-size,14px);margin-bottom:12px}
 #guide .wg-start-metrics .wg-value{display:block;font-size:clamp(24px,2.5vw,36px);font-weight:600;white-space:nowrap;line-height:1.3}
 #guide .wg-start-plan{margin-top:20px}
 #guide .wg-model-section{border-top:1px solid var(--wg-line);padding-top:22px}
@@ -120,7 +120,7 @@
 #guide .wg-model-setting>strong{display:block;font-size:18px;line-height:1.45;color:var(--red)}
 #guide .wg-model-card section+section{margin-top:14px}
 #guide .wg-model-card h5{margin:0 0 7px;font-size:12px;line-height:1.5}
-#guide .wg-model-card p{margin:0 0 8px;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+#guide .wg-model-card p{margin:0 0 8px;font-size:var(--ww-body-size,14px);line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
 #guide .wg-model-caution{border-left:2px solid var(--red);padding-left:10px}
 #guide .wg-model-support{display:grid;gap:28px}
 #guide .wg-model-support-section{border-top:1px solid var(--wg-line);padding-top:20px}
@@ -129,7 +129,7 @@
 #guide .wg-support-unit h5{margin:0 0 10px;font-size:17px}
 #guide .wg-support-definition{display:grid;grid-template-columns:112px minmax(0,1fr);gap:18px;align-items:baseline}
 #guide .wg-support-label{font-family:var(--font-label);line-height:1.8}
-#guide .wg-support-value,#guide .wg-support-statement{font-size:16px;line-height:2;word-break:keep-all;overflow-wrap:anywhere}
+#guide .wg-support-value,#guide .wg-support-statement{font-size:var(--ww-body-size,14px);line-height:2;word-break:keep-all;overflow-wrap:anywhere}
 #guide .wg-model-highlight{background:var(--brass);color:var(--ink);padding:1px 4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 #guide .wg-model-separator{white-space:pre-wrap}
 #guide .wg-support-unit .wg-note{margin:8px 0 0;padding-left:130px}
@@ -179,7 +179,7 @@
 #guide .ww-guide .wg-model-support-table{width:100%;table-layout:fixed;border-collapse:collapse;border:1px solid var(--brass);background:var(--paper);color:var(--ink)}
 #guide .ww-guide .wg-model-support-table :is(th,td){padding:12px 14px;border:1px solid var(--brass);text-align:left;vertical-align:top;overflow-wrap:anywhere;word-break:normal}
 #guide .ww-guide .wg-model-support-table th{width:112px;background:var(--ink);color:var(--paper);font-family:var(--font-label);font-weight:400}
-#guide .ww-guide .wg-model-support-table :is(td,.wg-support-value,.wg-support-statement,p){font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.65}
+#guide .ww-guide .wg-model-support-table :is(td,.wg-support-value,.wg-support-statement,p){font-family:var(--font-body);font-size:var(--ww-body-size,14px);font-weight:400;line-height:1.65}
 #guide .ww-guide .wg-model-support-table :is(.wg-support-value,.wg-support-statement){margin:0}
 #guide .ww-guide .wg-model-support-table p{margin:8px 0 0;white-space:pre-wrap}
 #guide .ww-guide .wg-model-support-table .wg-model-highlight{padding:0;background:none;color:inherit;font-weight:400;text-decoration:none}
@@ -199,7 +199,34 @@
 #guide .ww-guide .wg-support-notes{margin-top:12px;padding:10px 12px;border-left:3px solid var(--brass);background:var(--paper-deep)}
 #guide .ww-guide .wg-support-notes p{margin:0;line-height:1.65}
 #guide .ww-guide .wg-support-notes p+p{margin-top:8px}
-#guide .ww-guide .wg-progress-table{width:100%;table-layout:fixed;border-collapse:collapse;border:1px solid var(--brass);font-family:var(--font-body);font-size:16px;line-height:1.75;color:var(--ink);background:var(--paper)}
+#guide .ww-guide .wg-progress-table{width:100%;table-layout:fixed;border-collapse:collapse;border:1px solid var(--brass);font-family:var(--font-body);font-size:var(--ww-body-size,14px);line-height:1.75;color:var(--ink);background:var(--paper)}
 #guide .ww-guide .wg-progress-table :is(th,td){padding:16px;border:1px solid var(--brass);vertical-align:top;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
 #guide .ww-guide .wg-progress-table th{width:112px;font-family:var(--font-label);font-weight:400;background:var(--ink);color:var(--paper)}
 @media(max-width:600px){#guide .ww-guide .wg-progress-table th{width:78px}#guide .ww-guide .wg-progress-table :is(th,td){padding:12px 10px}#guide .ww-guide .wg-model-choice{padding:5px 7px}}
+
+/* Platform choices are independent controls, never a frame around the content. */
+#guide .ww-guide>.wg-control-panel{padding:0;border:0;box-shadow:none}
+#guide .ww-guide>.wg-platform-slot{height:auto;min-height:0;margin:0;padding:0}
+#guide .ww-guide .wg-local-tabs{display:flex;align-items:center;gap:8px;height:auto;min-height:44px;margin:0 0 20px;padding:0;border:0}
+#guide .ww-guide .wg-local-tabs button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;flex:0 0 auto;min-width:96px;height:44px;margin:0;padding:8px 14px;border:1px solid var(--brass);border-radius:2px;background:var(--paper);color:var(--ink);white-space:nowrap}
+#guide .ww-guide .wg-local-tabs button[aria-selected=true]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+#guide .ww-guide .wg-status-preview-body{padding:0;border:0;box-shadow:none}
+#guide .ww-guide .wg-groups .wg-category-platform-badge{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex:0 0 56px;width:56px;min-width:56px;height:24px;min-height:24px;padding:3px 5px;line-height:16px;white-space:nowrap;word-break:normal;overflow-wrap:normal}
+
+/* A section groups its explanations; its short paragraphs are not separate rows. */
+#guide .ww-guide :is(.wg-pieces,.wg-summary-pieces,.wg-model-support){gap:24px}
+#guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment){padding-top:16px}
+#guide .ww-guide :is(.wg-section,.wg-fragment,.wg-item-setting,.wg-model-section,.wg-model-support-section)>h4{margin-bottom:12px}
+#guide .ww-guide .wg-units{gap:8px;padding-left:0}
+#guide .ww-guide .wg-units>.wg-unit{padding:0;border:0}
+#guide .ww-guide :is(.wg-pieces p,.wg-start-plan p,.wg-support-unit p){margin-bottom:8px}
+#guide .ww-guide :is(.wg-pieces p,.wg-start-plan p,.wg-support-unit p):last-child{margin-bottom:0}
+@media(max-width:600px){
+  #guide .ww-guide .wg-groups button[data-wg-group]{padding:10px 4px;gap:4px;font-size:14px;white-space:nowrap}
+  #guide .ww-guide .wg-groups button>span{white-space:nowrap;word-break:normal;overflow-wrap:normal}
+  #guide .ww-guide .wg-groups .wg-category-platform-badge{flex-basis:44px;width:44px;min-width:44px;height:22px;min-height:22px;padding:2px 4px}
+}
+@media(max-width:360px){
+  #guide .ww-guide .wg-groups button[data-wg-group]{padding-inline:3px;gap:2px;font-size:12px}
+  #guide .ww-guide .wg-groups .wg-category-platform-badge{flex-basis:40px;width:40px;min-width:40px;padding-inline:3px}
+}

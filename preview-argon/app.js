@@ -16,7 +16,7 @@
     });
     document.body.classList.toggle('ww-landing', id === 'home');
     const footer = document.querySelector('body > footer');
-    if (footer) footer.hidden = id === 'home';
+    if (footer) footer.hidden = false;
     $$('.chapter-nav a').forEach((a) => {
       if (a.hash === '#' + id) a.setAttribute('aria-current', 'page');
       else a.removeAttribute('aria-current');
@@ -267,21 +267,7 @@
     window.addEventListener('pagehide',()=>engine.destroy(),{once:true});
   }
 
-  /* 7. 운행일지 소개 모달 및 캐릭터 드롭다운 닫기 */
-  const synopsisDialog = $('#synopsis');
-  $('#intro-more')?.addEventListener('click', () => synopsisDialog?.showModal());
-  $('#log-pull')?.addEventListener('click', () => synopsisDialog?.showModal());
-  $('.close-dialog')?.addEventListener('click', () => synopsisDialog?.close());
-
-  synopsisDialog?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) {
-      const r = e.currentTarget.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
-        e.currentTarget.close();
-      }
-    }
-  });
-
+  /* 7. 캐릭터 드롭다운 닫기 */
   document.addEventListener('click', (e) => {
     const charDetails = $('.characters');
     if (charDetails && !e.target.closest('.characters')) {
@@ -290,4 +276,4 @@
   });
 })();
 
-(()=>{const dialog=document.querySelector('#synopsis');let trigger=null;document.querySelectorAll('#intro-more,#log-pull').forEach(button=>button.addEventListener('click',()=>{trigger=button;}));dialog?.addEventListener('close',()=>trigger?.focus({preventScroll:true}));document.querySelector('.characters')?.addEventListener('keydown',event=>{if(event.key==='Escape'){event.currentTarget.open=false;event.currentTarget.querySelector('summary').focus();}});document.querySelector('#character-menu')?.addEventListener('click',()=>{document.querySelector('.characters').open=false;});})();
+(()=>{document.querySelector('.characters')?.addEventListener('keydown',event=>{if(event.key==='Escape'){event.currentTarget.open=false;event.currentTarget.querySelector('summary').focus();}});document.querySelector('#character-menu')?.addEventListener('click',()=>{document.querySelector('.characters').open=false;});})();

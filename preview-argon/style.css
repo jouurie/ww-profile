@@ -21,7 +21,7 @@
   --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
   --font-display: "Oswald", Impact, "Arial Narrow", sans-serif;
   --font-kr-title: "WWTitle", "Pretendard Variable", sans-serif;
-  --body-size: 17px;
+  --body-size: 14px;
   color-scheme: dark;
 }
 
@@ -399,7 +399,7 @@ i {
 }
 
 .head-desc {
-  font-size: 16px;
+  font-size: var(--ww-body-size,14px);
   color: var(--muted);
   max-width: 58ch;
 }
@@ -987,7 +987,7 @@ i {
 }
 
 .story-slip p {
-  font-size: 16px;
+  font-size: var(--ww-body-size,14px);
   line-height: 1.75;
   color: var(--ink);
 }
@@ -1264,7 +1264,7 @@ i {
 }
 
 .mini-tile p {
-  font-size: 16px;
+  font-size: var(--ww-body-size,14px);
   line-height: 1.75;
 }
 
@@ -1679,7 +1679,7 @@ i {
 
 .warning-banner-piece p {
   margin-top: 8px;
-  font-size: 16px;
+  font-size: var(--ww-body-size,14px);
   line-height: 1.75;
   color: var(--paper);
 }
@@ -2333,7 +2333,7 @@ dialog .close-dialog {
 
 @media (max-width: 720px) {
   :root {
-    --body-size: 16px;
+    --body-size: 14px;
   }
 
   .masthead {
@@ -2586,12 +2586,12 @@ dialog .close-dialog {
     padding: 16px 18px;
   }
   .opening-body {
-    font-size: 16px;
+    font-size: var(--ww-body-size,14px);
   }
 }
 
 /* Source integration only: supplied mosaic classes and structured source copy. */
-.prose{font-family:var(--font-body);font-size:17px;line-height:1.75;overflow-wrap:anywhere}.prose .kv-line{white-space:pre-wrap}.prose a{text-decoration:underline;text-underline-offset:3px}.mosaic-container article{min-width:0}.guide-source-card{scroll-margin-top:80px}.code-box{white-space:pre-wrap;overflow-wrap:anywhere}.copy-line{margin-top:18px;padding:8px 12px;border:1px solid var(--brass);font:600 13px/1.5 var(--font-body)}.contact-list{position:relative}.contact-page>div{min-width:0}.content-note{margin-top:22px}.content-note p{font-size:16px;line-height:1.75}.opening-foot{background:none;padding-left:0;padding-right:0}.rec-badge{margin-left:8px}.story-slip p{white-space:pre-wrap}@media(max-width:720px){.prose{font-size:16px}.contact-page .prose{grid-column:1/-1}.contact-page>div:not(.portrait){display:contents}.contact-page>.portrait{grid-row:1/5}.contact-page h3,.contact-page .eyebrow,.contact-page .english{grid-column:2}.contact-page .contact-page-number{grid-column:1/-1}}
+.prose{font-family:var(--font-body);font-size:17px;line-height:1.75;overflow-wrap:anywhere}.prose .kv-line{white-space:pre-wrap}.prose a{text-decoration:underline;text-underline-offset:3px}.mosaic-container article{min-width:0}.guide-source-card{scroll-margin-top:80px}.code-box{white-space:pre-wrap;overflow-wrap:anywhere}.copy-line{margin-top:18px;padding:8px 12px;border:1px solid var(--brass);font:600 13px/1.5 var(--font-body)}.contact-list{position:relative}.contact-page>div{min-width:0}.content-note{margin-top:22px}.content-note p{font-size:var(--ww-body-size,14px);line-height:1.75}.opening-foot{background:none;padding-left:0;padding-right:0}.rec-badge{margin-left:8px}.story-slip p{white-space:pre-wrap}@media(max-width:720px){.prose{font-size:16px}.contact-page .prose{grid-column:1/-1}.contact-page>div:not(.portrait){display:contents}.contact-page>.portrait{grid-row:1/5}.contact-page h3,.contact-page .eyebrow,.contact-page .english{grid-column:2}.contact-page .contact-page-number{grid-column:1/-1}}
 
 [hidden]{display:none!important}
 
@@ -2640,7 +2640,7 @@ html{overflow-y:scroll;scrollbar-gutter:stable;scrollbar-color:var(--brass) var(
 #intro .key-tag>img{min-height:0;height:auto;object-fit:cover}
 @media(max-width:1700px) and (min-width:1451px){#intro .key-tag{width:136px}}
 @media(max-width:1450px){#intro .intro-truck-stage{padding-right:112px}#intro .key-tag{left:auto;right:0;width:100px;top:24px}}
-@media(max-width:720px){#intro .intro-truck-stage{padding-right:86px}#intro .key-tag{width:76px;right:-4px;top:24px}}
+@media(max-width:720px){#intro .intro-truck-stage{padding-right:0;display:block}#intro .truck-photo-frame{width:100%}#intro .truck-photo-frame>img{width:100%;height:auto;min-height:0;flex:none;object-fit:contain;object-position:center}#intro .key-tag{width:76px;right:20px;top:16px}}
 
 /* Every interactive control responds without changing layout dimensions. */
 :where(button,[role="button"],summary,.piece-jump,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a){transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s,filter .2s}
@@ -2655,3 +2655,6 @@ body>main{flex:1 0 auto;width:100%;min-width:0}
 body>footer{margin-top:auto}
 
 @media(max-width:720px){#intro .twin-polaroid{grid-template-columns:minmax(0,1fr);align-items:start;gap:10px}#intro .twin-polaroid .tp-body{min-width:0;margin-top:0}#intro .twin-polaroid .tp-name{flex-wrap:wrap;gap:2px 8px}}
+
+/* Full English names stay on one line within the paired overview cards. */
+#intro .twin-polaroid{container-type:inline-size}#intro .tp-name strong{font-size:clamp(10px,12cqw,19px);white-space:nowrap}
