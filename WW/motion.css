@@ -1,0 +1,52 @@
+/* Strict opt-in: no layout, palette, typography, or default visibility changes. */
+.ww-motion-ready:is([data-motion~="float"], [data-motion~="parallax"]) {
+  translate: calc(var(--ww-float-x, 0px) + var(--ww-pointer-x, 0px)) calc(var(--ww-float-y, 0px) + var(--ww-pointer-y, 0px));
+}
+.ww-motion-ready[data-motion~="float"] {
+  rotate: var(--ww-float-r, 0deg);
+}
+.ww-motion-ready[data-motion~="tilt"] {
+  /* Individual rotate preserves the design's existing transform property. */
+  rotate: var(--ww-tilt-axis-x, 0) var(--ww-tilt-axis-y, 1) 0 var(--ww-tilt-angle, 0deg);
+}
+.ww-motion-ready[data-motion~="neon"] {
+  filter: brightness(var(--ww-neon-level, 1));
+}
+.ww-motion-ready[data-motion~="reels"][data-playing="true"] {
+  animation: ww-reel-turn var(--ww-reel-duration, 3.8s) linear infinite;
+}
+.ww-motion-ready[data-motion~="route"] {
+  /* The design owns the SVG stroke, dash pattern, and color. */
+  animation: ww-route-flow var(--ww-route-duration, 5.5s) linear infinite;
+}
+.ww-motion-ready[data-motion~="curtain"] [data-curtain-side] {
+  transition: translate 850ms cubic-bezier(.22,.72,.16,1);
+}
+.ww-motion-ready.ww-curtain-open[data-motion~="curtain"] [data-curtain-side="left"] {
+  translate: -102% 0;
+}
+.ww-motion-ready.ww-curtain-open[data-motion~="curtain"] [data-curtain-side="right"] {
+  translate: 102% 0;
+}
+.ww-motion-ready[data-motion~="tilt"] [data-motion-image] {
+  transition: scale 450ms cubic-bezier(.2,.7,.2,1);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ww-motion-ready[data-motion~="tilt"]:hover [data-motion-image] { scale: 1.025; }
+}
+.ww-motion-ready.ww-motion-sleep {
+  animation-play-state: paused;
+}
+@keyframes ww-reel-turn { to { rotate: 1turn; } }
+@keyframes ww-route-flow { to { stroke-dashoffset: -80; } }
+@media (prefers-reduced-motion: reduce) {
+  .ww-motion-ready[data-motion] { animation: none; }
+  .ww-motion-ready:is([data-motion~="float"], [data-motion~="parallax"], [data-motion~="tilt"]) {
+    translate: none;
+    rotate: none;
+  }
+  .ww-motion-ready[data-motion~="neon"] { filter: none; }
+  .ww-motion-ready[data-motion~="curtain"] [data-curtain-side],
+  .ww-motion-ready[data-motion~="tilt"] [data-motion-image] { transition: none; }
+}
+.ww-motion-ready.ww-motion-sleep[data-motion~="curtain"] [data-curtain-side] { transition: none; }

@@ -1,0 +1,46 @@
+/* Scoped to the existing cassette control row. */
+#radio .deck-controls-bar.radio-controls-inline{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:clamp(4px,1vw,14px);width:100%;min-width:0}
+#radio .radio-controls-inline .transport-btns{display:flex;flex:0 0 auto;flex-wrap:nowrap;align-items:center;gap:clamp(2px,.5vw,6px);min-width:0}
+#radio .radio-controls-inline .t-btn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;min-width:44px;height:44px;min-height:44px;box-sizing:border-box;padding:0;gap:0;line-height:1}
+#radio .radio-controls-inline .t-btn>svg{display:block;flex:none;width:22px;height:22px;pointer-events:none}
+#radio .radio-controls-inline .t-btn:disabled{opacity:.45;cursor:default}
+#radio .radio-controls-inline .t-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+#radio .radio-controls-inline .volume-module{display:flex;flex:1 1 160px;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:6px;min-width:0;max-width:220px;height:44px;box-sizing:border-box;margin-left:auto;padding:0 8px}
+#radio .radio-controls-inline .vol-label{display:inline-flex;align-items:center;justify-content:center;flex:0 0 22px;width:22px;height:22px}
+#radio .radio-controls-inline .vol-label svg{display:block;width:22px;height:22px}
+#radio .radio-controls-inline .vol-bars{display:none}
+#radio .radio-controls-inline .vol-slider{flex:1 1 80px;min-width:16px;width:80px;max-width:none;height:36px;margin:0;padding:0}
+#radio .radio-controls-inline .vol-num{flex:0 0 4ch;width:4ch;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+@media(max-width:650px){
+ #radio .deck-controls-bar.radio-controls-inline{gap:4px}
+ #radio .radio-controls-inline .transport-btns{gap:2px}
+ #radio .radio-controls-inline .t-btn{flex-basis:36px;width:36px;min-width:36px;height:36px;min-height:36px}
+ #radio .radio-controls-inline .t-btn>svg{width:20px;height:20px}
+ #radio .radio-controls-inline .volume-module{height:36px;flex-basis:100px;gap:3px;padding:0 3px;max-width:170px}
+ #radio .radio-controls-inline .vol-label{flex-basis:16px;width:16px;height:16px}
+ #radio .radio-controls-inline .vol-label svg{width:16px;height:16px}
+ #radio .radio-controls-inline .vol-num{font-size:10px}
+}
+@media(max-width:380px){
+ #radio .deck-controls-bar.radio-controls-inline{gap:2px}
+ #radio .radio-controls-inline .transport-btns{gap:0}
+ #radio .radio-controls-inline .volume-module{gap:2px;padding-inline:0}
+ #radio .radio-controls-inline .vol-label{flex-basis:14px;width:14px}
+ #radio .radio-controls-inline .vol-label svg{width:14px}
+}
+/* Let existing grids shrink to the viewport instead of their longest title. */
+#radio .radio-mosaic{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);min-width:0}
+#radio .cassette-track-grid{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0}
+#radio .radio-deck-piece,#radio .radio-side-stack,#radio .deck-vfd-screen,#radio .cassette-window,#radio .search-piece,#radio .radio-memo-piece{min-width:0;max-width:100%;box-sizing:border-box}
+#radio .deck-top-strip,#radio .vfd-meta,#radio .vfd-title-wrap,#radio .cassette-label-strip,#radio .search-input-row{min-width:0}
+#radio .deck-top-strip .deck-model{min-width:0;overflow-wrap:anywhere}
+#radio .deck-status-badge{flex-shrink:0}
+#radio .cassette-label-strip strong{min-width:0;overflow-wrap:anywhere}
+#radio .search-input-row input{min-width:0;width:0;max-width:100%}
+#radio .search-input-row button{flex-shrink:0}
+#radio .track-card{min-width:0;max-width:100%;box-sizing:border-box}
+#radio .track-card .tc-info{flex:1 1 0;min-width:0;max-width:100%}
+#radio .track-card .tc-title,#radio .track-card .tc-artist{min-width:0;max-width:100%}
+#radio .track-card .tc-num,#radio .track-card .tc-badge{flex-shrink:0}
+@media(max-width:1024px){#radio .radio-mosaic{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:720px){#radio .cassette-track-grid{grid-template-columns:minmax(0,1fr)}}

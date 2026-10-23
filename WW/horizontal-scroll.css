@@ -1,0 +1,40 @@
+.ww-hscroll-controls {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  padding: 2px 0;
+  color: var(--paper, #f1ddbd);
+  background: var(--tar, #090807);
+  border: 0;
+  font-family: var(--font-body, Pretendard, sans-serif);
+}
+.ww-hscroll-controls[hidden] { display: none !important; }
+.ww-hscroll-controls .ww-hscroll-arrow {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--brass, #b7873d);
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  font: 600 22px/1 sans-serif;
+  cursor: pointer;
+  box-shadow: none;
+}
+.ww-hscroll-controls .ww-hscroll-arrow:disabled { opacity: .35; cursor: default; }
+.ww-hscroll-controls .ww-hscroll-arrow:focus-visible { outline: 2px solid var(--cyan, #66e3d9); outline-offset: -3px; }
+.ww-hscroll-controls .ww-hscroll-hint { min-width: 0; text-align: center; font-size: 12px; line-height: 1.5; }
+.ww-hscroll-controls.ww-hscroll-sticky { position: sticky; top: var(--ww-hscroll-top, 48px); z-index: var(--ww-hscroll-z, 30); }
+#guide .ww-hscroll-controls { color: var(--wg-ink, var(--ink, #171713)); background: var(--paper, #f1ddbd); }
+@media (hover: hover) { .ww-hscroll-controls .ww-hscroll-arrow:not(:disabled):hover { background: var(--brass, #b7873d); color: var(--tar, #090807); } }

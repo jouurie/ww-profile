@@ -1,0 +1,100 @@
+/* Small photo carrier, source-faithful dossier, and ten selectable film slots. */
+.ww-npc {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  --ww-npc-paper: var(--paper, #e8ddc7);
+  --ww-npc-ink: var(--ink, #171713);
+  --ww-npc-red: var(--red, #a63628);
+  --ww-npc-gold: var(--brass, #b7873d);
+  --ww-npc-cyan: var(--cyan, #66e3d9);
+  color: var(--ww-npc-paper);
+}
+.ww-npc .ww-npc-shell { padding: clamp(20px, 3.5vw, 48px); max-width: 1360px; margin: 0 auto; }
+.ww-npc .ww-npc-heading-row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 24px; border-bottom: 1px solid var(--ww-npc-gold); padding-bottom: 10px; }
+.ww-npc .ww-npc-heading { font: 700 14px/1.4 Consolas, monospace; letter-spacing: .15em; margin: 0; }
+.ww-npc .ww-npc-edition { font: 11px/1.4 Consolas, monospace; }
+.ww-npc .ww-npc-page { touch-action: pan-y; }
+.ww-npc .ww-npc-spread { --ww-npc-accent: var(--ww-npc-gold); display: grid; grid-template-columns: clamp(130px, 15vw, 185px) minmax(0, 1fr); gap: clamp(24px, 4vw, 54px); align-items: start; }
+.ww-npc .ww-npc-spread[data-palette="cool"] { --ww-npc-accent: var(--ww-npc-cyan); }
+.ww-npc .ww-npc-polaroid { margin: 4px 0 0; padding: 9px 9px 12px; background: var(--ww-npc-paper); color: var(--ww-npc-ink); }
+.ww-npc .ww-npc-photo-pending { aspect-ratio: 4 / 4.7; display: grid; place-items: center; background: var(--ww-npc-ink); color: var(--ww-npc-paper); padding: 10px; text-align: center; font-size: 11px; line-height: 1.5; }
+.ww-npc .ww-npc-polaroid figcaption { font: 10px/1.5 Consolas, monospace; letter-spacing: .1em; margin-top: 10px; text-align: center; }
+.ww-npc .ww-npc-copy { min-width: 0; padding-top: 0; }
+.ww-npc .ww-npc-name { margin: 0 0 12px; font-size: clamp(28px, 3.2vw, 43px); line-height: 1.2; letter-spacing: -.045em; }
+.ww-npc .ww-npc-english { display: table; max-width: 100%; margin: 0 0 17px; padding: 7px 13px 8px; color: var(--ww-npc-ink); background: var(--ww-npc-accent); font: 700 clamp(14px, 1.45vw, 19px)/1.35 Consolas, monospace; overflow-wrap: anywhere; letter-spacing: .025em; }
+.ww-npc .ww-npc-traits { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 22px; padding: 0; list-style: none; }
+.ww-npc .ww-npc-trait { display: block; padding: 5px 10px; border: 1px solid var(--ww-npc-accent); background: var(--ww-npc-paper); color: var(--ww-npc-ink); font-size: 12px; line-height: 1.55; }
+.ww-npc .ww-npc-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 38px); }
+.ww-npc .ww-npc-details p { margin: 0; font-size: clamp(14px, 1.3vw, 17px); line-height: 1.9; word-break: keep-all; overflow-wrap: anywhere; }
+.ww-npc .ww-npc-details p + p { border-left: 1px solid var(--ww-npc-accent); padding-left: clamp(18px, 2vw, 28px); }
+.ww-npc .ww-npc-navigation { box-sizing: border-box; width: 100%; min-width: 0; display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: 12px; margin-top: clamp(28px, 4vw, 48px); }
+.ww-npc .ww-npc-arrow { box-sizing: border-box; display: grid; place-items: center; width: 48px; min-height: 48px; padding: 0; color: var(--ww-npc-paper); background: transparent; border: 1px solid var(--ww-npc-gold); border-radius: 0; font-size: 23px; }
+.ww-npc .ww-npc-film { box-sizing: border-box; min-width: 0; max-width: 100%; display: flex; gap: 9px; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; padding: 12px 0; border-block: 1px solid var(--ww-npc-gold); scrollbar-width: thin; scrollbar-color: var(--ww-npc-gold) var(--ww-npc-ink); }
+.ww-npc .ww-npc-thumb { box-sizing: border-box; flex: 1 0 88px; min-width: 0; display: block; margin: 0; padding: 6px; border: 1px solid var(--ww-npc-paper); border-radius: 0; background: transparent; color: var(--ww-npc-paper); text-align: center; transition: translate 180ms ease; }
+.ww-npc .ww-npc-thumb-frame { display: grid; align-items: end; justify-items: start; aspect-ratio: 4 / 3.9; padding: 5px; background: var(--ww-npc-ink); border: 1px solid var(--ww-npc-gold); }
+.ww-npc .ww-npc-thumb-number { font: 10px/1.3 Consolas, monospace; color: var(--ww-npc-gold); }
+.ww-npc .ww-npc-thumb-name { display: block; min-width: 0; margin-top: 7px; font-size: 10px; line-height: 1.4; white-space: normal; overflow-wrap: anywhere; }
+.ww-npc .ww-npc-thumb[aria-pressed="true"] { background: var(--ww-npc-paper); color: var(--ww-npc-ink); border-color: var(--ww-npc-red); }
+.ww-npc .ww-npc-thumb[aria-pressed="true"] .ww-npc-thumb-number { color: var(--ww-npc-paper); }
+.ww-npc .ww-npc-footer { display: flex; justify-content: center; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; padding-top: 12px; }
+.ww-npc .ww-npc-counter { font: 12px/1.6 Consolas, monospace; font-variant-numeric: tabular-nums; }
+.ww-npc .ww-npc-hint { font-size: 10px; line-height: 1.7; }
+.ww-npc :is(button):focus-visible { outline: 2px solid var(--ww-npc-cyan); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .ww-npc .ww-npc-thumb:hover { translate: 0 -3px; } }
+@media (max-width: 900px) {
+  .ww-npc .ww-npc-spread { grid-template-columns: 135px minmax(0, 1fr); gap: 24px; }
+  .ww-npc .ww-npc-details { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .ww-npc .ww-npc-details p + p { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 540px) {
+  .ww-npc .ww-npc-shell { padding: 20px 14px; }
+  .ww-npc .ww-npc-spread { grid-template-columns: 92px minmax(0, 1fr); gap: 16px; }
+  .ww-npc .ww-npc-polaroid { padding: 5px 5px 8px; }
+  .ww-npc .ww-npc-polaroid figcaption { font-size: 8px; letter-spacing: 0; margin-top: 7px; }
+  .ww-npc .ww-npc-name { font-size: 27px; }
+  .ww-npc .ww-npc-english { font-size: 12px; padding: 6px 8px; }
+  .ww-npc .ww-npc-trait { font-size: 11px; padding: 4px 7px; }
+  .ww-npc .ww-npc-details { grid-column: 1 / -1; }
+  .ww-npc .ww-npc-navigation { grid-template-columns: 48px minmax(0, 1fr) 48px; gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ww-npc .ww-npc-thumb { transition: none; }
+  .ww-npc .ww-npc-thumb:hover { translate: none; }
+}
+
+/* Keep the accepted cream profile layout; decorate only its text hierarchy. */
+.ww-npc .ww-npc-shell{max-width:1360px;padding:24px 0 38px}.ww-npc .ww-npc-heading-row{border:0;margin-bottom:26px}.ww-npc .ww-npc-heading{font:600 34px/1.3 var(--font-body);letter-spacing:-.03em}.ww-npc .ww-npc-edition{display:none}.ww-npc .ww-npc-spread{grid-template-columns:230px minmax(0,1fr);gap:38px;padding:32px;background:var(--paper);color:var(--ink);min-height:330px;align-items:start}.ww-npc .ww-npc-polaroid{margin:0;padding:0;background:transparent}.ww-npc .ww-npc-photo-pending{aspect-ratio:4/4.5;border:1px solid var(--brass);font-size:12px;background:var(--ink2);color:var(--muted)}.ww-npc .ww-npc-name{font-size:30px;margin:0 0 12px;letter-spacing:-.03em}.ww-npc .ww-npc-english{font:600 14px/1.4 var(--font-body);padding:5px 11px;margin-bottom:16px;background:var(--ink);color:var(--paper);border-left:4px solid var(--ww-npc-accent)}.ww-npc .ww-npc-traits{gap:7px;margin-bottom:20px}.ww-npc .ww-npc-trait{font-size:13px;border-color:var(--brass);padding:4px 9px;background:transparent}.ww-npc .ww-npc-details{display:block;max-width:780px}.ww-npc .ww-npc-details p{font:400 17px/1.8 var(--font-body);color:var(--ink)}.ww-npc .ww-npc-details p+p{border:0;padding:0;margin-top:14px}.ww-npc .ww-npc-navigation{margin-top:22px}.ww-npc .ww-npc-thumb-name{font-size:12px}.ww-npc .ww-npc-hint{font-size:12px}@media(max-width:720px){.ww-npc .ww-npc-shell{padding:12px 0}.ww-npc .ww-npc-heading{font-size:27px}.ww-npc .ww-npc-spread{grid-template-columns:120px minmax(0,1fr);gap:20px;padding:20px;min-height:0}.ww-npc .ww-npc-name{font-size:25px}.ww-npc .ww-npc-details p{font-size:16px}}@media(max-width:460px){.ww-npc .ww-npc-spread{grid-template-columns:82px minmax(0,1fr);gap:14px;padding:16px}.ww-npc .ww-npc-photo-pending{font-size:10px}.ww-npc .ww-npc-details{grid-column:1/-1}.ww-npc .ww-npc-trait{font-size:12px}.ww-npc .ww-npc-name{font-size:23px}}
+
+/* Original composition above; thumbnail cropping never modifies an image asset. */
+.ww-npc .ww-npc-profile-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 832 / 1216;
+}
+.ww-npc .ww-npc-thumb-frame {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+.ww-npc .ww-npc-thumb-image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100% * var(--ww-npc-face-scale, 2.6));
+  max-width: none;
+  height: auto;
+  transform: translate(calc(-1 * var(--ww-npc-face-x, 50%)), calc(-1 * var(--ww-npc-face-y, 27%)));
+  pointer-events: none;
+  user-select: none;
+}
+.ww-npc .ww-npc-thumb-number {
+  position: relative;
+  z-index: 1;
+  padding: 2px 4px;
+  background: var(--ww-npc-ink);
+}

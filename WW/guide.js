@@ -1,0 +1,230 @@
+(() => {
+  'use strict';
+  const root=document.querySelector('#guide');
+  if(!root||!window.WWGuideData||!window.WW)return;
+  const data=window.WWGuideData.build(window.WW);
+  const groups=['play','start','commands','recovery'].map(id=>data.groups.find(group=>group.id===id));
+  const moduleBase=new URL('.',document.currentScript?.src||new URL('guide.js',location.href));
+  const payloads=new Map();
+  let copyIndex=0;
+  const esc=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const clean=value=>String(value).replace(/^\s*#{1,6}\s*/gm,'').replace(/\u{1f517}\s*/gu,'').replace(/\u2b50\s*/g,'');
+  const links=value=>esc(clean(value)).replace(/https:\/\/[^\s<>]+/g,url=>'<a class="wg-resource-link" href="'+url+'" target="_blank" rel="noreferrer">'+url+'</a>');
+  const badge=item=>item.recommended?'<span class="wg-recommended">추천</span>':'';
+  function body(raw){
+    return raw.split('\n').filter(line=>line.trim()).map(line=>{
+      const text=clean(line.replace(/^[·↳] /,''));
+      if(/^\s*#{1,6}\s+/.test(line))return '<h4>'+links(text)+'</h4>';
+      if(text.startsWith('<RStatus'))return '<pre class="wg-code"><code>'+esc(text)+'</code></pre>'+copyControl(text,'예시 복사');
+      return '<p'+(line.startsWith('↳ ')?' class="wg-note"':'')+'>'+links(text)+'</p>';
+    }).join('');
+  }
+  function unit(raw){
+    const rows=raw.split('\n'),first=rows[0].replace(/^· /,'');
+    const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
+    if(pair&&clean(pair[1])==='추천')return '<p class="wg-inline-recommendation"><span class="wg-recommended">추천</span>'+links(pair[2])+'</p>'+body(rows.slice(1).join('\n'));
+    if(pair&&!first.startsWith('https://'))return '<p class="wg-keyvalue"><strong class="wg-inline-label">'+esc(clean(pair[1]))+': </strong> <span class="wg-value">'+links(pair[2])+'</span></p>'+body(rows.slice(1).join('\n'));
+    return body(raw);
+  }
+  function section(section,item,index){
+    const pair=section.heading.match(/^(.{1,36}?)( → | \| )(.+)$/);
+    if(pair&&item.index===1&&pair[3].includes("'!장면완화'"))return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3].replace("'!장면완화' 사용. ",''))+'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>!장면완화</code>'+copyControl('!장면완화')+'</div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>/장면완화</code>'+copyControl('/장면완화')+'</div></div></article>';
+    if(pair)return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3]+'\n'+section.body)+'</article>';
+    if(!section.heading){if(section.body.length>600)return '<div class="wg-preface wg-summary-pieces">'+section.body.split(/\n+/).filter(line=>line.trim()).map(line=>'<article class="wg-fragment">'+body(line)+'</article>').join('')+'</div>';return '<div class="wg-preface">'+body(section.body)+'</div>';}
+    if(!section.body.trim())return '<article class="wg-fragment wg-short">'+body(section.heading)+'</article>';
+    let units=section.units;
+    const metrics=item.index===6&&section===item.sections[0];
+    if(metrics&&units.length===4)units=[units[0],units[1],units.slice(2).join('')];
+    const content=units.length>1?'<div class="wg-units '+(metrics?'wg-metrics':'')+'">'+units.map(raw=>'<div class="wg-unit">'+unit(raw)+'</div>').join('')+'</div>':body(section.body);
+    return '<section class="wg-section'+(section.body.includes('<RStatus')?' wg-wide':'')+'"><h4>'+links(section.heading.replace(/:$/,''))+'</h4>'+content+'</section>';
+  }
+
+  function pieces(item,parts=item.sections){
+    const short=parts.every(part=>!part.body.trim()||part.heading.includes(' → ')||part.heading.includes(' | '));
+    return '<div class="wg-pieces'+(short?' wg-short-pieces':'')+'">'+parts.map((part,index)=>section(part,item,index)).join('')+'</div>';
+  }
+  function copyControl(payload,label='복사'){
+    const id='wg-copy-'+(++copyIndex);payloads.set(id,payload);
+    return '<div class="wg-copy-control"><button type="button" data-copy-block="'+id+'">'+label+'</button><span role="status"></span></div>';
+  }
+  function modelBody(item){
+    const common=item.sections[0];
+    const metrics='<section class="wg-item-setting"><h4>'+esc(common.heading)+'</h4><div class="wg-start-metrics">'+common.units.slice(0,3).map(raw=>'<article>'+unit(raw)+'</article>').join('')+'</div><div class="wg-start-plan">'+body(common.units.slice(3).join(''))+'</div></section>';
+    const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+esc(card.name)+'</h4>'+(card.recommended?'<span class="wg-recommended">추천</span>':'')+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
+    const support=item.sections.slice(1).filter(part=>part.heading!=='모델별 특징 · 개별 추론');
+    return metrics+cards+'<div class="wg-model-support">'+support.map(part=>'<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><div class="wg-support-units">'+part.units.map(raw=>'<div class="wg-support-unit">'+unit(raw)+'</div>').join('')+'</div></section>').join('')+'</div>';
+  }
+  function commandsBody(item){
+    return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(command=>'<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+(command.pinball?'<small>엘린: 상태창 내장 게임 · 노디: 별도 핀볼 패널</small>':'')+'</div><div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code>'+copyControl(command.elyn)+'</div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code>'+copyControl(command.nody)+'</div></div></article>').join('')+'</div></section>').join('');
+  }
+  function nodyStatusNotes(){
+    const fields=[
+      ['n','현재 턴 번호. 숫자를 문자열로 적습니다.'],
+      ['duration','동행 단계. 0=첫 동행, 1=며칠째, 2=일주일째, 3=몇 주째, 4=몇 달째, 5=장기 동행. 값은 문자열입니다.'],
+      ['loreKeys','현재 duration, month, weather에 맞춰 함께 갱신하는 문자열입니다.'],
+      ['shortGoal','현재 유지 중인 구체적인 목표 대상과 행동.'],
+      ['month','현재 계절.'],
+      ['time','현재 시간대.'],
+      ['weather','현재 날씨.'],
+      ['road','현재 도로명과 접근 지점.'],
+      ['heading','현재 진행 방향.'],
+      ['driverSeat','현재 운전 담당자.'],
+      ['motion','주행, 정차 등 현재 운행 상태.'],
+      ['truck','트럭, 엔진, 적재물의 현재 조건.'],
+      ['pressure','현재 진행을 막거나 손실을 주는 당면 사안.'],
+      ['wyattPosition','와이어트의 현재 위치.'],
+      ['wyattAction','와이어트의 현재 자세, 행동 또는 지속되는 결과.'],
+      ['wadePosition','웨이드의 현재 위치.'],
+      ['wadeAction','웨이드의 현재 자세, 행동 또는 지속되는 결과.'],
+      ['userOutfit','현재 보이는 유저의 복장.'],
+      ['userPosition','유저의 현재 위치.'],
+      ['userState','현재 보이는 유저의 신체, 복장, 자세 또는 접촉 상태.'],
+      ['radioLog','현재 장면에 나온 무전, 라디오, 뉴스의 소식이나 남은 영향.']
+    ];
+    const values=Object.fromEntries(fields.map(([key])=>[key,key==='n'?'1':key==='duration'?'0':'']));
+    const template='```status\n'+JSON.stringify(values,null,2)+'\n```';
+    return '<div class="wg-pieces"><section class="wg-section wg-wide"><h4>입력 형식 · 예시</h4><p>노디는 status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 아래는 장면 정보를 넣지 않은 최소 예시입니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p><pre class="wg-code"><code>'+esc(template)+'</code></pre>'+copyControl(template,'노디 예시 복사')+'</section><section class="wg-section"><h4>값 형식</h4><p>21개 값은 모두 문자열입니다. n과 duration도 따옴표 안에 적습니다. 빈 문자열에는 현재 확인된 값을 넣고, 바뀌지 않은 유효한 상태는 유지합니다.</p><p>loreKeys는 현재 duration, month, weather와 맞춰 갱신합니다.</p></section><section class="wg-section"><h4>항목별 의미 · JSON 키</h4>'+fields.map(([key,meaning])=>'<p class="wg-keyvalue"><strong class="wg-inline-label">'+esc(key)+': </strong><span class="wg-value">'+esc(meaning)+'</span></p>').join('')+'</section></div>';
+  }
+  function statusPreview(){
+    const tabs=['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" id="wg-status-tab-'+platform+'" aria-controls="wg-status-preview-'+platform+'" data-wg-status-platform="'+platform+'" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('');
+    return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="'+platform.toUpperCase()+' 상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
+  }
+  function itemBody(item){
+    if(item.index===0){
+      const labels=['진행 방식','사건 발생','다음 행동'];
+      return '<div class="wg-progress-lines">'+item.text.split('\n').filter(line=>line.trim()).map((line,index)=>'<p><strong class="wg-inline-label">['+labels[index]+']</strong> '+links(line.replace(/^▸\s*/,''))+'</p>').join('')+'</div>';
+    }
+    if(item.index===2)return '<ol class="wg-play-list">'+item.text.split('\n').filter(line=>line.trim()).map(line=>'<li>'+links(line.replace(/^▸\s*/,''))+'</li>').join('')+'</ol>';
+    if(item.index===6)return modelBody(item);
+    if(item.index===9)return commandsBody(item);
+    if(item.index===10)return statusPreview()+'<div class="wg-status-notes"><div data-status-notes-platform="elyn" hidden>'+pieces(item)+'</div><div data-status-notes-platform="nody" hidden>'+nodyStatusNotes()+'</div></div>';
+    if(item.index===7)return '<div class="wg-pieces">'+item.sections.map(part=>{
+      const rendered=section(part,item,0);
+      if(!part.heading)return rendered;
+      const payload=part.body.trim().replace(/\n+\(선택 사항\)\s*$/,'');
+      return '<div class="wg-prompt-block">'+rendered+copyControl(payload)+'</div>';
+    }).join('')+'</div>';
+    if(item.index===8){
+      const offset=item.text.indexOf('Use only supplied evidence.');
+      return offset<0?pieces(item):body(item.text.slice(0,offset))+'<div class="wg-summary-prompt">'+body(item.text.slice(offset))+'</div>'+copyControl(item.text.slice(offset).trim());
+    }
+    const rendered=pieces(item);
+    if(item.index===4||item.index===11)return rendered+(item.text.match(/https?:\/\/[^\s]+/g)||[]).map(url=>'<div class="wg-linked-source"><a class="wg-resource-link" href="'+esc(url)+'" target="_blank" rel="noreferrer">원문 보기 ↗</a>'+copyControl(url,'링크 복사')+'</div>').join('');
+    return rendered;
+  }
+  function entry(item){
+    const platformOnly=['start','recovery'].some(id=>data.groups.find(group=>group.id===id).items.includes(item));
+    const html=itemBody(item);
+    return '<section class="wg-item" id="'+item.id+'" data-source-index="'+item.index+'" hidden><header class="wg-entry-head"><h3>'+esc(clean(item.title))+badge(item)+'</h3></header>'+(platformOnly?'<div data-category-platform="elyn">'+html+'</div><div data-category-platform="nody" hidden><p class="wg-preparing">준비 중</p></div>':html)+'</section>';
+  }
+  const mount=document.createElement('div');mount.className='ww-guide';mount.id='ww-guide-module';
+  const categoryTabs=groups.map(group=>'<button type="button" role="tab" id="wg-tab-'+group.id+'" aria-controls="wg-control-panel" data-wg-group="'+group.id+'"><span>'+group.title+'</span>'+(['start','recovery'].includes(group.id)?'<span class="wg-category-platform-badge" data-category-badge="'+group.id+'">-</span>':'')+'</button>').join('');
+  const platformTabs='<div class="wg-platform-slot"><nav class="wg-category-platforms wg-local-tabs" role="tablist" aria-label="설정 플랫폼">'+['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" data-wg-category-platform="'+platform+'" aria-controls="wg-control-panel" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('')+'</nav></div>';
+  const selectors=groups.map(group=>'<div class="wg-item-selector" id="wg-selector-'+group.id+'" data-wg-selector="'+group.id+'" role="tablist" aria-label="'+esc(group.title)+' 항목" hidden>'+group.items.map(item=>'<button type="button" role="tab" id="wg-item-tab-'+item.index+'" aria-controls="'+item.id+'" data-wg-item="'+item.index+'">'+esc(clean(item.title))+badge(item)+'</button>').join('')+'</div>').join('');
+  mount.innerHTML='<nav class="wg-groups" role="tablist" aria-label="가이드 구분">'+categoryTabs+'</nav>'+platformTabs+'<div class="wg-control-panel" id="wg-control-panel">'+selectors+'<div class="wg-content" id="wg-content"><div class="wg-neutral-platform" data-category-neutral hidden><h3>플랫폼 미선택</h3><p>엘린 또는 노디를 선택하세요.</p></div>'+data.items.map(entry).join('')+'</div></div>';
+  root.querySelectorAll('.guide-layout,#guide-index,#guide-details,#guide-mosaic,#guide-info,#ww-guide-module').forEach(element=>element.remove());
+  root.append(mount);root.classList.add('ww-guide-ready');
+  const description=root.querySelector('.head-desc')||root.querySelector('.section-head>p:last-child');
+  if(description&&!description.classList.contains('eyebrow'))description.textContent='진행 안내와 설정을 확인하세요.';
+  let selected='play',statusPlatform=null;
+  const chosen={start:5,play:0,commands:9,recovery:4},platforms={start:null,recovery:null};
+  function updateBadges(){
+    mount.querySelectorAll('[data-category-badge]').forEach(label=>{
+      const id=label.dataset.categoryBadge;
+      label.textContent=platforms[id]?platforms[id].toUpperCase():'-';
+    });
+  }
+  function revealSelections(){
+    mount.querySelectorAll('.wg-groups,.wg-item-selector').forEach(bar=>{
+      if(!bar.clientWidth||bar.scrollWidth<=bar.clientWidth+1)return;
+      const active=bar.querySelector('[aria-selected="true"]');if(!active)return;
+      const item=active.getBoundingClientRect(),rail=bar.getBoundingClientRect();
+      if(item.left<rail.left)bar.scrollLeft+=item.left-rail.left;
+      else if(item.right>rail.right)bar.scrollLeft+=item.right-rail.right;
+    });
+  }
+  window.addEventListener('resize',revealSelections);
+  function requestPreviewSize(){
+    const frame=mount.querySelector('[data-preview-frame="'+statusPlatform+'"]');
+    if(frame?.contentWindow)frame.contentWindow.postMessage({type:'ww-status-preview-measure',platform:statusPlatform},new URL(frame.src).origin);
+  }
+  function display(groupID,itemIndex){
+    const group=data.groups.find(group=>group.id===groupID)||data.groups[0];selected=group.id;
+    const next=group.items.find(item=>item.index===itemIndex)||group.items.find(item=>item.index===chosen[selected])||group.items[0];chosen[selected]=next.index;
+    const platformCategory=selected==='start'||selected==='recovery';
+    mount.querySelector('.wg-category-platforms').hidden=!platformCategory;
+    mount.querySelector('#wg-control-panel').classList.toggle('wg-folder-panel',platformCategory);
+    const neutral=platformCategory&&!platforms[selected];
+    mount.querySelector('[data-category-neutral]').hidden=!neutral;
+    mount.querySelectorAll('[data-wg-category-platform]').forEach((button,index)=>{const active=button.dataset.wgCategoryPlatform===platforms[selected];button.setAttribute('aria-selected',String(active));button.tabIndex=active||(!platforms[selected]&&index===0)?0:-1;});
+    mount.querySelectorAll('[data-wg-group]').forEach(button=>{const active=button.dataset.wgGroup===selected;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+    mount.querySelectorAll('[data-wg-selector]').forEach(selector=>selector.hidden=selector.dataset.wgSelector!==selected);
+    mount.querySelectorAll('[data-wg-item]').forEach(button=>{const active=Number(button.dataset.wgItem)===next.index;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+    mount.querySelectorAll('.wg-item').forEach(panel=>{
+      panel.hidden=neutral||Number(panel.dataset.sourceIndex)!==next.index;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','wg-item-tab-'+panel.dataset.sourceIndex);
+      if(!panel.hidden&&platformCategory)panel.querySelectorAll('[data-category-platform]').forEach(page=>page.hidden=page.dataset.categoryPlatform!==platforms[selected]);
+    });
+    updateBadges();revealSelections();if(next.index===10)requestPreviewSize();
+  }
+  function keepPosition(action){
+    const x=window.scrollX,y=window.scrollY,host=mount.querySelector('#wg-control-panel');
+    host.style.minHeight='';
+    action();
+    if(y>Math.max(0,document.documentElement.scrollHeight-window.innerHeight)){
+      const end=(document.querySelector('footer')||document.body).getBoundingClientRect().bottom+window.scrollY;
+      const deficit=Math.max(0,y+window.innerHeight-end);
+      if(deficit)host.style.minHeight=Math.ceil(host.getBoundingClientRect().height+deficit)+'px';
+    }
+    window.scrollTo({left:x,top:y,behavior:'instant'});
+  }
+  window.addEventListener('scroll',()=>{if(window.scrollY===0)mount.querySelector('#wg-control-panel').style.minHeight='';},{passive:true});
+  function navigate(groupID,itemIndex){
+    keepPosition(()=>{display(groupID,itemIndex);const hash=itemIndex===undefined?'#guide-'+selected:'#guide-'+chosen[selected];if(location.hash!==hash)history.pushState({...history.state},'',hash);});
+  }
+  function synchronize(){
+    const itemRoute=location.hash.match(/^#guide-(\d+)$/);
+    if(itemRoute){const item=data.items[Number(itemRoute[1])];if(item){const group=data.groups.find(group=>group.items.includes(item));display(group.id,item.index);}return;}
+    const route=location.hash.match(/^#guide-(start|play|commands|recovery)(?:-(common|elyn|nody))?$/);
+    if(route){if(Object.hasOwn(platforms,route[1])&&['elyn','nody'].includes(route[2]))platforms[route[1]]=route[2];display(route[1]);}else if(location.hash==='#guide')display(selected);
+  }
+  function selectStatus(platform){
+    keepPosition(()=>{
+      statusPlatform=platform;
+      mount.querySelectorAll('[data-wg-status-platform]').forEach(button=>{const active=button.dataset.wgStatusPlatform===platform;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+      mount.querySelectorAll('[data-preview-platform]').forEach(page=>page.hidden=page.dataset.previewPlatform!==platform);
+      mount.querySelector('[data-status-neutral]').hidden=true;
+      mount.querySelectorAll('[data-status-notes-platform]').forEach(notes=>notes.hidden=notes.dataset.statusNotesPlatform!==platform);
+      updateBadges();requestPreviewSize();
+    });
+  }
+  mount.querySelectorAll('[data-wg-group]').forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.wgGroup)));
+  mount.querySelectorAll('[data-wg-item]').forEach(button=>button.addEventListener('click',()=>navigate(selected,Number(button.dataset.wgItem))));
+  mount.querySelectorAll('[data-wg-category-platform]').forEach(button=>button.addEventListener('click',()=>keepPosition(()=>{platforms[selected]=button.dataset.wgCategoryPlatform;display(selected);})));
+  mount.querySelectorAll('[data-wg-status-platform]').forEach(button=>button.addEventListener('click',()=>selectStatus(button.dataset.wgStatusPlatform)));
+  function keyboardTabs(bar,selector,activate){
+    bar.addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      const buttons=[...bar.querySelectorAll(selector)],current=buttons.indexOf(document.activeElement);if(current<0)return;event.preventDefault();
+      const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:(current+(event.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;
+      buttons[next].focus({preventScroll:true});activate(buttons[next]);
+    });
+  }
+  keyboardTabs(mount.querySelector('.wg-groups'),'[data-wg-group]',button=>navigate(button.dataset.wgGroup));
+  mount.querySelectorAll('.wg-item-selector').forEach(bar=>keyboardTabs(bar,'[data-wg-item]',button=>navigate(selected,Number(button.dataset.wgItem))));
+  keyboardTabs(mount.querySelector('.wg-category-platforms'),'[data-wg-category-platform]',button=>keepPosition(()=>{platforms[selected]=button.dataset.wgCategoryPlatform;display(selected);}));
+  mount.querySelectorAll('.wg-status-preview .wg-local-tabs').forEach(bar=>keyboardTabs(bar,'[data-wg-status-platform]',button=>selectStatus(button.dataset.wgStatusPlatform)));
+  mount.querySelectorAll('[data-copy-block]').forEach(button=>button.addEventListener('click',async()=>{
+    const status=button.parentElement.querySelector('[role="status"]');
+    try{await navigator.clipboard.writeText(payloads.get(button.dataset.copyBlock));status.textContent='복사됨';}
+    catch{status.textContent='본문을 선택해 복사해 주세요.';}
+  }));
+  mount.querySelectorAll('[data-preview-frame]').forEach(frame=>frame.addEventListener('load',requestPreviewSize));
+  window.addEventListener('message',event=>{
+    if(event.data?.type!=='ww-status-preview-height')return;
+    const platform=event.data.platform;if(!['elyn','nody'].includes(platform))return;
+    const frame=mount.querySelector('[data-preview-frame="'+platform+'"]');if(!frame||event.source!==frame.contentWindow||event.origin!==new URL(frame.src).origin)return;
+    const height=Number(event.data.height);if(Number.isFinite(height)&&height>0&&height<=20000)frame.style.height=Math.ceil(height)+'px';
+  });
+  window.addEventListener('hashchange',synchronize);window.addEventListener('popstate',synchronize);
+  display('play');synchronize();
+})();

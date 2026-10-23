@@ -1,0 +1,306 @@
+{
+  "version": "20261023-2250-outline",
+  "expected": 30,
+  "items": [
+    {
+      "id": "exterior-overview",
+      "title": "외관 전체",
+      "group": "exterior",
+      "spec": "전체 외관 · Peterbilt 379 계열 커스텀 슬리퍼 트랙터",
+      "file": "exterior-overview.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "exterior-overview-thumb.png"
+    },
+    {
+      "id": "exterior-front",
+      "title": "정면",
+      "group": "exterior",
+      "spec": "정면 · 긴 보닛과 전면 그릴",
+      "file": "exterior-front.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "exterior-front-thumb.png"
+    },
+    {
+      "id": "exterior-side",
+      "title": "측면·슬리퍼 외관",
+      "group": "exterior",
+      "spec": "캡 뒤 슬리퍼 외관 · 창·출입부·하부 연료 탱크",
+      "file": "exterior-side.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "exterior-side-thumb.png"
+    },
+    {
+      "id": "exterior-rear",
+      "title": "후면",
+      "group": "exterior",
+      "spec": "후면 · 슬리퍼 뒤와 탠덤 후륜",
+      "file": "exterior-rear.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "exterior-rear-thumb.png"
+    },
+    {
+      "id": "exhaust-stacks",
+      "title": "배기 스택",
+      "group": "exterior",
+      "spec": "캡 양쪽의 배기 스택",
+      "file": "exhaust-stacks.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "exhaust-stacks-thumb.png"
+    },
+    {
+      "id": "tandem-axles",
+      "title": "탠덤 후륜",
+      "group": "exterior",
+      "spec": "뒤쪽의 두 후륜 축",
+      "file": "tandem-axles.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "tandem-axles-thumb.png"
+    },
+    {
+      "id": "fuel-tank",
+      "title": "연료 탱크",
+      "group": "exterior",
+      "spec": "캡 아래 원통형 연료 탱크",
+      "file": "fuel-tank.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "fuel-tank-thumb.png"
+    },
+    {
+      "id": "side-steps",
+      "title": "사이드 스텝",
+      "group": "exterior",
+      "spec": "캡 옆 승하차 발판",
+      "file": "side-steps.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "side-steps-thumb.png"
+    },
+    {
+      "id": "roof-horns",
+      "title": "에어 혼·루프 마커",
+      "group": "exterior",
+      "spec": "루프 위 에어 혼과 마커등",
+      "file": "roof-horns.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "roof-horns-thumb.png"
+    },
+    {
+      "id": "interior-front",
+      "title": "앞좌석 전체",
+      "group": "interior",
+      "spec": "운전석·조수석 · 사이 통로 약 55~60cm",
+      "file": "interior-front.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "interior-front-thumb.png"
+    },
+    {
+      "id": "interior-sleeper",
+      "title": "슬리퍼 전체",
+      "group": "interior",
+      "spec": "차량 뒤쪽을 본 슬리퍼 캡",
+      "file": "interior-sleeper.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "interior-sleeper-thumb.png"
+    },
+    {
+      "id": "transverse-bed",
+      "title": "가로 침대",
+      "group": "interior",
+      "spec": "좌우 약 200cm · 앞뒤 약 110~120cm",
+      "file": "transverse-bed.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "transverse-bed-thumb.png"
+    },
+    {
+      "id": "upper-storage",
+      "title": "상부 수납함",
+      "group": "interior",
+      "spec": "침대 위쪽 상부 수납",
+      "file": "upper-storage.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "upper-storage-thumb.png"
+    },
+    {
+      "id": "curtain",
+      "title": "커튼",
+      "group": "interior",
+      "spec": "앞좌석과 슬리퍼 사이의 커튼",
+      "file": "curtain.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "curtain-thumb.png"
+    },
+    {
+      "id": "fridge-cooler",
+      "title": "냉장고·쿨러",
+      "group": "interior",
+      "spec": "침대 하부의 냉장고와 쿨러",
+      "file": "fridge-cooler.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "fridge-cooler-thumb.png"
+    },
+    {
+      "id": "personal-storage",
+      "title": "개인 수납",
+      "group": "interior",
+      "spec": "슬리퍼의 개인 수납",
+      "file": "personal-storage.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "personal-storage-thumb.png"
+    },
+    {
+      "id": "dashboard",
+      "title": "대시보드",
+      "group": "interior",
+      "spec": "앞좌석 대시보드",
+      "file": "dashboard.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "dashboard-thumb.png"
+    },
+    {
+      "id": "cb-radio",
+      "title": "CB 라디오",
+      "group": "interior",
+      "spec": "차량 무전기와 마이크",
+      "file": "cb-radio.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "cb-radio-thumb.png"
+    },
+    {
+      "id": "sleeper-foyer",
+      "title": "슬리퍼 전실",
+      "group": "interior",
+      "spec": "커튼 뒤와 침대 앞 · 약 60~70cm",
+      "file": "sleeper-foyer.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "sleeper-foyer-thumb.png"
+    },
+    {
+      "id": "boot-storage",
+      "title": "부츠 수납",
+      "group": "interior",
+      "spec": "침대 하부 부츠 수납",
+      "file": "boot-storage.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "boot-storage-thumb.png"
+    },
+    {
+      "id": "lower-drawers",
+      "title": "하부 수납함",
+      "group": "interior",
+      "spec": "침대 하부 서랍",
+      "file": "lower-drawers.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "lower-drawers-thumb.png"
+    },
+    {
+      "id": "tool-storage",
+      "title": "공구 수납",
+      "group": "interior",
+      "spec": "침대 하부 공구 수납",
+      "file": "tool-storage.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "tool-storage-thumb.png"
+    },
+    {
+      "id": "floor-lockbox",
+      "title": "바닥 잠금함",
+      "group": "interior",
+      "spec": "슬리퍼 바닥 잠금함",
+      "file": "floor-lockbox.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "floor-lockbox-thumb.png"
+    },
+    {
+      "id": "ledger-receipts",
+      "title": "장부·영수증",
+      "group": "interior",
+      "spec": "조수석이나 침대 옆에 두는 기록",
+      "file": "ledger-receipts.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "ledger-receipts-thumb.png"
+    },
+    {
+      "id": "floor-plan",
+      "title": "위에서 본 구조",
+      "group": "structure",
+      "spec": "가로 침대 약 200 × 110~120cm · 슬리퍼 전실 약 60~70cm",
+      "file": "floor-plan.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "floor-plan-thumb.png"
+    },
+    {
+      "id": "sleep-one",
+      "title": "1인 취침",
+      "group": "structure",
+      "spec": "침대 전체 사용 · 여유 있음",
+      "file": "sleep-one.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "sleep-one-thumb.png"
+    },
+    {
+      "id": "sleep-two",
+      "title": "2인 취침",
+      "group": "structure",
+      "spec": "1인당 약 55~60cm · 매우 비좁지만 가능",
+      "file": "sleep-two.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "sleep-two-thumb.png"
+    },
+    {
+      "id": "sleep-three",
+      "title": "3인 나란히 불가",
+      "group": "structure",
+      "spec": "1인당 약 37~40cm · 정상 취침 불가",
+      "file": "sleep-three.png",
+      "thumb": "sleep-three-thumb.png",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "sleep-floor-option",
+      "title": "대안 · 바닥 매트",
+      "group": "structure",
+      "spec": "침대 2인 + 임시 바닥 매트 1인",
+      "file": "sleep-floor-option.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "sleep-floor-option-thumb.png"
+    },
+    {
+      "id": "sleep-seat-option",
+      "title": "대안 · 빈 조수석",
+      "group": "structure",
+      "spec": "침대 2인 + 빈 조수석 1인",
+      "file": "sleep-seat-option.png",
+      "width": 1536,
+      "height": 1024,
+      "thumb": "sleep-seat-option-thumb.png"
+    }
+  ]
+}

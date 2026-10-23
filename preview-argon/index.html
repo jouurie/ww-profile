@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0d0b09">
+<title>와이어트, 웨이드</title>
+<meta name="description" content="1996–1999년 미국. 와이어트와 웨이드 로즈의 인물 소개, 세계관과 플레이 가이드.">
+<link rel="stylesheet" href="style.css?v=20261023-2330">
+<link rel="stylesheet" href="radio-controls.css?v=20261023-2330">
+<script src="content.js?v=20261023-2330" defer></script>
+<script src="../WW/profile-traits.js?v=20261023-2330" defer></script>
+<script src="render-sections.js?v=20261023-2330" defer></script>
+<script src="radio-engine.js?v=20261023-2330" defer></script>
+<script src="radio-controls.js?v=20261023-2330" defer></script>
+<script src="app.js?v=20261023-2330" defer></script>
+
+<link rel="stylesheet" href="../WW/start-ui.css?v=20261023-2330">
+<script src="../WW/start-ui.js?v=20261023-2330" defer></script>
+<link rel="stylesheet" href="../WW/truck-ui.css?v=20261023-2330">
+<link rel="stylesheet" href="../WW/npc-ui.css?v=20261023-2330">
+<link rel="stylesheet" href="../WW/openings-ui.css?v=20261023-2330">
+<link rel="stylesheet" href="../WW/guide.css?v=20261023-2330">
+<script src="../WW/npc-ui.js?v=20261023-2330" defer></script>
+<script src="../WW/openings-ui.js?v=20261023-2330" defer></script>
+<script src="../WW/guide-data.js?v=20261023-2330" defer></script>
+<script src="../WW/guide.js?v=20261023-2330" defer></script>
+<script src="../WW/truck-ui.js?v=20261023-2330" defer></script>
+<script src="../WW/surface-updates.js?v=20261023-2330" defer></script>
+<link rel="stylesheet" href="../WW/horizontal-scroll.css?v=20261023-2330">
+<script src="../WW/horizontal-scroll.js?v=20261023-2330" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 이동</a>
+
+<header class="masthead">
+  <a class="brand" href="../WW/" aria-label="와이어트, 웨이드 첫 화면">
+    <span class="brand-mark" aria-hidden="true">
+      <span class="brand-row"><span class="twin-w">WYATT</span><em>&amp;</em></span>
+      <span class="brand-row"><span class="twin-w">WADE</span></span>
+      <strong>RHODES</strong>
+    </span>
+    <span class="brand-name">와이어트,<br>웨이드</span>
+  </a>
+
+  <details class="characters">
+    <summary><span>다른 캐릭터</span><b>＋</b></summary>
+    <div class="character-menu" id="character-menu"></div>
+  </details>
+</header>
+
+<nav class="chapter-nav" aria-label="로즈 소개 메뉴">
+  <a href="#intro" aria-current="page"><small>01</small>소개</a>
+  <a href="#brothers"><small>02</small>형제</a>
+  <a href="#truck"><small>03</small>THE BEAST</a>
+  <a href="#world"><small>04</small>도로와 생활</a>
+  <a href="#npc"><small>05</small>NPC</a>
+  <a href="#openings"><small>06</small>도입부</a>
+  <a href="#guide"><small>07</small>플레이 가이드</a>
+  <a href="#radio"><small>08</small>플레이리스트</a>
+</nav>
+
+<main id="main">
+  <!-- ① 소개 (MAIN COLLAGE SCREEN) -->
+  <section class="panel intro-screen" id="intro" aria-labelledby="intro-title">
+    <div class="intro-shell">
+      <div class="intro-top-grid">
+        <!-- 좌측: 조형 타이틀 스탬프 + 테이프 문구 조각 + 키워드 태그 조각 -->
+        <div class="intro-left-stack">
+          <div class="stamp-bar">
+            <span class="stamp-year">1996—1999 · UNITED STATES</span>
+            <span class="route-mini-badge">I-80</span>
+            <span class="route-mini-badge">US-50</span>
+            <span class="route-mini-badge">US-66</span>
+          </div>
+
+          <div class="title-poster-piece">
+            <h1 id="intro-title">
+              <span class="poster-twins"><span>WYATT</span><em>&amp;</em><span>WADE</span></span>
+              <strong>RHODES</strong>
+            </h1>
+            <div class="poster-sub-row">
+              <span class="korean-title">와이어트, 웨이드</span>
+              <span class="poster-serial">PETERBILT 379 · 18-WHEELER</span>
+            </div>
+          </div>
+
+
+          <div class="keyword-tag-piece" aria-label="핵심 키워드">
+            <span class="kw-chip">1996-1999년 미국</span>
+            <span class="kw-chip">HL</span>
+            <span class="kw-chip">BL</span>
+            <span class="kw-chip">2:1</span>
+            <span class="kw-chip">로드트립</span>
+            <span class="kw-chip">쌍둥이 형제</span>
+            <span class="kw-chip">공범화</span>
+            <span class="kw-chip">세같살</span>
+            <span class="kw-chip">유사가족</span>
+          </div>
+        </div>
+
+        <!-- 우측: 트럭 프레임 조각 + 피터빌트 379 키태그 오브젝트 -->
+        <div class="intro-truck-stage">
+          <div class="truck-photo-frame">
+            <span class="frame-corner tl" aria-hidden="true"></span>
+            <span class="frame-corner tr" aria-hidden="true"></span>
+            <span class="frame-corner bl" aria-hidden="true"></span>
+            <span class="frame-corner br" aria-hidden="true"></span>
+            <img src="hero.png" alt="미국의 트럭스톱에 정차한 검은 피터빌트 트럭 일러스트">
+            <div class="truck-frame-bar">
+              <span>THE BEAST · BLACK PETERBILT 379</span>
+              <span>CAB · SLEEPER · RECORDS</span>
+            </div>
+          </div>
+
+          <a class="key-tag" href="#truck" aria-label="더 비스트 구조 보기"><img src="../WW/assets/motel-key.png" alt="379번 호텔 키"></a>
+        </div>
+      </div>
+
+      <!-- 하단 3분할 벤토 행: 쌍둥이 요약 폴라로이드 조각 + 5단 운행일지 클립보드 + 플랫폼/내비 티켓 -->
+      <div class="intro-bottom-bento">
+        <!-- 조각 1: 쌍둥이 폴라로이드 2열 조각 -->
+        <div class="bento-piece twin-polaroid-piece">
+          <div class="piece-head">
+            <span class="sq-label">THE RHODES TWins</span>
+            <a class="piece-jump" href="#brothers">상세 프로필 ↗</a>
+          </div>
+          <div class="twin-mini-grid">
+            <a class="twin-polaroid wyatt" href="#brothers">
+              <div class="portrait tiny" aria-label="와이어트 이미지 자리">
+                <span>W</span>
+                <small>IMAGE SLOT</small>
+              </div>
+              <div class="tp-body">
+                <div class="tp-name"><strong>WYATT</strong><span>형 · 25세</span></div>
+                <p>174cm · 운전 교대 / 협상 / 외부 대응</p>
+              </div>
+            </a>
+            <a class="twin-polaroid wade" href="#brothers">
+              <div class="portrait tiny" aria-label="웨이드 이미지 자리">
+                <span>W</span>
+                <small>IMAGE SLOT</small>
+              </div>
+              <div class="tp-body">
+                <div class="tp-name"><strong>WADE</strong><span>동생 · 25세</span></div>
+                <p>174cm · 운전 교대 / 정비 / 노선 / 장부</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- 조각 2: 클립보드 화물 운송 기록 (INTRO 5문단 조각화) -->
+        <div class="bento-piece paper-clipboard-piece">
+          <span class="metal-clip" aria-hidden="true"></span>
+          <div class="clipboard-head">
+            <span class="sq-label dark">WAYBILL · INTRO</span>
+            <span class="mono-code">RHODES FREIGHT LOG / 1996—1999</span>
+          </div>
+          <div class="intro-story-grid" id="intro-story-grid"></div>
+        </div>
+
+        <!-- 조각 3: 플랫폼 티켓 & 사물 바로가기 조각 -->
+        <div class="bento-piece dispatch-side-piece">
+          <div class="dispatch-ticket-box">
+            <div class="piece-head">
+              <span class="sq-label">DISPATCH LINKS</span>
+              <span class="mono-code">CHAT</span>
+            </div>
+            <div class="platforms" id="platforms"></div>
+          </div>
+
+          <div class="quick-object-grid" aria-label="주요 구획 바로가기">
+            <a class="obj-tile" href="#truck">
+              <small>03 / TRUCK</small>
+              <strong>더 비스트 구조</strong>
+              <span>앞좌석 · 슬리퍼 캡 · 장부 ↗</span>
+            </a>
+            <a class="obj-tile" href="#world">
+              <small>04 / ATLAS</small>
+              <strong>도로와 생활</strong>
+              <span>노선 · 공범화 · 진행 소재 ↗</span>
+            </a>
+            <a class="obj-tile" href="#npc">
+              <small>05 / CONTACTS</small>
+              <strong>NPC 10명 장부</strong>
+              <span>브로커 · 트럭커 · 정차지 ↗</span>
+            </a>
+            <a class="obj-tile" href="#radio">
+              <small>08 / AUDIO DECK</small>
+              <strong>플레이리스트 12곡</strong>
+              <span>내장 카세트 오디오 재생 ↗</span>
+            </a>
+          </div>
+
+          <details class="compact-tw-piece">
+            <summary><span>주의 요소 확인 (TW)</span><b>＋</b></summary>
+            <p id="intro-tw-text"></p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② 형제 (THE RHODES BROTHERS) -->
+  <section class="panel reading" id="brothers" aria-labelledby="brothers-title" hidden>
+    <div class="section-head">
+      <div class="head-left">
+        <p class="eyebrow">02 / THE RHODES BROTHERS</p>
+        <h2 id="brothers-title">로즈 형제</h2>
+      </div>
+      <p class="head-desc">25세. 같은 얼굴, 서로 다른 역할. 운전석과 장부, 바깥 대응과 안쪽 단속을 나누어 맡습니다.</p>
+    </div>
+
+    <div id="brothers-mosaic" class="mosaic-container"></div>
+  </section>
+
+  <!-- ③ 트럭 (THE BEAST) -->
+  <section class="panel reading" id="truck" aria-labelledby="truck-title" hidden>
+    <div class="section-head">
+      <div class="head-left">
+        <p class="eyebrow">03 / BLACK PETERBILT 379</p>
+        <h2 id="truck-title">The Beast</h2>
+      </div>
+      <p class="head-desc">검은 18륜 피터빌트 트럭. 로즈 형제의 집이자 일터, 은신처입니다.</p>
+    </div>
+
+    <div class="truck-mosaic">
+      <!-- 상단: 트럭 비주얼 + 구역 선택기 + 인터랙티브 점검 메모 -->
+      <div class="truck-top-split">
+        <div class="truck-visual-piece">
+          <div class="truck-spec-strip">
+            <span>MODEL: PETERBILT 379</span>
+            <span>TYPE: 18-WHEELER SLEEPER</span>
+            <span>COLOR: BLACK</span>
+          </div>
+          <div class="truck-img-wrap">
+            <img src="hero.png" alt="검은 피터빌트 트럭">
+            <div class="truck-tabs" role="group" aria-label="트럭 구역 선택">
+              <button type="button" data-truck="front" aria-pressed="true">01 앞좌석</button>
+              <button type="button" data-truck="sleeper" aria-pressed="false">02 커튼 뒤 슬리퍼 캡</button>
+              <button type="button" data-truck="records" aria-pressed="false">03 장부와 영수증</button>
+            </div>
+          </div>
+        </div>
+
+        <article class="paper-piece truck-inspector-piece">
+          <div class="piece-head">
+            <span class="sq-label dark" id="truck-number">01 / CAB</span>
+            <span class="mono-code">INSPECTION SHEET</span>
+          </div>
+          <h3 id="truck-zone">앞좌석</h3>
+          <div class="inspector-body" id="truck-description"></div>
+
+          <button class="curtain-btn" id="curtain" type="button" hidden aria-expanded="false">
+            <span>커튼 열기 · 내부 수납 확인</span><b>＋</b>
+          </button>
+          <div class="curtain-inside" id="curtain-inside" hidden>
+            <div class="compartment-chip"><small>01</small><strong>좁은 침대</strong></div>
+            <div class="compartment-chip"><small>02</small><strong>담요</strong></div>
+            <div class="compartment-chip"><small>03</small><strong>작은 냉장고</strong></div>
+            <div class="compartment-chip"><small>04</small><strong>바닥 잠금함</strong></div>
+          </div>
+
+          <div class="seat-rule-subbox">
+            <span class="sq-label">좌석 구분 규칙</span>
+            <div class="seat-rule-grid">
+              <div><strong>조수석</strong><p>밖에서 보이는 자리. 검문소나 정차지에서 동승자로 위장할 때 앉힙니다.</p></div>
+              <div><strong>조수석 아래 · 커튼 안쪽</strong><p>숨는 자리. 외부 시선을 차단하거나 검문을 피할 때 밀어 넣습니다.</p></div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- 중단: 3구역 동시 비교 도면 조각 (ㅁ ㅁ ㅁ) -->
+      <div class="truck-three-zones" id="truck-three-zones"></div>
+
+      <!-- 하단: 외부 참고 도면 티켓 조각 -->
+      <div class="truck-blueprint-links">
+        <div class="bp-label-box">
+          <span class="sq-label">REFERENCE BLUEPRINTS</span>
+          <p>피터빌트 트럭 외관 · 실내 구조 및 침대 방향 참고 도면</p>
+        </div>
+        <div class="bp-actions">
+          <a class="bp-ticket" href="https://cdn.imgchest.com/files/d8e8c1d604cd.png" target="_blank" rel="noreferrer">
+            <small>DIAGRAM 01</small>
+            <strong>피터빌트 트럭 외관 · 실내 구조 이미지 ↗</strong>
+          </a>
+          <a class="bp-ticket" href="https://cdn.imgchest.com/files/73be245718dd.png" target="_blank" rel="noreferrer">
+            <small>DIAGRAM 02</small>
+            <strong>침대 방향과 취침 가능 인원 이미지 ↗</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 도로와 생활 (ON THE ROAD - DETAILED MOSAIC) -->
+  <section class="panel reading" id="world" aria-labelledby="world-title" hidden>
+    <div class="section-head">
+      <div class="head-left">
+        <p class="eyebrow">04 / ON THE ROAD · ATLAS &amp; LIFE</p>
+        <h2 id="world-title">도로와 생활</h2>
+      </div>
+      <p class="head-desc">1996년부터 1999년 사이의 미국. 종이 지도책과 차량 무전, 로그북과 현금 모텔로 이어지는 도로 위의 일상입니다.</p>
+    </div>
+
+    <div id="world-mosaic" class="mosaic-container"></div>
+  </section>
+
+  <!-- ⑤ NPC (CONTACT BOOK) -->
+  <section class="panel reading" id="npc" aria-labelledby="npc-title" hidden>
+    <div class="section-head">
+      <div class="head-left">
+        <p class="eyebrow">05 / CONTACT BOOK · 10 FACES</p>
+        <h2 id="npc-title">도로에서 만나는 사람들</h2>
+      </div>
+      <p class="head-desc">야드 브로커, 폐차장 주인, 모텔 지배인, 라이벌 트럭커와 배차 담당자까지 도로 위에서 마주치는 10명의 연락처 장부입니다.</p>
+    </div>
+
+    <div class="contact-controls">
+      <button type="button" id="npc-prev" aria-label="이전 NPC">←</button>
+      <div class="contact-status">
+        <span id="npc-counter">01 / 10</span>
+        <small>Shift + 휠로 좌우 이동 · 좌우 화살표로 한 명씩 전환 · 모바일 터치 스와이프</small>
+      </div>
+      <button type="button" id="npc-next" aria-label="다음 NPC">→</button>
+    </div>
+
+    <div class="contact-book">
+      <div class="contact-list" id="contact-list" role="group" aria-label="NPC 연락처 목록"></div>
+      <article class="contact-page" id="contact-page" aria-live="polite"></article>
+    </div>
+
+    <!-- 하단: 10인 역할별 디렉토리 조각 (ㅁ ㅁ) -->
+    <div class="npc-directory-split" id="npc-directory-split"></div>
+  </section>
+
+  <!-- ⑥ 도입부 (OPENING SCENES) -->
+  <section class="panel reading" id="openings" aria-labelledby="openings-title" hidden>
+  <div class="section-head">
+    <p class="eyebrow">06 / OPENING SCENES</p>
+    <h2 id="openings-title">도입부</h2>
+    <p>선택한 시점에서 시작합니다.</p>
+  </div>
+  <div class="opening-grid" id="opening-list"></div>
+  <div class="content-note">
+    <div class="content-note-title">성인 · 강압 요소 안내</div>
+    <p id="content-warning"></p>
+  </div>
+</section>
+
+
+  <!-- ⑦ 플레이 가이드 (DRIVER'S LOG & MANUAL - DETAILED MOSAIC) -->
+  <section class="panel reading" id="guide" aria-labelledby="guide-title" hidden>
+    <div class="section-head">
+      <div class="head-left">
+        <p class="eyebrow">07 / DRIVER'S LOG &amp; PLAY MANUAL</p>
+        <h2 id="guide-title">플레이 가이드</h2>
+      </div>
+      <p class="head-desc">진행 방식, 플레이 팁, 추천 설정과 모델, 명령어와 상태창 규격을 조각별로 정리한 매뉴얼입니다.</p>
+    </div>
+
+    <nav class="guide-jump-bar" id="guide-index" aria-label="가이드 구획 바로가기"></nav>
+    <div id="guide-mosaic" class="mosaic-container"></div>
+  </section>
+
+  <!-- ⑧ 라디오 (VIDEO-FREE CUSTOM AUDIO DECK) -->
+  <section class="panel reading" id="radio" aria-labelledby="radio-title" hidden>
+    <div class="section-head">
+      <div class="head-left">
+        <p class="eyebrow">08 / CAB CASSETTE &amp; RADIO DECK</p>
+        <h2 id="radio-title">플레이리스트</h2>
+      </div>
+      <p class="head-desc">동영상 화면 없이 소개 페이지 안에서 바로 음악만 재생되는 대시보드 오디오 데크입니다. 자동재생되지 않습니다.</p>
+    </div>
+
+    <!-- 동영상 창이 전혀 노출되지 않는 오프스크린 오디오 전용 컨테이너 -->
+    <div id="rie-audio-engine-host" class="sr-audio-host" aria-hidden="true"></div>
+
+    <div class="radio-mosaic">
+      <!-- 상단 좌측: 대시보드 카세트 & 디지털 리시버 조각 -->
+      <div class="radio-deck-piece">
+        <div class="deck-top-strip">
+          <span class="deck-model">PETERBILT CAB AUDIO · MODEL 379-FM</span>
+          <span class="deck-status-badge" id="radio-status-badge">STANDBY · READY</span>
+        </div>
+
+        <div class="deck-vfd-screen">
+          <div class="vfd-meta">
+            <span id="radio-trk-num">TRK 01 / 12</span>
+            <span id="radio-mode-indicator">REPEAT OFF · NORMAL</span>
+          </div>
+          <div class="vfd-title-wrap">
+            <strong id="radio-current-title">Lo Fidelity Allstars - Battleflag</strong>
+          </div>
+          <div class="vfd-Notice" id="radio-status-msg">재생(▶) 버튼을 누르거나 아래 카세트 곡목을 선택하세요.</div>
+        </div>
+
+        <!-- 평면 카세트 테이프 릴 창 (동영상/썸네일 대신 회전하는 테이프 릴 그래픽) -->
+        <div class="cassette-window" id="cassette-window" data-playing="false">
+          <div class="cassette-label-strip">
+            <span>SIDE A · 90 MIN</span>
+            <strong>RHODES ROAD MIX 1996—1999</strong>
+            <a id="radio-fallback-link" href="https://www.youtube.com/watch?v=o2BNpK01eww" target="_blank" rel="noreferrer" title="브라우저에서 음원이 차단된 경우 외부에서 열기">원본 음원 ↗</a>
+          </div>
+          <div class="cassette-mechanism" aria-hidden="true">
+            <div class="tape-reel" id="reel-left"><i></i></div>
+            <div class="tape-bridge">
+              <span class="tape-window-line"></span>
+            </div>
+            <div class="tape-reel" id="reel-right"><i></i></div>
+          </div>
+        </div>
+
+        <!-- 재생 위치 탐색 바 -->
+        <div class="deck-seek-row">
+          <span class="time-stamp" id="radio-elapsed">0:00</span>
+          <input type="range" id="radio-seek" class="deck-slider" min="0" max="100" step="0.1" value="0" aria-label="재생 위치 이동">
+          <span class="time-stamp" id="radio-duration">0:00</span>
+        </div>
+
+        <!-- 조작 버튼 & 볼륨 컨트롤 행 -->
+        <div class="deck-controls-bar">
+          <div class="transport-btns" role="group" aria-label="오디오 재생 조작">
+            <button type="button" class="t-btn" id="radio-prev" aria-label="이전 곡">⏮<span>이전</span></button>
+            <button type="button" class="t-btn play-main" id="radio-play" aria-label="재생" aria-pressed="false">▶<span id="radio-play-text">재생</span></button>
+            <button type="button" class="t-btn" id="radio-next" aria-label="다음 곡">⏭<span>다음</span></button>
+            <button type="button" class="t-btn" id="radio-repeat" aria-label="한 곡 반복" aria-pressed="false">🔁<span>반복</span></button>
+            <button type="button" class="t-btn" id="radio-shuffle" aria-label="곡 순서 섞기">🔀<span>셔플</span></button>
+          </div>
+
+          <div class="volume-module">
+            <span class="vol-label">VOL</span>
+            <span class="vol-bars" id="vol-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <input type="range" id="radio-volume" class="vol-slider" min="0" max="100" step="1" value="80" aria-label="볼륨 조절">
+            <span class="vol-num" id="radio-vol-val">80%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 상단 우측: 검색 & 운전 교대 라디오 메모 조각 -->
+      <div class="radio-side-stack">
+        <div class="dark-piece search-piece">
+          <div class="piece-head">
+            <span class="sq-label">TRACK FILTER</span>
+            <span class="mono-code" id="radio-count-label">12 TRACKS</span>
+          </div>
+          <div class="search-input-row">
+            <input type="search" id="radio-search" placeholder="곡명 또는 아티스트 검색" autocomplete="off" aria-label="곡명 또는 아티스트 검색">
+            <button type="button" id="radio-search-clear" aria-label="검색어 지우기">×</button>
+          </div>
+        </div>
+
+        <div class="paper-piece radio-memo-piece">
+          <div class="piece-head">
+            <span class="sq-label dark">CAB RADIO NOTE</span>
+            <span class="mono-code">CH 19 / FM</span>
+          </div>
+          <div class="memo-lines">
+            <div class="memo-item">
+              <span class="sq-sub">운전 교대</span>
+              <p>운전 교대 사이에는 라디오 채널을 바꾸고 영수증을 접어 장부에 끼웁니다.</p>
+            </div>
+            <div class="memo-item">
+              <span class="sq-sub">노선 변경</span>
+              <p>라디오 소식과 도로 사건 때문에 노선이 바뀌기도 합니다.</p>
+            </div>
+            <div class="memo-item">
+              <span class="sq-sub">!라디오</span>
+              <p>채팅 중 <code>!라디오</code> 명령어를 사용하면 장면에 맞는 곡과 도로 소식을 볼 수 있습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 하단: 12곡 카세트 인덱스 조각 그리드 -->
+    <div class="cassette-track-grid" id="track-list" role="list" aria-label="플레이리스트 12곡 목록"></div>
+  </section>
+</main>
+
+<footer>
+  <span>와이어트, 웨이드 (WYATT &amp; WADE RHODES)</span>
+  <div class="footer-actions">
+    <button class="text-button" id="intro-more" type="button">운행일지 요약</button>
+    <a class="text-button" href="#intro">맨 위로 ↑</a>
+  </div>
+  <span>1996—1999 · UNITED STATES</span>
+</footer>
+
+<dialog id="synopsis" aria-labelledby="synopsis-title">
+  <div class="dialog-head">
+    <p class="eyebrow">INTRODUCTION · WAYBILL LOG</p>
+    <button class="close-dialog" type="button" aria-label="소개 닫기">×</button>
+  </div>
+  <h2 id="synopsis-title">로즈 형제와 더 비스트</h2>
+  <div class="dialog-body" id="synopsis-body"></div>
+</dialog>
+</body>
+</html>

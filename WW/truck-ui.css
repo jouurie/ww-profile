@@ -1,0 +1,54 @@
+/* One fixed viewer, native categories and individual image buttons. */
+.wwtruck {
+  --wwtruck-paper: var(--paper, #e8ddc7);
+  --wwtruck-ink: var(--ink, #171713);
+  --wwtruck-red: var(--red, #a63628);
+  color: var(--wwtruck-paper);
+  width: 100%;
+  min-width: 0;
+}
+.wwtruck .wwtruck-shell { box-sizing: border-box; width: 100%; padding: clamp(18px, 3vw, 38px); }
+.wwtruck .wwtruck-heading { margin: 0 0 18px; font-size: 30px; line-height: 1.3; letter-spacing: -.03em; }
+.wwtruck .wwtruck-gallery-stage { display: grid; grid-template-columns: minmax(0, 3.2fr) minmax(0, 1fr); align-items: start; gap: 24px; }
+.wwtruck .wwtruck-viewer { position: relative; min-width: 0; width: 100%; aspect-ratio: 3 / 2; margin: 0; overflow: hidden; background: var(--wwtruck-ink); }
+.wwtruck .wwtruck-visual { position: absolute; inset: 0; }
+.wwtruck .wwtruck-gallery-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+.wwtruck .wwtruck-captions { display: grid; min-width: 0; }
+.wwtruck .wwtruck-caption { grid-area: 1 / 1; min-width: 0; visibility: hidden; pointer-events: none; }
+.wwtruck .wwtruck-caption[data-active="true"] { visibility: visible; pointer-events: auto; }
+.wwtruck .wwtruck-caption h3 { font-size: 23px; line-height: 1.4; margin: 0 0 14px; overflow-wrap: anywhere; }
+.wwtruck .wwtruck-spec { margin: 0; padding: 12px 0; border-block: 1px solid var(--wwtruck-paper); font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
+.wwtruck .wwtruck-detail { margin: 14px 0 0; font-size: 16px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+.wwtruck .wwtruck-categories { display: flex; align-items: stretch; gap: 8px; margin-top: 20px; }
+.wwtruck .wwtruck-category { flex: 1; min-width: 0; min-height: 46px; padding: 9px 12px; border: 1px solid var(--wwtruck-paper); background: transparent; color: var(--wwtruck-paper); font: inherit; font-size: 16px; font-weight: 600; line-height: 1.4; }
+.wwtruck .wwtruck-category[aria-selected="true"] { background: var(--wwtruck-red); border-color: var(--wwtruck-red); }
+.wwtruck .wwtruck-group-panels { display: grid; margin-top: 12px; min-width: 0; }
+.wwtruck .wwtruck-group-panel { grid-area: 1 / 1; min-width: 0; visibility: hidden; pointer-events: none; }
+.wwtruck .wwtruck-group-panel[data-active="true"] { visibility: visible; pointer-events: auto; }
+.wwtruck .wwtruck-thumbnail-strip { display: flex; gap: 10px; min-width: 0; overflow-x: auto; overflow-y: hidden; padding: 5px 0; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: var(--wwtruck-paper) var(--wwtruck-ink); }
+.wwtruck .wwtruck-thumbnail { box-sizing: border-box; flex: 1 0 104px; min-width: 0; max-width: 180px; padding: 5px; margin: 0; background: transparent; color: var(--wwtruck-paper); border: 1px solid var(--wwtruck-paper); font: inherit; text-align: left; }
+.wwtruck .wwtruck-thumbnail[aria-pressed="true"] { background: var(--wwtruck-paper); color: var(--wwtruck-ink); border-color: var(--wwtruck-red); }
+.wwtruck .wwtruck-thumbnail-image { display: block; width: 100%; height: 72px; object-fit: cover; }
+.wwtruck .wwtruck-thumbnail-title { display: block; min-height: 2.9em; margin-top: 7px; font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+.wwtruck .wwtruck-plan-labels { position: absolute; inset: 0; pointer-events: none; }
+.wwtruck .wwtruck-plan-labels span { position: absolute; transform: translate(-50%, -50%); padding: 2px 5px; background: var(--wwtruck-paper); color: var(--wwtruck-ink); font-size: 14px; line-height: 1.4; white-space: nowrap; }
+.wwtruck .wwtruck-concept-note { margin: 16px 0 0; font-size: 13px; line-height: 1.6; }
+.wwtruck .wwtruck-gallery-status { margin: 0; font-size: 14px; line-height: 1.5; }
+.wwtruck [hidden] { display: none !important; }
+.wwtruck button:focus-visible { outline: 2px solid var(--wwtruck-paper); outline-offset: 3px; }
+@media (max-width: 900px) {
+  .wwtruck .wwtruck-gallery-stage { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .wwtruck .wwtruck-caption h3 { font-size: 21px; margin-bottom: 10px; }
+  .wwtruck .wwtruck-detail { margin-top: 9px; }
+}
+@media (max-width: 540px) {
+  .wwtruck .wwtruck-shell { padding: 18px 14px; }
+  .wwtruck .wwtruck-heading { font-size: 27px; }
+  .wwtruck .wwtruck-categories { gap: 6px; }
+  .wwtruck .wwtruck-category { padding: 8px 6px; }
+  .wwtruck .wwtruck-plan-labels span { font-size: 12px; padding: 1px 3px; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .wwtruck .wwtruck-category:not([aria-selected="true"]):hover,
+  .wwtruck .wwtruck-thumbnail:not([aria-pressed="true"]):hover { color: var(--wwtruck-ink); background: var(--wwtruck-paper); }
+}

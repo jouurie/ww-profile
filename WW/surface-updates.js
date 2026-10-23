@@ -1,0 +1,1 @@
+(()=>{'use strict';window.WWTruckUI?.mount(document.getElementById('truck'),window.WW);const npc=document.getElementById('npc');if(npc&&!npc.classList.contains('ww-npc'))window.WWNPCUI?.mount(npc);const openings=document.getElementById('openings');if(openings&&!openings.classList.contains('ww-openings-ui'))window.WWOpeningsUI?.mount(document);})();
