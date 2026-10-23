@@ -96,7 +96,7 @@
     title.id = (root.id || 'npc') + '-ui-title';
     session.label = title.id;
     root.setAttribute('aria-labelledby', title.id);
-    header.append(title, node('span', 'ww-npc-edition', String(npcs.length).padStart(2, '0') + ' CONTACTS'));
+    header.append(title, node('span', 'ww-npc-edition', 'CONTACTS'));
     var page = node('div', 'ww-npc-page');
     page.id = 'contact-page';
     var navigation = node('nav', 'ww-npc-navigation');
@@ -121,7 +121,6 @@
       frame.setAttribute('aria-hidden', 'true');
       var image = imageFor(npc);
       if (image) frame.append(picture(npc, image, true));
-      frame.append(node('span', 'ww-npc-thumb-number', String(index + 1).padStart(2, '0')));
       button.append(frame, node('span', 'ww-npc-thumb-name', npc.name));
       thumbnails.push(button); film.append(button);
     });
@@ -141,8 +140,8 @@
     var footer = node('div', 'ww-npc-footer');
     var counter = node('span', 'ww-npc-counter');
     counter.id = 'npc-counter'; counter.setAttribute('role', 'status'); counter.setAttribute('aria-live', 'polite');
-    var hint = node('span', 'ww-npc-hint', 'Shift + 휠로 필름 넘기기 · ← → 키 · 터치로 선택');
-    footer.append(counter, hint);
+    var hint = node('span', 'ww-npc-hint', '← → 키 · 터치로 선택');
+    footer.append(hint);
     shell.append(header, page, navigation, footer);
     root.classList.add('ww-npc'); root.replaceChildren(shell);
     function select(index, scroll, focus) {
@@ -156,7 +155,6 @@
       portrait.setAttribute('data-motion', 'tilt');
       var image = imageFor(npc);
       if (image) portrait.append(picture(npc, image, false));
-      portrait.append(node('figcaption', '', 'CONTACT ' + String(session.index + 1).padStart(2, '0')));
       var copy = node('div', 'ww-npc-copy');
       var korean = node('h3', 'ww-npc-name', npc.name);
       korean.setAttribute('data-motion', 'reveal');
@@ -207,16 +205,6 @@
         session.index + (event.key === 'ArrowRight' ? 1 : -1);
       select(index, true, true);
     });
-    on(film, 'wheel', function (event) {
-      if (!event.shiftKey) return;
-      var delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-      if (event.deltaMode === 1) delta *= 16;
-      else if (event.deltaMode === 2) delta *= film.clientWidth;
-      var limit = Math.max(0, film.scrollWidth - film.clientWidth);
-      if (limit <= 1) return;
-      var target = Math.max(0, Math.min(limit, film.scrollLeft + delta));
-      if (target !== film.scrollLeft) { event.preventDefault(); film.scrollLeft = target; }
-    }, { passive: false });
     on(page, 'pointerdown', function (event) {
       if (event.pointerType === 'touch') session.touch = { x: event.clientX, y: event.clientY, id: event.pointerId };
     }, { passive: true });

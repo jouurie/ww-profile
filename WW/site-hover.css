@@ -1,0 +1,40 @@
+/* Component feedback follows the status panel: fixed geometry, local emphasis.
+   Key swing and the landing start/dim interaction have their own owners. */
+/* Focus feedback also works on touch keyboards and keeps selected colors intact. */
+@media (hover: hover) {
+  :is(.ww-site-header,.ww-landing,main>.panel)
+    :is(a[href],button,summary,[role="button"],[role="tab"],input[type="range"],input[type="search"]):not(:disabled,[aria-disabled="true"],.key-tag,.key-tag *,.ww-start,.ww-start *):hover {
+    filter: brightness(1.12);
+  }
+  :is(.ww-site-header,.ww-landing,main>.panel)
+    a[href]:not(.key-tag,.key-tag *,.ww-start,.ww-start *):hover {
+    text-decoration: none;
+  }
+  /* Images respond inside their fixed link or button; no hit target is moved. */
+  :is(.ww-site-header,.ww-landing,main>.panel)
+    :is(a[href],button):not(.key-tag,.ww-start *):hover img {
+    filter: brightness(1.1);
+  }
+  /* Information remains information: no pointer cursor or motion on paper. */
+  main>.panel :is(.brother-dossier,.profile-sheet,.paper-piece,.bento-piece,.ww-npc-spread,.ww-opening-card,.wg-model-card,.wg-status-card,.wg-support-unit,.wwtruck-caption):hover {
+    filter: brightness(1.08);
+  }
+  main>.panel :is(.prose .kv-line,.ww-npc-details p,.wg-command-row,.wg-model-setting,.wg-progress-lines p,.memo-item,.story-slip):hover {
+    filter: brightness(1.15);
+  }
+}
+:is(.ww-site-header,.ww-landing,main>.panel)
+  :is(a[href],button,summary,[role="button"],[role="tab"],input[type="range"],input[type="search"]):not(:disabled,[aria-disabled="true"],.key-tag,.key-tag *,.ww-start,.ww-start *):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+:is(.ww-site-header,.ww-landing,main>.panel)
+  :is(a[href],button):not(.key-tag,.ww-start *):focus-visible img {
+  filter: brightness(1.15);
+}
+/* All feedback here is static, including when reduced motion is requested. */
+
+@media(hover:hover){
+  main>.panel :is(a,button,summary):hover:not(:focus-visible){outline:none!important;box-shadow:none!important}
+  main>.panel details:has(>summary:hover){box-shadow:none!important}
+}

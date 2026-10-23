@@ -1,12 +1,15 @@
 /* Add a visible swing at the ring without changing the destination. */
-#intro .key-tag { overflow: visible; }
+#intro .key-tag,
+#intro .key-tag:is(:hover,:focus-visible) {
+  overflow: visible;
+  animation: none;
+}
 #intro .key-tag > img {
   transform-origin: 50% 8%;
   transition: transform .25s ease;
 }
 #intro .key-tag:is(:hover,:focus-visible) > img {
-  animation: ww-key-swing .85s ease-in-out;
-  transform: rotate(-7deg);
+  animation: ww-key-swing 1.1s ease-in-out infinite;
 }
 #intro .key-tag:focus-visible {
   outline: 2px solid var(--brass);
@@ -27,15 +30,11 @@
   white-space: normal;
 }
 @keyframes ww-key-swing {
-  0% { transform: rotate(0); }
-  24% { transform: rotate(-17deg); }
-  48% { transform: rotate(11deg); }
-  70% { transform: rotate(-11deg); }
-  86% { transform: rotate(-4deg); }
-  100% { transform: rotate(-7deg); }
+  0%, 100% { transform: rotate(-17deg); }
+  50% { transform: rotate(17deg); }
 }
 @media (prefers-reduced-motion: reduce) {
   #intro .key-tag { animation: none; }
   #intro .key-tag > img { transition: none; }
-  #intro .key-tag:is(:hover,:focus-visible) > img { animation: none; transform: none; }
+  #intro .key-tag:is(:hover,:focus-visible) > img { animation: none; transform: rotate(-10deg); }
 }

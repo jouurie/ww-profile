@@ -35,7 +35,19 @@ window.WWRender = (() => {
     if(at>0&&at<=22&&!body.startsWith('http'))return '<p class="kv-line">'+inlineLabel(body.slice(0,at).trim(),body.slice(at+1).trim())+'</p>';
     return '<p class="kv-line">'+linkify(body)+'</p>';
   }
-  function renderStructuredText(rawText) {
+  function formatProfileSubLines(lines) {
+    const blocks=[];
+    for(let i=0;i<lines.length;){
+      const match=lines[i].replace(/^[·↳]\s*/, '').trim().match(/^(와이어트|웨이드):\s*(.*)$/);
+      if(!match){blocks.push(lines[i].startsWith('<RStatus')?'<pre class="code-box">'+escapeHTML(lines[i])+'</pre>':formatSubLine(lines[i]));i++;continue;}
+      const values=[match[2]];let j=i+1;
+      while(j<lines.length){const next=lines[j].replace(/^[·↳]\s*/, '').trim().match(/^(와이어트|웨이드):\s*(.*)$/);if(!next||next[1]!==match[1])break;values.push(next[2]);j++;}
+      blocks.push(values.length===1?formatSubLine(lines[i]):'<p class="kv-line"><span class="sq-sub '+getLabelTone(match[1])+'">'+escapeHTML(match[1])+'</span> <span class="kv-value">'+values.map(value=>'<span class="kv-value-paragraph">'+linkify(value)+'</span>').join('')+'</span></p>');
+      i=j;
+    }
+    return blocks.join('');
+  }
+  function renderStructuredText(rawText, mergeProfileLabels=false) {
     const lines=String(rawText||'').split('\n'),blocks=[];
     for(let i=0;i<lines.length;){
       const line=lines[i].trim();if(!line){i++;continue;}
@@ -46,7 +58,7 @@ window.WWRender = (() => {
         while(j<lines.length){const next=lines[j].trim();if(next.startsWith('▸')||next.startsWith('※'))break;if(next)subs.push(next);j++;}
         if(subs.length){
           const entity=/^(와이어트 로즈|웨이드 로즈|더 비스트)\s*\(/.test(content);
-          blocks.push('<section class="kv-section'+(entity?' kv-entity':'')+'"><h4 class="kv-heading"><span class="sq-sub '+getLabelTone(content)+'">'+escapeHTML(content)+'</span></h4><div class="kv-section-body">'+subs.map(sub=>sub.startsWith('<RStatus')?'<pre class="code-box">'+escapeHTML(sub)+'</pre>':formatSubLine(sub)).join('')+'</div></section>');i=j;continue;
+          blocks.push('<section class="kv-section'+(entity?' kv-entity':'')+'"><h4 class="kv-heading"><span class="sq-sub '+getLabelTone(content)+'">'+escapeHTML(content)+'</span></h4><div class="kv-section-body">'+(mergeProfileLabels?formatProfileSubLines(subs):subs.map(sub=>sub.startsWith('<RStatus')?'<pre class="code-box">'+escapeHTML(sub)+'</pre>':formatSubLine(sub)).join(''))+'</div></section>');i=j;continue;
         }
         const pair=content.match(/^(.{1,28}?)(?: → | \| |:\s+)([\s\S]+)$/);
         blocks.push('<p class="kv-line">'+(pair&&!content.startsWith('http')?inlineLabel(pair[1],pair[2]):linkify(content))+'</p>');i++;continue;
@@ -143,7 +155,7 @@ window.WWRender = (() => {
     if(!WW)return;
     sanitizeDOMLabels();
     const put=(id,html)=>{const element=document.getElementById(id);if(element)element.innerHTML=html;};
-    const heading=item=>escapeHTML(item.title.replace(/^⭐\s*/,''))+(item.title.includes('⭐')?'<span class="rec-badge">추천</span>':'');
+    const heading=item=>escapeHTML(item.title.replace(/^⭐\s*/,''));
     const card=(item,id='')=>`<article class="paper-piece guide-source-card" ${id?`id="${id}"`:''}><h3 class="piece-title">${heading(item)}</h3><div class="prose" data-raw="${escapeHTML(item.text)}">${renderStructuredText(item.text)}</div>${/가이던스|요약 지침|^상태창$/.test(item.title)?`<button type="button" class="copy-line" data-copy="${id}">원문 복사</button>`:''}</article>`;
     const rows=(items,prefix)=>Array.from({length:Math.ceil(items.length/2)},(_,row)=>`<div class="mosaic-row-2">${items.slice(row*2,row*2+2).map((item,offset)=>card(item,prefix?`${prefix}-${row*2+offset}`:'')).join('')}</div>`).join('');
     put('character-menu',`<a href="#intro">와이어트, 웨이드<small>현재 소개</small></a><a href="https://jouurie.github.io/ig-profile/">이결<small>소개 바로가기 ↗</small></a>`);
@@ -153,7 +165,7 @@ window.WWRender = (() => {
     const sourceLine=$('#intro-source-line');if(sourceLine)sourceLine.textContent=WW.intro.split('\n')[0];
     const tw=$('#intro-tw-text');if(tw)tw.textContent=WW.warning;
     const dossiers=[['wyatt','WYATT','와이어트 로즈','형'],['wade','WADE','웨이드 로즈','동생']].map(([tone,english,name,role])=>`<article class="brother-dossier ${tone}"><div class="portrait large" aria-label="${name} 이미지 자리">${english}</div><div class="bd-head"><small>${role}</small><h3>${name}</h3><div class="bd-spec-table"><div><span>AGE</span>25세</div><div><span>HEIGHT</span>174cm</div></div><ul class="ww-profile-traits">${(window.WWProfileTraits?.[tone]||[]).map(tag=>`<li>${escapeHTML(tag)}</li>`).join('')}</ul></div></article>`).join('');
-    put('brothers-mosaic',`<div class="mosaic-row-2">${dossiers}</div><article class="paper-piece profile-sheet">`+WW.profile.map((item,i)=>`<section class="profile-section" id="profile-${i}"><h3 class="piece-title">${heading(item)}</h3><div class="prose" data-raw="${escapeHTML(item.text)}">${renderStructuredText(item.text)}</div></section>`).join('')+'</article>');
+    put('brothers-mosaic',`<div class="mosaic-row-2">${dossiers}</div><article class="paper-piece profile-sheet">`+WW.profile.map((item,i)=>`<section class="profile-section" id="profile-${i}"><h3 class="piece-title">${heading(item)}</h3><div class="prose" data-raw="${escapeHTML(item.text)}">${renderStructuredText(item.text,true)}</div></section>`).join('')+'</article>');
     const beast=(WW.supplement||[]).find(item=>item.title==='더 비스트');
     if(beast){const parts=[...beast.text.matchAll(/▸ ([^\n]+)\n([\s\S]*?)(?=\n▸ |$)/g)].map(match=>({title:match[1],text:match[2].trim()}));put('truck-three-zones',parts.filter(item=>['앞좌석','커튼 뒤 슬리퍼 캡','장부와 영수증'].includes(item.title)).map(item=>card(item)).join(''));}
     const worldTitles=['세계관','미국 전역 장거리 화물노선','로즈 형제','트럭 생활','공범화','진행 소재'];

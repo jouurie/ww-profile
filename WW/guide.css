@@ -40,12 +40,28 @@
 #guide .wg-platform-label.wg-elyn{color:var(--cyan,var(--paper))}
 #guide .wg-platform-label.wg-nody{color:var(--red)}
 #guide .wg-command-token code{font-size:16px;white-space:nowrap;color:var(--wg-ink)}
-#guide .wg-command-token .wg-copy-control{margin:0}
-#guide .wg-command-token .wg-copy-control button{padding:4px 8px;font-size:13px}
 #guide .wg-status-preview{margin-bottom:28px}
 #guide .wg-status-preview-body{padding:12px;border:1px solid var(--wg-ink);background:var(--paper);min-width:0}
 #guide .wg-status-frame{color-scheme:normal;display:block;width:100%;height:560px;border:0;overflow:hidden}
 #guide .wg-status-notes{margin-top:28px}
+#guide .wg-status-guide{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:18px;align-items:start;min-width:0}
+#guide .wg-status-input-stack{display:grid;gap:18px;min-width:0}
+#guide .wg-status-guide .wg-status-card{min-width:0;padding:18px;border:1px solid var(--wg-line);background:var(--paper)}
+#guide .wg-status-guide .wg-status-card h4{margin:0 0 14px;font:600 19px/1.5 var(--font-label)}
+#guide .wg-status-guide .wg-status-card h5{margin:16px 0 8px;font:600 15px/1.6 var(--font-label)}
+#guide .wg-status-guide .wg-status-card p{margin:0 0 10px;font:16px/1.65 var(--font-body);word-break:keep-all;overflow-wrap:anywhere}
+#guide .wg-status-guide .wg-status-card p:last-child{margin-bottom:0}
+#guide .wg-status-guide .wg-code{min-width:0;max-width:100%;margin:12px 0 0;padding:12px;border:1px solid var(--wg-line);box-sizing:border-box;font:14px/1.65 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+#guide .wg-status-guide .wg-copy-control{margin-top:10px}
+#guide .wg-status-guide .wg-status-field-table{width:100%;table-layout:fixed;border-collapse:collapse;font:15px/1.6 var(--font-body)}
+#guide .wg-status-guide .wg-status-field-table :is(th,td){padding:9px 10px;border-bottom:1px solid var(--wg-line);text-align:left;vertical-align:top;overflow-wrap:anywhere;word-break:keep-all}
+#guide .wg-status-guide .wg-status-field-table th:first-child{width:110px;padding-left:0}
+#guide .wg-status-guide .wg-status-field-table thead th{font-family:var(--font-label);border-bottom:2px solid var(--wg-ink)}
+#guide .wg-status-guide .wg-status-field-table tbody th{font-weight:400}
+#guide .wg-status-guide .wg-status-field-table td{padding-right:0}
+#guide .wg-status-guide .wg-status-field-notes{margin-top:16px;padding-top:14px;border-top:1px solid var(--wg-line)}
+@media(max-width:600px){#guide .wg-status-guide{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:650px){#guide .wg-status-guide .wg-status-card{padding:14px}#guide .wg-status-guide .wg-status-field-table th:first-child{width:94px}#guide .wg-status-guide .wg-status-field-table :is(th,td){padding-top:8px;padding-bottom:8px}}
 @media(hover:hover){#guide .ww-guide button:hover{border-color:var(--wg-ink);text-decoration:underline;text-underline-offset:4px}}
 @media(max-width:850px){#guide .wg-command-row{grid-template-columns:minmax(0,1fr);gap:12px}#guide .wg-control-panel{padding:18px}}
 @media(max-width:650px){#guide .wg-command-pair{grid-template-columns:minmax(0,1fr);gap:12px}#guide .wg-control-panel{padding:14px}#guide .wg-groups button{min-width:220px}#guide .wg-status-preview-body{padding:6px}}
@@ -135,3 +151,55 @@
 #guide .wg-groups button,#guide .wg-groups button[aria-selected],#guide .wg-item-selector button,#guide .wg-item-selector button[aria-selected],#guide .wg-local-tabs button,#guide .wg-local-tabs button[aria-selected]{font-weight:600;border-width:1px}
 #guide .wg-item-selector{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:3px;scrollbar-width:thin}
 #guide .wg-item-selector button{flex:0 0 184px;width:184px;min-height:48px;white-space:nowrap;text-align:center}
+
+/* Keep each play tip inside its own ruled column. */
+#guide .ww-guide .wg-pieces.wg-short-pieces{gap:20px;align-items:stretch}
+#guide .ww-guide .wg-short-pieces>.wg-fragment{box-sizing:border-box;min-width:0;max-width:100%;padding:20px 16px 16px;border-inline-start:1px solid var(--brass)}
+#guide .ww-guide .wg-short-pieces>.wg-fragment :is(h4,p,.wg-command-pair,.wg-command-token){min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:anywhere}
+#guide .ww-guide .wg-short-pieces>.wg-fragment p{margin-inline:0;white-space:normal;word-break:normal}
+#guide .ww-guide .wg-short-pieces>.wg-fragment .wg-command-pair{grid-template-columns:minmax(0,1fr)}
+
+/* Equal-width recommendation cells follow the source's 1–23 reading order. */
+#guide .ww-guide ol.wg-play-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:12px;columns:auto;margin:0;padding:0;list-style:none;counter-reset:wg-play}
+#guide .ww-guide ol.wg-play-list>li{display:grid;grid-template-columns:2.25em minmax(0,1fr);align-items:start;gap:12px;min-width:0;margin:0;padding:14px;box-sizing:border-box;border:1px solid var(--brass);background:var(--paper);color:var(--ink);counter-increment:wg-play;white-space:normal;word-break:normal;overflow-wrap:anywhere}
+#guide .ww-guide ol.wg-play-list>li::before{content:counter(wg-play);align-self:stretch;min-width:0;padding-right:10px;border-right:1px solid var(--brass);color:var(--ink);font:inherit;text-align:center}
+@media(max-width:650px){#guide .ww-guide ol.wg-play-list{grid-template-columns:minmax(0,1fr)}#guide .ww-guide .wg-short-pieces>.wg-fragment{padding:18px 14px 14px}}
+
+/* Model cards and operation tables have distinct, readable surfaces. */
+#guide .ww-guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+#guide .ww-guide .wg-model-card{display:flex;flex-direction:column;min-width:0;padding:16px;border:1px solid var(--brass);border-top:3px solid var(--brass);background:var(--ink);color:var(--paper)}
+#guide .ww-guide .wg-model-card>header{padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--brass)}
+#guide .ww-guide .wg-model-card :is(h4,h5,p){color:var(--paper)}
+#guide .ww-guide .wg-model-card p{font-weight:400}
+#guide .ww-guide .wg-model-card .wg-model-setting{padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--brass)}
+#guide .ww-guide .wg-model-card .wg-model-setting>strong{color:var(--status-red,var(--red));font-weight:400}
+#guide .ww-guide .wg-model-card :is(.wg-model-feature,.wg-model-caution){min-width:0}
+#guide .ww-guide .wg-model-card .wg-model-caution{padding-left:10px;border-left:2px solid var(--status-red,var(--red))}
+#guide .ww-guide .wg-model-card h5{margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--brass)}
+#guide .ww-guide .wg-model-support-table{width:100%;table-layout:fixed;border-collapse:collapse;border:1px solid var(--brass);background:var(--paper);color:var(--ink)}
+#guide .ww-guide .wg-model-support-table :is(th,td){padding:12px 14px;border:1px solid var(--brass);text-align:left;vertical-align:top;overflow-wrap:anywhere;word-break:normal}
+#guide .ww-guide .wg-model-support-table th{width:112px;background:var(--ink);color:var(--paper);font-family:var(--font-label);font-weight:400}
+#guide .ww-guide .wg-model-support-table :is(td,.wg-support-value,.wg-support-statement,p){font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.65}
+#guide .ww-guide .wg-model-support-table :is(.wg-support-value,.wg-support-statement){margin:0}
+#guide .ww-guide .wg-model-support-table p{margin:8px 0 0;white-space:pre-wrap}
+#guide .ww-guide .wg-model-support-table .wg-model-highlight{padding:0;background:none;color:inherit;font-weight:400;text-decoration:none}
+#guide .ww-guide .wg-model-support-table .wg-note{padding-left:0}
+@media(max-width:850px){#guide .ww-guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#guide .ww-guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}#guide .ww-guide .wg-model-support-table th{width:84px}#guide .ww-guide .wg-model-support-table :is(th,td){padding:10px}}
+
+#guide .ww-guide .wg-pieces.wg-short-pieces{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:650px){#guide .ww-guide .wg-pieces.wg-short-pieces{grid-template-columns:minmax(0,1fr)}}
+
+/* Keep choices, switches and subordinate notes visually distinct. */
+#guide .ww-guide .wg-model-choices{display:flex;align-items:center;flex-wrap:wrap;gap:8px 7px}
+#guide .ww-guide .wg-model-choice{display:inline-block;max-width:100%;padding:5px 9px;border:1px solid var(--brass);background:var(--paper-deep);color:var(--ink);line-height:1.6;overflow-wrap:anywhere}
+#guide .ww-guide .wg-model-separator{flex:none;color:var(--ink);font-size:17px;line-height:1.6;white-space:normal}
+#guide .ww-guide .wg-model-extra{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;margin-top:10px;line-height:1.6}
+#guide .ww-guide .wg-model-extra mark{display:inline-block;max-width:100%;padding:4px 8px;background:var(--brass);color:var(--ink);line-height:1.6;overflow-wrap:anywhere}
+#guide .ww-guide .wg-support-notes{margin-top:12px;padding:10px 12px;border-left:3px solid var(--brass);background:var(--paper-deep)}
+#guide .ww-guide .wg-support-notes p{margin:0;line-height:1.65}
+#guide .ww-guide .wg-support-notes p+p{margin-top:8px}
+#guide .ww-guide .wg-progress-table{width:100%;table-layout:fixed;border-collapse:collapse;border:1px solid var(--brass);font-family:var(--font-body);font-size:16px;line-height:1.75;color:var(--ink);background:var(--paper)}
+#guide .ww-guide .wg-progress-table :is(th,td){padding:16px;border:1px solid var(--brass);vertical-align:top;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
+#guide .ww-guide .wg-progress-table th{width:112px;font-family:var(--font-label);font-weight:400;background:var(--ink);color:var(--paper)}
+@media(max-width:600px){#guide .ww-guide .wg-progress-table th{width:78px}#guide .ww-guide .wg-progress-table :is(th,td){padding:12px 10px}#guide .ww-guide .wg-model-choice{padding:5px 7px}}

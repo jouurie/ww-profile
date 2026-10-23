@@ -1,5 +1,5 @@
 /* One reading system: 4px rhythm, consistent role sizes, and shared alignment. */
-:root{--ww-page-width:1360px;--ww-page-inset:32px;--ww-section-gap:32px;--ww-subsection-gap:24px;--ww-heading-gap:16px;--ww-paragraph-gap:12px;--ww-label-gap:12px;--ww-body-size:18px;--ww-body-leading:1.8;--ww-label-column:96px}
+:root{--ww-page-width:770px;--ww-page-inset:32px;--ww-section-gap:32px;--ww-subsection-gap:24px;--ww-heading-gap:16px;--ww-paragraph-gap:12px;--ww-label-gap:12px;--ww-body-size:16px;--ww-body-leading:1.7;--ww-label-column:96px}
 body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 64px);max-width:var(--ww-page-width);margin:0 auto;padding:32px 0 40px;box-sizing:border-box;min-width:0}
 body:not(.ww-landing) #guide.ww-guide-ready{background:transparent;color:var(--paper)}
 .wwtruck .wwtruck-shell,.ww-npc .ww-npc-shell{max-width:none;padding:0}
@@ -38,7 +38,7 @@ main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwt
 #guide .ww-guide{padding:var(--ww-page-inset);font-size:var(--ww-body-size);box-sizing:border-box}
 #guide .wg-groups{gap:8px;margin-bottom:var(--ww-subsection-gap)}
 #guide .wg-groups button{flex:0 0 auto;min-width:0;padding:10px 16px;gap:10px}
-#guide .wg-category-platform-badge{flex:0 0 40px;width:40px;min-width:40px;min-height:24px;padding:1px 4px;font-size:11px}
+#guide .wg-category-platform-badge{flex:0 0 40px;width:40px;min-width:40px;height:18px;min-height:18px;padding:1px 4px;box-sizing:border-box;font-size:11px;line-height:14px}
 #guide .wg-platform-slot:has(.wg-category-platforms[hidden]){display:none}
 #guide .wg-item-selector{margin-bottom:var(--ww-subsection-gap)}
 #guide .wg-control-panel{padding:var(--ww-subsection-gap)}
@@ -51,7 +51,7 @@ main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwt
 #guide .wg-command-token{gap:var(--ww-label-gap)}
 #guide .wg-platform-label{min-width:48px;background:var(--ink);font-size:13px}
 #guide .wg-platform-label.wg-nody{color:var(--status-red,var(--red))}
-#guide .wg-model-highlight{padding:0 3px;background:linear-gradient(transparent 48%,var(--brass) 48%,var(--brass) 88%,transparent 88%);font-weight:700;line-height:inherit;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#guide .wg-model-highlight{padding:0;background:none;color:inherit;font-weight:700;line-height:inherit;text-decoration:none}
 #guide .wg-support-definition{grid-template-columns:112px minmax(0,1fr);gap:16px}
 #guide .wg-support-unit .wg-note{padding-left:128px;font-size:16px}
 #guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:var(--ww-section-gap)}
@@ -61,4 +61,43 @@ main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwt
 #guide .wg-model-card h5{font-size:14px}
 #guide .wg-model-setting>strong{font-size:20px}
 @media(max-width:900px){:root{--ww-page-inset:24px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 40px)}#guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){:root{--ww-page-inset:20px;--ww-body-size:17px;--ww-label-column:80px;--ww-label-gap:10px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 24px);padding-top:24px}main .panel .ww-section-title{font-size:28px}main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3,.wg-entry-head h3){font-size:20px}.profile-section>.prose{padding-inline:0}.prose .kv-line>.sq-sub{font-size:13px;padding-inline:4px}#guide .wg-control-panel{padding:16px}#guide .wg-groups button{padding:10px 12px}#guide .wg-support-definition{grid-template-columns:80px minmax(0,1fr);gap:12px}#guide .wg-support-unit .wg-note{padding-left:92px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){:root{--ww-page-inset:20px;--ww-body-size:16px;--ww-label-column:80px;--ww-label-gap:10px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 24px);padding-top:24px}main .panel .ww-section-title{font-size:28px}main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3,.wg-entry-head h3){font-size:20px}.profile-section>.prose{padding-inline:0}.prose .kv-line>.sq-sub{font-size:13px;padding-inline:4px}#guide .wg-control-panel{padding:16px}#guide .wg-groups button{padding:10px 12px}#guide .wg-support-definition{grid-template-columns:80px minmax(0,1fr);gap:12px}#guide .wg-support-unit .wg-note{padding-left:92px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}}
+
+
+#guide .wg-recommended{display:inline-flex;align-items:center;justify-content:center;font:700 12px/1.4 var(--font-label);padding:2px 6px;border:1px solid var(--brass);background:var(--brass);color:var(--ink);white-space:nowrap}
+
+/* Dark card anchors keep dense guidance distinct from the paper body. */
+main .panel .profile-section>.piece-title{padding:10px 12px;border:0;border-left:3px solid var(--brass);background:var(--ink);color:var(--paper)}
+#guide .wg-entry-head h3{padding:10px 12px;border-left:3px solid var(--brass);background:var(--ink);color:var(--paper)}
+#guide .wg-status-guide .wg-status-card{background:var(--ink);color:var(--paper);border-color:var(--brass)}
+#guide .wg-status-guide .wg-status-card h4{padding:0 0 10px;border-bottom:1px solid var(--brass);color:var(--paper);font-weight:700}
+#guide .wg-status-guide .wg-status-card p{font-family:var(--font-body);font-weight:400}
+#guide .wg-status-guide .wg-code{background:var(--tar);color:var(--paper);border-color:var(--brass);font-weight:400}
+#guide .wg-status-guide .wg-copy-control{background:var(--brass);color:var(--ink);border-color:var(--brass)}
+#guide .wg-status-guide .wg-status-field-table{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-weight:400;line-height:1.5}
+#guide .wg-status-guide .wg-status-field-table thead{background:var(--tar);color:var(--paper)}
+#guide .wg-status-guide .wg-status-field-table :is(th,td){padding:8px;border-color:var(--brass);font-weight:400}
+#guide .wg-status-guide .wg-status-field-table th:first-child{width:100px;padding-left:8px}
+#guide .wg-status-guide .wg-status-field-table tbody tr:nth-child(even){background:var(--paper-deep,var(--paper))}
+#guide .wg-status-guide .wg-status-field-table thead th{font-weight:700}
+#guide .wg-status-guide .wg-status-field-table td{padding-right:8px}
+
+/* Compact supporting rows without changing labels or recommendation copy. */
+#guide .wg-support-unit{padding:8px 0}
+#guide :is(.wg-support-value,.wg-support-statement){line-height:1.55}
+#guide .wg-support-unit .wg-note{margin:4px 0 0;line-height:1.55}
+#guide .wg-model-support{gap:20px}
+#guide .wg-model-support-section{padding-top:16px}
+#guide .wg-model-support-section>h4{margin-bottom:8px}
+
+/* Matching character badges share one type and edge metric at every level. */
+.profile-sheet .prose :is(.kv-heading,.kv-line)>.sq-sub:is(.wyatt,.wade){font:700 13px/20px var(--font-label);padding:3px 8px;border-left-width:3px;box-sizing:border-box;min-height:26px}
+.profile-sheet .kv-value-paragraph{display:block}
+.profile-sheet .kv-value-paragraph+.kv-value-paragraph{margin-top:4px}
+
+/* Repeated speaker names are plain color text; basic-info entity tags stay boxed. */
+.prose .kv-line:has(>.sq-sub:is(.wyatt,.wade)){grid-template-columns:64px minmax(0,1fr)}
+main .prose .kv-line>.sq-sub:is(.wyatt,.wade){display:inline;justify-content:initial;align-items:initial;min-height:0;padding:0;border:0;background:none;box-shadow:none;text-align:left;font:700 14px/1.7 var(--font-label)}
+
+/* Cyan body labels retain their hue while contrasting with the light paper. */
+main .prose .kv-line>.sq-sub.wyatt{color:#19c5d8}

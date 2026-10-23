@@ -38,3 +38,5 @@
 .ww-hscroll-controls.ww-hscroll-sticky { position: sticky; top: var(--ww-hscroll-top, 48px); z-index: var(--ww-hscroll-z, 30); }
 #guide .ww-hscroll-controls { color: var(--wg-ink, var(--ink, #171713)); background: var(--paper, #f1ddbd); }
 @media (hover: hover) { .ww-hscroll-controls .ww-hscroll-arrow:not(:disabled):hover { background: var(--brass, #b7873d); color: var(--tar, #090807); } }
+
+.ww-hscroll-controls>.ww-hscroll-arrow:last-child{grid-column:3;justify-self:end}

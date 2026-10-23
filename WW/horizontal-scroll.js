@@ -24,18 +24,17 @@
     var originalDescription = rail.getAttribute('aria-describedby');
     var identity = ++serial, controls = document.createElement('div');
     controls.className = 'ww-hscroll-controls'; controls.hidden = true;
-    var left = document.createElement('button'), right = document.createElement('button'), hint = document.createElement('span');
+    var left = document.createElement('button'), right = document.createElement('button');
     var label = options.label || rail.getAttribute('aria-label') || '목록';
     if (!rail.id) rail.id = 'ww-horizontal-rail-' + identity;
     controls.setAttribute('role', 'group'); controls.setAttribute('aria-label', label + ' 가로 이동');
-    hint.className = 'ww-hscroll-hint'; hint.id = 'ww-horizontal-hint-' + identity; hint.textContent = 'Shift + 휠로 이동';
     [left, right].forEach(function (button, index) {
       button.type = 'button'; button.className = 'ww-hscroll-arrow';
       button.textContent = index ? '→' : '←';
       button.setAttribute('aria-label', label + (index ? ' 오른쪽으로 이동' : ' 왼쪽으로 이동'));
       button.setAttribute('aria-controls', rail.id);
     });
-    controls.append(left, hint, right);
+    controls.append(left, right);
     var host = options.controlsHost;
     if (typeof host === 'string') host = document.querySelector(host);
     var header = rail.closest('header'), anchor = header || rail;
@@ -54,7 +53,7 @@
         active = next;
         if (active) {
           if (originalTabindex === null) rail.tabIndex = 0;
-          rail.setAttribute('aria-describedby', [originalDescription, hint.id].filter(Boolean).join(' '));
+          restoreAttribute('aria-describedby', originalDescription);
         } else {
           restoreAttribute('tabindex', originalTabindex); restoreAttribute('aria-describedby', originalDescription);
         }
@@ -82,16 +81,6 @@
       schedule();
     }
     function goLeft() { move(-1); } function goRight() { move(1); }
-    function wheel(event) {
-      if (!active || !event.shiftKey || event.defaultPrevented || event.ctrlKey || event.metaKey) return;
-      var delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-      if (!delta) return;
-      if (event.deltaMode === 1) delta *= 16;
-      if (event.deltaMode === 2) delta *= rail.clientWidth;
-      event.preventDefault();
-      rail.scrollLeft = Math.max(0, Math.min(max(), rail.scrollLeft + delta));
-      schedule();
-    }
     function key(event) {
       if (event.target !== rail || !active || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); move(event.key === 'ArrowLeft' ? -1 : 1); }
@@ -99,14 +88,13 @@
     }
     left.addEventListener('click', goLeft); right.addEventListener('click', goRight);
     rail.addEventListener('scroll', schedule, { passive: true });
-    rail.addEventListener('wheel', wheel, { passive: false });
     rail.addEventListener('keydown', key);
     var resize = new ResizeObserver(schedule);
     resize.observe(rail); if (rail.parentElement) resize.observe(rail.parentElement); if (header) resize.observe(header);
     var entry = { rail: rail, controls: controls, refresh: refresh, destroy: function () {
       if (destroyed) return; destroyed = true;
       clearTimeout(frame); resize.disconnect();
-      rail.removeEventListener('scroll', schedule); rail.removeEventListener('wheel', wheel); rail.removeEventListener('keydown', key);
+      rail.removeEventListener('scroll', schedule); rail.removeEventListener('keydown', key);
       left.removeEventListener('click', goLeft); right.removeEventListener('click', goRight);
       restoreAttribute('tabindex', originalTabindex); restoreAttribute('aria-describedby', originalDescription);
       if (originalId === null && rail.id === 'ww-horizontal-rail-' + identity) rail.removeAttribute('id');

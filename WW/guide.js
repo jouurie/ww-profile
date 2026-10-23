@@ -10,7 +10,7 @@
   const esc=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const clean=value=>String(value).replace(/^\s*#{1,6}\s*/gm,'').replace(/\u{1f517}\s*/gu,'').replace(/\u2b50\s*/g,'');
   const links=value=>clean(value).split(/(https?:\/\/[^\s<>]+)/g).map(part=>/^https?:\/\//.test(part)?'<a class="wg-resource-link" href="'+esc(part)+'" target="_blank" rel="noreferrer">지침 보기 ↗</a>':esc(part)).join('');
-  const badge=item=>item.recommended?' <span class="wg-recommended">추천</span>':'';
+  const badge=()=>'';
   function body(raw){
     return raw.split('\n').filter(line=>line.trim()).map(line=>{
       const text=clean(line.replace(/^[·↳] /,''));
@@ -22,13 +22,13 @@
   function unit(raw){
     const rows=raw.split('\n'),first=rows[0].replace(/^· /,'');
     const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
-    if(pair&&clean(pair[1])==='추천')return '<p class="wg-inline-recommendation"><span class="wg-recommended">추천</span> <span>'+links(pair[2])+'</span></p>'+body(rows.slice(1).join('\n'));
+    if(pair&&clean(pair[1])==='추천')return '<p class="wg-inline-recommendation"><span>'+links(pair[2])+'</span></p>'+body(rows.slice(1).join('\n'));
     if(pair&&!first.startsWith('https://'))return '<p class="wg-keyvalue"><strong class="wg-inline-label">'+esc(clean(pair[1]))+': </strong> <span class="wg-value">'+links(pair[2])+'</span></p>'+body(rows.slice(1).join('\n'));
     return body(raw);
   }
   function section(section,item,index){
     const pair=section.heading.match(/^(.{1,36}?)( → | \| )(.+)$/);
-    if(pair&&item.index===1&&pair[3].includes("'!장면완화'"))return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3].replace("'!장면완화' 사용. ",''))+'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>!장면완화</code>'+copyControl('!장면완화')+'</div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>/장면완화</code>'+copyControl('/장면완화')+'</div></div></article>';
+    if(pair&&item.index===1&&pair[3].includes("'!장면완화'"))return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3].replace("'!장면완화' 사용. ",''))+'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>!장면완화</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>/장면완화</code></div></div></article>';
     if(pair)return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3]+'\n'+section.body)+'</article>';
     if(!section.heading){if(section.body.length>600)return '<div class="wg-preface wg-summary-pieces">'+section.body.split(/\n+/).filter(line=>line.trim()).map(line=>'<article class="wg-fragment">'+body(line)+'</article>').join('')+'</div>';return '<div class="wg-preface">'+body(section.body)+'</div>';}
     if(!section.body.trim())return '<article class="wg-fragment wg-short">'+body(section.heading)+'</article>';
@@ -50,19 +50,36 @@
   function modelBody(item){
     const common=item.sections[0];
     const metrics='<section class="wg-item-setting"><h4>'+esc(common.heading)+'</h4><div class="wg-start-metrics">'+common.units.slice(0,3).map(raw=>'<article>'+unit(raw)+'</article>').join('')+'</div><div class="wg-start-plan">'+body(common.units.slice(3).join(''))+'</div></section>';
-    const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+esc(card.name)+'</h4>'+(card.recommended?'<span class="wg-recommended">추천</span>':'')+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
+    const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+esc(card.name)+'</h4>'+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
     const support=item.sections.slice(1).filter(part=>part.heading!=='모델별 특징 · 개별 추론');
-    return metrics+cards+'<div class="wg-model-support">'+support.map(part=>'<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><div class="wg-support-units">'+part.units.map(raw=>'<div class="wg-support-unit">'+modelUnit(raw)+'</div>').join('')+'</div></section>').join('')+'</div>';
+    return metrics+cards+'<div class="wg-model-support">'+support.map(part=>'<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><table class="wg-model-support-table"><tbody>'+part.units.map(modelUnit).join('')+'</tbody></table></section>').join('')+'</div>';
   }
   function modelUnit(raw){
     const rows=raw.split('\n'),first=rows.shift().replace(/^· /,'');
     const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
-    const emphasize=text=>links(text).split(/( ↔ | \/ | → )/).map(part=>/^( ↔ | \/ | → )$/.test(part)?'<span class="wg-model-separator">'+part+'</span>'+(part===' ↔ '?'<br>':'<wbr>'):'<mark class="wg-model-highlight">'+part+'</mark>').join('');
-    const main=pair?'<div class="wg-support-definition"><strong class="wg-support-label">'+esc(pair[1])+':</strong><div class="wg-support-value">'+emphasize(pair[2])+'</div></div>':'<p class="wg-support-statement">'+emphasize(first)+'</p>';
-    return main+body(rows.join('\n'));
+    const emphasize=text=>{
+      const [main,...extra]=text.split(' / 별도 선택: ');
+      const choices=main.split(' ↔ ').map(part=>'<span class="wg-model-choice">'+links(part)+'</span>').join('<span class="wg-model-separator"> ↔ </span>');
+      return '<div class="wg-model-choices">'+choices+'</div>'+extra.map(part=>'<div class="wg-model-extra"><span>별도 선택:</span> <mark>'+links(part)+'</mark></div>').join('');
+    };
+    const notes=rows.some(row=>row.trim())?'<div class="wg-support-notes">'+body(rows.join('\n'))+'</div>':'';
+    return pair?'<tr><th scope="row">'+esc(pair[1])+'</th><td><div class="wg-support-value">'+emphasize(pair[2])+'</div>'+notes+'</td></tr>':'<tr><td colspan="2"><div class="wg-support-statement">'+links(first)+'</div>'+notes+'</td></tr>';
   }
   function commandsBody(item){
-    return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(command=>'<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+(command.pinball?'<small>엘린: 상태창 내장 게임 · 노디: 별도 핀볼 패널</small>':'')+'</div><div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code>'+copyControl(command.elyn)+'</div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code>'+copyControl(command.nody)+'</div></div></article>').join('')+'</div></section>').join('');
+    return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(command=>'<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+(command.pinball?'<small>엘린: 상태창 내장 게임 · 노디: 별도 핀볼 패널</small>':'')+'</div><div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code></div></div></article>').join('')+'</div></section>').join('');
+  }
+  function statusFields(fields){
+    return '<table class="wg-status-field-table"><thead><tr><th scope="col">항목</th><th scope="col">의미</th></tr></thead><tbody>'+fields.map(([key,meaning])=>'<tr><th scope="row"><code>'+esc(key)+'</code></th><td>'+links(meaning)+'</td></tr>').join('')+'</tbody></table>';
+  }
+  function statusGuide(input,settings,meaningTitle,fields,notes=''){
+    return '<div class="wg-status-guide"><div class="wg-status-input-stack"><section class="wg-status-card wg-status-input"><h4>입력 형식 · 예시</h4>'+input+'</section><section class="wg-status-card wg-status-settings">'+settings+'</section></div><section class="wg-status-card wg-status-fields"><h4>'+esc(meaningTitle)+'</h4>'+statusFields(fields)+(notes?'<div class="wg-status-field-notes">'+notes+'</div>':'')+'</section></div>';
+  }
+  function elynStatusNotes(item){
+    const format=item.sections[0],settings=item.sections[1],meaning=item.sections[2],example=item.sections[3];
+    const rows=meaning.body.split('\n'),fields=rows.filter(line=>line.startsWith('· ')).map(line=>{const colon=line.indexOf(':');return [line.slice(2,colon),line.slice(colon+1).trimStart()];});
+    const notes=body(rows.filter(line=>!line.startsWith('· ')).join('\n'));
+    const input='<h5>'+esc(format.heading)+'</h5>'+body(format.body)+'<h5>'+esc(example.heading)+'</h5>'+body(example.body);
+    return statusGuide(input,'<h4>'+esc(settings.heading)+'</h4>'+body(settings.body),meaning.heading,fields,notes);
   }
   function nodyStatusNotes(){
     const fields=[
@@ -90,7 +107,9 @@
     ];
     const values=Object.fromEntries(fields.map(([key])=>[key,key==='n'?'1':key==='duration'?'0':'']));
     const template='```status\n'+JSON.stringify(values,null,2)+'\n```';
-    return '<div class="wg-pieces"><section class="wg-section wg-wide"><h4>입력 형식 · 예시</h4><p>노디는 status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 아래는 장면 정보를 넣지 않은 최소 예시입니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p><pre class="wg-code"><code>'+esc(template)+'</code></pre>'+copyControl(template,'노디 예시 복사')+'</section><section class="wg-section"><h4>값 형식</h4><p>21개 값은 모두 문자열입니다. n과 duration도 따옴표 안에 적습니다. 빈 문자열에는 현재 확인된 값을 넣고, 바뀌지 않은 유효한 상태는 유지합니다.</p><p>loreKeys는 현재 duration, month, weather와 맞춰 갱신합니다.</p></section><section class="wg-section"><h4>항목별 의미 · JSON 키</h4>'+fields.map(([key,meaning])=>'<p class="wg-keyvalue"><strong class="wg-inline-label">'+esc(key)+': </strong><span class="wg-value">'+esc(meaning)+'</span></p>').join('')+'</section></div>';
+    const input='<p>노디는 status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 아래는 장면 정보를 넣지 않은 최소 예시입니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p><pre class="wg-code"><code>'+esc(template.replace(/\n  /g,'\n'))+'</code></pre>'+copyControl(template,'노디 예시 복사');
+    const settings='<h4>값 형식</h4><p>21개 값은 모두 문자열입니다. n과 duration도 따옴표 안에 적습니다. 빈 문자열에는 현재 확인된 값을 넣고, 바뀌지 않은 유효한 상태는 유지합니다.</p><p>loreKeys는 현재 duration, month, weather와 맞춰 갱신합니다.</p>';
+    return statusGuide(input,settings,'항목별 의미 · JSON 키',fields);
   }
   function statusPreview(){
     const tabs=['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" id="wg-status-tab-'+platform+'" aria-controls="wg-status-preview-'+platform+'" data-wg-status-platform="'+platform+'" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('');
@@ -99,21 +118,21 @@
   function itemBody(item){
     if(item.index===0){
       const labels=['진행 방식','사건 발생','다음 행동'];
-      return '<div class="wg-progress-lines">'+item.text.split('\n').filter(line=>line.trim()).map((line,index)=>'<p><strong class="wg-inline-label">['+labels[index]+']</strong> '+links(line.replace(/^▸\s*/,''))+'</p>').join('')+'</div>';
+      return '<table class="wg-progress-table"><tbody>'+item.text.split('\n').filter(line=>line.trim()).map((line,index)=>'<tr><th scope="row">'+labels[index]+'</th><td>'+links(line.replace(/^▸\s*/,''))+'</td></tr>').join('')+'</tbody></table>';
     }
     if(item.index===2)return '<ol class="wg-play-list">'+item.text.split('\n').filter(line=>line.trim()).map(line=>'<li>'+links(line.replace(/^▸\s*/,''))+'</li>').join('')+'</ol>';
     if(item.index===6)return modelBody(item);
     if(item.index===9)return commandsBody(item);
-    if(item.index===10)return statusPreview()+'<div class="wg-status-notes"><div data-status-notes-platform="elyn" hidden>'+pieces(item)+'</div><div data-status-notes-platform="nody" hidden>'+nodyStatusNotes()+'</div></div>';
+    if(item.index===10)return statusPreview()+'<div class="wg-status-notes"><div data-status-notes-platform="elyn" hidden>'+elynStatusNotes(item)+'</div><div data-status-notes-platform="nody" hidden>'+nodyStatusNotes()+'</div></div>';
     if(item.index===7)return '<div class="wg-pieces">'+item.sections.map(part=>{
       const rendered=section(part,item,0);
       if(!part.heading)return rendered;
       const payload=part.body.trim().replace(/\n+\(선택 사항\)\s*$/,'');
-      return '<div class="wg-prompt-block">'+rendered+copyControl(payload)+'</div>';
+      return '<div class="wg-prompt-block">'+rendered+copyControl(payload,'영어 본문 전체 복사')+'</div>';
     }).join('')+'</div>';
     if(item.index===8){
       const offset=item.text.indexOf('Use only supplied evidence.');
-      return offset<0?pieces(item):body(item.text.slice(0,offset))+'<div class="wg-summary-prompt">'+body(item.text.slice(offset))+'</div>'+copyControl(item.text.slice(offset).trim());
+      return offset<0?pieces(item):body(item.text.slice(0,offset))+'<div class="wg-summary-prompt">'+body(item.text.slice(offset))+copyControl(item.text.slice(offset).trim(),'요약 지침 전체 복사')+'</div>';
     }
     return pieces(item);
   }
@@ -164,10 +183,11 @@
     mount.querySelector('.wg-category-platforms').hidden=!platformCategory;
     mount.querySelector('#wg-control-panel').classList.toggle('wg-folder-panel',platformCategory);
     const neutral=platformCategory&&!platforms[selected];
-    mount.querySelector('[data-category-neutral]').hidden=!neutral;
+    mount.querySelector('#wg-control-panel').hidden=neutral;
+    mount.querySelector('[data-category-neutral]').hidden=true;
     mount.querySelectorAll('[data-wg-category-platform]').forEach((button,index)=>{const active=button.dataset.wgCategoryPlatform===platforms[selected];button.setAttribute('aria-selected',String(active));button.tabIndex=active||(!platforms[selected]&&index===0)?0:-1;});
     mount.querySelectorAll('[data-wg-group]').forEach(button=>{const active=button.dataset.wgGroup===selected;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
-    mount.querySelectorAll('[data-wg-selector]').forEach(selector=>selector.hidden=selector.dataset.wgSelector!==selected);
+    mount.querySelectorAll('[data-wg-selector]').forEach(selector=>selector.hidden=neutral||selector.dataset.wgSelector!==selected);
     mount.querySelectorAll('[data-wg-item]').forEach(button=>{const active=Number(button.dataset.wgItem)===next.index;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
     mount.querySelectorAll('.wg-item').forEach(panel=>{
       panel.hidden=neutral||Number(panel.dataset.sourceIndex)!==next.index;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','wg-item-tab-'+panel.dataset.sourceIndex);
