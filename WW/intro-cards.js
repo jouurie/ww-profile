@@ -9,12 +9,23 @@
       const front=button.querySelector('.tp-card-front'),back=button.querySelector('.tp-card-back');
       if(!front||!back)return;
       const name=button.dataset.introCard==='wyatt'?'와이어트 로즈':'웨이드 로즈';
-      button.addEventListener('click',()=>{
+      let turning=false;
+      button.addEventListener('click',async()=>{
+        if(turning)return;
+        turning=true;
+        const motion=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(motion)await button.animate([{transform:'perspective(900px) rotateY(0deg)'},{transform:'perspective(900px) rotateY(90deg)'}],{duration:260,easing:'ease-in',fill:'forwards'}).finished;
         const flipped=button.getAttribute('aria-pressed')!=='true';
         button.setAttribute('aria-pressed',String(flipped));
         front.setAttribute('aria-hidden',String(flipped));front.inert=flipped;
         back.setAttribute('aria-hidden',String(!flipped));back.inert=!flipped;
         button.setAttribute('aria-label',flipped?name+' 대표 한마디: '+back.textContent.trim()+' 앞면 보기':name+' 대표 한마디 보기');
+        if(motion){
+          const opening=button.animate([{transform:'perspective(900px) rotateY(-90deg)'},{transform:'perspective(900px) rotateY(0deg)'}],{duration:300,easing:'ease-out'});
+          await opening.finished;
+          button.getAnimations().forEach(animation=>animation.cancel());
+        }
+        turning=false;
       });
     });
   }

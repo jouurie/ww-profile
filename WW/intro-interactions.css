@@ -38,3 +38,8 @@
   #intro .key-tag > img { transition: none; }
   #intro .key-tag:is(:hover,:focus-visible) > img { animation: none; transform: rotate(-10deg); }
 }
+
+/* The hanging motel key keeps moving before hover, with a stronger hover swing. */
+#intro .key-tag > img{animation:ww-key-idle 2.8s ease-in-out infinite}
+@keyframes ww-key-idle{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@media(prefers-reduced-motion:reduce){#intro .key-tag > img{animation:none}}

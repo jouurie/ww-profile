@@ -149,7 +149,7 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 @media(max-width:360px){#intro .key-tag{width:82px;left:22px;top:16px}}
 
 /* Match the source portraits' eye spacing and keep Wade's face left of the copy. */
-#brothers .brother-dossier.wyatt>.portrait.large>img{transform:translateX(-20%) scale(1.28);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+#brothers .brother-dossier.wyatt>.portrait.large>img{transform:translateX(-20%) scale(1.08);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
 #brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 15%;transform:translateX(-24%);mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
 
 /* Basic information: two brothers above the shared truck. */
@@ -213,3 +213,14 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 #intro .ww-intro-flip .tp-card-back{padding-inline:12px}
 #intro .ww-intro-flip .tp-card-quote{max-width:100%}
 #intro .ww-intro-flip .tp-quote-line{display:block}
+
+/* The whole card turns; its faces switch only at the edge-on midpoint. */
+#intro .ww-intro-flip :is(.tp-card-front,.tp-card-back){transition:none}
+
+/* Text-only overview cards keep both faces centered in the same footprint. */
+#intro .ww-intro-flip .tp-card-front{grid-template-columns:minmax(0,1fr);justify-items:center;min-height:96px;text-align:center}
+#intro .ww-intro-flip .tp-body{display:grid;gap:4px;justify-items:center;width:100%}
+#intro .ww-intro-flip .tp-name{display:block;grid-area:auto;margin:0;text-align:center}
+#intro .ww-intro-flip .tp-summary{grid-area:auto;text-align:center}
+#intro .ww-intro-flip .tp-meta{justify-content:center}
+#intro .ww-intro-flip .tp-card-quote{text-align:center}
