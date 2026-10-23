@@ -14,6 +14,9 @@
     $$('.panel').forEach((p) => {
       p.hidden = p.id !== id;
     });
+    document.body.classList.toggle('ww-landing', id === 'home');
+    const footer = document.querySelector('body > footer');
+    if (footer) footer.hidden = id === 'home';
     $$('.chapter-nav a').forEach((a) => {
       if (a.hash === '#' + id) a.setAttribute('aria-current', 'page');
       else a.removeAttribute('aria-current');
@@ -25,12 +28,17 @@
       });
     }
     document.title =
-      id === 'intro'
+      id === 'intro' || id === 'home'
         ? '와이어트, 웨이드'
         : `${$('#' + id + ' h2')?.textContent || '로즈'} · 와이어트, 웨이드`;
   };
 
   function route() {
+    const view = window.WWPageShell?.resolve();
+    if (view?.view === 'home') {
+      showPanel('home', true);
+      return;
+    }
     const id = location.hash.slice(1) || 'intro';
     if (id.startsWith('guide-')) {
       showPanel('guide');
@@ -41,6 +49,7 @@
   }
 
   window.addEventListener('hashchange', route);
+  window.addEventListener('popstate', route);
   route();
 
   $$('[data-guide]').forEach((a) =>

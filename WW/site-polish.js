@@ -1,6 +1,6 @@
 /* Shared heading anatomy; content-specific views retain their own controls. */
 (function(){'use strict';
-  var descriptions={brothers:'같은 얼굴의 25세 쌍둥이가 운전·장부와 바깥 대응·안쪽 단속을 나눠 맡습니다.',truck:'로즈 형제의 집이자 일터, 은신처인 검은 18륜 피터빌트입니다.',world:'1996~1999년, 종이 지도책과 무전·로그북을 쓰고 현금으로 모텔을 이용하던 미국입니다.',npc:'브로커와 모텔 지배인, 트럭커 등 도로에서 마주치는 10명을 소개합니다.',openings:'시작할 시점과 상황을 골라 이야기를 시작해 보세요.',guide:'진행 방식과 설정, 명령어와 상태창 사용법을 확인해 보세요.',radio:'화면 없이 음악만 재생하는 오디오 데크입니다. 자동재생은 꺼져 있습니다.'};
+  var descriptions={"brothers":["같은 얼굴의 25세 쌍둥이가 운전·장부와","바깥 대응·안쪽 단속을 나눠 맡습니다."],"truck":["로즈 형제의 집이자 일터, 은신처인","검은 18륜 피터빌트입니다."],"world":["1996~1999년, 종이 지도책·무전·로그북을 쓰고","현금으로 모텔을 이용하던 미국입니다."],"npc":["브로커와 모텔 지배인, 트럭커 등","도로에서 마주치는 10명을 소개합니다."],"openings":["시작할 시점과 상황을 골라","이야기를 시작해 보세요."],"guide":["진행 방식과 설정,","명령어와 상태창 사용법을 확인해 보세요."],"radio":["화면 없이 음악만 재생하는 오디오 데크입니다.","자동재생은 꺼져 있습니다."]};
   function mount(){
     document.querySelectorAll('main>.panel:not(#intro)').forEach(function(panel){
       var title=panel.querySelector('h2');if(!title)return;
@@ -11,7 +11,8 @@
       title.classList.add('ww-section-title');
       var desc=head.querySelector('.head-desc');
       if(!desc){desc=document.createElement('p');desc.className='head-desc';head.append(desc);}
-      desc.textContent=descriptions[panel.id];
+      var parts=descriptions[panel.id];if(!parts)return;
+      desc.replaceChildren();parts.forEach(function(text,index){if(index)desc.append(document.createTextNode(' '));var phrase=document.createElement('span');phrase.className='ww-desc-phrase';phrase.textContent=text;desc.append(phrase);});
     });
   }
   var sharedTip;

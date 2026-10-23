@@ -118,3 +118,6 @@ main .prose .kv-line>.sq-sub.wyatt{color:#19c5d8}
 /* Brief page descriptions share the same readable line treatment. */
 main .ww-section-head .head-desc{font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.7;word-break:keep-all;overflow-wrap:normal;text-wrap:balance}
 main :is(.prose,.ww-opening-body,.ww-npc-details p,.wg-pieces p,.wg-model-card p,.wg-command-description){word-break:keep-all;text-wrap:pretty}
+
+/* Short descriptions break by authored phrase on phones, staying one line on desktop. */
+@media(max-width:720px){main .panel .ww-section-head .head-desc .ww-desc-phrase{display:block}}

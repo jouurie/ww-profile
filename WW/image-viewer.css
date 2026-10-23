@@ -1,0 +1,44 @@
+/* Portrait framing changes no surrounding type, color or card geometry. */
+.portrait.ww-portrait-filled { position: relative; overflow: hidden; }
+.portrait.ww-portrait-filled > .ww-character-portrait { display: block; width: 100%; height: 100%; min-height: 0; object-fit: cover; }
+.ww-character-portrait-wyatt { object-position: 52% 25%; }
+.ww-character-portrait-wade { object-position: 58% 20%; }
+.portrait.tiny .ww-character-portrait { object-position: 50% 0%; }
+main img.ww-viewable-image { cursor: zoom-in; }
+main img.ww-viewable-image:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+/* Body portal + native top layer avoids filtered/animated page ancestors. */
+body > dialog.ww-image-viewer {
+  position: fixed;
+  inset: 0;
+  width: calc(100% - 32px);
+  max-width: none;
+  height: calc(100svh - 32px);
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--brass);
+  background: var(--tar);
+  color: var(--paper);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+body > dialog.ww-image-viewer[open] { display: grid; grid-template-rows: auto minmax(0,1fr); }
+.ww-image-viewer::backdrop { background: rgba(5,4,4,.84); }
+.ww-image-viewer .wwiv-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--brass); }
+.ww-image-viewer .wwiv-heading { flex: 1 1 160px; min-width: 0; }
+.ww-image-viewer #wwiv-caption { margin: 0; padding: 0; border: 0; font: 500 16px/1.5 var(--font-body); color: var(--paper); overflow-wrap: anywhere; word-break: keep-all; }
+.ww-image-viewer .wwiv-dimensions { font: 400 12px/1.5 var(--font-body); color: var(--paper); }
+.ww-image-viewer .wwiv-bar button { flex: 0 0 auto; min-height: 44px; padding: 8px 12px; border: 1px solid var(--brass); background: var(--tar); color: var(--paper); font: 500 14px/1.5 var(--font-body); cursor: pointer; }
+.ww-image-viewer .wwiv-bar button:hover { filter: brightness(1.18); }
+.ww-image-viewer .wwiv-bar button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.ww-image-viewer .wwiv-bar button:disabled { cursor: default; opacity: .45; }
+.ww-image-viewer .wwiv-stage { min-width: 0; min-height: 0; padding: 12px; overflow: auto; box-sizing: border-box; overscroll-behavior: contain; }
+.ww-image-viewer .wwiv-image { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; margin: 0 auto; object-fit: contain; }
+.ww-image-viewer.wwiv-native .wwiv-image { max-width: none; max-height: none; margin: 0; }
+.ww-image-viewer .wwiv-status { margin: 12px; font: 400 16px/1.7 var(--font-body); color: var(--paper); }
+@media (max-width: 650px) {
+  body > dialog.ww-image-viewer { width: calc(100% - 16px); height: calc(100svh - 16px); }
+  .ww-image-viewer .wwiv-bar { padding: 8px; gap: 8px; }
+  .ww-image-viewer .wwiv-heading { flex-basis: 100%; }
+  .ww-image-viewer .wwiv-stage { padding: 8px; }
+}
