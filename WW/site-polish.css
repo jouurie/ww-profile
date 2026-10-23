@@ -150,7 +150,8 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 
 /* Match the source portraits' eye spacing and keep Wade's face left of the copy. */
 #brothers .brother-dossier.wyatt>.portrait.large>img{transform:translateX(-20%) scale(1.08);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
-#brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 15%;transform:translateX(-24%);mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+#brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 21%;transform:translateX(-24%);mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+@media(max-width:720px){#brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 18%}}
 
 /* Basic information: two brothers above the shared truck. */
 #profile-0>.prose>.kv-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -224,3 +225,12 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 #intro .ww-intro-flip .tp-summary{grid-area:auto;text-align:center}
 #intro .ww-intro-flip .tp-meta{justify-content:center}
 #intro .ww-intro-flip .tp-card-quote{text-align:center}
+
+/* One smaller rectangle rotates fully; the two faces remain opposite each other. */
+#intro .twin-polaroid.ww-intro-flip{width:84%;justify-self:center;padding:8px 10px;transform-style:preserve-3d;transform:perspective(900px) rotateY(0deg);overflow:visible}
+#intro .twin-polaroid.ww-intro-flip[aria-pressed=true]{transform:perspective(900px) rotateY(180deg)}
+#intro .ww-intro-flip :is(.tp-card-front,.tp-card-back){backface-visibility:visible}
+#intro .ww-intro-flip .tp-card-front{min-height:74px;transform:rotateY(0deg)}
+#intro .ww-intro-flip .tp-card-back{transform:rotateY(180deg);visibility:hidden}
+#intro .ww-intro-flip[aria-pressed=true] .tp-card-front{transform:rotateY(0deg);visibility:hidden}
+#intro .ww-intro-flip[aria-pressed=true] .tp-card-back{transform:rotateY(180deg);visibility:visible}

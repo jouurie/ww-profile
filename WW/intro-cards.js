@@ -14,16 +14,25 @@
         if(turning)return;
         turning=true;
         const motion=!matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if(motion)await button.animate([{transform:'perspective(900px) rotateY(0deg)'},{transform:'perspective(900px) rotateY(90deg)'}],{duration:260,easing:'ease-in',fill:'forwards'}).finished;
         const flipped=button.getAttribute('aria-pressed')!=='true';
+        let closing;
+        if(motion){
+          closing=button.animate([
+            {transform:'perspective(900px) rotateY('+(flipped?0:180)+'deg)'},
+            {transform:'perspective(900px) rotateY(90deg)'}
+          ],{duration:350,easing:'ease-in',fill:'forwards'});
+          await closing.finished;
+        }
         button.setAttribute('aria-pressed',String(flipped));
         front.setAttribute('aria-hidden',String(flipped));front.inert=flipped;
         back.setAttribute('aria-hidden',String(!flipped));back.inert=!flipped;
         button.setAttribute('aria-label',flipped?name+' 대표 한마디: '+back.textContent.trim()+' 앞면 보기':name+' 대표 한마디 보기');
         if(motion){
-          const opening=button.animate([{transform:'perspective(900px) rotateY(-90deg)'},{transform:'perspective(900px) rotateY(0deg)'}],{duration:300,easing:'ease-out'});
-          await opening.finished;
-          button.getAnimations().forEach(animation=>animation.cancel());
+          const opening=button.animate([
+            {transform:'perspective(900px) rotateY(90deg)'},
+            {transform:'perspective(900px) rotateY('+(flipped?180:0)+'deg)'}
+          ],{duration:350,easing:'ease-out'});
+          try{await opening.finished;}finally{opening.cancel();closing.cancel();}
         }
         turning=false;
       });
