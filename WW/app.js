@@ -1,0 +1,22 @@
+(() => {
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s)),data=window.WW;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clean=s=>String(s).replace(/^\s*#{1,6}\s*/gm,'').replace(/🔗\s*/gu,'').replace(/⭐\s*/gu,'');
+function inline(s){return esc(clean(s)).replace(/https:\/\/[^\s<>]+/g,u=>'<a class="resource-link" href="'+u+'" target="_blank" rel="noreferrer">참고 이미지 보기 ↗</a>');}
+function prose(s){return String(s).split(/\r?\n/).filter(l=>l.trim()).map(l=>/^\s*#{1,6}\s+/.test(l)?'<h4>'+inline(l)+'</h4>':'<p>'+inline(l.replace(/^[·▸↳]\s*/,''))+'</p>').join('');}
+function parts(text){const out=[];String(text).split(/\r?\n/).forEach(line=>{if(line.startsWith('▸ '))out.push({heading:line.slice(2),lines:[]});else if(line.trim()){if(!out.length)out.push({heading:'',lines:[]});out[out.length-1].lines.push(line);}});return out;}
+function pieces(item){return '<article class="source-piece" data-source-title="'+esc(item.title)+'" data-motion="reveal"><h3>'+esc(clean(item.title))+'</h3><div class="source-body">'+parts(item.text).map(p=>!p.lines.length?'<p>'+inline(p.heading)+'</p>':'<section class="source-fragment">'+(p.heading?'<h4>'+inline(p.heading)+'</h4>':'')+prose(p.lines.join('\n'))+'</section>').join('')+'</div></article>';}
+$('#character-menu').innerHTML='<a href="#intro">와이어트, 웨이드<small>현재 페이지</small></a><a href="https://jouurie.github.io/ig-profile/">이결<small>소개 페이지 ↗</small></a>';
+$('#platforms').innerHTML=['elyn','nody'].filter(id=>data.platforms[id]).map(id=>'<a class="platform-link '+id+'" href="'+esc(data.platforms[id])+'" target="_blank" rel="noreferrer">'+(id==='elyn'?'ELYN':'NODY')+'<span aria-hidden="true">↗</span></a>').join('');
+$('#intro-story').innerHTML=String(data.intro).split(/\r?\n\s*\r?\n/).map(p=>'<p>'+inline(p).replace(/\r?\n/g,'<br>')+'</p>').join('');
+window.WWBrothersUI?.mount($('#brothers'),data);
+const truckParts=parts(data.supplement.find(item=>item.title==='더 비스트').text),zones={front:truckParts[1],sleeper:truckParts[2],records:truckParts[3]};
+function selectTruck(id){const p=zones[id];if(!p)return;$('#truck-zone').textContent=p.heading;$('#truck-number').textContent={front:'01 / CAB',sleeper:'02 / SLEEPER',records:'03 / LOGBOOK'}[id];$('#truck-description').innerHTML=prose(p.lines.join('\n'));$$('[data-truck]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.truck===id)));$('#truck').dataset.zone=id;$('#curtain').hidden=id!=='sleeper';if(id!=='sleeper'){$('#curtain').setAttribute('aria-expanded','false');$('#curtain-stage').dataset.open='false';}}
+$$('[data-truck]').forEach(b=>b.addEventListener('click',()=>selectTruck(b.dataset.truck)));
+$('#curtain').addEventListener('click',()=>{const open=$('#curtain').getAttribute('aria-expanded')!=='true';$('#curtain').setAttribute('aria-expanded',String(open));$('#curtain-stage').dataset.open=String(open);$('#curtain').textContent=open?'커튼 닫기 −':'커튼 열기 ＋';});
+$('#truck-details').innerHTML='<p class="truck-fact">'+inline(truckParts[0].heading)+'</p><div class="truck-references">'+truckParts.slice(4).map(p=>'<a href="'+esc(p.lines[0])+'" target="_blank" rel="noreferrer">'+esc(p.heading.replace(/ 이미지:$/,''))+' ↗</a>').join('')+'</div>';selectTruck('front');
+window.WWNPCUI?.mount($('#npc'));
+window.WWOpeningsUI?.mount(document);window.WWWorldUI?.mount(document);window.WWRadioUI?.mount($('#radio'));window.WWMotion?.mount(document);
+function route(){let id=(location.hash.slice(1)||'intro').split('-')[0];if(!$('#'+id)?.classList.contains('panel'))id='intro';$$('.panel').forEach(p=>p.hidden=p.id!==id);$$('.chapter-nav a').forEach(a=>{if(a.hash==='#'+id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});document.body.dataset.panel=id;document.title=id==='intro'?'와이어트, 웨이드':($('#'+id+' h2')?.textContent||'소개')+' · 와이어트, 웨이드';window.WWMotion?.refresh($('#'+id));if(!location.hash.startsWith('#guide-'))window.scrollTo({top:0,behavior:'instant'});document.querySelector('.characters')?.removeAttribute('open');}window.addEventListener('hashchange',route);window.addEventListener('popstate',route);window.addEventListener('load',()=>{if(!location.hash.startsWith('#guide-'))window.scrollTo({top:0,behavior:'instant'});});route();
+})();

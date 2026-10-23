@@ -149,7 +149,7 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 @media(max-width:360px){#intro .key-tag{width:82px;left:22px;top:16px}}
 
 /* Match the source portraits' eye spacing and keep Wade's face left of the copy. */
-#brothers .brother-dossier.wyatt>.portrait.large>img{transform:translateX(-20%) scale(1.06);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+#brothers .brother-dossier.wyatt>.portrait.large>img{transform:translateX(-20%) scale(1.28);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
 #brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 15%;transform:translateX(-24%);mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
 
 /* Basic information: two brothers above the shared truck. */
@@ -202,3 +202,14 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 #brothers .brother-dossier .bd-spec-table{margin-top:0}
 
 @media(max-width:360px){#brothers .brother-dossier .bd-head h3{font-size:20px;letter-spacing:0}}
+
+/* Names stand alone; relationship, age and height share one metadata line. */
+#intro .ww-intro-flip .tp-summary>.tp-meta{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+#intro .ww-intro-flip .tp-meta>.tp-kind{font-size:12px;line-height:1.5;color:var(--muted)}
+#intro .twin-polaroid.wyatt .portrait.tiny>img{transform:scale(1.14);transform-origin:50% 20%}
+/* The first two basic-info entries remain level after their duplicate English labels are removed. */
+#profile-0>.prose>.kv-stack>.kv-section:nth-child(-n+2){margin-top:0}
+
+#intro .ww-intro-flip .tp-card-back{padding-inline:12px}
+#intro .ww-intro-flip .tp-card-quote{max-width:100%}
+#intro .ww-intro-flip .tp-quote-line{display:block}

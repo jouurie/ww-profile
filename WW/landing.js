@@ -11,7 +11,7 @@
     wrap.className = 'ww-start';
     wrap.innerHTML = '<button type="button" class="ww-start-trigger" aria-expanded="false" aria-controls="ww-start-platforms">시작하기</button><nav class="ww-start-platforms" id="ww-start-platforms" aria-label="플레이 플랫폼" hidden></nav>';
     var trigger = wrap.querySelector('button'), links = wrap.querySelector('nav');
-    ['elyn', 'nody'].forEach(function (key) {
+    ['elyn', 'nody'].filter(function (key) { return data.platforms[key]; }).forEach(function (key) {
       var anchor = document.createElement('a');
       anchor.href = data.platforms[key]; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer';
       anchor.textContent = key === 'elyn' ? '엘린 ↗' : '노디 ↗'; links.append(anchor);
