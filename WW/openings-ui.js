@@ -55,11 +55,6 @@
     heading.append(title);
     content.append(heading);
 
-    var notice = element('aside', 'ww-openings-notice');
-    notice.setAttribute('aria-label', '내용 안내');
-    notice.append(element('strong', '', '내용 안내'), prose('ww-openings-warning', data.warning));
-    content.append(notice);
-
     var grid = element('div', 'ww-openings-grid');
     grid.id = 'opening-list';
     data.openings.forEach(function (source, index) {
