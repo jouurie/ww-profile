@@ -99,8 +99,8 @@
 .ww-opening-card:focus-visible { outline: 2px solid var(--brass); outline-offset: 8px; }
 .ww-opening-card-head { flex-wrap: wrap; }
 .ww-opening-preview-button { margin-left: auto; min-height: 44px; padding: 8px; border: 1px solid var(--opening-ink); background: transparent; color: var(--opening-ink); font: inherit; cursor: pointer; }
-.ww-opening-masked .ww-opening-body { filter: blur(7px); transition: filter .2s ease; }
-.ww-opening-masked:is(:hover,:focus-within) .ww-opening-body { filter: none; }
+.ww-opening-masked-word { display: inline-block; filter: blur(4px); transition: filter .2s ease; }
+.ww-opening-masked:is(:hover,:focus-within) .ww-opening-masked-word { filter: none; }
 .ww-opening-preview { box-sizing: border-box; width: min(770px, calc(100% - 32px)); max-height: calc(100dvh - 40px); margin: auto; padding: clamp(20px, 4vw, 40px); overflow-y: auto; border: 1px solid var(--brass); background: var(--ink); color: var(--paper); font-family: var(--font-body); scrollbar-color: var(--brass) var(--ink); }
 .ww-opening-preview::backdrop { background: var(--tar); opacity: .9; }
 .ww-opening-preview-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }

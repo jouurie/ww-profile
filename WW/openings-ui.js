@@ -173,6 +173,17 @@
       card.append(header, photo);
       if (card.dataset.plot === 'plot1' || card.dataset.plot === 'plot2') {
         card.classList.add('ww-opening-masked');
+        var walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+        var textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(function (textNode) {
+          if (!/좆|오럴/.test(textNode.nodeValue)) return;
+          var fragment = document.createDocumentFragment();
+          textNode.nodeValue.split(/(좆|오럴)/g).forEach(function (word) {
+            fragment.append(/^(좆|오럴)$/.test(word) ? element('span', 'ww-opening-masked-word', word) : document.createTextNode(word));
+          });
+          textNode.replaceWith(fragment);
+        });
       }
       card.append(body);
       card.addEventListener('click', function (event) {
