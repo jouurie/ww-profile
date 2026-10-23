@@ -2635,12 +2635,22 @@ html{overflow-y:scroll;scrollbar-gutter:stable;scrollbar-color:var(--brass) var(
 ::-webkit-scrollbar{width:12px;height:10px}::-webkit-scrollbar-track{background:var(--tar)}::-webkit-scrollbar-thumb{background:var(--brass);border:3px solid var(--tar);border-radius:6px}
 #guide :is(.wg-item-selector,.wg-groups){scrollbar-color:var(--brass) var(--paper)}
 
-/* Keep the generated key outside the photo, on its right. */
-#intro .key-tag{left:calc(100% + 12px);right:auto;top:24px;width:170px;height:auto;transform:rotate(8deg);overflow:visible}
-#intro .key-tag>img{min-height:0;height:auto;object-fit:cover}
-@media(max-width:1700px) and (min-width:1451px){#intro .key-tag{width:136px}}
-@media(max-width:1450px){#intro .intro-truck-stage{padding-right:112px}#intro .key-tag{left:auto;right:0;width:100px;top:24px}}
-@media(max-width:720px){#intro .intro-truck-stage{padding-right:0;display:block}#intro .truck-photo-frame{width:100%}#intro .truck-photo-frame>img{width:100%;height:auto;min-height:0;flex:none;object-fit:contain;object-position:center}#intro .key-tag{width:76px;right:20px;top:16px}}
+/* The overview follows the same reading width as the detail pages. */
+#intro .intro-shell{max-width:100%;gap:24px;min-width:0}
+#intro .intro-top-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+#intro .intro-left-stack{min-width:0;gap:16px}
+#intro .intro-truck-stage{padding-right:0;display:block;min-width:0}
+#intro .truck-photo-frame{width:100%;box-sizing:border-box;min-width:0}
+#intro .truck-photo-frame>img{display:block;width:100%;height:auto;min-height:0;flex:none;object-fit:contain;object-position:center}
+#intro .truck-frame-bar{flex-wrap:wrap;gap:4px 16px}
+#intro .truck-frame-bar>span{white-space:nowrap}
+#intro .key-tag{left:auto;right:20px;top:16px;width:84px;height:auto;transform:rotate(8deg);overflow:visible}
+#intro .key-tag>img{min-height:0;height:auto;object-fit:contain}
+#intro .twin-polaroid{min-width:0}
+#intro .twin-polaroid .tp-body{min-width:0;margin-top:0}
+#intro .poster-sub-row{flex-wrap:wrap;gap:8px 16px}
+@media(max-width:720px){#intro .key-tag{width:70px;right:32px;top:12px}#intro .intro-shell,#intro .intro-top-grid{gap:20px}}
+@media(max-width:360px){#intro .bento-piece{padding:16px 12px}#intro .twin-mini-grid{gap:10px}#intro .twin-polaroid{padding:8px}#intro .piece-head{flex-wrap:wrap}#intro .truck-frame-bar{letter-spacing:.04em}}
 
 /* Every interactive control responds without changing layout dimensions. */
 :where(button,[role="button"],summary,.piece-jump,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a){transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s,filter .2s}

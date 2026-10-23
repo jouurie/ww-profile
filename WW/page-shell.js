@@ -56,6 +56,12 @@
   }
   document.addEventListener('click', function (event) {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var scrollTop = event.target.closest && event.target.closest('[data-scroll-top]');
+    if (scrollTop) {
+      event.preventDefault();
+      global.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      return;
+    }
     var anchor = event.target.closest && event.target.closest('a[href]');
     if (!anchor || anchor.hasAttribute('download') || anchor.target && anchor.target !== '_self') return;
     if (anchor.classList.contains('skip')) {
