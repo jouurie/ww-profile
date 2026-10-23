@@ -38,3 +38,14 @@
   main>.panel :is(a,button,summary):hover:not(:focus-visible){outline:none!important;box-shadow:none!important}
   main>.panel details:has(>summary:hover){box-shadow:none!important}
 }
+
+/* Site-styled hints replace browser title bubbles. */
+.ww-tooltip-host{position:relative}
+.ww-html-tooltip{position:absolute;left:50%;top:calc(100% + 8px);z-index:90;width:max-content;max-width:min(240px,calc(100vw - 32px));padding:7px 10px;border:1px solid var(--brass);background:var(--ink);color:var(--paper);font:400 13px/1.5 var(--font-body);text-align:center;white-space:normal;word-break:keep-all;opacity:0;visibility:hidden;transform:translateX(-50%);pointer-events:none;transition:opacity .15s ease}
+.ww-tooltip-host:is(:hover,:focus-visible)>.ww-html-tooltip{opacity:1;visibility:visible}
+@media(hover:hover){main img{transition:filter .2s ease}main img:hover,main :is(.ww-opening-card,.ww-npc-polaroid,.wwtruck-visual,.key-tag):hover img{filter:brightness(1.18)}}
+#intro .key-tag:focus-visible>img{filter:brightness(1.18)}
+
+.ww-html-tooltip{position:fixed;top:0;left:50%}
+
+body>.ww-html-tooltip.is-visible{opacity:1;visibility:visible}

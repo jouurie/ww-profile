@@ -28,7 +28,7 @@
   }
   function section(section,item,index){
     const pair=section.heading.match(/^(.{1,36}?)( → | \| )(.+)$/);
-    if(pair&&item.index===1&&pair[3].includes("'!장면완화'"))return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3].replace("'!장면완화' 사용. ",''))+'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>!장면완화</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>/장면완화</code></div></div></article>';
+    if(pair&&item.index===1&&pair[3].includes("'!장면완화'"))return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3].replace(/^'!장면완화'(?: 사용\. |를 사용하면 )/,''))+'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>!장면완화</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>/장면완화</code></div></div></article>';
     if(pair)return '<article class="wg-fragment"><h4>'+esc(pair[1])+'</h4>'+body(pair[3]+'\n'+section.body)+'</article>';
     if(!section.heading){if(section.body.length>600)return '<div class="wg-preface wg-summary-pieces">'+section.body.split(/\n+/).filter(line=>line.trim()).map(line=>'<article class="wg-fragment">'+body(line)+'</article>').join('')+'</div>';return '<div class="wg-preface">'+body(section.body)+'</div>';}
     if(!section.body.trim())return '<article class="wg-fragment wg-short">'+body(section.heading)+'</article>';
@@ -83,27 +83,27 @@
   }
   function nodyStatusNotes(){
     const fields=[
-      ['n','현재 턴 번호. 숫자를 문자열로 적습니다.'],
-      ['duration','동행 단계. 0=첫 동행, 1=며칠째, 2=일주일째, 3=몇 주째, 4=몇 달째, 5=장기 동행. 값은 문자열입니다.'],
+      ['n','현재 턴 번호입니다. 숫자를 문자열로 적습니다.'],
+      ['duration','동행 단계입니다. 0=첫 동행, 1=며칠째, 2=일주일째, 3=몇 주째, 4=몇 달째, 5=장기 동행으로 구분하며, 값은 문자열입니다.'],
       ['loreKeys','현재 duration, month, weather에 맞춰 함께 갱신하는 문자열입니다.'],
-      ['shortGoal','현재 유지 중인 구체적인 목표 대상과 행동.'],
-      ['month','현재 계절.'],
-      ['time','현재 시간대.'],
-      ['weather','현재 날씨.'],
-      ['road','현재 도로명과 접근 지점.'],
-      ['heading','현재 진행 방향.'],
-      ['driverSeat','현재 운전 담당자.'],
-      ['motion','주행, 정차 등 현재 운행 상태.'],
-      ['truck','트럭, 엔진, 적재물의 현재 조건.'],
-      ['pressure','현재 진행을 막거나 손실을 주는 당면 사안.'],
-      ['wyattPosition','와이어트의 현재 위치.'],
-      ['wyattAction','와이어트의 현재 자세, 행동 또는 지속되는 결과.'],
-      ['wadePosition','웨이드의 현재 위치.'],
-      ['wadeAction','웨이드의 현재 자세, 행동 또는 지속되는 결과.'],
-      ['userOutfit','현재 보이는 유저의 복장.'],
-      ['userPosition','유저의 현재 위치.'],
-      ['userState','현재 보이는 유저의 신체, 복장, 자세 또는 접촉 상태.'],
-      ['radioLog','현재 장면에 나온 무전, 라디오, 뉴스의 소식이나 남은 영향.']
+      ['shortGoal','현재 유지 중인 구체적인 목표 대상과 행동입니다.'],
+      ['month','현재 계절입니다.'],
+      ['time','현재 시간대입니다.'],
+      ['weather','현재 날씨입니다.'],
+      ['road','현재 도로명과 접근 지점입니다.'],
+      ['heading','현재 진행 방향입니다.'],
+      ['driverSeat','현재 운전 담당자입니다.'],
+      ['motion','주행, 정차 등 현재 운행 상태입니다.'],
+      ['truck','트럭과 엔진, 적재물의 현재 조건입니다.'],
+      ['pressure','현재 진행을 막거나 손실을 주는 당면 사안입니다.'],
+      ['wyattPosition','와이어트의 현재 위치입니다.'],
+      ['wyattAction','와이어트의 현재 자세나 행동, 또는 지속되는 결과입니다.'],
+      ['wadePosition','웨이드의 현재 위치입니다.'],
+      ['wadeAction','웨이드의 현재 자세나 행동, 또는 지속되는 결과입니다.'],
+      ['userOutfit','현재 보이는 유저의 복장입니다.'],
+      ['userPosition','유저의 현재 위치입니다.'],
+      ['userState','현재 보이는 유저의 신체, 복장, 자세 또는 접촉 상태입니다.'],
+      ['radioLog','현재 장면에 나온 무전과 라디오, 뉴스의 소식이나 남은 영향입니다.']
     ];
     const values=Object.fromEntries(fields.map(([key])=>[key,key==='n'?'1':key==='duration'?'0':'']));
     const template='```status\n'+JSON.stringify(values,null,2)+'\n```';

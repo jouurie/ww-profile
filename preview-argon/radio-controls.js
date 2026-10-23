@@ -8,7 +8,7 @@
     next:'<path d="M18 5v14"/><path d="m5 5 10 7-10 7Z" fill="currentColor" stroke="none"/>',
     repeat:'<path d="m16 3 4 4-4 4M4 11V9a2 2 0 0 1 2-2h14M8 21l-4-4 4-4m12 0v2a2 2 0 0 1-2 2H4"/>',
     shuffle:'<path d="M3 6h3c4 0 8 12 12 12h3m-4-4 4 4-4 4M3 18h3c1.8 0 3.6-2.4 5.4-5.1M14 8.3C15.4 6.9 16.7 6 18 6h3m-4-4 4 4-4 4"/>',
-    volume:'<path d="M11 4 6 8H3v8h3l5 4ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>'
+    volume:'<path d="M11 4 6 8H3v8h3l5 4ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="radio-mute-slash" d="m3 21 18-18"/>'
   };
   function icon(name){
     return '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.play)+'</svg>';
@@ -17,6 +17,15 @@
     const button=document.querySelector('#radio #radio-play');if(!button)return;
     button.innerHTML=icon(playing?'pause':'play');
     button.title=button.getAttribute('aria-label')||(playing?'일시정지':'재생');
+  }
+  function updateState(state){
+    const radio=document.getElementById('radio');if(!radio||!state)return;
+    radio.classList.toggle('radio-is-playing',state.playing);
+    const mute=radio.querySelector('.radio-mute');
+    if(mute){mute.setAttribute('aria-pressed',String(state.muted));mute.setAttribute('aria-label',state.muted?'음소거 해제':'음소거');mute.title=mute.getAttribute('aria-label');}
+    const slider=radio.querySelector('#radio-volume'),readout=radio.querySelector('#radio-vol-val');
+    if(slider)slider.value=String(state.volume);
+    if(readout)readout.textContent=Math.round(state.volume)+'%';
   }
   function mount(root=document){
     const radio=root.matches?.('#radio')?root:root.querySelector('#radio');if(!radio)return false;
@@ -29,11 +38,25 @@
     });
     const play=radio.querySelector('#radio-play');
     if(play)updatePlay(play.getAttribute('aria-pressed')==='true');
-    const label=radio.querySelector('.volume-module .vol-label');
-    if(label){label.innerHTML=icon('volume');label.setAttribute('aria-hidden','true');}
+    const module=radio.querySelector('.volume-module');
+    const label=module?.querySelector('.vol-label');
+    if(label&&!module.dataset.radioVolumeReady){
+      const mute=document.createElement('button');mute.type='button';mute.className='vol-label radio-mute';mute.innerHTML=icon('volume');
+      label.replaceWith(mute);
+      mute.addEventListener('click',()=>global.WWRadioEngine?.mute());
+      module.addEventListener('wheel',event=>{
+        if(!event.deltaY)return;
+        const engine=global.WWRadioEngine;if(!engine)return;
+        event.preventDefault();engine.volume(engine.state.volume+(event.deltaY<0?5:-5));
+      },{passive:false});
+      module.dataset.radioVolumeReady='true';
+    }
+    updateState(global.WWRadioEngine?.state);
     return controls;
   }
-  global.WWRadioControls={icon,updatePlay,mount};
+  global.addEventListener('ww-radio-state',event=>updateState(event.detail));
+  document.addEventListener('visibilitychange',()=>document.getElementById('radio')?.classList.toggle('radio-motion-paused',document.hidden));
+  global.WWRadioControls={icon,updatePlay,updateState,mount};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>mount(),{once:true});
   else mount();
 })(window);

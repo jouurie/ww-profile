@@ -5,7 +5,7 @@
     var key = document.querySelector('#intro .key-tag[href="#truck"]');
     if (!key || key.dataset.introInteraction) return;
     key.dataset.introInteraction = 'ready';
-    key.title = '차량 소개 보기';
+    key.removeAttribute('title');
     key.setAttribute('aria-label', '차량 소개 보기');
     var label = document.createElement('span');
     label.className = 'ww-key-action';

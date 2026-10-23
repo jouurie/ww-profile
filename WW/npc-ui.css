@@ -28,8 +28,7 @@
 .ww-npc .ww-npc-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 38px); }
 .ww-npc .ww-npc-details p { margin: 0; font-size: clamp(14px, 1.3vw, 17px); line-height: 1.9; word-break: keep-all; overflow-wrap: anywhere; }
 .ww-npc .ww-npc-details p + p { border-left: 1px solid var(--ww-npc-accent); padding-left: clamp(18px, 2vw, 28px); }
-.ww-npc .ww-npc-navigation { box-sizing: border-box; width: 100%; min-width: 0; display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: 12px; margin-top: clamp(28px, 4vw, 48px); }
-.ww-npc .ww-npc-arrow { box-sizing: border-box; display: grid; place-items: center; width: 48px; min-height: 48px; padding: 0; color: var(--ww-npc-paper); background: transparent; border: 1px solid var(--ww-npc-gold); border-radius: 0; font-size: 23px; }
+.ww-npc .ww-npc-navigation { margin-top: clamp(28px, 4vw, 48px); }
 .ww-npc .ww-npc-film { box-sizing: border-box; min-width: 0; max-width: 100%; display: flex; gap: 9px; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; padding: 12px 0; border-block: 1px solid var(--ww-npc-gold); scrollbar-width: thin; scrollbar-color: var(--ww-npc-gold) var(--ww-npc-ink); }
 .ww-npc .ww-npc-thumb { box-sizing: border-box; flex: 1 0 88px; min-width: 0; display: block; margin: 0; padding: 6px; border: 1px solid var(--ww-npc-paper); border-radius: 0; background: transparent; color: var(--ww-npc-paper); text-align: center; transition: translate 180ms ease; }
 .ww-npc .ww-npc-thumb-frame { display: grid; align-items: end; justify-items: start; aspect-ratio: 4 / 3.9; padding: 5px; background: var(--ww-npc-ink); border: 1px solid var(--ww-npc-gold); }
@@ -56,7 +55,6 @@
   .ww-npc .ww-npc-english { font-size: 12px; padding: 6px 8px; }
   .ww-npc .ww-npc-trait { font-size: 11px; padding: 4px 7px; }
   .ww-npc .ww-npc-details { grid-column: 1 / -1; }
-  .ww-npc .ww-npc-navigation { grid-template-columns: 48px minmax(0, 1fr) 48px; gap: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ww-npc .ww-npc-thumb { transition: none; }

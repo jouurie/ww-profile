@@ -99,10 +99,10 @@
     header.append(title, node('span', 'ww-npc-edition', 'CONTACTS'));
     var page = node('div', 'ww-npc-page');
     page.id = 'contact-page';
-    var navigation = node('nav', 'ww-npc-navigation');
+    var navigation = node('nav', 'ww-npc-navigation ww-rail-navigation');
     navigation.setAttribute('aria-label', 'NPC 선택');
     function control(id, label, glyph) {
-      var button = node('button', 'ww-npc-arrow', glyph);
+      var button = node('button', 'ww-npc-arrow ww-rail-arrow', glyph);
       button.type = 'button'; button.id = id;
       button.setAttribute('aria-label', label); button.title = label;
       return button;

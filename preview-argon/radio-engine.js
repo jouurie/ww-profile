@@ -97,8 +97,9 @@
   let host=null,slot=null,listener=null,widget=null,connecting=null;
   let generation=0,request=0,loadedIndex=-1,wantsPlay=false,pendingSeek=null,loadTimer=null;
   let state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false};
-  const snapshot=()=>({...state,tracks});
-  function publish(){const value=snapshot();try{listener?.(value);}catch{/* A UI observer cannot interrupt playback cleanup. */}return value;}
+  let lastVolume=70;
+  const snapshot=()=>({...state,muted:state.volume===0,tracks});
+  function publish(){const value=snapshot();try{listener?.(value);}catch{/* A UI observer cannot interrupt playback cleanup. */}window.dispatchEvent(new CustomEvent('ww-radio-state',{detail:value}));return value;}
   function setError(message){clearTimeout(loadTimer);state.error=message;state.playing=false;wantsPlay=false;publish();}
   function apply(){
     if(!widget||!state.ready)return;
@@ -145,6 +146,7 @@
     if(!host||typeof host.append!=='function')throw TypeError('재생기를 담을 요소가 필요합니다.');
     listener=typeof onState==='function'?onState:null;
     state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false};
+    lastVolume=state.volume;
     return publish();
   }
   function select(index,autoPlay=false){
@@ -167,8 +169,9 @@
   }
   function volume(value){
     const level=Number(value);if(!Number.isFinite(level))return snapshot();
-    state.volume=Math.max(0,Math.min(100,level));if(widget&&state.ready)widget.setVolume(state.volume);return publish();
+    state.volume=Math.max(0,Math.min(100,level));if(state.volume>0)lastVolume=state.volume;if(widget&&state.ready)widget.setVolume(state.volume);return publish();
   }
+  function mute(){return volume(state.volume===0?lastVolume:0);}
   function destroy(){
     generation++;request++;clearTimeout(loadTimer);loadTimer=null;connecting=null;wantsPlay=false;pendingSeek=null;loadedIndex=-1;
     const current=widget;widget=null;
@@ -176,5 +179,5 @@
     slot?.remove();slot=null;host=null;state.ready=false;state.playing=false;state.current=0;state.duration=0;state.error=null;
     const value=publish();listener=null;return value;
   }
-  window.WWRadioEngine=Object.freeze({init,select,play,pause,toggle,prev,next,seek,volume,destroy,get state(){return snapshot();}});
+  window.WWRadioEngine=Object.freeze({init,select,play,pause,toggle,prev,next,seek,volume,mute,destroy,get state(){return snapshot();}});
 })();

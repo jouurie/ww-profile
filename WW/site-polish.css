@@ -114,3 +114,7 @@ main .prose .kv-line>.sq-sub.wyatt{color:#19c5d8}
 #guide .ww-guide .wg-item-selector button{width:100%;min-width:0;min-height:48px;height:auto;flex:none;padding:10px 8px;white-space:normal;line-height:1.5;word-break:keep-all;overflow-wrap:anywhere}
 #guide .ww-hscroll-controls{display:none!important}
 @media(max-width:600px){#guide .ww-guide .wg-groups,#guide .ww-guide .wg-item-selector{grid-template-columns:repeat(2,minmax(0,1fr))}#guide .ww-guide .wg-groups button{font-size:13px}#guide .ww-guide .wg-item-selector button{font-size:14px}}
+
+/* Brief page descriptions share the same readable line treatment. */
+main .ww-section-head .head-desc{font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.7;word-break:keep-all;overflow-wrap:normal;text-wrap:balance}
+main :is(.prose,.ww-opening-body,.ww-npc-details p,.wg-pieces p,.wg-model-card p,.wg-command-description){word-break:keep-all;text-wrap:pretty}

@@ -18,37 +18,43 @@
   function mount(rail, options) {
     options = options || {};
     if (typeof rail === 'string') rail = document.querySelector(rail);
-    if (!rail || rail.closest(excluded)) return null;
+    if (!rail) return null;
     if (instances.has(rail)) return instances.get(rail);
+    if (rail.closest(excluded)) return null;
     var originalId = rail.getAttribute('id'), originalTabindex = rail.getAttribute('tabindex');
     var originalDescription = rail.getAttribute('aria-describedby');
     var identity = ++serial, controls = document.createElement('div');
-    controls.className = 'ww-hscroll-controls'; controls.hidden = true;
+    controls.className = 'ww-hscroll-controls ww-hscroll-shell ww-rail-navigation';
     var left = document.createElement('button'), right = document.createElement('button');
     var label = options.label || rail.getAttribute('aria-label') || '목록';
     if (!rail.id) rail.id = 'ww-horizontal-rail-' + identity;
     controls.setAttribute('role', 'group'); controls.setAttribute('aria-label', label + ' 가로 이동');
     [left, right].forEach(function (button, index) {
-      button.type = 'button'; button.className = 'ww-hscroll-arrow';
+      button.type = 'button'; button.className = 'ww-hscroll-arrow ww-rail-arrow'; button.hidden = true;
       button.textContent = index ? '→' : '←';
       button.setAttribute('aria-label', label + (index ? ' 오른쪽으로 이동' : ' 왼쪽으로 이동'));
       button.setAttribute('aria-controls', rail.id);
     });
-    controls.append(left, right);
-    var host = options.controlsHost;
-    if (typeof host === 'string') host = document.querySelector(host);
-    var header = rail.closest('header'), anchor = header || rail;
-    if (host) host.append(controls); else anchor.after(controls);
-    var stickyAnchor = header || rail, active = false, frame = 0, destroyed = false;
+    var originalStyle = getComputedStyle(rail), originalRailMarker = rail.getAttribute('data-ww-hscroll-rail');
+    controls.style.margin = originalStyle.margin; controls.style.order = originalStyle.order;
+    controls.style.flex = originalStyle.flex; controls.style.gridArea = originalStyle.gridArea;
+    if (originalStyle.position === 'sticky') {
+      controls.style.position = 'sticky'; controls.style.top = originalStyle.top; controls.style.zIndex = originalStyle.zIndex;
+    }
+    rail.setAttribute('data-ww-hscroll-rail', '');
+    rail.before(controls); controls.append(left, rail, right);
+    var header = rail.closest('header'), active = false, frame = 0, destroyed = false;
     function max() { return Math.max(0, rail.scrollWidth - rail.clientWidth); }
     function restoreAttribute(name, value) { if (value === null) rail.removeAttribute(name); else rail.setAttribute(name, value); }
     function refresh() {
       frame = 0;
       if (destroyed) return;
       var style = getComputedStyle(rail);
-      var next = visible(rail) && /^(auto|scroll)$/.test(style.overflowX) && rail.clientWidth > 0 && max() > 2;
-      controls.hidden = !next;
-      controls.style.order = style.order;
+      var shellStyle = getComputedStyle(controls);
+      var available = controls.clientWidth - (parseFloat(shellStyle.paddingLeft) || 0) - (parseFloat(shellStyle.paddingRight) || 0);
+      var next = visible(rail) && /^(auto|scroll)$/.test(style.overflowX) && rail.clientWidth > 0 && max() > 2 && rail.scrollWidth > available + 2;
+      left.hidden = right.hidden = !next;
+      controls.classList.toggle('ww-hscroll-active', next);
       if (active !== next) {
         active = next;
         if (active) {
@@ -61,23 +67,20 @@
       if (!next) return;
       var position = Math.max(0, rail.scrollLeft);
       left.disabled = position <= 2; right.disabled = position >= max() - 2;
-      var sticky = !host && options.sticky !== false && getComputedStyle(stickyAnchor).position === 'sticky';
-      controls.classList.toggle('ww-hscroll-sticky', sticky);
-      if (sticky) {
-        var anchorStyle = getComputedStyle(stickyAnchor);
-        controls.style.setProperty('--ww-hscroll-top', ((parseFloat(anchorStyle.top) || 0) + stickyAnchor.getBoundingClientRect().height) + 'px');
-        controls.style.setProperty('--ww-hscroll-z', String(Math.max(1, parseInt(anchorStyle.zIndex, 10) || 1)));
-      }
     }
     function schedule() { if (!frame) frame = setTimeout(refresh); }
-    function distance() {
+    function destination(direction) {
       var items = Array.from(rail.children).filter(function (item) { return item.getClientRects().length; });
-      var first = items[0], second = items[1];
-      var step = first && second ? Math.abs(second.getBoundingClientRect().left - first.getBoundingClientRect().left) : 0;
-      return step > 0 && step <= rail.clientWidth ? Math.max(step, Math.floor(rail.clientWidth / step) * step) : rail.clientWidth * .85;
+      if (!items.length) return rail.scrollLeft;
+      var origin = items[0].getBoundingClientRect().left;
+      var positions = items.map(function (item) { return item.getBoundingClientRect().left - origin; });
+      var position = Math.max(0, rail.scrollLeft), target;
+      if (direction > 0) target = positions.find(function (value) { return value > position + 2; });
+      else target = positions.reverse().find(function (value) { return value < position - 2; });
+      return target === undefined ? (direction > 0 ? max() : 0) : Math.max(0, Math.min(max(), target));
     }
     function move(direction) {
-      rail.scrollTo({ left: Math.max(0, Math.min(max(), rail.scrollLeft + direction * distance())), behavior: reduced() ? 'instant' : 'smooth' });
+      rail.scrollTo({ left: destination(direction), behavior: reduced() ? 'instant' : 'smooth' });
       schedule();
     }
     function goLeft() { move(-1); } function goRight() { move(1); }
@@ -97,7 +100,9 @@
       rail.removeEventListener('scroll', schedule); rail.removeEventListener('keydown', key);
       left.removeEventListener('click', goLeft); right.removeEventListener('click', goRight);
       restoreAttribute('tabindex', originalTabindex); restoreAttribute('aria-describedby', originalDescription);
+      restoreAttribute('data-ww-hscroll-rail', originalRailMarker);
       if (originalId === null && rail.id === 'ww-horizontal-rail-' + identity) rail.removeAttribute('id');
+      if (rail.parentNode === controls && controls.parentNode) controls.before(rail);
       controls.remove(); instances.delete(rail);
     } };
     instances.set(rail, entry); refresh(); return entry;
@@ -118,7 +123,7 @@
     observer = new MutationObserver(function (records) {
       var meaningful = false;
       records.forEach(function (record) {
-        if (record.target.closest && record.target.closest('.ww-hscroll-controls')) return;
+        if (record.target.matches && record.target.matches('.ww-hscroll-controls,.ww-hscroll-arrow')) return;
         if (record.type === 'childList') record.addedNodes.forEach(function (node) { if (node.nodeType === 1 && !node.matches('.ww-hscroll-controls')) scan(node); });
         meaningful = true;
       });
