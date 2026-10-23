@@ -13,6 +13,19 @@
     });
   }
 
+  function markedNarration(parent, text) {
+    var pattern = /^[ \t]*["“][^\r\n]+/gm;
+    var cursor = 0, match;
+    while ((match = pattern.exec(text))) {
+      markedText(parent, text.slice(cursor, match.index));
+      var line = element('span', 'ww-opening-npc-dialogue');
+      markedText(line, match[0]);
+      parent.append(line);
+      cursor = pattern.lastIndex;
+    }
+    markedText(parent, text.slice(cursor));
+  }
+
   // Only the two canonical dialogue spans are interpreted; every other tag stays literal.
   function renderPreview(source) {
     var fragment = document.createDocumentFragment();
@@ -20,14 +33,14 @@
     var pattern = /<span style="color:(#10ced9|#ff4b4b);">([\s\S]*?)<\/span>/g;
     var cursor = 0, match;
     while ((match = pattern.exec(text))) {
-      markedText(fragment, text.slice(cursor, match.index));
+      markedNarration(fragment, text.slice(cursor, match.index));
       var span = element('span', 'ww-opening-dialogue');
       span.style.color = match[1];
       markedText(span, match[2]);
       fragment.append(span);
       cursor = pattern.lastIndex;
     }
-    markedText(fragment, text.slice(cursor));
+    markedNarration(fragment, text.slice(cursor));
     return fragment;
   }
 

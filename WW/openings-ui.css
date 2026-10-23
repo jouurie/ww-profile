@@ -110,3 +110,5 @@
 .ww-opening-user { padding: 0; background: linear-gradient(to bottom, transparent 68%, color-mix(in srgb, currentColor 24%, transparent) 68%, color-mix(in srgb, currentColor 24%, transparent) 94%, transparent 94%); color: inherit; font-weight: inherit; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .ww-opening-preview :is(button):focus-visible,.ww-opening-card button:focus-visible { outline: 2px solid var(--brass); outline-offset: 4px; }
 @media(max-width:620px) { .ww-opening-preview { width: calc(100% - 20px); max-height: calc(100dvh - 20px); padding: 20px; } }
+
+.ww-opening-npc-dialogue { color: #aaa; }
