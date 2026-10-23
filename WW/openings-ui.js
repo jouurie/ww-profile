@@ -3,6 +3,84 @@
   'use strict';
   var sceneImages = {"01":"https://cdn.imgchest.com/files/9b65036dea36.png","02":"https://cdn.imgchest.com/files/83c52183f6b5.png","03":"https://cdn.imgchest.com/files/15f834822cc5.png","04":"https://cdn.imgchest.com/files/1a2529d842f4.png","05":"https://cdn.imgchest.com/files/5b1541f2ad05.png","06":"https://cdn.imgchest.com/files/9d1a1aa8a1b4.png"};
   var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자율 도입부'];
+  var plotIds = ['plot1', 'plot2', 'plot3', 'plot4', 'plot5', 'plot_auto_intro'];
+  var dialog, previewTitle, previewBody, opener, overflow;
+
+  function markedText(parent, text) {
+    var chunks = text.split(/(\{\{user\}\})/g);
+    chunks.forEach(function (chunk) {
+      parent.append(chunk === '{{user}}' ? element('mark', 'ww-opening-user', chunk) : document.createTextNode(chunk));
+    });
+  }
+
+  // Only the two canonical dialogue spans are interpreted; every other tag stays literal.
+  function renderPreview(source) {
+    var fragment = document.createDocumentFragment();
+    var text = String(source).replace(/<!--[\s\S]*?-->/g, '');
+    var pattern = /<span style="color:(#10ced9|#ff4b4b);">([\s\S]*?)<\/span>/g;
+    var cursor = 0, match;
+    while ((match = pattern.exec(text))) {
+      markedText(fragment, text.slice(cursor, match.index));
+      var span = element('span', 'ww-opening-dialogue');
+      span.style.color = match[1];
+      markedText(span, match[2]);
+      fragment.append(span);
+      cursor = pattern.lastIndex;
+    }
+    markedText(fragment, text.slice(cursor));
+    return fragment;
+  }
+
+  function restorePreview() {
+    if (!overflow) return;
+    document.documentElement.style.overflow = overflow.html;
+    document.body.style.overflow = overflow.body;
+    overflow = null;
+    if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+  }
+
+  function closePreview() {
+    if (dialog && dialog.open) dialog.close();
+    restorePreview();
+  }
+
+  function createPreview() {
+    if (dialog) return;
+    dialog = element('dialog', 'ww-opening-preview');
+    dialog.setAttribute('aria-labelledby', 'ww-opening-preview-title');
+    var header = element('header', 'ww-opening-preview-head');
+    previewTitle = element('h2', '', '');
+    previewTitle.id = 'ww-opening-preview-title';
+    var close = element('button', 'ww-opening-preview-close', '×');
+    close.type = 'button';
+    close.setAttribute('aria-label', '도입부 미리보기 닫기');
+    close.addEventListener('click', closePreview);
+    header.append(previewTitle, close);
+    previewBody = element('div', 'ww-opening-preview-body');
+    dialog.append(header, previewBody);
+    document.body.append(dialog);
+    dialog.addEventListener('cancel', function (event) { event.preventDefault(); closePreview(); });
+    dialog.addEventListener('close', restorePreview);
+    dialog.addEventListener('click', function (event) {
+      var bounds = dialog.getBoundingClientRect();
+      if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) closePreview();
+    });
+  }
+
+  function openPreview(card, trigger) {
+    var source = global.WWOpeningPreviews && global.WWOpeningPreviews[card.dataset.plot];
+    if (!source || document.querySelector('dialog[open]')) return;
+    createPreview();
+    opener = trigger || card;
+    previewTitle.textContent = card.querySelector('h3').textContent;
+    previewBody.replaceChildren(renderPreview(source));
+    overflow = { html: document.documentElement.style.overflow, body: document.body.style.overflow };
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    dialog.showModal();
+    dialog.scrollTop = 0;
+    dialog.querySelector('.ww-opening-preview-close').focus({ preventScroll: true });
+  }
 
   function openingParts(source, index) {
     var text = String(source).replace(/^[⑴⑵⑶⑷⑸⑹]\s*/u, '');
@@ -62,6 +140,9 @@
       var number = String(index + 1).padStart(2, '0');
       var card = element('article', 'ww-opening-card');
       card.dataset.opening = number;
+      card.dataset.plot = plotIds[index];
+      card.tabIndex = 0;
+      card.setAttribute('aria-haspopup', 'dialog');
       card.dataset.motion = 'reveal';
       var header = element('header', 'ww-opening-card-head');
       var count = element('span', 'ww-opening-number', number);
@@ -70,6 +151,11 @@
       name.id = 'ww-opening-title-' + number;
       card.setAttribute('aria-labelledby', name.id);
       header.append(count, name);
+      var previewButton = element('button', 'ww-opening-preview-button', '전문 보기');
+      previewButton.type = 'button';
+      previewButton.setAttribute('aria-label', parts.title + ' 전문 보기');
+      previewButton.addEventListener('click', function (event) { event.stopPropagation(); openPreview(card, previewButton); });
+      header.append(previewButton);
       var photo = element('div', 'ww-opening-photo');
       photo.dataset.motion = 'tilt';
       var image = element('img', '');
@@ -79,10 +165,23 @@
       image.decoding = 'async';
       image.width = 960;
       image.height = 640;
+      image.dataset.imageViewer = 'on';
+      image.setAttribute('data-motion-image', '');
       photo.append(image);
       var body = prose('ww-openings-prose ww-opening-body', parts.body);
       body.dataset.openingSource = number;
-      card.append(header, photo, body);
+      card.append(header, photo);
+      if (card.dataset.plot === 'plot1' || card.dataset.plot === 'plot2') {
+        card.classList.add('ww-opening-masked');
+      }
+      card.append(body);
+      card.addEventListener('click', function (event) {
+        if (event.target.closest('img,a,button,input,label,select,textarea,summary,[role="button"]')) return;
+        openPreview(card, card);
+      });
+      card.addEventListener('keydown', function (event) {
+        if (event.target === card && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openPreview(card, card); }
+      });
       grid.append(card);
     });
     content.append(grid);

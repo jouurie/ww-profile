@@ -26,5 +26,5 @@
     global.addEventListener('popstate', function () { toggle(false); });
     stage.append(wrap);
   }
-  global.WWMotion?.mount(root);
+  global.WWMotion?.mount(document);
 })(window);

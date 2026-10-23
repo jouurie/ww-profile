@@ -149,7 +149,7 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 @media(max-width:360px){#intro .key-tag{width:82px;left:22px;top:16px}}
 
 /* Match the source portraits' eye spacing and keep Wade's face left of the copy. */
-#brothers .brother-dossier.wyatt>.portrait.large>img{transform:translateX(-20%) scale(1.08);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+#brothers .brother-dossier.wyatt>.portrait.large>img{transform:translate(-20%,12px) scale(1.08);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
 #brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 21%;transform:translateX(-24%);mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
 @media(max-width:720px){#brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 18%}}
 

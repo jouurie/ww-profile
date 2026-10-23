@@ -17,15 +17,15 @@
     'Nate Pell': { src: 'https://cdn.imgchest.com/files/70acdb09c37a.png', faceX: 44.5, faceY: 34.5, scale: 2.6 }
   };
   var appearance = {
-    'Callum Rusk': { sentence: '검은 올백머리와 좁은 검은 눈을 지닌 마른 중년 남자입니다.', tags: ['검은 올백머리', '좁은 검은 눈', '마른 중년 남자'] },
-    'Marlene Pike': { sentence: '짧은 붉은 곱슬머리와 적갈색 눈의 피곤한 미인입니다.', tags: ['짧은 붉은 곱슬머리', '적갈색 눈', '피곤한 미인'] },
+    'Callum Rusk': { sentence: '검은 올백머리와 가늘고 검은 눈을 지닌 마른 중년 남자입니다.', tags: ['검은 올백머리', '좁은 검은 눈', '마른 중년 남자'] },
+    'Marlene Pike': { sentence: '짧은 붉은 곱슬머리와 적갈색 눈의 피곤해 보이는 미인입니다.', tags: ['짧은 붉은 곱슬머리', '적갈색 눈', '피곤한 미인'] },
     'Rudy Kline': { sentence: '짧게 민 검은 머리와 검은 눈에 큰 체격을 지녔습니다.', tags: ['짧게 민 검은 머리', '검은 눈', '큰 체격'] },
     'Saul Aguirre': { sentence: '매끈하게 넘긴 검은 머리와 호박색 눈을 지녔습니다.', tags: ['매끈하게 넘긴 검은 머리', '호박색 눈'] },
     'Dottie Mercer': { sentence: '탈색 금발 보브컷과 붉은기 도는 갈색 눈을 지녔습니다.', tags: ['탈색 금발 보브컷', '붉은기 도는 갈색 눈'] },
     'Bowie Maddox': { sentence: '헝클어진 검은 머리와 검은 눈에 햇볕에 탄 거구입니다.', tags: ['헝클어진 검은 머리', '검은 눈', '햇볕에 탄 거구'] },
-    'Vince Crowder': { sentence: '짙은 갈색 샤기컷과 좁은 푸른 눈, 마른 체격에 잘생긴 얼굴을 지녔습니다.', tags: ['짙은 갈색 샤기컷', '좁은 푸른 눈', '마른 체격', '잘생긴 얼굴'] },
+    'Vince Crowder': { sentence: '짙은 갈색 샤기컷과 가늘고 푸른 눈, 마른 체격에 잘생긴 얼굴을 지녔습니다.', tags: ['짙은 갈색 샤기컷', '좁은 푸른 눈', '마른 체격', '잘생긴 얼굴'] },
     'Lena Vosk': { sentence: '잿빛 섞인 짧은 어두운 금발과 헤이즐브라운 눈을 지녔습니다.', tags: ['잿빛 섞인 짧은 어두운 금발', '헤이즐브라운 눈'] },
-    'Grady Pell': { sentence: '은회색의 헝클어진 머리와 회색 눈을 지녔습니다.', tags: ['은회색 헝클어진 머리', '회색 눈'] },
+    'Grady Pell': { sentence: '헝클어진 은회색 머리와 회색 눈을 지녔습니다.', tags: ['은회색 헝클어진 머리', '회색 눈'] },
     'Nate Pell': { sentence: '아버지와 닮은 은회색 머리와 회색 눈에 아직 앳된 얼굴을 지녔습니다.', tags: ['아버지와 닮은 은회색 머리', '회색 눈', '아직 앳된 얼굴'] }
   };
   function node(tag, className, text) {
