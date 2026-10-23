@@ -107,6 +107,6 @@
 .ww-opening-preview-head h2 { margin: 0; flex: 1; color: var(--paper); font: 700 24px/1.5 var(--font-label); }
 .ww-opening-preview-close { flex: none; width: 44px; height: 44px; padding: 0; border: 1px solid var(--brass); background: var(--ink); color: var(--paper); font: 28px/1 var(--font-body); cursor: pointer; }
 .ww-opening-preview-body { max-width: 75ch; white-space: pre-wrap; overflow-wrap: anywhere; word-break: keep-all; font: 400 16px/1.9 var(--font-body); }
-.ww-opening-user { padding: 0 2px; background: var(--brass); color: var(--ink); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.ww-opening-user { padding: 0; background: linear-gradient(to bottom, transparent 68%, color-mix(in srgb, currentColor 24%, transparent) 68%, color-mix(in srgb, currentColor 24%, transparent) 94%, transparent 94%); color: inherit; font-weight: inherit; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .ww-opening-preview :is(button):focus-visible,.ww-opening-card button:focus-visible { outline: 2px solid var(--brass); outline-offset: 4px; }
 @media(max-width:620px) { .ww-opening-preview { width: calc(100% - 20px); max-height: calc(100dvh - 20px); padding: 20px; } }

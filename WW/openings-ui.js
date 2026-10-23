@@ -16,7 +16,7 @@
   // Only the two canonical dialogue spans are interpreted; every other tag stays literal.
   function renderPreview(source) {
     var fragment = document.createDocumentFragment();
-    var text = String(source).replace(/<!--[\s\S]*?-->/g, '');
+    var text = String(source).replace(/<!--[\s\S]*?-->/g, '').replace(/(?:\r?\n)[ \t]*---[ \t]*\s*$/, '');
     var pattern = /<span style="color:(#10ced9|#ff4b4b);">([\s\S]*?)<\/span>/g;
     var cursor = 0, match;
     while ((match = pattern.exec(text))) {
