@@ -86,7 +86,13 @@
     createPreview();
     opener = trigger || card;
     previewTitle.textContent = card.querySelector('h3').textContent;
-    previewBody.replaceChildren(renderPreview(source));
+    if (card.dataset.plot === 'plot_auto_intro') {
+      var frame = element('iframe', 'ww-opening-component');
+      frame.title = '자율 도입부 안내 미리보기';
+      frame.src = '../WW/intro-preview/elyn.html?v=20261024-font-preview1';
+      frame.setAttribute('scrolling', 'no');
+      previewBody.replaceChildren(frame);
+    } else previewBody.replaceChildren(renderPreview(source));
     overflow = { html: document.documentElement.style.overflow, body: document.body.style.overflow };
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
@@ -216,5 +222,10 @@
     return panel;
   }
 
+  global.addEventListener('message', function (event) {
+    if (event.origin !== global.location.origin || event.data?.type !== 'ww-intro-preview-height') return;
+    var frame = previewBody?.querySelector('iframe.ww-opening-component');
+    if (frame && event.source === frame.contentWindow && Number.isFinite(event.data.height)) frame.style.height = Math.max(100, Math.min(6000, event.data.height)) + 'px';
+  });
   global.WWOpeningsUI = { mount: mount };
 })(window);
