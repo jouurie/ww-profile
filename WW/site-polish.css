@@ -1,0 +1,64 @@
+/* One reading system: 4px rhythm, consistent role sizes, and shared alignment. */
+:root{--ww-page-width:1360px;--ww-page-inset:32px;--ww-section-gap:32px;--ww-subsection-gap:24px;--ww-heading-gap:16px;--ww-paragraph-gap:12px;--ww-label-gap:12px;--ww-body-size:18px;--ww-body-leading:1.8;--ww-label-column:96px}
+body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 64px);max-width:var(--ww-page-width);margin:0 auto;padding:32px 0 40px;box-sizing:border-box;min-width:0}
+body:not(.ww-landing) #guide.ww-guide-ready{background:transparent;color:var(--paper)}
+.wwtruck .wwtruck-shell,.ww-npc .ww-npc-shell{max-width:none;padding:0}
+main .panel .ww-section-head{display:block;position:relative;margin:0 0 var(--ww-section-gap);padding:0 0 var(--ww-heading-gap);border:0;border-bottom:1px solid var(--brass);color:var(--paper)}
+main .panel .ww-section-head::after{display:none}
+main .panel .ww-section-head .head-left{display:contents}
+main .panel .ww-section-title{margin:0;font:400 36px/1.35 var(--font-kr-title);letter-spacing:0;color:var(--paper);text-wrap:balance}
+main .panel .ww-section-head .head-desc{margin:12px 0 0;max-width:75ch;font-size:16px;line-height:1.8;color:var(--muted)}
+main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3,.wg-entry-head h3){margin:0 0 var(--ww-heading-gap);font:700 22px/1.5 var(--font-label);letter-spacing:0}
+main .panel :is(.profile-section>.piece-title,.prose h4,.wg-section>h4,.wg-fragment>h4,.wg-item-setting>h4,.wg-model-section>h4,.wg-model-support-section>h4,.wg-command-group>h4){margin:0 0 var(--ww-heading-gap);font:700 20px/1.5 var(--font-label);letter-spacing:0}
+main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwtruck-spec,.wwtruck-detail,.wg-value,.wg-support-value,.wg-support-statement,.wg-pieces p,.wg-start-plan p,.wg-model-card p,.wg-command-description){font-size:var(--ww-body-size);line-height:var(--ww-body-leading);font-family:var(--font-body)}
+:is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wg-prompt-block,.wg-summary-prompt){max-width:75ch}
+.profile-sheet{padding:var(--ww-page-inset)}
+.profile-section+.profile-section{margin-top:var(--ww-section-gap)}
+.profile-section>.piece-title{padding:0 0 var(--ww-heading-gap);border-bottom:1px solid var(--paper-line)}
+.profile-section>.prose{padding-inline:16px;box-sizing:border-box;max-width:100%}
+.prose .kv-stack{display:flex;flex-direction:column;gap:var(--ww-paragraph-gap)}
+.prose .kv-line{margin:0;padding:0;font-size:var(--ww-body-size);line-height:var(--ww-body-leading);max-width:75ch}
+.prose .kv-line:has(>.sq-sub){display:grid;grid-template-columns:var(--ww-label-column) minmax(0,1fr);align-items:baseline;gap:var(--ww-label-gap)}
+.prose .kv-line>.sq-sub{display:inline-flex;justify-content:center;align-items:center;width:100%;box-sizing:border-box;margin:0;padding:3px 8px;font:700 14px/1.6 var(--font-label);white-space:normal;text-align:center}
+.prose .kv-value{min-width:0}
+.prose .kv-section{margin:var(--ww-subsection-gap) 0 0;padding:0;border:0;background:transparent}
+.prose .kv-section:first-child{margin-top:0}
+.prose .kv-heading{margin:0 0 var(--ww-heading-gap);gap:var(--ww-label-gap);font:700 18px/1.5 var(--font-label)}
+.prose .kv-heading>.sq-sub{margin:0;padding:3px 10px;line-height:1.6}
+.prose .kv-heading::after{margin:0;border-width:1px}
+.prose .kv-section-body{display:grid;gap:var(--ww-paragraph-gap);padding-left:0}
+.sq-sub,.sq-label{vertical-align:baseline}
+.sq-sub+span,.sq-label+span{margin-inline-start:4px}
+.kv-line>.kv-value{margin-inline-start:0}
+.ww-opening-card .ww-opening-card-head{align-items:center;gap:16px;margin-bottom:var(--ww-heading-gap)}
+.ww-opening-card .ww-opening-card-head h3{margin:0}
+.ww-opening-card .ww-opening-body{margin-top:var(--ww-heading-gap)}
+.ww-openings-ui .ww-openings-notice{margin:0 0 var(--ww-subsection-gap)}
+.ww-npc .ww-npc-spread{padding:var(--ww-page-inset)}
+#guide .ww-guide{padding:var(--ww-page-inset);font-size:var(--ww-body-size);box-sizing:border-box}
+#guide .wg-groups{gap:8px;margin-bottom:var(--ww-subsection-gap)}
+#guide .wg-groups button{flex:0 0 auto;min-width:0;padding:10px 16px;gap:10px}
+#guide .wg-category-platform-badge{flex:0 0 40px;width:40px;min-width:40px;min-height:24px;padding:1px 4px;font-size:11px}
+#guide .wg-platform-slot:has(.wg-category-platforms[hidden]){display:none}
+#guide .wg-item-selector{margin-bottom:var(--ww-subsection-gap)}
+#guide .wg-control-panel{padding:var(--ww-subsection-gap)}
+#guide .wg-neutral-platform{min-height:144px;padding:24px 0}
+#guide .wg-entry-head{margin-bottom:var(--ww-subsection-gap)}
+#guide :is(.wg-pieces,.wg-summary-pieces,.wg-model-support){gap:var(--ww-section-gap)}
+#guide :is(.wg-section,.wg-fragment,.wg-model-section,.wg-model-support-section){padding-top:var(--ww-subsection-gap)}
+#guide :is(.wg-pieces p,.wg-start-plan p,.wg-model-card p){margin-bottom:var(--ww-paragraph-gap)}
+#guide .wg-command-group{margin-top:var(--ww-section-gap)}
+#guide .wg-command-token{gap:var(--ww-label-gap)}
+#guide .wg-platform-label{min-width:48px;background:var(--ink);font-size:13px}
+#guide .wg-platform-label.wg-nody{color:var(--status-red,var(--red))}
+#guide .wg-model-highlight{padding:0 3px;background:linear-gradient(transparent 48%,var(--brass) 48%,var(--brass) 88%,transparent 88%);font-weight:700;line-height:inherit;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#guide .wg-support-definition{grid-template-columns:112px minmax(0,1fr);gap:16px}
+#guide .wg-support-unit .wg-note{padding-left:128px;font-size:16px}
+#guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:var(--ww-section-gap)}
+#guide .wg-model-card{padding:20px;border:1px solid var(--brass)}
+#guide .wg-model-card :is(h4,h5){font-family:var(--font-label)}
+#guide .wg-model-card h4{font-size:20px}
+#guide .wg-model-card h5{font-size:14px}
+#guide .wg-model-setting>strong{font-size:20px}
+@media(max-width:900px){:root{--ww-page-inset:24px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 40px)}#guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){:root{--ww-page-inset:20px;--ww-body-size:17px;--ww-label-column:80px;--ww-label-gap:10px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 24px);padding-top:24px}main .panel .ww-section-title{font-size:28px}main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3,.wg-entry-head h3){font-size:20px}.profile-section>.prose{padding-inline:0}.prose .kv-line>.sq-sub{font-size:13px;padding-inline:4px}#guide .wg-control-panel{padding:16px}#guide .wg-groups button{padding:10px 12px}#guide .wg-support-definition{grid-template-columns:80px minmax(0,1fr);gap:12px}#guide .wg-support-unit .wg-note{padding-left:92px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}}

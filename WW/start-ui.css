@@ -2,6 +2,6 @@
 /* The start control affects its scene without moving the hit target. */
 .ww-start-trigger{transition:background-color .25s,color .25s,box-shadow .25s,filter .25s}
 .truck-photo-frame>img,.ww-home-hero>.hero-image{transition:filter .35s ease}
-.truck-photo-frame:has(.ww-start-trigger:is(:hover,:focus-visible))>img,.ww-home-hero:has(.ww-start-trigger:is(:hover,:focus-visible))>.hero-image{filter:brightness(.62)}
+.truck-photo-frame:has(.ww-start-trigger:is(:hover,:focus-visible,[aria-expanded=true]))>img,.ww-home-hero:has(.ww-start-trigger:is(:hover,:focus-visible,[aria-expanded=true]))>.hero-image{filter:brightness(.62)}
 .ww-start-trigger:is(:hover,:focus-visible){background:var(--paper);color:var(--red);box-shadow:0 0 0 3px var(--red),0 6px 24px #0009}
 @media(prefers-reduced-motion:reduce){.ww-start-trigger,.truck-photo-frame>img,.ww-home-hero>.hero-image{transition:none}}

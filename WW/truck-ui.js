@@ -337,7 +337,33 @@
       return typeof item.title === 'string' && typeof item.spec === 'string';
     });
   }
+  function sleepingDiagram(item, thumb) {
+    var diagram = node('div', 'wwtruck-sleep-diagram' + (thumb ? ' is-thumbnail' : ''));
+    diagram.dataset.sleepDiagram = item.id;
+    if (thumb) diagram.setAttribute('aria-hidden', 'true');
+    else { diagram.setAttribute('role', 'img'); diagram.setAttribute('aria-label', item.title + ' 배치: ' + item.spec); }
+    var background = node('img', 'wwtruck-sleep-background');
+    background.src = new URL('sleep-empty.png', assetBase).href;
+    background.alt = ''; background.width = 1536; background.height = 1024;
+    background.loading = thumb ? 'lazy' : 'eager'; background.decoding = 'async'; background.draggable = false;
+    diagram.append(background);
+    var positions = item.id === 'sleep-one' ? [[51, 77]] : [[51, 69], [51, 84]];
+    if (item.id === 'sleep-three') positions.push([51, 56]);
+    if (item.id === 'sleep-floor-option') positions.push([50, 49]);
+    if (item.id === 'sleep-seat-option') positions.push([65, 27]);
+    positions.forEach(function (position, index) {
+      var slot = node('span', 'wwtruck-sleep-slot', '자리 ' + (index + 1));
+      slot.dataset.occupant = String(index + 1);
+      slot.style.setProperty('--slot-left', position[0] + '%');
+      slot.style.setProperty('--slot-top', position[1] + '%');
+      if (index === 2 && item.id === 'sleep-three') slot.classList.add('is-outside');
+      if (index === 2 && item.id !== 'sleep-three') slot.classList.add('is-alternative');
+      diagram.append(slot);
+    });
+    return diagram;
+  }
   function picture(item, thumb) {
+    if (/^sleep-/.test(item.id)) return sleepingDiagram(item, thumb);
     var image = node('img', thumb ? 'wwtruck-thumbnail-image' : 'wwtruck-gallery-image');
     var file = thumb && /^[a-z0-9-]+\.png$/.test(item.thumb || '') ? item.thumb : item.file;
     var imageURL = new URL(file, assetBase);

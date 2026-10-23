@@ -1,0 +1,15 @@
+/* The same three Korean faces used by the Rhodes status window. */
+@font-face{font-family:Taenada;src:url('fonts/Tenada.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Mujeokhaebeong;src:url('fonts/MarinesRegular.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
+@font-face{font-family:Mujeokhaebeong;src:url('fonts/MarinesBold.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
+@font-face{font-family:YUniverse;src:url('fonts/YUniverse-L.woff2') format('woff2');font-style:normal;font-weight:300 600;font-display:swap}
+@font-face{font-family:YUniverse;src:url('fonts/YUniverse-B.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
+:root{--font-body:YUniverse,sans-serif;--font-label:Mujeokhaebeong,sans-serif;--font-kr-title:Taenada,sans-serif;--font-mono:Mujeokhaebeong,sans-serif}
+body{font-family:var(--font-body);font-weight:400;line-height:1.8;letter-spacing:0}
+body :is(button,summary,input,select,textarea){font-family:var(--font-label)!important}
+:is(.prose,.source-body,.intro-whole-body,.ww-openings-prose,.ww-npc-details,.head-desc,.wwtruck-detail,.wwtruck-spec,.wg-value,.wg-support-value,.wg-support-statement){font-family:var(--font-body);letter-spacing:0}
+:is(.sq-sub,.sq-label,.piece-title,.kv-heading,.ww-opening-card h3,.ww-npc-name,.wwtruck-caption h3,.ww-profile-traits,.brand-name,.character-menu,.chapter-nav,.ww-key-action){font-family:var(--font-label);letter-spacing:0}
+:is(.ww-npc-edition,.ww-npc-heading,.ww-npc-polaroid figcaption,.ww-npc-english,.ww-npc-thumb-number,.ww-npc-counter,.ww-radio-time,.ww-radio-volume-value,.ww-radio-track-count,.ww-radio-track-number){font-family:var(--font-label)}
+:is(code,pre){font-family:var(--font-mono)}
+::selection{background:var(--brass);color:var(--tar)}
+input,textarea{caret-color:var(--cyan)}

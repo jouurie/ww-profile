@@ -1,8 +1,6 @@
 /* One selected source at a time, with item-local folder tabs. */
-@font-face{font-family:WWGuideReading;src:url(Pretendard-Regular.woff2) format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:WWGuideReading;src:url(Pretendard-SemiBold.woff2) format('woff2');font-weight:500 900;font-display:swap}
 #guide.ww-guide-ready{width:calc(100% - 80px);max-width:1360px;margin-inline:auto;padding:32px;box-sizing:border-box;min-height:0;background:var(--paper);color:var(--ink)}
-#guide .ww-guide{--wg-paper:var(--paper);--wg-ink:var(--ink);--wg-line:var(--brass,var(--line));--font-body:WWGuideReading,Pretendard,sans-serif;display:flex;flex-direction:column;min-width:0;background:var(--paper);color:var(--ink);font:16px/1.75 var(--font-body)}
+#guide .ww-guide{--wg-paper:var(--paper);--wg-ink:var(--ink);--wg-line:var(--brass,var(--line));display:flex;flex-direction:column;min-width:0;background:var(--paper);color:var(--ink);font:16px/1.75 var(--font-body)}
 #guide .ww-guide [hidden]{display:none!important}
 #guide .ww-guide button{cursor:pointer;font:inherit;color:inherit}
 #guide .ww-guide button:focus-visible,#guide .ww-guide a:focus-visible{outline:2px solid var(--wg-ink);outline-offset:3px}
@@ -13,7 +11,7 @@
 #guide .wg-item-selector::-webkit-scrollbar{display:none}
 #guide .wg-item-selector button{display:flex;align-items:center;justify-content:center;gap:6px;flex:0 0 184px;width:184px;height:48px;box-sizing:border-box;padding:4px 10px;border:1px solid var(--wg-line);border-radius:2px;background:transparent;text-align:center;font-weight:600;line-height:1.35}
 #guide .wg-item-selector button[aria-selected=true]{border-color:var(--wg-ink);font-weight:600;box-shadow:inset 0 -3px var(--red)}
-#guide .wg-category-platform-badge{display:inline-flex;align-items:center;justify-content:center;flex:0 0 80px;width:80px;min-height:22px;padding:1px 5px;border:1px solid currentColor;box-sizing:border-box;font-size:11px;line-height:1.3;font-weight:600}
+#guide .wg-category-platform-badge{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:20px;min-height:20px;padding:1px 5px;border:1px solid currentColor;box-sizing:border-box;font-size:11px;line-height:1.3;font-weight:600}
 #guide .wg-platform-slot{height:44px;flex:none}
 #guide .wg-category-platforms{height:44px}
 #guide .wg-category-platforms button{height:44px;box-sizing:border-box;min-width:112px;font-weight:600}
@@ -21,7 +19,7 @@
 #guide .wg-control-panel.wg-folder-panel{border-color:var(--wg-ink)}
 #guide .wg-preparing{margin:0;font-size:16px;line-height:1.8}
 #guide .wg-neutral-platform{box-sizing:border-box;min-height:240px;padding:24px 0;font-size:16px;line-height:1.8}
-#guide .wg-neutral-platform h3,#guide .wg-neutral-platform h4{margin:0 0 12px;font:600 20px/1.5 var(--font-body,Pretendard,sans-serif)}
+#guide .wg-neutral-platform h3,#guide .wg-neutral-platform h4{margin:0 0 12px;font:600 20px/1.5 var(--font-label)}
 #guide .wg-neutral-platform p{margin:0}
 #guide .wg-copy-control{display:inline-flex;gap:9px;align-items:center;margin-top:12px;vertical-align:middle}
 #guide .wg-copy-control button{padding:6px 12px;border:1px solid var(--wg-line);border-radius:2px;background:transparent;font-size:14px;line-height:1.5;font-weight:600}
@@ -38,8 +36,8 @@
 #guide .wg-command-description small{display:block;margin-top:7px;font-size:13px;line-height:1.6}
 #guide .wg-command-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 #guide .wg-command-token{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
-#guide .wg-platform-label{display:inline-block;border:1px solid currentColor;padding:1px 7px;font-size:12px;line-height:1.5}
-#guide .wg-platform-label.wg-elyn{color:var(--cyan,var(--paper));background:var(--wg-ink)}
+#guide .wg-platform-label{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:42px;box-sizing:border-box;border:1px solid currentColor;padding:1px 7px;background:var(--wg-ink);font:600 12px/1.5 var(--font-label)}
+#guide .wg-platform-label.wg-elyn{color:var(--cyan,var(--paper))}
 #guide .wg-platform-label.wg-nody{color:var(--red)}
 #guide .wg-command-token code{font-size:16px;white-space:nowrap;color:var(--wg-ink)}
 #guide .wg-command-token .wg-copy-control{margin:0}
@@ -54,7 +52,9 @@
 #guide .wg-content,#guide .wg-item{width:100%;min-width:0;box-sizing:border-box}
 #guide .wg-entry-head{margin:0 0 22px}
 #guide .wg-entry-head h3{display:flex;gap:10px;align-items:center;margin:0;font-size:24px;line-height:1.45}
-#guide .wg-recommended{display:inline-block;flex:none;margin-left:7px;font-size:10px;line-height:1.5;padding:2px 7px;border:1px solid var(--red);color:var(--red);vertical-align:middle}
+#guide .wg-recommended{display:inline-block;flex:none;margin-inline:4px;font:600 10px/1.5 var(--font-label);padding:2px 7px;border:1px solid var(--red);color:var(--red);vertical-align:middle}
+#guide .wg-inline-recommendation{display:flex;align-items:baseline;gap:10px}
+#guide .wg-inline-recommendation .wg-recommended{margin-inline:0}
 #guide .wg-local-tabs{position:relative;z-index:1;display:flex;gap:6px;margin:0 0 -1px;padding-left:12px;box-sizing:border-box}
 #guide .wg-local-tabs button{position:relative;min-width:76px;padding:8px 17px;border:1px solid var(--wg-line);border-radius:5px 5px 0 0;background:var(--paper);font-weight:600}
 #guide .wg-local-tabs button[aria-selected=true]{border-color:var(--wg-ink);border-bottom-color:var(--paper);color:var(--red);z-index:2}
@@ -73,7 +73,7 @@
 #guide .wg-preface{min-width:0}
 #guide .wg-summary-pieces{display:grid;gap:22px}
 #guide .wg-short-pieces{grid-template-columns:repeat(3,minmax(0,1fr))}
-#guide .wg-code{font:14px/1.75 Consolas,monospace;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
+#guide .wg-code{font:14px/1.75 var(--font-mono);white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
 #guide .wg-code code{font:inherit}
 #guide .wg-resource-link{color:inherit;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
 #guide .wg-copy-row{display:flex;gap:12px;align-items:center;margin-top:26px;padding-top:18px;border-top:1px solid var(--wg-line);background:transparent;color:inherit}
@@ -108,18 +108,27 @@
 #guide .wg-model-caution{border-left:2px solid var(--red);padding-left:10px}
 #guide .wg-model-support{display:grid;gap:28px}
 #guide .wg-model-support-section{border-top:1px solid var(--wg-line);padding-top:20px}
-#guide .wg-support-units{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding-left:16px}
-#guide .wg-support-unit{min-width:0}
+#guide .wg-support-units{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+#guide .wg-support-unit{min-width:0;padding:16px 0;border-bottom:1px solid var(--wg-line)}
 #guide .wg-support-unit h5{margin:0 0 10px;font-size:17px}
+#guide .wg-support-definition{display:grid;grid-template-columns:112px minmax(0,1fr);gap:18px;align-items:baseline}
+#guide .wg-support-label{font-family:var(--font-label);line-height:1.8}
+#guide .wg-support-value,#guide .wg-support-statement{font-size:16px;line-height:2;word-break:keep-all;overflow-wrap:anywhere}
+#guide .wg-model-highlight{background:var(--brass);color:var(--ink);padding:1px 4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#guide .wg-model-separator{white-space:pre-wrap}
+#guide .wg-support-unit .wg-note{margin:8px 0 0;padding-left:130px}
+#guide .ww-guide :is(h3,h4,h5,button,.wg-inline-label,.wg-model-setting>span){font-family:var(--font-label)}
+#guide .ww-guide code{font-family:var(--font-mono)}
 @media(min-width:1200px){#guide .wg-model-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media(max-width:1100px){#guide.ww-guide-ready{width:calc(100% - 48px);padding:26px}#guide .wg-model-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#guide .wg-support-units{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1100px){#guide.ww-guide-ready{width:calc(100% - 48px);padding:26px}#guide .wg-model-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:850px){#guide.ww-guide-ready{width:calc(100% - 32px);padding:20px}#guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#guide .wg-start-metrics .wg-value{font-size:clamp(18px,3.2vw,28px)}}
 @media(max-width:650px){#guide .wg-groups button{flex:none;font-size:14px;padding:9px 11px}#guide .wg-item-selector{gap:5px}#guide .wg-item-selector button{font-size:15px;padding:8px 10px}#guide .wg-local-platform>[data-wg-local-page]{padding:16px}#guide .wg-short-pieces,#guide .wg-support-units{grid-template-columns:minmax(0,1fr)}#guide .wg-play-list{columns:1}#guide .wg-progress-lines p{display:block}#guide .wg-progress-lines .wg-inline-label{display:block;margin-bottom:8px}#guide .wg-start-metrics{gap:12px}#guide .wg-start-metrics article{padding-right:10px}#guide .wg-start-metrics .wg-value{white-space:normal;font-size:20px}}
 @media(max-width:420px){#guide.ww-guide-ready{width:calc(100% - 24px);padding:16px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}#guide .wg-local-tabs{padding-left:8px}}
+@media(max-width:650px){#guide .wg-support-definition{grid-template-columns:minmax(0,1fr);gap:6px}#guide .wg-support-unit .wg-note{padding-left:0}}
 
 /* Hierarchy is category tabs, item buttons, then the selected body. */
 #guide .ww-guide>.wg-groups{order:0}#guide .ww-guide>#wg-item-selectors{order:1}#guide .ww-guide>.wg-content{order:2}
-#guide .section-head{color:var(--ink)}#guide .section-head :is(h2,.head-desc){color:var(--ink)}
+#guide .section-head{color:var(--paper)}#guide .section-head h2{color:var(--paper)}#guide .section-head .head-desc{color:var(--muted)}
 #guide .wg-item-selector button{background:var(--paper);border-color:var(--wg-line)}#guide .wg-item-selector button[aria-selected=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
 /* Selection changes colors only: no font, border, or intrinsic-width change. */

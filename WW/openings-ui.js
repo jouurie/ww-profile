@@ -2,7 +2,18 @@
 (function (global) {
   'use strict';
   var sceneImages = {"01":"https://cdn.imgchest.com/files/9b65036dea36.png","02":"https://cdn.imgchest.com/files/83c52183f6b5.png","03":"https://cdn.imgchest.com/files/15f834822cc5.png","04":"https://cdn.imgchest.com/files/1a2529d842f4.png","05":"https://cdn.imgchest.com/files/5b1541f2ad05.png","06":"https://cdn.imgchest.com/files/9d1a1aa8a1b4.png"};
-  var labels = ['납치 직후', '검문소 앞', '납치 후 며칠', '모텔에서의 밤', '납치 후 몇 주', '자율 도입부'];
+  var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자율 도입부'];
+
+  function openingParts(source, index) {
+    var text = String(source).replace(/^[⑴⑵⑶⑷⑸⑹]\s*/u, '');
+    var warning = text.match(/^🔞\s*/u);
+    if (warning) text = text.slice(warning[0].length);
+    var prefix = text.match(/^(납치 직후|납치 후 [^,:，：\n]+|자율 도입부)\s*[,，:：]\s*/u);
+    return {
+      title: (prefix ? prefix[1] : labels[index]) + (warning ? ' 🔞' : ''),
+      body: prefix ? text.slice(prefix[0].length) : text
+    };
+  }
 
   function element(tag, className, text) {
     var node = document.createElement(tag);
@@ -52,6 +63,7 @@
     var grid = element('div', 'ww-openings-grid');
     grid.id = 'opening-list';
     data.openings.forEach(function (source, index) {
+      var parts = openingParts(source, index);
       var number = String(index + 1).padStart(2, '0');
       var card = element('article', 'ww-opening-card');
       card.dataset.opening = number;
@@ -59,7 +71,7 @@
       var header = element('header', 'ww-opening-card-head');
       var count = element('span', 'ww-opening-number', number);
       count.setAttribute('aria-hidden', 'true');
-      var name = element('h3', '', labels[index]);
+      var name = element('h3', '', parts.title);
       name.id = 'ww-opening-title-' + number;
       card.setAttribute('aria-labelledby', name.id);
       header.append(count, name);
@@ -73,7 +85,7 @@
       image.width = 960;
       image.height = 640;
       photo.append(image);
-      var body = prose('ww-openings-prose ww-opening-body', String(source).replace(/^[⑴⑵⑶⑷⑸⑹]\s*/u, ''));
+      var body = prose('ww-openings-prose ww-opening-body', parts.body);
       body.dataset.openingSource = number;
       card.append(header, photo, body);
       grid.append(card);

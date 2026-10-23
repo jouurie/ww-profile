@@ -9,8 +9,8 @@
   let copyIndex=0;
   const esc=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const clean=value=>String(value).replace(/^\s*#{1,6}\s*/gm,'').replace(/\u{1f517}\s*/gu,'').replace(/\u2b50\s*/g,'');
-  const links=value=>esc(clean(value)).replace(/https:\/\/[^\s<>]+/g,url=>'<a class="wg-resource-link" href="'+url+'" target="_blank" rel="noreferrer">'+url+'</a>');
-  const badge=item=>item.recommended?'<span class="wg-recommended">추천</span>':'';
+  const links=value=>clean(value).split(/(https?:\/\/[^\s<>]+)/g).map(part=>/^https?:\/\//.test(part)?'<a class="wg-resource-link" href="'+esc(part)+'" target="_blank" rel="noreferrer">지침 보기 ↗</a>':esc(part)).join('');
+  const badge=item=>item.recommended?' <span class="wg-recommended">추천</span>':'';
   function body(raw){
     return raw.split('\n').filter(line=>line.trim()).map(line=>{
       const text=clean(line.replace(/^[·↳] /,''));
@@ -22,7 +22,7 @@
   function unit(raw){
     const rows=raw.split('\n'),first=rows[0].replace(/^· /,'');
     const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
-    if(pair&&clean(pair[1])==='추천')return '<p class="wg-inline-recommendation"><span class="wg-recommended">추천</span>'+links(pair[2])+'</p>'+body(rows.slice(1).join('\n'));
+    if(pair&&clean(pair[1])==='추천')return '<p class="wg-inline-recommendation"><span class="wg-recommended">추천</span> <span>'+links(pair[2])+'</span></p>'+body(rows.slice(1).join('\n'));
     if(pair&&!first.startsWith('https://'))return '<p class="wg-keyvalue"><strong class="wg-inline-label">'+esc(clean(pair[1]))+': </strong> <span class="wg-value">'+links(pair[2])+'</span></p>'+body(rows.slice(1).join('\n'));
     return body(raw);
   }
@@ -52,7 +52,14 @@
     const metrics='<section class="wg-item-setting"><h4>'+esc(common.heading)+'</h4><div class="wg-start-metrics">'+common.units.slice(0,3).map(raw=>'<article>'+unit(raw)+'</article>').join('')+'</div><div class="wg-start-plan">'+body(common.units.slice(3).join(''))+'</div></section>';
     const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+esc(card.name)+'</h4>'+(card.recommended?'<span class="wg-recommended">추천</span>':'')+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
     const support=item.sections.slice(1).filter(part=>part.heading!=='모델별 특징 · 개별 추론');
-    return metrics+cards+'<div class="wg-model-support">'+support.map(part=>'<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><div class="wg-support-units">'+part.units.map(raw=>'<div class="wg-support-unit">'+unit(raw)+'</div>').join('')+'</div></section>').join('')+'</div>';
+    return metrics+cards+'<div class="wg-model-support">'+support.map(part=>'<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><div class="wg-support-units">'+part.units.map(raw=>'<div class="wg-support-unit">'+modelUnit(raw)+'</div>').join('')+'</div></section>').join('')+'</div>';
+  }
+  function modelUnit(raw){
+    const rows=raw.split('\n'),first=rows.shift().replace(/^· /,'');
+    const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
+    const emphasize=text=>links(text).split(/( ↔ | \/ | → )/).map(part=>/^( ↔ | \/ | → )$/.test(part)?'<span class="wg-model-separator">'+part+'</span>'+(part===' ↔ '?'<br>':'<wbr>'):'<mark class="wg-model-highlight">'+part+'</mark>').join('');
+    const main=pair?'<div class="wg-support-definition"><strong class="wg-support-label">'+esc(pair[1])+':</strong><div class="wg-support-value">'+emphasize(pair[2])+'</div></div>':'<p class="wg-support-statement">'+emphasize(first)+'</p>';
+    return main+body(rows.join('\n'));
   }
   function commandsBody(item){
     return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(command=>'<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+(command.pinball?'<small>엘린: 상태창 내장 게임 · 노디: 별도 핀볼 패널</small>':'')+'</div><div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code>'+copyControl(command.elyn)+'</div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code>'+copyControl(command.nody)+'</div></div></article>').join('')+'</div></section>').join('');
@@ -108,9 +115,7 @@
       const offset=item.text.indexOf('Use only supplied evidence.');
       return offset<0?pieces(item):body(item.text.slice(0,offset))+'<div class="wg-summary-prompt">'+body(item.text.slice(offset))+'</div>'+copyControl(item.text.slice(offset).trim());
     }
-    const rendered=pieces(item);
-    if(item.index===4||item.index===11)return rendered+(item.text.match(/https?:\/\/[^\s]+/g)||[]).map(url=>'<div class="wg-linked-source"><a class="wg-resource-link" href="'+esc(url)+'" target="_blank" rel="noreferrer">원문 보기 ↗</a>'+copyControl(url,'링크 복사')+'</div>').join('');
-    return rendered;
+    return pieces(item);
   }
   function entry(item){
     const platformOnly=['start','recovery'].some(id=>data.groups.find(group=>group.id===id).items.includes(item));
@@ -132,6 +137,7 @@
     mount.querySelectorAll('[data-category-badge]').forEach(label=>{
       const id=label.dataset.categoryBadge;
       label.textContent=platforms[id]?platforms[id].toUpperCase():'-';
+      label.title=platforms[id]?'선택 플랫폼: '+platforms[id].toUpperCase():'플랫폼 미선택';
     });
   }
   function revealSelections(){
@@ -149,8 +155,11 @@
     if(frame?.contentWindow)frame.contentWindow.postMessage({type:'ww-status-preview-measure',platform:statusPlatform},new URL(frame.src).origin);
   }
   function display(groupID,itemIndex){
-    const group=data.groups.find(group=>group.id===groupID)||data.groups[0];selected=group.id;
-    const next=group.items.find(item=>item.index===itemIndex)||group.items.find(item=>item.index===chosen[selected])||group.items[0];chosen[selected]=next.index;
+    const group=data.groups.find(group=>group.id===groupID)||data.groups[0];
+    const next=group.items.find(item=>item.index===itemIndex)||group.items.find(item=>item.index===chosen[group.id])||group.items[0];
+    if(selected!==group.id&&Object.hasOwn(platforms,selected))platforms[selected]=null;
+    if(selected==='commands'&&chosen.commands===10&&(group.id!=='commands'||next.index!==10))resetStatus();
+    selected=group.id;chosen[selected]=next.index;
     const platformCategory=selected==='start'||selected==='recovery';
     mount.querySelector('.wg-category-platforms').hidden=!platformCategory;
     mount.querySelector('#wg-control-panel').classList.toggle('wg-folder-panel',platformCategory);
@@ -185,7 +194,18 @@
     const itemRoute=location.hash.match(/^#guide-(\d+)$/);
     if(itemRoute){const item=data.items[Number(itemRoute[1])];if(item){const group=data.groups.find(group=>group.items.includes(item));display(group.id,item.index);}return;}
     const route=location.hash.match(/^#guide-(start|play|commands|recovery)(?:-(common|elyn|nody))?$/);
-    if(route){if(Object.hasOwn(platforms,route[1])&&['elyn','nody'].includes(route[2]))platforms[route[1]]=route[2];display(route[1]);}else if(location.hash==='#guide')display(selected);
+    if(route)display(route[1]);
+    else if(location.hash==='#guide')display(selected);
+    else resetPlatforms();
+  }
+  function resetStatus(){
+    statusPlatform=null;
+    mount.querySelectorAll('[data-wg-status-platform]').forEach((button,index)=>{button.setAttribute('aria-selected','false');button.tabIndex=index===0?0:-1;});
+    mount.querySelectorAll('[data-preview-platform],[data-status-notes-platform]').forEach(page=>page.hidden=true);
+    mount.querySelector('[data-status-neutral]').hidden=false;
+  }
+  function resetPlatforms(){
+    platforms.start=null;platforms.recovery=null;resetStatus();display(selected);
   }
   function selectStatus(platform){
     keepPosition(()=>{

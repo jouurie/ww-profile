@@ -16,7 +16,7 @@ window.WWRender = (() => {
   const linkify = (s) =>
     escapeHTML(s).replace(
       /https:\/\/[^\s<>]+/g,
-      (u) => `<a href="${u}" target="_blank" rel="noreferrer">${u}</a>`
+      (u) => `<a href="${u}" target="_blank" rel="noreferrer">링크 ↗</a>`
     );
 
   function getLabelTone(label) {

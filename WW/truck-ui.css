@@ -36,6 +36,14 @@
 .wwtruck .wwtruck-gallery-status { margin: 0; font-size: 14px; line-height: 1.5; }
 .wwtruck [hidden] { display: none !important; }
 .wwtruck button:focus-visible { outline: 2px solid var(--wwtruck-paper); outline-offset: 3px; }
+.wwtruck .wwtruck-sleep-diagram{position:relative;width:100%;height:100%;overflow:hidden;color:var(--wwtruck-ink);font-family:var(--font-label,var(--font-body))}
+.wwtruck .wwtruck-sleep-background{display:block;width:100%;height:100%;object-fit:cover}
+.wwtruck .wwtruck-sleep-slot{position:absolute;left:var(--slot-left);top:var(--slot-top);transform:translate(-50%,-50%);width:120px;height:36px;box-sizing:border-box;border:1px solid var(--wwtruck-ink);display:flex;align-items:center;justify-content:center;background:var(--wwtruck-paper);color:var(--wwtruck-ink);font-size:18px;line-height:1.4;white-space:nowrap}
+.wwtruck .wwtruck-sleep-slot.is-outside{border:2px dashed var(--status-red,var(--wwtruck-red));background:var(--wwtruck-ink);color:var(--wwtruck-paper)}
+.wwtruck .wwtruck-sleep-slot.is-alternative{border-color:var(--brass);background:var(--wwtruck-ink);color:var(--wwtruck-paper)}
+.wwtruck .wwtruck-sleep-diagram.is-thumbnail{height:72px;aspect-ratio:3/2;pointer-events:none}
+.wwtruck .is-thumbnail .wwtruck-sleep-slot{width:28px;height:10px;font-size:6px;border-width:1px}
+@media(max-width:600px){.wwtruck .wwtruck-sleep-slot{width:72px;height:24px;font-size:12px}.wwtruck .is-thumbnail .wwtruck-sleep-slot{width:28px;height:10px;font-size:6px}}
 @media (max-width: 900px) {
   .wwtruck .wwtruck-gallery-stage { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .wwtruck .wwtruck-caption h3 { font-size: 21px; margin-bottom: 10px; }
