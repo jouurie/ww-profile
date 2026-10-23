@@ -43,7 +43,7 @@
 .ww-hscroll-shell:not(.ww-hscroll-active)>[data-ww-hscroll-rail] { grid-column: 1; }
 .ww-site-header>.ww-hscroll-shell { flex-shrink: 0; padding-inline: max(24px,calc((100% - 1240px)/2)); }
 .ww-site-header>.ww-hscroll-shell>.chapter-nav { position: relative; top: auto; z-index: 30; display: flex; align-items: stretch; justify-content: flex-start; gap: 4px; height: 48px; min-height: 48px; padding: 0; background: var(--header-panel); border-bottom: 1px solid var(--brass); overflow-x: auto; scrollbar-width: none; white-space: nowrap; }
-.ww-site-header>.ww-hscroll-shell>.chapter-nav a { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; margin: 0; padding: 0 12px; font: 700 13.5px/1.5 var(--font-label); white-space: nowrap; color: var(--muted); text-decoration: none; border: 0; border-bottom: 3px solid transparent; background: transparent; }
+.ww-site-header>.ww-hscroll-shell>.chapter-nav a { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; margin: 0; padding: 0 12px; font: var(--ww-header-type); white-space: nowrap; color: var(--muted); text-decoration: none; border: 0; border-bottom: 3px solid transparent; background: transparent; }
 .ww-site-header>.ww-hscroll-shell>.chapter-nav a small { font: 400 10px/1.5 var(--font-label); color: var(--brass); }
 .ww-site-header>.ww-hscroll-shell>.chapter-nav a[aria-current=page] { background: var(--stamp-red); color: var(--paper); border-bottom-color: var(--paper); }
 .ww-site-header>.ww-hscroll-shell>.chapter-nav a[aria-current=page] small { color: var(--paper); }
