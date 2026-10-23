@@ -94,7 +94,7 @@
     return {sdk,create};
   })();
 
-  let host=null,slot=null,listener=null,widget=null,connecting=null;
+  let host=null,slot=null,mediaRoot=null,listener=null,widget=null,connecting=null;
   let generation=0,request=0,loadedIndex=-1,wantsPlay=false,pendingSeek=null,loadTimer=null;
   let state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false};
   let lastVolume=70;
@@ -142,8 +142,17 @@
   }
   function init(element,onState){
     destroy();
-    host=typeof element==='string'?document.getElementById(element):element;
-    if(!host||typeof host.append!=='function')throw TypeError('재생기를 담을 요소가 필요합니다.');
+    const controlHost=typeof element==='string'?document.getElementById(element):element;
+    if(!controlHost||typeof controlHost.append!=='function')throw TypeError('재생기를 담을 요소가 필요합니다.');
+    // Route panels may become display:none. Keep one media node in the shared
+    // header instead; changing sections never moves or reloads its iframe.
+    mediaRoot=document.createElement('div');
+    mediaRoot.className='ww-radio-media-host';
+    mediaRoot.setAttribute('aria-hidden','true');
+    mediaRoot.style.cssText='position:fixed;left:-240px;top:0;width:200px;height:200px;display:block;pointer-events:none;';
+    const header=document.querySelector('body > .ww-site-header,body > header.masthead');
+    (header&&!header.closest('.panel,[hidden]')?header:document.body).append(mediaRoot);
+    host=mediaRoot;
     listener=typeof onState==='function'?onState:null;
     state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false};
     lastVolume=state.volume;
@@ -176,7 +185,7 @@
     generation++;request++;clearTimeout(loadTimer);loadTimer=null;connecting=null;wantsPlay=false;pendingSeek=null;loadedIndex=-1;
     const current=widget;widget=null;
     try{current?.pause();}catch{}try{current?.destroy();}catch{}
-    slot?.remove();slot=null;host=null;state.ready=false;state.playing=false;state.current=0;state.duration=0;state.error=null;
+    slot?.remove();slot=null;mediaRoot?.remove();mediaRoot=null;host=null;state.ready=false;state.playing=false;state.current=0;state.duration=0;state.error=null;
     const value=publish();listener=null;return value;
   }
   window.WWRadioEngine=Object.freeze({init,select,play,pause,toggle,prev,next,seek,volume,mute,destroy,get state(){return snapshot();}});
