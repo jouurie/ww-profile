@@ -69,7 +69,8 @@ window.WWRender = (() => {
   }
 
   function renderBasicProfile(rawText) {
-    return renderStructuredText(rawText,true).replace(/(와이어트 로즈|웨이드 로즈) (\([^<]+\))/g, '$1 <span class="kv-entity-english">$2</span>');
+    const text=String(rawText||'').replace(/(^|\n)(▸\s*)와이어트 로즈 \(Wyatt Rhodes\)/g,'$1$2와이어트 로즈').replace(/(^|\n)(▸\s*)웨이드 로즈 \(Wade Rhodes\)/g,'$1$2웨이드 로즈');
+    return renderStructuredText(text,true);
   }
 
   function makeDetails(items, prefix) {
@@ -168,7 +169,7 @@ window.WWRender = (() => {
     put('intro-story-grid','<div class="intro-whole-body">'+introLines.map(text=>`<p>${linkify(text).replace(/\n/g,'<br>')}</p>`).join('')+'</div>');
     const sourceLine=$('#intro-source-line');if(sourceLine)sourceLine.textContent=WW.intro.split('\n')[0];
     const tw=$('#intro-tw-text');if(tw)tw.textContent=WW.warning;
-    const dossiers=[['wyatt','WYATT','와이어트 로즈','형'],['wade','WADE','웨이드 로즈','동생']].map(([tone,english,name,role])=>`<article class="brother-dossier ${tone}"><div class="portrait large" aria-label="${name} 이미지 자리">${english}</div><div class="bd-head"><small>${role}</small><h3>${name}</h3><div class="bd-spec-table"><div><span>AGE</span>25세</div><div><span>HEIGHT</span>174cm</div></div><ul class="ww-profile-traits">${(window.WWProfileTraits?.[tone]||[]).map(tag=>`<li>${escapeHTML(tag)}</li>`).join('')}</ul></div></article>`).join('');
+    const dossiers=[['wyatt','WYATT','와이어트 로즈','형'],['wade','WADE','웨이드 로즈','동생']].map(([tone,english,name,role])=>`<article class="brother-dossier ${tone}"><div class="portrait large" aria-label="${name} 이미지 자리">${english}</div><div class="bd-head"><small>${role}</small><h3>${name}</h3><span class="bd-name-en">${tone==='wyatt'?'Wyatt Rhodes':'Wade Rhodes'}</span><div class="bd-spec-table"><div><span>AGE</span>25세</div><div><span>HEIGHT</span>174cm</div></div><ul class="ww-profile-traits">${(window.WWProfileTraits?.[tone]||[]).map(tag=>`<li>${escapeHTML(tag)}</li>`).join('')}</ul></div></article>`).join('');
     put('brothers-mosaic',`<div class="mosaic-row-2">${dossiers}</div><article class="paper-piece profile-sheet">`+WW.profile.map((item,i)=>`<section class="profile-section" id="profile-${i}"><h3 class="piece-title">${heading(item)}</h3><div class="prose" data-raw="${escapeHTML(item.text)}">${i===0?renderBasicProfile(item.text):renderStructuredText(item.text,true)}</div></section>`).join('')+'</article>');
     const beast=(WW.supplement||[]).find(item=>item.title==='더 비스트');
     if(beast){const parts=[...beast.text.matchAll(/▸ ([^\n]+)\n([\s\S]*?)(?=\n▸ |$)/g)].map(match=>({title:match[1],text:match[2].trim()}));put('truck-three-zones',parts.filter(item=>['앞좌석','커튼 뒤 슬리퍼 캡','장부와 영수증'].includes(item.title)).map(item=>card(item)).join(''));}

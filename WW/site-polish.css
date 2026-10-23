@@ -184,3 +184,21 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
  #intro .twin-polaroid .tp-name{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin:0}
  #intro .twin-polaroid .tp-summary{grid-column:1/-1;grid-row:2;margin:0}
 }
+
+/* Independent, fixed-footprint overview cards reveal their own line on the back. */
+#intro .twin-polaroid.ww-intro-flip{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:0;width:100%;text-align:left;font:inherit;perspective:900px;isolation:isolate}
+#intro .twin-polaroid.ww-intro-flip:hover{transform:none}
+#intro .ww-intro-flip .tp-card-front{display:grid;grid-template-columns:96px minmax(0,1fr);gap:18px;align-items:center;min-width:0;backface-visibility:hidden;transform:rotateY(0deg);transition:transform .48s cubic-bezier(.22,.7,.2,1)}
+#intro .ww-intro-flip .tp-summary{font-size:13.5px;line-height:1.5;color:var(--paper)}
+#intro .ww-intro-flip .tp-card-back{position:absolute;inset:0;display:grid;place-items:center;min-width:0;padding:16px;box-sizing:border-box;background:var(--tar);color:var(--paper);backface-visibility:hidden;transform:rotateY(-180deg);transition:transform .48s cubic-bezier(.22,.7,.2,1);pointer-events:none}
+#intro .ww-intro-flip .tp-card-quote{display:block;width:100%;max-width:28ch;font:500 14px/1.7 var(--font-body);word-break:keep-all;overflow-wrap:anywhere;text-align:left}
+#intro .ww-intro-flip[aria-pressed=true] .tp-card-front{transform:rotateY(180deg);pointer-events:none}
+#intro .ww-intro-flip[aria-pressed=true] .tp-card-back{transform:rotateY(0deg);pointer-events:auto}
+@media(max-width:720px){#intro .ww-intro-flip .tp-card-front{grid-template-columns:64px minmax(0,1fr);gap:10px}}
+@media(prefers-reduced-motion:reduce){#intro .ww-intro-flip :is(.tp-card-front,.tp-card-back){transition:none}}
+
+/* The small English line uses the previous heading-to-spec gap, preserving card height. */
+#brothers .brother-dossier .bd-name-en{display:block;margin:0;font-family:YUniverse,sans-serif;font-size:12px;font-weight:300!important;line-height:12px;color:var(--muted);font-synthesis:none;white-space:nowrap}
+#brothers .brother-dossier .bd-spec-table{margin-top:0}
+
+@media(max-width:360px){#brothers .brother-dossier .bd-head h3{font-size:20px;letter-spacing:0}}
