@@ -101,3 +101,8 @@ main .prose .kv-line>.sq-sub:is(.wyatt,.wade){display:inline;justify-content:ini
 
 /* Cyan body labels retain their hue while contrasting with the light paper. */
 main .prose .kv-line>.sq-sub.wyatt{color:#19c5d8}
+
+/* Two readable opening columns within the approved 770px reading width. */
+#openings .ww-openings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#openings .ww-opening-card-head{min-height:66px}
+@media(max-width:620px){#openings .ww-openings-grid{grid-template-columns:minmax(0,1fr)}#openings .ww-opening-card-head{min-height:56px}}

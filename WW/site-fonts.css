@@ -38,3 +38,5 @@ body :is(strong,b,.kw-chip,.tc-title,.wg-model-highlight):not(.brand-mark *,.pos
 body :is(.kw-chip,.sq-label,.mono-code,.ww-npc-english,.ww-npc-edition,.ww-npc-heading,.ww-radio-time,.ww-radio-volume-value,.ww-radio-track-count,.ww-radio-track-number,.tp-name strong,.portrait,.portrait span,.portrait small){font-family:var(--font-body)!important}
 body .kw-chip{font-size:14px;line-height:1.5}
 body :is(.tp-name strong,.portrait span){letter-spacing:0}
+
+#radio .cassette-label-strip strong{font-family:var(--font-body)!important;font-size:13px;font-weight:500;line-height:1.6;letter-spacing:0}
