@@ -65,3 +65,48 @@
 #radio[hidden] .tape-reel i,#radio.radio-motion-paused .tape-reel i{animation-play-state:paused}
 @keyframes ww-radio-reel-turn{to{transform:rotate(1turn)}}
 @media(prefers-reduced-motion:reduce){#radio .tape-reel i{animation:none!important;transform:none!important}}
+
+/* Keep full song names on one line; duplicate only when measured text overflows. */
+#radio :is(#radio-current-title,.tc-title){font-weight:500;text-overflow:clip;white-space:nowrap;line-height:1.5}
+#radio #radio-current-title{font-size:17px}
+#radio .tc-title{font-size:13px}
+#radio .radio-title-runner{display:block;min-width:0;max-width:100%;overflow:hidden}
+#radio .radio-title-track{display:inline-flex;align-items:baseline;gap:24px;width:max-content;max-width:none;white-space:nowrap;vertical-align:top}
+#radio .radio-title-track>span{display:block;flex:none;white-space:nowrap}
+#radio .radio-title-copy{display:none!important}
+#radio .radio-title-runner.has-overflow .radio-title-copy{display:block!important}
+#radio .radio-title-runner.has-overflow .radio-title-track{will-change:transform}
+#radio .radio-title-runner:focus-visible .radio-title-track,
+#radio .track-card:focus-visible .radio-title-track,
+#radio .radio-title-runner.is-offscreen .radio-title-track,
+#radio.radio-titles-paused .radio-title-track{animation-play-state:paused}
+@keyframes ww-radio-title-flow{to{transform:translateX(var(--radio-title-distance,0px))}}
+#radio .deck-top-strip .deck-model{white-space:nowrap;overflow-wrap:normal;font-size:10px;letter-spacing:.03em}
+#radio .vfd-meta{gap:8px;white-space:nowrap;font-size:10px;letter-spacing:0}
+#radio .cassette-label-strip{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;line-height:1.4}
+#radio .cassette-label-strip>span{grid-column:1;grid-row:1;white-space:nowrap}
+#radio .cassette-label-strip>strong{grid-column:1/-1;grid-row:2;white-space:nowrap}
+#radio .cassette-label-strip a{grid-column:2;grid-row:1;white-space:nowrap;flex:none}
+@media(max-width:650px){
+ #radio .radio-deck-piece{padding:16px;gap:12px}
+ #radio .deck-top-strip{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;font-size:9px;line-height:1.4;letter-spacing:.06em}
+ #radio .deck-top-strip .deck-model{grid-column:1;grid-row:1;font-size:9px}
+ #radio .deck-status-badge{grid-column:1;grid-row:2;justify-self:end;flex-basis:auto;width:18ch;min-width:18ch;font-size:9px;letter-spacing:.06em}
+ #radio .deck-vfd-screen{padding:12px}
+ #radio #radio-current-title{font-size:16px}
+ #radio .cassette-window{padding:10px}
+ #radio .cassette-label-strip{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;padding:6px 8px;font-size:9px;line-height:1.4}
+ #radio .cassette-label-strip>span{grid-column:1;grid-row:1;white-space:nowrap}
+ #radio .cassette-label-strip>a{grid-column:2;grid-row:1;font-size:10px}
+ #radio .cassette-label-strip>strong{grid-column:1/-1;grid-row:2;white-space:nowrap;font-size:11px;letter-spacing:.02em}
+ #radio .radio-controls-inline .t-btn{flex-basis:32px;width:32px;min-width:32px;height:36px;min-height:36px}
+ #radio .radio-controls-inline .t-btn>svg{width:18px;height:18px}
+ #radio .radio-controls-inline .volume-module{flex:1 1 0;max-width:none;min-width:0;padding:0 2px}
+ #radio .radio-controls-inline .vol-num{font-size:9px;flex-basis:3.5ch;width:3.5ch}
+ #radio .radio-controls-inline .vol-slider{min-width:12px}
+ #radio .track-card{gap:8px;padding:10px}
+ #radio .tc-num{min-width:20px;font-size:11px}
+ #radio .tc-badge{font-size:9px;width:8ch;min-width:8ch;padding-inline:4px}
+ #radio .memo-item p{font-size:13px;line-height:1.7}
+}
+/* Song-name flow is explicitly requested for readability, including reduced-motion mode. */

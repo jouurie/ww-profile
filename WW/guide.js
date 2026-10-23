@@ -116,7 +116,7 @@
   }
   function statusPreview(){
     const tabs=['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" id="wg-status-tab-'+platform+'" aria-controls="wg-status-preview-'+platform+'" data-wg-status-platform="'+platform+'" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('');
-    return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="'+platform.toUpperCase()+' 상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=ui17',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
+    return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="'+platform.toUpperCase()+' 상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=ui19',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
   }
   function itemBody(item){
     if(item.index===0){
@@ -145,23 +145,15 @@
     return '<section class="wg-item" id="'+item.id+'" data-source-index="'+item.index+'" hidden><header class="wg-entry-head"><h3>'+esc(clean(item.title))+badge(item)+'</h3></header>'+(platformOnly?'<div data-category-platform="elyn">'+html+'</div><div data-category-platform="nody" hidden><p class="wg-preparing">준비 중</p></div>':html)+'</section>';
   }
   const mount=document.createElement('div');mount.className='ww-guide';mount.id='ww-guide-module';
-  const categoryTabs=groups.map(group=>'<button type="button" role="tab" id="wg-tab-'+group.id+'" aria-controls="wg-control-panel" data-wg-group="'+group.id+'"><span>'+group.title+'</span>'+(['start','recovery'].includes(group.id)?'<span class="wg-category-platform-badge" data-category-badge="'+group.id+'">-</span>':'')+'</button>').join('');
   const platformTabs='<div class="wg-platform-slot"><nav class="wg-category-platforms wg-local-tabs" role="tablist" aria-label="설정 플랫폼">'+['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" data-wg-category-platform="'+platform+'" aria-controls="wg-control-panel" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('')+'</nav></div>';
-  const selectors=groups.map(group=>'<div class="wg-item-selector" id="wg-selector-'+group.id+'" data-wg-selector="'+group.id+'" role="tablist" aria-label="'+esc(group.title)+' 항목" hidden>'+group.items.map(item=>'<button type="button" role="tab" id="wg-item-tab-'+item.index+'" aria-controls="'+item.id+'" data-wg-item="'+item.index+'">'+esc(clean(item.title))+badge(item)+'</button>').join('')+'</div>').join('');
-  mount.innerHTML='<nav class="wg-groups" role="tablist" aria-label="가이드 구분">'+categoryTabs+'</nav>'+platformTabs+'<div class="wg-control-panel" id="wg-control-panel">'+selectors+'<div class="wg-content" id="wg-content"><div class="wg-neutral-platform" data-category-neutral hidden><h3>플랫폼 미선택</h3><p>엘린 또는 노디를 선택하세요.</p></div>'+data.items.map(entry).join('')+'</div></div>';
+  const directory=groups.map(group=>'<section class="wg-directory-group"><h3 class="wg-directory-heading" id="wg-directory-'+group.id+'">'+esc(group.title)+'</h3><div class="wg-item-selector" id="wg-selector-'+group.id+'" data-wg-selector="'+group.id+'" role="tablist" aria-labelledby="wg-directory-'+group.id+'">'+group.items.map(item=>'<button type="button" role="tab" id="wg-item-tab-'+item.index+'" aria-controls="'+item.id+'" data-wg-item="'+item.index+'" data-item-group="'+group.id+'">'+(item.index===11?'<span>상태창 · 대사<span class="wg-directory-wrap"> 복원 지침</span></span>':esc(clean(item.title)))+badge(item)+'</button>').join('')+'</div></section>').join('');
+  mount.innerHTML='<nav class="wg-directory" aria-label="가이드 전체 항목">'+directory+'</nav><div class="wg-control-panel" id="wg-control-panel"><div class="wg-content" id="wg-content">'+data.items.map(entry).join('')+'</div></div>'+platformTabs;
   root.querySelectorAll('.guide-layout,#guide-index,#guide-details,#guide-mosaic,#guide-info,#ww-guide-module').forEach(element=>element.remove());
   root.append(mount);root.classList.add('ww-guide-ready');
   const description=root.querySelector('.head-desc')||root.querySelector('.section-head>p:last-child');
   if(description&&!description.classList.contains('eyebrow'))description.textContent='진행 안내와 설정을 확인하세요.';
   let selected='play',statusPlatform=null;
   const chosen={start:5,play:0,commands:9,recovery:4},platforms={start:null,recovery:null};
-  function updateBadges(){
-    mount.querySelectorAll('[data-category-badge]').forEach(label=>{
-      const id=label.dataset.categoryBadge;
-      label.textContent=platforms[id]?platforms[id].toUpperCase():'-';
-      label.title=platforms[id]?'선택 플랫폼: '+platforms[id].toUpperCase():'플랫폼 미선택';
-    });
-  }
   function revealSelections(){
     mount.querySelectorAll('.wg-groups,.wg-item-selector').forEach(bar=>{
       if(!bar.clientWidth||bar.scrollWidth<=bar.clientWidth+1)return;
@@ -183,20 +175,18 @@
     if(selected==='commands'&&chosen.commands===10&&(group.id!=='commands'||next.index!==10))resetStatus();
     selected=group.id;chosen[selected]=next.index;
     const platformCategory=selected==='start'||selected==='recovery';
+    const platformSlot=mount.querySelector('.wg-platform-slot');
+    const activePanel=mount.querySelector('.wg-item[data-source-index="'+next.index+'"]');
+    activePanel.querySelector('.wg-entry-head').append(platformSlot);
     mount.querySelector('.wg-category-platforms').hidden=!platformCategory;
-    mount.querySelector('#wg-control-panel').classList.toggle('wg-folder-panel',platformCategory);
-    const neutral=platformCategory&&!platforms[selected];
-    mount.querySelector('#wg-control-panel').hidden=neutral;
-    mount.querySelector('[data-category-neutral]').hidden=true;
+    mount.querySelector('#wg-control-panel').hidden=false;
     mount.querySelectorAll('[data-wg-category-platform]').forEach((button,index)=>{const active=button.dataset.wgCategoryPlatform===platforms[selected];button.setAttribute('aria-selected',String(active));button.tabIndex=active||(!platforms[selected]&&index===0)?0:-1;});
-    mount.querySelectorAll('[data-wg-group]').forEach(button=>{const active=button.dataset.wgGroup===selected;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
-    mount.querySelectorAll('[data-wg-selector]').forEach(selector=>selector.hidden=neutral||selector.dataset.wgSelector!==selected);
-    mount.querySelectorAll('[data-wg-item]').forEach(button=>{const active=Number(button.dataset.wgItem)===next.index;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+    mount.querySelectorAll('[data-wg-item]').forEach(button=>{const active=Number(button.dataset.wgItem)===next.index;button.setAttribute('aria-selected',String(active));button.tabIndex=active||(button.dataset.itemGroup!==selected&&button===button.parentElement.firstElementChild)?0:-1;});
     mount.querySelectorAll('.wg-item').forEach(panel=>{
-      panel.hidden=neutral||Number(panel.dataset.sourceIndex)!==next.index;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','wg-item-tab-'+panel.dataset.sourceIndex);
+      panel.hidden=Number(panel.dataset.sourceIndex)!==next.index;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','wg-item-tab-'+panel.dataset.sourceIndex);
       if(!panel.hidden&&platformCategory)panel.querySelectorAll('[data-category-platform]').forEach(page=>page.hidden=page.dataset.categoryPlatform!==platforms[selected]);
     });
-    updateBadges();revealSelections();if(next.index===10)requestPreviewSize();
+    revealSelections();if(next.index===10)requestPreviewSize();
   }
   function keepPosition(action){
     const x=window.scrollX,y=window.scrollY,host=mount.querySelector('#wg-control-panel');
@@ -237,11 +227,11 @@
       mount.querySelectorAll('[data-preview-platform]').forEach(page=>page.hidden=page.dataset.previewPlatform!==platform);
       mount.querySelector('[data-status-neutral]').hidden=true;
       mount.querySelectorAll('[data-status-notes-platform]').forEach(notes=>notes.hidden=notes.dataset.statusNotesPlatform!==platform);
-      updateBadges();requestPreviewSize();
+      requestPreviewSize();
     });
   }
   mount.querySelectorAll('[data-wg-group]').forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.wgGroup)));
-  mount.querySelectorAll('[data-wg-item]').forEach(button=>button.addEventListener('click',()=>navigate(selected,Number(button.dataset.wgItem))));
+  mount.querySelectorAll('[data-wg-item]').forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.itemGroup,Number(button.dataset.wgItem))));
   mount.querySelectorAll('[data-wg-category-platform]').forEach(button=>button.addEventListener('click',()=>keepPosition(()=>{platforms[selected]=button.dataset.wgCategoryPlatform;display(selected);})));
   mount.querySelectorAll('[data-wg-status-platform]').forEach(button=>button.addEventListener('click',()=>selectStatus(button.dataset.wgStatusPlatform)));
   function keyboardTabs(bar,selector,activate){
@@ -252,8 +242,7 @@
       buttons[next].focus({preventScroll:true});activate(buttons[next]);
     });
   }
-  keyboardTabs(mount.querySelector('.wg-groups'),'[data-wg-group]',button=>navigate(button.dataset.wgGroup));
-  mount.querySelectorAll('.wg-item-selector').forEach(bar=>keyboardTabs(bar,'[data-wg-item]',button=>navigate(selected,Number(button.dataset.wgItem))));
+  mount.querySelectorAll('.wg-item-selector').forEach(bar=>keyboardTabs(bar,'[data-wg-item]',button=>navigate(button.dataset.itemGroup,Number(button.dataset.wgItem))));
   keyboardTabs(mount.querySelector('.wg-category-platforms'),'[data-wg-category-platform]',button=>keepPosition(()=>{platforms[selected]=button.dataset.wgCategoryPlatform;display(selected);}));
   mount.querySelectorAll('.wg-status-preview .wg-local-tabs').forEach(bar=>keyboardTabs(bar,'[data-wg-status-platform]',button=>selectStatus(button.dataset.wgStatusPlatform)));
   mount.querySelectorAll('[data-copy-block]').forEach(button=>button.addEventListener('click',async()=>{
