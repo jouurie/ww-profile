@@ -2596,7 +2596,7 @@ dialog .close-dialog {
 [hidden]{display:none!important}
 
 /* Intro is one continuous text, below the twin identities. */
-#intro .intro-bottom-bento{grid-template-columns:minmax(0,1fr);align-items:start}#intro .twin-mini-grid{grid-template-columns:minmax(0,1fr);gap:14px}#intro .twin-polaroid{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:18px}#intro .twin-polaroid .portrait.tiny{aspect-ratio:1;min-height:0;height:auto}#intro .intro-story-grid{display:block}#intro .intro-whole-body{padding:8px 0 0;font-size:16px;line-height:1.9;color:var(--ink,#171713)}#intro .intro-whole-body p{margin:0 0 1.2em}#intro .intro-whole-body p:last-child{margin-bottom:0}.tc-artist{display:none}
+#intro .intro-bottom-bento{grid-template-columns:minmax(0,1fr);align-items:start}#intro .twin-mini-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}#intro .twin-polaroid{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:18px}#intro .twin-polaroid .portrait.tiny{aspect-ratio:1;min-height:0;height:auto}#intro .intro-story-grid{display:block}#intro .intro-whole-body{padding:8px 0 0;font-size:16px;line-height:1.9;color:var(--ink,#171713)}#intro .intro-whole-body p{margin:0 0 1.2em}#intro .intro-whole-body p:last-child{margin-bottom:0}.tc-artist{display:none}
 
 #intro .key-tag{width:170px;aspect-ratio:0.7;height:auto;padding:0;border:0;background:transparent;box-shadow:none;clip-path:none}#intro .key-tag:before,#intro .key-tag:after{display:none}#intro .key-tag>img{display:block;width:100%;height:100%;aspect-ratio:0.7;object-fit:cover;filter:drop-shadow(3px 5px 4px #0007)}
 
@@ -2653,3 +2653,5 @@ body{min-height:100svh;display:flex;flex-direction:column}
 body>.masthead,body>.chapter-nav,body>footer{flex-shrink:0}
 body>main{flex:1 0 auto;width:100%;min-width:0}
 body>footer{margin-top:auto}
+
+@media(max-width:720px){#intro .twin-polaroid{grid-template-columns:minmax(0,1fr);align-items:start;gap:10px}#intro .twin-polaroid .tp-body{min-width:0;margin-top:0}#intro .twin-polaroid .tp-name{flex-wrap:wrap;gap:2px 8px}}
