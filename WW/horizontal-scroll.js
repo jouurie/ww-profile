@@ -23,16 +23,17 @@
     if (rail.closest(excluded)) return null;
     var originalId = rail.getAttribute('id'), originalTabindex = rail.getAttribute('tabindex');
     var originalDescription = rail.getAttribute('aria-describedby');
+    var selection = rail.getAttribute('data-horizontal-scroll') === 'select';
     var identity = ++serial, controls = document.createElement('div');
     controls.className = 'ww-hscroll-controls ww-hscroll-shell ww-rail-navigation';
     var left = document.createElement('button'), right = document.createElement('button');
     var label = options.label || rail.getAttribute('aria-label') || '목록';
     if (!rail.id) rail.id = 'ww-horizontal-rail-' + identity;
-    controls.setAttribute('role', 'group'); controls.setAttribute('aria-label', label + ' 가로 이동');
+    controls.setAttribute('role', 'group'); controls.setAttribute('aria-label', label + (selection ? ' 항목 선택' : ' 가로 이동'));
     [left, right].forEach(function (button, index) {
       button.type = 'button'; button.className = 'ww-hscroll-arrow ww-rail-arrow'; button.hidden = true;
       button.textContent = index ? '→' : '←';
-      button.setAttribute('aria-label', label + (index ? ' 오른쪽으로 이동' : ' 왼쪽으로 이동'));
+      button.setAttribute('aria-label', label + (selection ? (index ? ' 다음 항목' : ' 이전 항목') : (index ? ' 오른쪽으로 이동' : ' 왼쪽으로 이동')));
       button.setAttribute('aria-controls', rail.id);
     });
     var originalStyle = getComputedStyle(rail), originalRailMarker = rail.getAttribute('data-ww-hscroll-rail');
@@ -45,6 +46,15 @@
     rail.before(controls); controls.append(left, rail, right);
     var header = rail.closest('header'), active = false, frame = 0, destroyed = false;
     function max() { return Math.max(0, rail.scrollWidth - rail.clientWidth); }
+    function choices() { return Array.from(rail.children).filter(function (item) { return item.matches('button,[role=button],[role=tab]') && !item.disabled && !item.hidden; }); }
+    function choose(index) {
+      var items = choices(); if (!items.length) return;
+      var target = items[(index + items.length) % items.length];
+      target.click();
+      var position = target.getBoundingClientRect().left - rail.getBoundingClientRect().left + rail.scrollLeft - (rail.clientWidth - target.clientWidth) / 2;
+      rail.scrollTo({ left: Math.max(0, Math.min(max(), position)), behavior: reduced() ? 'instant' : 'smooth' });
+      schedule();
+    }
     function restoreAttribute(name, value) { if (value === null) rail.removeAttribute(name); else rail.setAttribute(name, value); }
     function refresh() {
       frame = 0;
@@ -52,7 +62,7 @@
       var style = getComputedStyle(rail);
       var shellStyle = getComputedStyle(controls);
       var available = controls.clientWidth - (parseFloat(shellStyle.paddingLeft) || 0) - (parseFloat(shellStyle.paddingRight) || 0);
-      var next = visible(rail) && /^(auto|scroll)$/.test(style.overflowX) && rail.clientWidth > 0 && max() > 2 && rail.scrollWidth > available + 2;
+      var next = visible(rail) && rail.clientWidth > 0 && (selection ? choices().length > 1 : /^(auto|scroll)$/.test(style.overflowX) && max() > 2 && rail.scrollWidth > available + 2);
       left.hidden = right.hidden = !next;
       controls.classList.toggle('ww-hscroll-active', next);
       if (active !== next) {
@@ -66,7 +76,7 @@
       }
       if (!next) return;
       var position = Math.max(0, rail.scrollLeft);
-      left.disabled = position <= 2; right.disabled = position >= max() - 2;
+      left.disabled = selection ? false : position <= 2; right.disabled = selection ? false : position >= max() - 2;
     }
     function schedule() { if (!frame) frame = setTimeout(refresh); }
     function destination(direction) {
@@ -80,14 +90,18 @@
       return target === undefined ? (direction > 0 ? max() : 0) : Math.max(0, Math.min(max(), target));
     }
     function move(direction) {
+      if (selection) {
+        var items = choices(), index = items.findIndex(function (item) { return item.matches('[aria-pressed="true"],[aria-selected="true"]'); });
+        choose((index < 0 ? 0 : index) + direction); return;
+      }
       rail.scrollTo({ left: destination(direction), behavior: reduced() ? 'instant' : 'smooth' });
       schedule();
     }
     function goLeft() { move(-1); } function goRight() { move(1); }
     function key(event) {
       if (event.target !== rail || !active || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); move(event.key === 'ArrowLeft' ? -1 : 1); }
-      else if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); rail.scrollLeft = event.key === 'Home' ? 0 : max(); schedule(); }
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); if (selection) event.stopPropagation(); move(event.key === 'ArrowLeft' ? -1 : 1); }
+      else if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); if (selection) { event.stopPropagation(); choose(event.key === 'Home' ? 0 : choices().length - 1); } else { rail.scrollLeft = event.key === 'Home' ? 0 : max(); schedule(); } }
     }
     left.addEventListener('click', goLeft); right.addEventListener('click', goRight);
     rail.addEventListener('scroll', schedule, { passive: true });

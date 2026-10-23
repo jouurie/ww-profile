@@ -32,7 +32,7 @@
   :is(a[href],button):not(.key-tag,.ww-start *):focus-visible img {
   filter: brightness(1.15);
 }
-/* All feedback here is static, including when reduced motion is requested. */
+/* Existing controls keep their geometry; tag feedback below respects reduced motion. */
 
 @media(hover:hover){
   main>.panel :is(a,button,summary):hover:not(:focus-visible){outline:none!important;box-shadow:none!important}
@@ -49,3 +49,8 @@
 .ww-html-tooltip{position:fixed;top:0;left:50%}
 
 body>.ww-html-tooltip.is-visible{opacity:1;visibility:visible}
+
+/* Each small information tag responds independently without inventing a click action. */
+main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*){transition:filter .16s ease,transform .16s ease;transform-origin:center}
+@media(hover:hover) and (pointer:fine){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):hover{filter:brightness(1.22);transform:scale(1.04)}}
+@media(prefers-reduced-motion:reduce){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*){transition:none}main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):hover{transform:none}}

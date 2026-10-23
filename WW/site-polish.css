@@ -1,5 +1,5 @@
 /* One reading system: 4px rhythm, consistent role sizes, and shared alignment. */
-:root{--ww-page-width:770px;--ww-page-inset:32px;--ww-section-gap:32px;--ww-subsection-gap:24px;--ww-heading-gap:16px;--ww-paragraph-gap:12px;--ww-label-gap:12px;--ww-body-size:14px;--ww-body-leading:1.7;--ww-label-column:96px}
+:root{--ww-page-width:770px;--ww-page-inset:32px;--ww-section-gap:32px;--ww-subsection-gap:24px;--ww-heading-gap:16px;--ww-paragraph-gap:12px;--ww-label-gap:12px;--ww-body-size:13px;--ww-body-leading:1.7;--ww-label-column:96px}
 body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 64px);max-width:var(--ww-page-width);margin:0 auto;padding:32px 0 40px;box-sizing:border-box;min-width:0}
 body:not(.ww-landing) #guide.ww-guide-ready{background:transparent;color:var(--paper)}
 .wwtruck .wwtruck-shell,.ww-npc .ww-npc-shell{max-width:none;padding:0}
@@ -61,7 +61,7 @@ main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwt
 #guide .wg-model-card h5{font-size:14px}
 #guide .wg-model-setting>strong{font-size:20px}
 @media(max-width:900px){:root{--ww-page-inset:24px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 40px)}#guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){:root{--ww-page-inset:20px;--ww-body-size:14px;--ww-label-column:80px;--ww-label-gap:10px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 24px);padding-top:24px}main .panel .ww-section-title{font-size:28px}main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3,.wg-entry-head h3){font-size:20px}.profile-section>.prose{padding-inline:0}.prose .kv-line>.sq-sub{font-size:13px;padding-inline:4px}#guide .wg-control-panel{padding:16px}#guide .wg-groups button{padding:10px 12px}#guide .wg-support-definition{grid-template-columns:80px minmax(0,1fr);gap:12px}#guide .wg-support-unit .wg-note{padding-left:92px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){:root{--ww-page-inset:20px;--ww-body-size:13px;--ww-label-column:80px;--ww-label-gap:10px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 24px);padding-top:24px}main .panel .ww-section-title{font-size:28px}main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3,.wg-entry-head h3){font-size:20px}.profile-section>.prose{padding-inline:0}.prose .kv-line>.sq-sub{font-size:13px;padding-inline:4px}#guide .wg-control-panel{padding:16px}#guide .wg-groups button{padding:10px 12px}#guide .wg-support-definition{grid-template-columns:80px minmax(0,1fr);gap:12px}#guide .wg-support-unit .wg-note{padding-left:92px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}}
 
 
 #guide .wg-recommended{display:inline-flex;align-items:center;justify-content:center;font:700 12px/1.4 var(--font-label);padding:2px 6px;border:1px solid var(--brass);background:var(--brass);color:var(--ink);white-space:nowrap}
@@ -132,3 +132,32 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 #world .ww-road-atlas img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
 
 #intro .keyword-tag-piece .kw-chip{padding-inline:8px}
+
+/* The existing portraits become the dossiers' left-edge image layer. */
+#brothers .brother-dossier{position:relative;isolation:isolate}
+#brothers .brother-dossier::before{content:'';grid-column:1;grid-row:1;min-height:220px;pointer-events:none}
+#brothers .brother-dossier>.portrait.large{position:absolute;inset:0 auto 0 0;width:68%;height:100%;min-height:0;margin:0;padding:0;border:0;background:transparent;z-index:0;mask-image:linear-gradient(to right,#000 0%,#000 32%,#000b 55%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 0%,#000 32%,#000b 55%,transparent 100%)}
+#brothers .brother-dossier>.portrait.large::before,#brothers .brother-dossier>.portrait.large::after{display:none}
+#brothers .brother-dossier>.portrait.large>img{display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+#brothers .brother-dossier>.bd-head{position:relative;z-index:1;grid-column:2;grid-row:1;min-width:0}
+@media(max-width:720px){#brothers .brother-dossier::before{min-height:165px}}
+
+/* Crop only transparent side padding so the key itself is visibly larger. */
+#intro .key-tag{width:128px;aspect-ratio:auto;left:28px;right:auto;top:32px}
+#intro .key-tag>img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center}
+@media(max-width:720px){#intro .key-tag{width:96px;left:24px;right:auto;top:20px}#intro .key-tag .ww-key-action{margin-top:4px}}
+@media(max-width:360px){#intro .key-tag{width:82px;left:22px;top:16px}}
+
+/* Match the source portraits' eye spacing and keep Wade's face left of the copy. */
+#brothers .brother-dossier.wyatt>.portrait.large>img{transform:translateX(-20%) scale(1.06);transform-origin:45% 25%;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+#brothers .brother-dossier.wade>.portrait.large>img{object-position:58% 15%;transform:translateX(-24%);mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+
+/* Basic information: two brothers above the shared truck. */
+#profile-0>.prose>.kv-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#profile-0 .kv-stack>.kv-entity{min-width:0;margin:0;padding:14px;border:1px solid var(--paper-line)}
+#profile-0 .kv-stack>.kv-entity:nth-child(n+3){grid-column:1/-1}
+#profile-0 .kv-heading>.sq-sub{display:inline-block;max-width:100%;box-sizing:border-box}
+#profile-0 .kv-entity-english{display:block;white-space:nowrap;font-size:12px;line-height:1.6}
+@media(max-width:600px){#profile-0>.prose>.kv-stack{gap:8px}#profile-0 .kv-stack>.kv-entity{padding:8px}#profile-0 .kv-heading>.sq-sub:is(.wyatt,.wade){padding:3px 4px;font-size:12px}#profile-0 .kv-entity-english{font-size:11px}#profile-0 .kv-section-body{gap:8px}}
+
+@media(max-width:360px){#profile-0 .kv-heading>.sq-sub:is(.wyatt,.wade){padding-inline:1px}}

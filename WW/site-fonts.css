@@ -1,4 +1,4 @@
-/* Preserve display and label faces; use Sweet only for reader text. */
+/* Preserve display and label faces; use Paybooc for reader text. */
 @font-face{font-family:Taenada;src:url('fonts/Tenada.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:Mujeokhaebeong;src:url('fonts/MarinesRegular.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
 @font-face{font-family:Mujeokhaebeong;src:url('fonts/MarinesBold.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
@@ -12,8 +12,10 @@
 @font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
 @font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-ExtraBold.woff2') format('woff2');font-style:normal;font-weight:800;font-display:swap}
 @font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Heavy.woff2') format('woff2');font-style:normal;font-weight:900;font-display:swap}
-:root{--font-body:Sweet,sans-serif;--font-label:Mujeokhaebeong,sans-serif;--font-kr-title:Taenada,sans-serif;--font-mono:Sweet,sans-serif}
-body{font-family:var(--font-body);font-size:var(--ww-body-size,14px);font-weight:400;line-height:1.7;letter-spacing:0}
+@font-face{font-family:PayboocFont;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Medium.woff') format('woff');font-style:normal;font-weight:400 500;font-display:swap}
+@font-face{font-family:PayboocFont;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');font-style:normal;font-weight:600 700;font-display:swap}
+:root{--font-body:PayboocFont,sans-serif;--font-label:Mujeokhaebeong,sans-serif;--font-kr-title:Taenada,sans-serif;--font-mono:PayboocFont,sans-serif}
+body{font-family:var(--font-body);font-size:var(--ww-body-size,13px);font-weight:500;line-height:1.7;letter-spacing:0}
 body :is(button,summary,input,select,textarea){font-family:var(--font-body)!important}
 :is(.prose,.source-body,.intro-whole-body,.ww-openings-prose,.ww-npc-details,.head-desc,.wwtruck-detail,.wwtruck-spec,.wg-value,.wg-support-value,.wg-support-statement){font-family:var(--font-body);letter-spacing:0}
 :is(.sq-sub,.sq-label,.piece-title,.kv-heading,.ww-opening-card h3,.ww-npc-name,.wwtruck-caption h3,.ww-profile-traits,.brand-name,.character-menu,.chapter-nav,.ww-key-action){font-family:var(--font-label);letter-spacing:0}
@@ -23,7 +25,7 @@ body :is(button,summary,input,select,textarea){font-family:var(--font-body)!impo
 input,textarea{caret-color:var(--cyan)}
 
 /* Reader weight hierarchy stays below the existing headings and labels. */
-main :is(.prose,.source-body,.intro-whole-body,.ww-opening-body,.ww-npc-details,.head-desc,.wwtruck-detail,.wwtruck-spec,.wg-value,.wg-support-value,.wg-support-statement,.ww-guide,p,code,pre){font-weight:400;-webkit-text-stroke:0}
+main :is(.prose,.source-body,.intro-whole-body,.ww-opening-body,.ww-npc-details,.head-desc,.wwtruck-detail,.wwtruck-spec,.wg-value,.wg-support-value,.wg-support-statement,.ww-guide,p,code,pre){font-weight:500;-webkit-text-stroke:0}
 
 main :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details,.wwtruck-detail,.wwtruck-spec,.wg-value,.wg-support-value,.wg-support-statement,.wg-status-field-table) strong{font-weight:700}
 main :is(.prose,.ww-opening-body,.wg-value,.wg-support-value,.wg-support-statement) em{font-weight:500}
@@ -37,10 +39,10 @@ main :is(.prose,.ww-opening-body,.wg-value,.wg-support-value,.wg-support-stateme
 
 /* Readable strokes take priority over decorative weight at every size. */
 body{font-synthesis:none}
-body :is(p,span,a,button,summary,input,select,textarea,li,th,td,code,pre,small,em,mark,label):not(h1 *,h2 *,h3 *,h4 *,h5 *,h6 *,.brand-mark,.brand-mark *,.poster-twins,.poster-twins *,.poster-title,.poster-title *,#intro-title,#intro-title *,.hero-copy h1,.hero-copy h1 *){font-weight:400!important;-webkit-text-stroke:0!important}
+body :is(p,span,a,button,summary,input,select,textarea,li,th,td,code,pre,small,em,mark,label):not(h1 *,h2 *,h3 *,h4 *,h5 *,h6 *,.brand-mark,.brand-mark *,.poster-twins,.poster-twins *,.poster-title,.poster-title *,#intro-title,#intro-title *,.hero-copy h1,.hero-copy h1 *){font-weight:500!important;-webkit-text-stroke:0!important}
 body :is(strong,b,.kw-chip,.tc-title,.wg-model-highlight):not(.brand-mark *,.poster-title *,#intro-title *,h1 *,h2 *,h3 *,h4 *,h5 *,h6 *,.hero-copy h1 *){font-weight:500!important;-webkit-text-stroke:0!important}
 body :is(.kw-chip,.sq-label,.mono-code,.ww-npc-english,.ww-npc-edition,.ww-radio-time,.ww-radio-volume-value,.ww-radio-track-count,.ww-radio-track-number,.tp-name strong,.portrait,.portrait span,.portrait small){font-family:var(--font-body)!important}
-body .kw-chip{font-size:14px;line-height:1.5}
+body .kw-chip{font-size:13px;line-height:1.5}
 body :is(.tp-name strong,.portrait span){letter-spacing:0}
 
 #radio .cassette-label-strip strong{font-family:var(--font-body)!important;font-size:13px;font-weight:500;line-height:1.6;letter-spacing:0}

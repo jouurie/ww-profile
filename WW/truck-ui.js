@@ -415,6 +415,8 @@
       panel.id = 'wwtruck-group-' + group.id; panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('aria-labelledby', button.id);
       var strip = node('div', 'wwtruck-thumbnail-strip');
+      strip.setAttribute('data-horizontal-scroll', 'select');
+      strip.setAttribute('aria-label', group.label + ' 이미지');
       panel.append(strip); groups.append(panel); groupPanels.set(group.id, { panel: panel, strip: strip });
       categoryButtons.push(button); categoryBar.append(button);
     });

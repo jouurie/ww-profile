@@ -50,3 +50,29 @@
 @media (hover: hover) { .ww-rail-navigation .ww-rail-arrow:not(:disabled):hover { background: var(--brass); color: var(--tar); } .ww-site-header>.ww-hscroll-shell>.chapter-nav a:hover { background: var(--header-panel); color: var(--paper); } }
 @media(max-width:720px) { .ww-rail-navigation { gap: 6px; } }
 @media(max-width:600px) { .ww-site-header>.ww-hscroll-shell { padding-inline: 0; } }
+
+/* Mobile image rails keep their full width; their shared arrows sit below. */
+@media(max-width:600px) {
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation) {
+    grid-template-columns:minmax(0,1fr) 36px 36px minmax(0,1fr);
+    column-gap:8px;
+    row-gap:8px;
+  }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>:is(.wwtruck-thumbnail-strip,.ww-npc-film) {
+    grid-column:1/-1;
+    grid-row:1;
+    width:100%;
+    min-width:0;
+    max-width:100%;
+  }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow {
+    grid-row:2;
+    width:36px;
+    min-width:36px;
+    height:30px;
+    min-height:30px;
+    justify-self:center;
+  }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:first-child { grid-column:2; }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:last-child { grid-column:3; }
+}

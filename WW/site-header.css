@@ -1,5 +1,5 @@
 /* The same two-row header stays available on every Rhodes page. */
-.ww-site-header{--ww-header-type:400 var(--ww-body-size,14px)/1.7 var(--font-label);--header-tar:#0d0b09;--header-panel:#181411;--header-line:rgba(183,135,61,.42);position:sticky;top:0;z-index:60;flex-shrink:0;width:100%;background:var(--header-tar);color:var(--paper);font-family:var(--font-body)}
+.ww-site-header{--ww-header-type:400 var(--ww-body-size,13px)/1.7 var(--font-label);--header-tar:#0d0b09;--header-panel:#181411;--header-line:rgba(183,135,61,.42);position:sticky;top:0;z-index:60;flex-shrink:0;width:100%;background:var(--header-tar);color:var(--paper);font-family:var(--font-body)}
 .ww-site-header *{box-sizing:border-box}
 .ww-site-header>.masthead{position:relative;top:auto;z-index:40;display:flex;align-items:center;justify-content:space-between;grid-template-columns:none;gap:20px;height:76px;min-height:76px;padding:0 max(24px,calc((100% - 1240px)/2));background:var(--header-tar);border-top:3px solid var(--brass);border-bottom:1px solid var(--header-line)}
 .ww-site-header .brand{display:inline-flex;align-items:center;gap:16px;min-width:0;color:var(--paper);text-decoration:none}

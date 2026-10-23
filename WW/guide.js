@@ -47,10 +47,13 @@
     const id='wg-copy-'+(++copyIndex);payloads.set(id,payload);
     return '<div class="wg-copy-control"><button type="button" data-copy-block="'+id+'">'+label+'</button><span role="status"></span></div>';
   }
+  function modelTitle(name){
+    return esc(name).replace(/3\.8 Flash|4 Argon|Opus|GPT 5\.6 Sol(?: \(SFW\))?/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
+  }
   function modelBody(item){
     const common=item.sections[0];
     const metrics='<section class="wg-item-setting"><h4>'+esc(common.heading)+'</h4><div class="wg-start-metrics">'+common.units.slice(0,3).map(raw=>'<article>'+unit(raw)+'</article>').join('')+'</div><div class="wg-start-plan">'+body(common.units.slice(3).join(''))+'</div></section>';
-    const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+esc(card.name)+'</h4>'+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
+    const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4>'+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
     const support=item.sections.slice(1).filter(part=>part.heading!=='모델별 특징 · 개별 추론');
     return metrics+cards+'<div class="wg-model-support">'+support.map(part=>'<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><table class="wg-model-support-table"><tbody>'+part.units.map(modelUnit).join('')+'</tbody></table></section>').join('')+'</div>';
   }
