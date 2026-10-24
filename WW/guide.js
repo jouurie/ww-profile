@@ -53,17 +53,29 @@
   function modelTitle(name){
     return esc(name).replace(/3\.8 Flash|4 Argon|Opus|GPT 5\.6 Sol(?: \(SFW\))?/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
   }
-  function modelBody(item){
+  function settingPath(text){return '<ol class="wg-setting-path" aria-label="설정 위치">'+text.split(' → ').map(step=>'<li>'+esc(step)+'</li>').join('')+'</ol>';}
+  function modelSettings(item){
     const common=item.sections[0];
-    const metrics='<section class="wg-item-setting"><h4>'+esc(common.heading)+'</h4><div class="wg-start-metrics">'+common.units.slice(0,3).map(raw=>'<article>'+unit(raw)+'</article>').join('')+'</div><div class="wg-start-plan">'+body(common.units.slice(3).join(''))+'</div></section>';
-    const cards='<section class="wg-model-section"><h4>모델별 특징 · 개별 추론</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4>'+'</header><div class="wg-model-setting"><span>권장 추론</span><strong>'+esc(card.value)+'</strong></div>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
-    const support=item.sections.slice(1).filter(part=>part.heading!=='모델별 특징 · 개별 추론');
-    return metrics+cards+'<div class="wg-model-support">'+support.map(modelSupport).join('')+'</div>';
+    const metrics='<section class="wg-model-support-section"><h4>'+esc(common.heading)+'</h4><table class="wg-model-support-table"><tbody>'+common.units.slice(0,3).map(modelUnit).join('')+'</tbody></table>'+body(common.units.slice(3).join(''))+'</section>';
+    const perModel='<section class="wg-model-support-section"><h4>모델별 추론값</h4><table class="wg-model-support-table"><tbody>'+data.models.map(card=>modelUnit(card.name+': '+card.value)).join('')+'</tbody></table></section>';
+    const support=item.sections.filter(part=>part.heading==='추론 조절'||part.heading==='참고').map(part=>part.heading==='참고'?{...part,heading:'설정 참고',units:part.units.filter(raw=>/^([^:\n]{1,28}):\s*(.+)$/.test(raw.trim().replace(/^· /,'').split('\n')[0]))}:part);
+    return metrics+perModel+support.map(modelSupport).join('')+'<p class="wg-note">모델별 추론값이 공통 기본값보다 우선합니다.</p>';
+  }
+  function modelBody(item){
+    const operation=item.sections.find(part=>part.heading==='운용');
+    const cards='<section class="wg-model-section"><h4>모델별 특징</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4></header>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
+    const reference=item.sections.find(part=>part.heading==='참고');
+    const notes=reference?reference.units.filter(raw=>!/^([^:\n]{1,28}):\s*(.+)$/.test(raw.trim().replace(/^· /,'').split('\n')[0])).join('\n'):'';
+    return (operation?modelSupport(operation):'')+cards+(notes?'<aside class="wg-model-defaults wg-support-notes"><h4>참고</h4>'+body(notes)+'</aside>':'')+'<p>공통 기본값과 모델별 추론 조절: <a class="wg-resource-link" href="#guide-5">추천 설정값</a></p>';
   }
   function modelSupport(part){
     const defaults=[];
     const units=part.units.map(raw=>part.heading==='추론 조절'?raw.split('\n').filter(line=>{if(/^↳ (?:기본 |설명이 길어지면)/.test(line)){defaults.push(line);return false;}return true;}).join('\n'):raw);
     return '<section class="wg-model-support-section"><h4>'+esc(part.heading)+'</h4><table class="wg-model-support-table"><tbody>'+units.map(modelUnit).join('')+'</tbody></table>'+(defaults.length?'<aside class="wg-model-defaults wg-support-notes"><h5>기본값</h5>'+body(defaults.join('\n'))+'</aside>':'')+'</section>';
+  }
+  function settingLabel(text){
+    const groups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
+    return (groups[text]||text.split(' ')).map(part=>'<span class="wg-label-part">'+esc(part)+'</span>').join(' ');
   }
   function modelUnit(raw){
     const rows=raw.split('\n'),first=rows.shift().replace(/^· /,'');
@@ -74,7 +86,7 @@
       return '<div class="wg-model-choices">'+choices+'</div>'+extra.map(part=>'<div class="wg-model-extra"><span>별도 선택:</span> <mark>'+links(part)+'</mark></div>').join('');
     };
     const notes=rows.some(row=>row.trim())?'<div class="wg-support-notes">'+body(rows.join('\n'))+'</div>':'';
-    return pair?'<tr><th scope="row">'+esc(pair[1])+'</th><td><div class="wg-support-value">'+emphasize(pair[2])+'</div>'+notes+'</td></tr>':'<tr><td colspan="2"><div class="wg-support-statement">'+links(first)+'</div>'+notes+'</td></tr>';
+    return pair?'<tr><th scope="row">'+settingLabel(pair[1])+'</th><td><div class="wg-support-value">'+emphasize(pair[2])+'</div>'+notes+'</td></tr>':'<tr><td colspan="2"><div class="wg-support-statement">'+links(first)+'</div>'+notes+'</td></tr>';
   }
   function commandsBody(item){
     return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(command=>'<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+(command.pinball?'<small>엘린: 상태창 내장 게임 · 노디: 별도 핀볼 패널</small>':'')+'</div><div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code></div></div></article>').join('')+'</div></section>').join('');
@@ -126,24 +138,26 @@
     const tabs=['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" id="wg-status-tab-'+platform+'" aria-controls="wg-status-preview-'+platform+'" data-wg-status-platform="'+platform+'" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('');
     return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="'+platform.toUpperCase()+' 상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=20261024-density1',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
   }
+  function budgetPanel(lines){return '<section class="wg-setting-box"><h4>로어북 예산</h4><ul class="wg-setting-list">'+lines.filter(line=>line.trim()).map(line=>'<li>'+(line.includes('권장 예산')?'<strong>권장 예산:</strong> <a class="wg-resource-link" href="#guide-5">추천 설정값</a>':links(line.replace(/^[▸·] /,'')))+'</li>').join('')+'</ul></section>';}
   function itemBody(item){
+    if(item.index===3)return budgetPanel(item.text.split('\n'));
     if(item.index===0){
       const labels=['진행 방식','사건 발생','다음 행동'];
       return '<table class="wg-progress-table"><tbody>'+item.text.split('\n').filter(line=>line.trim()).map((line,index)=>'<tr><th scope="row">'+labels[index]+'</th><td>'+links(line.replace(/^▸\s*/,''))+'</td></tr>').join('')+'</tbody></table>';
     }
     if(item.index===2)return '<ol class="wg-play-list">'+item.text.split('\n').filter(line=>line.trim()).map(line=>'<li>'+links(line.replace(/^▸\s*/,''))+'</li>').join('')+'</ol>';
+    if(item.index===5)return '<div class="wg-pieces">'+settingPath('출력 탭')+'<div class="wg-setting-cards">'+item.sections.map((part,index)=>section(part,item,index)).join('')+'</div>'+modelSettings(data.items[6])+'</div>';
     if(item.index===6)return modelBody(item);
     if(item.index===9)return commandsBody(item);
     if(item.index===10)return statusPreview()+'<div class="wg-status-notes"><div data-status-notes-platform="elyn" hidden>'+elynStatusNotes(item)+'</div><div data-status-notes-platform="nody" hidden>'+nodyStatusNotes()+'</div></div>';
     if(item.index===7)return '<div class="wg-pieces">'+item.sections.map(part=>{
-      const rendered=section(part,item,0);
-      if(!part.heading)return rendered;
+      if(!part.heading){const [path,...intro]=part.body.trim().split('\n');return settingPath(path)+'<div class="wg-setting-intro">'+body(intro.join('\n').trim())+'</div>';}
       const payload=part.body.trim().replace(/\n+\(선택 사항\)\s*$/,'');
-      return '<div class="wg-prompt-block">'+copyPanel(rendered,payload,'영어 본문 전체 복사')+'</div>';
+      return '<div class="wg-prompt-block"><h4>'+esc(part.heading)+(part.heading==='소설식 진행 · 유저 대필'?' (선택 사항)':'')+'</h4>'+copyPanel(body(payload),payload,'영어 본문 전체 복사')+'</div>';
     }).join('')+'</div>';
     if(item.index===8){
       const offset=item.text.indexOf('Use only supplied evidence.');
-      return offset<0?pieces(item):body(item.text.slice(0,offset))+'<div class="wg-summary-prompt">'+copyPanel(body(item.text.slice(offset)),item.text.slice(offset).trim(),'요약 지침 전체 복사')+'</div>';
+      return offset<0?pieces(item):'<div class="wg-pieces">'+settingPath(item.text.slice(0,offset).trim())+'<div class="wg-prompt-block"><h4>추가 요약 지침</h4>'+copyPanel(body(item.text.slice(offset)),item.text.slice(offset).trim(),'요약 지침 전체 복사')+'</div></div>';
     }
     return pieces(item);
   }
@@ -154,27 +168,23 @@
     const paragraphs=(host,text)=>{host.innerHTML+=body(text);};
     const card=(title,text)=>{const node=make("section","wg-section");node.append(make("h4","",title));if(text)paragraphs(node,text);return node;};
     const settingsList=(host,items)=>{host.innerHTML+=items.map(raw=>unit(raw)).join('');};
-    const settingsPath=text=>make("h4","wg-inline-label",text);
+    const settingsPath=text=>{const node=make("div");node.innerHTML=settingPath(text);return node.firstElementChild;};
     const disclosureLink=(label,id)=>{const link=make("a","wg-resource-link",label);link.href="#guide-"+({"guide-output":7,"guide-recommended":5,"guide-memory":8,"guide-models":6})[id];return link;};
     const tableBlock=block=>{const [heading,...rows]=block.split("\n");const node=make("section","wg-model-support-section");node.innerHTML="<h4>"+esc(heading)+"</h4><table class=\"wg-model-support-table\"><tbody>"+rows.filter(Boolean).map(modelUnit).join("")+"</tbody></table>";return node;};
     const copyBlock=(title,content)=>{const node=make("div","wg-prompt-block");node.innerHTML="<h4>"+esc(title)+"</h4>"+copyPanel(body(content),content,title+" 전체 복사");return node;};
   function renderNody(section) {
     if (section === 'recovery') { panel.append(card('안내', '등록된 안내가 없습니다.')); return; }
     if (active === 'budget') {
-      const budget = card('로어북 예산');
-      settingsList(budget, ["로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.","로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.","내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다."]);
-      const link = make('p', 'wg-keyvalue'); link.append(make('strong', 'wg-inline-label', '권장 예산: '), disclosureLink('추천 설정값', 'guide-recommended')); budget.append(link); panel.append(budget);
+      panel.innerHTML=budgetPanel(["로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.","로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.","내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다.","권장 예산: 추천 설정값"]);
     } else if (active === 'recommended') {
-      const options = make('div', 'wg-units');
-      const prevention = card('사칭 방지 플레이'); settingsList(prevention, ['내 캐릭터 대신 하기 (사칭): 안 함']);
-      const impersonation = card('사칭 플레이 (/이어서, *이어서* 위주)'); settingsList(impersonation, ['내 캐릭터 대신 하기 (사칭): 기본 살짝', '적극적인 사칭 플레이: 적극']);
-      options.append(prevention, impersonation); panel.append(options);
       panel.append(settingsPath('채팅방 설정 → 대화'));
+      const options = make('div', 'wg-setting-cards');
+      options.append(tableBlock("사칭 방지 플레이\n내 캐릭터 대신 하기 (사칭): 안 함"),tableBlock("사칭 플레이 (/이어서, *이어서* 위주)\n내 캐릭터 대신 하기 (사칭): 기본 살짝\n적극적인 사칭 플레이: 적극")); panel.append(options);
       panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
       panel.append(make('p', 'guide-note', "응답 품질은 답변 전에 점검하는 항목 수입니다. 노디 안내 기준 낮음은 3개, 보통은 4개, 높음은 5개이며, 모델 자체의 추론 예산과 같은 수치로 볼 수는 없습니다. 설정과 앞선 대화를 더 챙기도록 모델 공통으로 높음을 권장합니다. 모델별 최적값이나 최저비용을 검증한 값은 아니며, 답변이 느려지고 캐시 사용량이 늘 수 있습니다. 높음도 상태창과 기억의 정확성을 보장하지는 않습니다."));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n문체: 노디 기본\n지문 별표 쓰기: 끔"));
-      const guidance = card('출력 가이던스'); settingsList(guidance, ['역할극 유지: 적용', '관계 진행: 적용']); guidance.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
+      const guidance = tableBlock("출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용"); guidance.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
       panel.append(tableBlock("AI 연기 방식\n내 캐릭터 대신 하기 (사칭): 상단에서 고른 플레이 방식에 맞춰 안 함 / 살짝 / 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       panel.append(tableBlock("기타\n상태창 표시: 켬"));
       panel.append(settingsPath('채팅방 설정 → 기억'));
@@ -187,10 +197,10 @@
       panel.append(tableBlock("글자\n원문 줄바꿈 그대로: 켬"));
     } else if (active === 'models') {
       const model = make('div', 'wg-model-support'); model.id = 'wg-model-support';
-      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
+      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 저렴한 축이라 긴 대화의 비용 부담이 적습니다. 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
-      const instructions = make('div', 'wg-preface');
+      const instructions = make('div', 'wg-setting-intro');
       paragraphs(instructions, "진행을 안정시키려면 아래 기본 가이던스 2개를 추가하세요.\n각 제목은 '규칙 이름'에, 그 아래 영어 본문은 '내용' 칸에 입력하세요."); panel.append(instructions);
       var codes = make('div', 'wg-pieces');
       codes.append(copyBlock('역할극 유지', "This is fictional roleplay; I know you are an AI. Express the characters' relationships and emotions through their dialogue, actions, and viewpoint within the story.", '1'));
@@ -216,6 +226,18 @@
   mount.innerHTML='<nav class="wg-directory" aria-label="가이드 전체 항목">'+directory+'</nav><div class="wg-control-panel" id="wg-control-panel"><div class="wg-content" id="wg-content">'+data.items.map(entry).join('')+'</div></div>'+platformTabs;
   root.querySelectorAll('.guide-layout,#guide-index,#guide-details,#guide-mosaic,#guide-info,#ww-guide-module').forEach(element=>element.remove());
   root.append(mount);root.classList.add('ww-guide-ready');
+  const mobileTables=matchMedia('(max-width:650px)');
+  mount.querySelectorAll('.wg-model-support-section,.wg-status-fields,.wg-model-section').forEach(section=>{
+    const table=section.querySelector('table'),grid=section.querySelector('.wg-model-grid'),heading=section.querySelector(':scope>h4');
+    if(!heading||(!grid&&(!table||table.rows.length<3)))return;
+    const details=document.createElement('details'),summary=document.createElement('summary');
+    details.className='wg-table-disclosure';summary.textContent=heading.textContent;heading.remove();
+    details.open=!mobileTables.matches;summary.tabIndex=mobileTables.matches?0:-1;
+    summary.addEventListener('click',event=>{if(!mobileTables.matches)event.preventDefault();});
+    details.append(summary,...section.childNodes);section.append(details);
+  });
+  mobileTables.addEventListener('change',()=>mount.querySelectorAll('.wg-table-disclosure').forEach(details=>{details.open=!mobileTables.matches;details.querySelector('summary').tabIndex=mobileTables.matches?0:-1;}));
+
   const description=root.querySelector('.head-desc')||root.querySelector('.section-head>p:last-child');
   if(description&&!description.classList.contains('eyebrow'))description.textContent='진행 안내와 설정을 확인하세요.';
   let selected='play',statusPlatform=null;
