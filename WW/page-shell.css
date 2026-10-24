@@ -60,26 +60,26 @@ html.ww-page-turn::view-transition-new(ww-page) {
 html.ww-page-turn::view-transition-old(ww-page) { animation-name:ww-page-out-next; z-index:0; }
 html.ww-page-turn::view-transition-new(ww-page) {
   animation-name:ww-page-in-next; z-index:1;
-  box-shadow:12px 0 20px var(--tar);
+  box-shadow:-12px 0 20px var(--tar);
 }
 html.ww-page-turn[data-ww-page-direction=previous]::view-transition-old(ww-page) { animation-name:ww-page-out-previous; }
 html.ww-page-turn[data-ww-page-direction=previous]::view-transition-new(ww-page) {
   animation-name:ww-page-in-previous;
-  box-shadow:-12px 0 20px var(--tar);
+  box-shadow:12px 0 20px var(--tar);
 }
 @keyframes ww-page-out-next {
   from { transform:translate(0,var(--ww-page-old-y,0px)); }
-  to { transform:translate(100%,var(--ww-page-old-y,0px)); }
+  to { transform:translate(-100%,var(--ww-page-old-y,0px)); }
 }
 @keyframes ww-page-in-next {
-  from { transform:translateX(-100%); }
+  from { transform:translateX(100%); }
   to { transform:translateX(0); }
 }
 @keyframes ww-page-out-previous {
   from { transform:translate(0,var(--ww-page-old-y,0px)); }
-  to { transform:translate(-100%,var(--ww-page-old-y,0px)); }
+  to { transform:translate(100%,var(--ww-page-old-y,0px)); }
 }
 @keyframes ww-page-in-previous {
-  from { transform:translateX(100%); }
+  from { transform:translateX(-100%); }
   to { transform:translateX(0); }
 }
