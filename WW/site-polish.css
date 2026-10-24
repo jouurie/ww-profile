@@ -245,3 +245,11 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 @keyframes ww-requested-reel-turn { to { rotate: 1turn; } }
 #radio.radio-is-playing .tape-reel i { animation-play-state:running!important; }
 #radio[hidden] .tape-reel i,#radio.radio-motion-paused .tape-reel i { animation-play-state:paused!important; }
+/* Mobile prose: retain the display hierarchy and give reading text its own rhythm. */
+@media(max-width:600px){
+ #intro .intro-whole-body,#intro .intro-whole-body p{font-size:14px!important;line-height:1.75!important;font-weight:400!important}
+ #intro .intro-whole-body p{margin:0 0 24px!important}
+ #intro .intro-whole-body p:last-child{margin-bottom:0!important}
+ main .panel :is(.kv-line,.wwtruck-detail,.wwtruck-spec,.ww-opening-body,.ww-npc-details p,.wg-pieces p,.wg-model-card p,.wg-command-description,.wg-prompt-block,.wg-summary-prompt){line-height:1.8!important}
+ main .panel .prose .kv-stack{gap:16px}
+}
