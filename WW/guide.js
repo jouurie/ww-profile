@@ -142,9 +142,8 @@
   }
   function budgetPanel(lines){return '<section class="wg-setting-box"><h4>로어북 예산</h4><ul class="wg-setting-list">'+lines.filter(line=>line.trim()).map(line=>'<li>'+(line.includes('권장 예산')?'<strong>권장 예산:</strong> <a class="wg-resource-link" href="#guide-5">추천 설정값</a>':links(line.replace(/^[▸·] /,'')))+'</li>').join('')+'</ul></section>';}
   function handoffBody(platform){
-    const common=["대화가 길어져 맥락이 흐려지거나 새 채팅방에서 이어가고 싶을 때 사용하세요. 인물 관계, 현재 상황, 진행 중인 사건을 인계 메모로 정리해 다음 방에서도 이어갈 수 있습니다.","기존 대화를 TXT로 내보낸 뒤, TXT와 인계 지침을 함께 전달해 인계 메모를 만드세요. 같은 캐릭터와 페르소나로 새 방을 열고, 완성된 메모 전체를 유저노트에 넣습니다."];
-    const path={"elyn":"새 방의 유저노트에 메모를 붙여 넣고 추가 요약 지침을 확인하세요. 기존 방의 마지막 4턴은 시간순으로 옮기고 턴 번호를 1~4로 맞춥니다.","nody":"기존 방의 설정 → 메뉴 → 대화 내보내기에서 TXT를 저장하세요. 새 방의 설정 → 노트 → 유저노트 추가에 메모 전체를 넣고 해당 방에 연결한 뒤 이어갑니다."};
-    return '<div class="wg-pieces"><section class="wg-section"><h4>새 채팅방으로 이어갈 때</h4>'+common.map(text=>'<p>'+text+'</p>').join('')+'<p>'+path[platform]+'</p><p><a class="wg-resource-link" href="https://rentry.co/rp-handoff-note'+(platform==='nody'?'-nody':'')+'" target="_blank" rel="noreferrer">RP 인계 방법과 지침 열기 ↗</a></p></section></div>';
+    const uses=["대화가 길어져 맥락이 흐려졌을 때","새 채팅방에서 이어가고 싶을 때"];
+    return '<div class="wg-pieces"><section class="wg-section"><h4>사용 시점</h4><div class="wg-units">'+uses.map(text=>'<div class="wg-unit"><p>'+text+'</p></div>').join('')+'</div></section><section class="wg-section"><h4>RP 인계 방법 + 가이드</h4><p><a class="wg-resource-link" href="https://rentry.co/rp-handoff-note'+(platform==='nody'?'-nody':'')+'" target="_blank" rel="noreferrer">지침 보기 ↗</a></p></section></div>';
   }
   function itemBody(item){
     if(item.index===4)return handoffBody('elyn');
@@ -167,7 +166,7 @@
       const offset=item.text.indexOf('Use only supplied evidence.');
       return offset<0?pieces(item):'<div class="wg-pieces">'+settingPath(item.text.slice(0,offset).trim())+'<div class="wg-prompt-block"><h4>추가 요약 지침</h4>'+copyPanel(body(item.text.slice(offset)),item.text.slice(offset).trim(),'요약 지침 전체 복사')+'</div></div>';
     }
-    return pieces(item);
+    return item.index===11?pieces(item).replaceAll('복원 지침','복원 안내'):pieces(item);
   }
   function nodyBody(item){
     const active=({3:"budget",5:"recommended",6:"models",7:"output",8:"memory"})[item.index];
@@ -227,21 +226,16 @@
   }
   function nodyRecoveryBody(item){
     if(item.index===4)return handoffBody('nody');
-    const transfer=item.index===4;
-    const title=transfer?'새 채팅방으로 이어갈 때':'상태창·대사가 어긋났을 때';
-    const text=transfer?'기존 대화를 TXT로 내보내 인계 메모를 만들고, 새 방의 유저노트에 연결하세요. 같은 캐릭터와 페르소나를 고른 뒤 인계 내용을 확인하고 이어갑니다.':'복원할 AI 응답과 직전 정상 상태를 포함한 기록을 지침과 함께 전달하세요. 복원된 응답 전체를 해당 메시지의 수정 칸에 넣고 저장합니다.';
-    const href=transfer?'https://rentry.co/rp-handoff-note-nody':'https://rentry.co/rp-status-recovery-rhodes-nody';
-    const label=transfer?'RP 인계 방법과 지침 열기 ↗':'상태창·대사 복원 지침 열기 ↗';
-    return '<div class="wg-pieces"><section class="wg-section"><h4>'+title+'</h4><p>'+text+'</p><p><a class="wg-resource-link" href="'+href+'" target="_blank" rel="noreferrer">'+label+'</a></p></section></div>';
+    return itemBody(item).replace('https://rentry.co/rp-status-recovery-rhodes','https://rentry.co/rp-status-recovery-rhodes-nody');
   }
   function entry(item){
     const platformOnly=['start','recovery'].some(id=>data.groups.find(group=>group.id===id).items.includes(item));
     const html=itemBody(item);
-    return '<section class="wg-item" id="'+item.id+'" data-source-index="'+item.index+'" hidden><header class="wg-entry-head"><h3>'+esc(clean(item.title))+badge(item)+'</h3></header>'+(platformOnly?'<div data-category-platform="elyn">'+html+'</div><div data-category-platform="nody" hidden>'+(data.groups.find(group=>group.id==='start').items.includes(item)?nodyBody(item):nodyRecoveryBody(item))+'</div>':html)+'</section>';
+    return '<section class="wg-item" id="'+item.id+'" data-source-index="'+item.index+'" hidden><header class="wg-entry-head"><h3>'+esc(clean(item.title).replace('복원 지침','복원 안내'))+badge(item)+'</h3></header>'+(platformOnly?'<div data-category-platform="elyn">'+html+'</div><div data-category-platform="nody" hidden>'+(data.groups.find(group=>group.id==='start').items.includes(item)?nodyBody(item):nodyRecoveryBody(item))+'</div>':html)+'</section>';
   }
   const mount=document.createElement('div');mount.className='ww-guide';mount.id='ww-guide-module';
   const platformTabs='<div class="wg-platform-slot"><nav class="wg-category-platforms wg-local-tabs" role="tablist" aria-label="설정 플랫폼">'+['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" data-wg-category-platform="'+platform+'" aria-controls="wg-control-panel" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('')+'</nav></div>';
-  const directory=groups.map(group=>'<section class="wg-directory-group"><h3 class="wg-directory-heading" id="wg-directory-'+group.id+'">'+esc(group.title)+'</h3><div class="wg-item-selector" id="wg-selector-'+group.id+'" data-wg-selector="'+group.id+'" role="tablist" aria-labelledby="wg-directory-'+group.id+'">'+group.items.map(item=>'<button type="button" role="tab" id="wg-item-tab-'+item.index+'" aria-controls="'+item.id+'" data-wg-item="'+item.index+'" data-item-group="'+group.id+'">'+(item.index===11?'<span>상태창 · 대사<span class="wg-directory-wrap"> 복원 지침</span></span>':esc(clean(item.title)))+badge(item)+'</button>').join('')+'</div></section>').join('');
+  const directory=groups.map(group=>'<section class="wg-directory-group"><h3 class="wg-directory-heading" id="wg-directory-'+group.id+'">'+esc(group.title)+'</h3><div class="wg-item-selector" id="wg-selector-'+group.id+'" data-wg-selector="'+group.id+'" role="tablist" aria-labelledby="wg-directory-'+group.id+'">'+group.items.map(item=>'<button type="button" role="tab" id="wg-item-tab-'+item.index+'" aria-controls="'+item.id+'" data-wg-item="'+item.index+'" data-item-group="'+group.id+'">'+(item.index===11?'<span>상태창 · 대사<span class="wg-directory-wrap"> 복원 안내</span></span>':esc(clean(item.title)))+badge(item)+'</button>').join('')+'</div></section>').join('');
   mount.innerHTML='<nav class="wg-directory" aria-label="가이드 전체 항목">'+directory+'</nav><div class="wg-control-panel" id="wg-control-panel"><div class="wg-content" id="wg-content">'+data.items.map(entry).join('')+'</div></div>'+platformTabs;
   root.querySelectorAll('.guide-layout,#guide-index,#guide-details,#guide-mosaic,#guide-info,#ww-guide-module').forEach(element=>element.remove());
   root.append(mount);root.classList.add('ww-guide-ready');
