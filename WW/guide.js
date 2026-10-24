@@ -219,10 +219,18 @@
   }
     renderNody("settings");return panel.outerHTML;
   }
+  function nodyRecoveryBody(item){
+    const transfer=item.index===4;
+    const title=transfer?'새 채팅방으로 이어갈 때':'상태창·대사가 어긋났을 때';
+    const text=transfer?'기존 대화를 TXT로 내보내 인계 메모를 만들고, 새 방의 유저노트에 연결하세요. 같은 캐릭터와 페르소나를 고른 뒤 인계 내용을 확인하고 이어갑니다.':'복원할 AI 응답과 직전 정상 상태를 포함한 기록을 지침과 함께 전달하세요. 복원된 응답 전체를 해당 메시지의 수정 칸에 넣고 저장합니다.';
+    const href=transfer?'https://rentry.co/rp-handoff-note-nody':'https://rentry.co/rp-status-recovery-rhodes-nody';
+    const label=transfer?'RP 인계 방법과 지침 열기 ↗':'상태창·대사 복원 지침 열기 ↗';
+    return '<div class="wg-pieces"><section class="wg-section"><h4>'+title+'</h4><p>'+text+'</p><p><a class="wg-resource-link" href="'+href+'" target="_blank" rel="noreferrer">'+label+'</a></p></section></div>';
+  }
   function entry(item){
     const platformOnly=['start','recovery'].some(id=>data.groups.find(group=>group.id===id).items.includes(item));
     const html=itemBody(item);
-    return '<section class="wg-item" id="'+item.id+'" data-source-index="'+item.index+'" hidden><header class="wg-entry-head"><h3>'+esc(clean(item.title))+badge(item)+'</h3></header>'+(platformOnly?'<div data-category-platform="elyn">'+html+'</div><div data-category-platform="nody" hidden>'+(data.groups.find(group=>group.id==='start').items.includes(item)?nodyBody(item):'<p class="wg-preparing">등록된 안내가 없습니다.</p>')+'</div>':html)+'</section>';
+    return '<section class="wg-item" id="'+item.id+'" data-source-index="'+item.index+'" hidden><header class="wg-entry-head"><h3>'+esc(clean(item.title))+badge(item)+'</h3></header>'+(platformOnly?'<div data-category-platform="elyn">'+html+'</div><div data-category-platform="nody" hidden>'+(data.groups.find(group=>group.id==='start').items.includes(item)?nodyBody(item):nodyRecoveryBody(item))+'</div>':html)+'</section>';
   }
   const mount=document.createElement('div');mount.className='ww-guide';mount.id='ww-guide-module';
   const platformTabs='<div class="wg-platform-slot"><nav class="wg-category-platforms wg-local-tabs" role="tablist" aria-label="설정 플랫폼">'+['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" data-wg-category-platform="'+platform+'" aria-controls="wg-control-panel" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('')+'</nav></div>';
