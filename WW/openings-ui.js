@@ -160,8 +160,6 @@
       var card = element('article', 'ww-opening-card');
       card.dataset.opening = number;
       card.dataset.plot = plotIds[index];
-      card.tabIndex = 0;
-      card.setAttribute('aria-haspopup', 'dialog');
       card.dataset.motion = 'reveal';
       var header = element('header', 'ww-opening-card-head');
       var count = element('span', 'ww-opening-number', number);
@@ -172,6 +170,7 @@
       header.append(count, name);
       var previewButton = element('button', 'ww-opening-preview-button', '전문 보기');
       previewButton.type = 'button';
+      previewButton.setAttribute('aria-haspopup', 'dialog');
       previewButton.setAttribute('aria-label', parts.title + ' 전문 보기');
       previewButton.addEventListener('click', function (event) { event.stopPropagation(); openPreview(card, previewButton); });
       header.append(previewButton);
@@ -205,13 +204,6 @@
         });
       }
       card.append(body);
-      card.addEventListener('click', function (event) {
-        if (event.target.closest('img,a,button,input,label,select,textarea,summary,[role="button"]')) return;
-        openPreview(card, card);
-      });
-      card.addEventListener('keydown', function (event) {
-        if (event.target === card && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openPreview(card, card); }
-      });
       grid.append(card);
     });
     content.append(grid);

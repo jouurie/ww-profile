@@ -141,7 +141,13 @@
     return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="'+platform.toUpperCase()+' 상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=20261024-density1',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
   }
   function budgetPanel(lines){return '<section class="wg-setting-box"><h4>로어북 예산</h4><ul class="wg-setting-list">'+lines.filter(line=>line.trim()).map(line=>'<li>'+(line.includes('권장 예산')?'<strong>권장 예산:</strong> <a class="wg-resource-link" href="#guide-5">추천 설정값</a>':links(line.replace(/^[▸·] /,'')))+'</li>').join('')+'</ul></section>';}
+  function handoffBody(platform){
+    const common=["대화가 길어져 맥락이 흐려지거나 새 채팅방에서 이어가고 싶을 때 사용하세요. 인물 관계, 현재 상황, 진행 중인 사건을 인계 메모로 정리해 다음 방에서도 이어갈 수 있습니다.","기존 대화를 TXT로 내보낸 뒤, TXT와 인계 지침을 함께 전달해 인계 메모를 만드세요. 같은 캐릭터와 페르소나로 새 방을 열고, 완성된 메모 전체를 유저노트에 넣습니다."];
+    const path={"elyn":"새 방의 유저노트에 메모를 붙여 넣고 추가 요약 지침을 확인하세요. 기존 방의 마지막 4턴은 시간순으로 옮기고 턴 번호를 1~4로 맞춥니다.","nody":"기존 방의 설정 → 메뉴 → 대화 내보내기에서 TXT를 저장하세요. 새 방의 설정 → 노트 → 유저노트 추가에 메모 전체를 넣고 해당 방에 연결한 뒤 이어갑니다."};
+    return '<div class="wg-pieces"><section class="wg-section"><h4>새 채팅방으로 이어갈 때</h4>'+common.map(text=>'<p>'+text+'</p>').join('')+'<p>'+path[platform]+'</p><p><a class="wg-resource-link" href="https://rentry.co/rp-handoff-note'+(platform==='nody'?'-nody':'')+'" target="_blank" rel="noreferrer">RP 인계 방법과 지침 열기 ↗</a></p></section></div>';
+  }
   function itemBody(item){
+    if(item.index===4)return handoffBody('elyn');
     if(item.index===3)return budgetPanel(item.text.split('\n'));
     if(item.index===0){
       const labels=['진행 방식','사건 발생','다음 행동'];
@@ -220,6 +226,7 @@
     renderNody("settings");return panel.outerHTML;
   }
   function nodyRecoveryBody(item){
+    if(item.index===4)return handoffBody('nody');
     const transfer=item.index===4;
     const title=transfer?'새 채팅방으로 이어갈 때':'상태창·대사가 어긋났을 때';
     const text=transfer?'기존 대화를 TXT로 내보내 인계 메모를 만들고, 새 방의 유저노트에 연결하세요. 같은 캐릭터와 페르소나를 고른 뒤 인계 내용을 확인하고 이어갑니다.':'복원할 AI 응답과 직전 정상 상태를 포함한 기록을 지침과 함께 전달하세요. 복원된 응답 전체를 해당 메시지의 수정 칸에 넣고 저장합니다.';
