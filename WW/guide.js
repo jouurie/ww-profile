@@ -51,7 +51,7 @@
     return '<section class="wg-copy-block"><header class="wg-copy-block-head"><span>본문</span>'+copyControl(payload,label)+'</header><div class="wg-copy-block-body">'+content+'</div></section>';
   }
   function modelTitle(name){
-    return esc(name).replace(/3\.8 Flash|4 Argon|Opus|GPT 5\.6 Sol(?: \(SFW\))?/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
+    return esc(name).replace(/3\.8 Flash|4 Argon|Opus|GPT[ -]5\.6 Sol(?: \(SFW\))?/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
   }
   function settingPath(text){return '<ol class="wg-setting-path" aria-label="설정 위치">'+text.split(' → ').map(step=>'<li>'+esc(step)+'</li>').join('')+'</ol>';}
   function modelSettings(item){
@@ -61,9 +61,10 @@
     const support=item.sections.filter(part=>part.heading==='추론 조절'||part.heading==='참고').map(part=>part.heading==='참고'?{...part,heading:'설정 참고',units:part.units.filter(raw=>/^([^:\n]{1,28}):\s*(.+)$/.test(raw.trim().replace(/^· /,'').split('\n')[0]))}:part);
     return metrics+perModel+support.map(modelSupport).join('')+'<p class="wg-note">모델별 추론값이 공통 기본값보다 우선합니다.</p>';
   }
+  function modelCards(models){return '<section class="wg-model-section"><h4>모델별 특징</h4><div class="wg-model-grid">'+models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4></header>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';}
   function modelBody(item){
     const operation=item.sections.find(part=>part.heading==='운용');
-    const cards='<section class="wg-model-section"><h4>모델별 특징</h4><div class="wg-model-grid">'+data.models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4></header>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+links(note.text)+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';
+    const cards=modelCards(data.models);
     const reference=item.sections.find(part=>part.heading==='참고');
     const notes=reference?reference.units.filter(raw=>!/^([^:\n]{1,28}):\s*(.+)$/.test(raw.trim().replace(/^· /,'').split('\n')[0])).join('\n'):'';
     return (operation?modelSupport(operation):'')+cards+(notes?'<aside class="wg-model-defaults wg-support-notes"><h4>참고</h4>'+body(notes)+'</aside>':'')+'<p>공통 기본값과 모델별 추론 조절: <a class="wg-resource-link" href="#guide-5">추천 설정값</a></p>';
@@ -77,13 +78,14 @@
     const groups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
     return (groups[text]||text.split(' ')).map(part=>'<span class="wg-label-part">'+esc(part)+'</span>').join(' ');
   }
+  function highlightModelNames(text){return links(text).replace(/3\.8 Flash|4 Argon|Opus|GPT[ -]5\.6 Sol/g,match=>'<span class="wg-model-highlight">'+match+'</span>');}
   function modelUnit(raw){
     const rows=raw.split('\n'),first=rows.shift().replace(/^· /,'');
     const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
     const emphasize=text=>{
       const [main,...extra]=text.split(' / 별도 선택: ');
-      const choices=main.split(' ↔ ').map(part=>'<span class="wg-model-choice">'+links(part)+'</span>').join('<span class="wg-model-separator"> ↔ </span>');
-      return '<div class="wg-model-choices">'+choices+'</div>'+extra.map(part=>'<div class="wg-model-extra"><span>별도 선택:</span> <mark>'+links(part)+'</mark></div>').join('');
+      const choices=main.split(' ↔ ').map(part=>'<span class="wg-model-choice">'+highlightModelNames(part)+'</span>').join('<span class="wg-model-separator"> ↔ </span>');
+      return '<div class="wg-model-choices">'+choices+'</div>'+extra.map(part=>'<div class="wg-model-extra"><span>별도 선택:</span> '+highlightModelNames(part)+'</div>').join('');
     };
     const notes=rows.some(row=>row.trim())?'<div class="wg-support-notes">'+body(rows.join('\n'))+'</div>':'';
     return pair?'<tr><th scope="row">'+settingLabel(pair[1])+'</th><td><div class="wg-support-value">'+emphasize(pair[2])+'</div>'+notes+'</td></tr>':'<tr><td colspan="2"><div class="wg-support-statement">'+links(first)+'</div>'+notes+'</td></tr>';
@@ -170,7 +172,7 @@
     const settingsList=(host,items)=>{host.innerHTML+=items.map(raw=>unit(raw)).join('');};
     const settingsPath=text=>{const node=make("div");node.innerHTML=settingPath(text);return node.firstElementChild;};
     const disclosureLink=(label,id)=>{const link=make("a","wg-resource-link",label);link.href="#guide-"+({"guide-output":7,"guide-recommended":5,"guide-memory":8,"guide-models":6})[id];return link;};
-    const tableBlock=block=>{const [heading,...rows]=block.split("\n");const node=make("section","wg-model-support-section");node.innerHTML="<h4>"+esc(heading)+"</h4><table class=\"wg-model-support-table\"><tbody>"+rows.filter(Boolean).map(modelUnit).join("")+"</tbody></table>";return node;};
+    const tableBlock=block=>{const [heading,...rows]=block.split("\n");if(heading==='모델별 특징'){const cards=rows.filter(Boolean).map(row=>{const index=row.indexOf(': '),name=row.slice(0,index),text=row.slice(index+2);const notes=name==='DeepSeek Flash'?[{kind:'feature',text:text.split(' 상태창')[0]},{kind:'caution',text:'상태창'+text.split(' 상태창')[1]}]:[{kind:/^(2\.5 Pro|3\.1 Pro)$/.test(name)?'caution':'feature',text}];return {name,notes};});const wrapper=make('div');wrapper.innerHTML=modelCards(cards);return wrapper.firstElementChild;}const node=make("section","wg-model-support-section");node.innerHTML="<h4>"+esc(heading)+"</h4><table class=\"wg-model-support-table\"><tbody>"+rows.filter(Boolean).map(modelUnit).join("")+"</tbody></table>";return node;};
     const copyBlock=(title,content)=>{const node=make("div","wg-prompt-block");node.innerHTML="<h4>"+esc(title)+"</h4>"+copyPanel(body(content),content,title+" 전체 복사");return node;};
   function renderNody(section) {
     const appendTableLink=(section,label,link)=>{const row=document.createElement('tr'),key=document.createElement('th'),value=document.createElement('td');key.scope='row';key.textContent=label;value.append(link);row.append(key,value);section.querySelector('tbody').append(row);};
@@ -187,7 +189,7 @@
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n문체: 노디 기본\n지문 별표 쓰기: 끔"));
       const guidance = tableBlock("출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용"); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
-      panel.append(tableBlock("AI 연기 방식\n내 캐릭터 대신 하기 (사칭): 상단에서 고른 플레이 방식에 맞춰 살짝 / 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
+      panel.append(tableBlock("AI 연기 방식\n사칭 방지 플레이: 살짝\n사칭 플레이: 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       panel.append(tableBlock("기타\n상태창 표시: 켬"));
       panel.append(settingsPath('채팅방 설정 → 기억'));
       panel.append(tableBlock("대화 기억 범위\n최근 대화: 5턴"));
