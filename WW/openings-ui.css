@@ -113,6 +113,8 @@
 
 .ww-opening-npc-dialogue { color: #aaa; }
 
-.ww-opening-component { display:block; width:100%; height:420px; min-height:100px; border:0; }
+.ww-opening-component { display:block; width:100%; height:420px; min-height:100px; border:0; color-scheme:normal; }
 
 .ww-openings-ui .ww-opening-card{cursor:default}
+
+.ww-opening-preview-body .ww-opening-translation { color: var(--paper); }

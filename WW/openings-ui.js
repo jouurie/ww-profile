@@ -13,13 +13,23 @@
     });
   }
 
+  function markedDialogue(parent, text) {
+    text.split(/(\([^)]*[\uac00-\ud7a3][^)]*\))/g).forEach(function (chunk) {
+      if (/^\([^)]*[\uac00-\ud7a3]/.test(chunk)) {
+        var translation = element('span', 'ww-opening-translation');
+        markedText(translation, chunk);
+        parent.append(translation);
+      } else markedText(parent, chunk);
+    });
+  }
+
   function markedNarration(parent, text) {
     var pattern = /^[ \t]*["“][^\r\n]+/gm;
     var cursor = 0, match;
     while ((match = pattern.exec(text))) {
       markedText(parent, text.slice(cursor, match.index));
       var line = element('span', 'ww-opening-npc-dialogue');
-      markedText(line, match[0]);
+      markedDialogue(line, match[0]);
       parent.append(line);
       cursor = pattern.lastIndex;
     }
@@ -36,7 +46,7 @@
       markedNarration(fragment, text.slice(cursor, match.index));
       var span = element('span', 'ww-opening-dialogue');
       span.style.color = match[1];
-      markedText(span, match[2]);
+      markedDialogue(span, match[2]);
       fragment.append(span);
       cursor = pattern.lastIndex;
     }
