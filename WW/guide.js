@@ -173,24 +173,26 @@
     const tableBlock=block=>{const [heading,...rows]=block.split("\n");const node=make("section","wg-model-support-section");node.innerHTML="<h4>"+esc(heading)+"</h4><table class=\"wg-model-support-table\"><tbody>"+rows.filter(Boolean).map(modelUnit).join("")+"</tbody></table>";return node;};
     const copyBlock=(title,content)=>{const node=make("div","wg-prompt-block");node.innerHTML="<h4>"+esc(title)+"</h4>"+copyPanel(body(content),content,title+" 전체 복사");return node;};
   function renderNody(section) {
+    const appendTableLink=(section,label,link)=>{const row=document.createElement('tr'),key=document.createElement('th'),value=document.createElement('td');key.scope='row';key.textContent=label;value.append(link);row.append(key,value);section.querySelector('tbody').append(row);};
+
     if (section === 'recovery') { panel.append(card('안내', '등록된 안내가 없습니다.')); return; }
     if (active === 'budget') {
       panel.innerHTML=budgetPanel(["로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.","로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.","내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다.","권장 예산: 추천 설정값"]);
     } else if (active === 'recommended') {
       panel.append(settingsPath('채팅방 설정 → 대화'));
       const options = make('div', 'wg-setting-cards');
-      options.append(tableBlock("사칭 방지 플레이\n내 캐릭터 대신 하기 (사칭): 안 함"),tableBlock("사칭 플레이 (/이어서, *이어서* 위주)\n내 캐릭터 대신 하기 (사칭): 기본 살짝\n적극적인 사칭 플레이: 적극")); panel.append(options);
+      options.append(tableBlock("사칭 방지 플레이\n내 캐릭터 대신 하기 (사칭): 살짝"),tableBlock("사칭 플레이 (/이어서, *이어서* 위주)\n내 캐릭터 대신 하기 (사칭): 적극")); panel.append(options);
       panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
       panel.append(make('p', 'guide-note', "응답 품질은 답변 전에 점검하는 항목 수입니다. 노디 안내 기준 낮음은 3개, 보통은 4개, 높음은 5개이며, 모델 자체의 추론 예산과 같은 수치로 볼 수는 없습니다. 설정과 앞선 대화를 더 챙기도록 모델 공통으로 높음을 권장합니다. 모델별 최적값이나 최저비용을 검증한 값은 아니며, 답변이 느려지고 캐시 사용량이 늘 수 있습니다. 높음도 상태창과 기억의 정확성을 보장하지는 않습니다."));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n문체: 노디 기본\n지문 별표 쓰기: 끔"));
-      const guidance = tableBlock("출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용"); guidance.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
-      panel.append(tableBlock("AI 연기 방식\n내 캐릭터 대신 하기 (사칭): 상단에서 고른 플레이 방식에 맞춰 안 함 / 살짝 / 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
+      const guidance = tableBlock("출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용"); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
+      panel.append(tableBlock("AI 연기 방식\n내 캐릭터 대신 하기 (사칭): 상단에서 고른 플레이 방식에 맞춰 살짝 / 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       panel.append(tableBlock("기타\n상태창 표시: 켬"));
       panel.append(settingsPath('채팅방 설정 → 기억'));
       panel.append(tableBlock("대화 기억 범위\n최근 대화: 5턴"));
-      panel.append(tableBlock("장기기억 설정\n요약 주기: 5턴\n요약 글자수: 6,000자\n자동으로 요약하기: 켬"));
-      const memoryLink = make('p'); memoryLink.append(document.createTextNode('요약 방식 입력: '), disclosureLink('기억 지침', 'guide-memory')); panel.append(memoryLink);
+      const memorySettings=tableBlock("장기기억 설정\n요약 주기: 5턴\n요약 글자수: 6,000자\n자동으로 요약하기: 켬"); panel.append(memorySettings);
+      appendTableLink(memorySettings,'요약 방식',disclosureLink('기억 지침', 'guide-memory'));
       panel.append(make('p', 'wg-note', '1턴은 내 말과 캐릭터 답변 한 쌍입니다. 최근 대화는 원문으로 기억할 범위이고, 요약 주기는 장기기억을 갱신할 간격입니다. 원문 비용을 줄이려면 최근 대화부터 조절하세요.'));
       panel.append(make('p', 'wg-note', '요약 주기를 줄이면 요약 횟수가 늘어납니다. 총비용은 답변 사용량과 실제 캐시 차감, 요약 요금의 포함 여부를 함께 확인하세요. DeepSeek Flash로 각 20턴을 시험했을 때는 별도 추가 요약 차감이 확인되지 않았습니다. 위 5턴 주기는 기억을 자주 갱신하기 위한 권장값이며, 최저비용 설정으로 검증된 값은 아닙니다.'));
       panel.append(settingsPath('채팅방 설정 → 화면 → 글자'));
