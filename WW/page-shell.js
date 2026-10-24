@@ -27,62 +27,98 @@
     return url;
   }
 
-  // Animate only the document body below the persistent navigation and above the footer.
+  // Slide the live panels directly; no asynchronous page snapshot is required.
   var pageTurnSequence = 0;
   var pageTurnAnimation = null;
   var pageTurnOrder = ['home', 'intro', 'brothers', 'truck', 'world', 'npc', 'openings', 'guide', 'radio'];
+  var pageTurnSupported = typeof document.documentElement.animate === 'function';
+  if (pageTurnSupported && /^https?:$/.test(location.protocol)) document.documentElement.classList.add('ww-page-slides');
   function clearPageTurn() {
     var html = document.documentElement;
     html.classList.remove('ww-page-turn');
     delete html.dataset.wwPageDirection;
-    ['--ww-page-old-y', '--ww-page-top', '--ww-page-bottom'].forEach(function (name) { html.style.removeProperty(name); });
+    ['--ww-page-top', '--ww-page-bottom'].forEach(function (name) { html.style.removeProperty(name); });
   }
   function cancelPageTurn() {
     pageTurnSequence++;
-    if (pageTurnAnimation) pageTurnAnimation.skipTransition();
+    var cancel = pageTurnAnimation;
     pageTurnAnimation = null;
-    clearPageTurn();
+    if (cancel) cancel();
+    else clearPageTurn();
   }
   function renderNavigation(update, previous, next) {
     cancelPageTurn();
     var main = document.getElementById('main');
+    var outgoing = main && main.querySelector('.panel:not([hidden])');
     var from = pageTurnOrder.indexOf(previous && previous.view);
     var to = pageTurnOrder.indexOf(next.view);
-    if (!main || !document.startViewTransition || from < 0 || to < 0 || from === to || next.key.indexOf('guide-') === 0) {
+    if (!outgoing || !pageTurnSupported || from < 0 || to < 0 || from === to || next.key.indexOf('guide-') === 0) {
       update();
       return;
     }
     var sequence = pageTurnSequence;
     var html = document.documentElement;
-    var oldTop = main.getBoundingClientRect().top;
+    var oldBox = outgoing.getBoundingClientRect();
+    var oldDisplay = getComputedStyle(outgoing).display;
     var header = document.querySelector('.ww-site-header');
     var footer = document.querySelector('body > footer');
-    html.dataset.wwPageDirection = to > from ? 'next' : 'previous';
-    html.style.setProperty('--ww-page-top', Math.max(0, header ? header.getBoundingClientRect().bottom : 0) + 'px');
-    html.style.setProperty('--ww-page-bottom', footer && getComputedStyle(footer).position === 'fixed' ? Math.max(0, innerHeight - footer.getBoundingClientRect().top) + 'px' : '0px');
+    var headerBottom = Math.max(0, header ? header.getBoundingClientRect().bottom : 0);
+    var footerGap = footer && getComputedStyle(footer).position === 'fixed' ? Math.max(0, innerHeight - footer.getBoundingClientRect().top) : 0;
+    var forward = to > from;
+    html.dataset.wwPageDirection = forward ? 'next' : 'previous';
+    html.style.setProperty('--ww-page-top', headerBottom + 'px');
+    html.style.setProperty('--ww-page-bottom', footerGap + 'px');
     html.classList.add('ww-page-turn');
-    try {
-      var transition = document.startViewTransition(function () {
-        if (sequence !== pageTurnSequence) return;
-        update();
-        // Finish the established section-to-top navigation inside the snapshot swap.
-        global.scrollTo({ top: 0, behavior: 'instant' });
-        html.style.setProperty('--ww-page-old-y', oldTop - main.getBoundingClientRect().top + 'px');
+    var incoming, effects = [], savedProperties = [], savedInert = outgoing.getAttribute('inert'), done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      effects.forEach(function (effect) { effect.cancel(); });
+      outgoing.classList.remove('ww-page-leaving');
+      if (incoming) incoming.classList.remove('ww-page-arriving');
+      savedProperties.forEach(function (item) {
+        if (item.value) outgoing.style.setProperty(item.name, item.value, item.priority);
+        else outgoing.style.removeProperty(item.name);
       });
-      pageTurnAnimation = transition;
-      transition.ready.catch(function () {});
-      function finish() {
-        if (sequence !== pageTurnSequence) return;
-        pageTurnAnimation = null;
-        clearPageTurn();
-      }
-      transition.finished.then(finish, finish);
-    } catch (_) {
+      if (savedInert === null) outgoing.removeAttribute('inert');
+      else outgoing.setAttribute('inert', savedInert);
+      if (pageTurnAnimation === finish) pageTurnAnimation = null;
       clearPageTurn();
-      update();
     }
+    pageTurnAnimation = finish;
+    try {
+      update();
+      global.scrollTo({ top: 0, behavior: 'instant' });
+      incoming = document.getElementById(next.view);
+      if (!incoming || incoming.hidden || incoming === outgoing) { finish(); return; }
+      var values = {
+        '--ww-page-x': oldBox.left + 'px', '--ww-page-y': oldBox.top + 'px',
+        '--ww-page-width': oldBox.width + 'px', '--ww-page-height': oldBox.height + 'px',
+        '--ww-page-display': oldDisplay
+      };
+      Object.keys(values).forEach(function (name) {
+        savedProperties.push({ name: name, value: outgoing.style.getPropertyValue(name), priority: outgoing.style.getPropertyPriority(name) });
+        outgoing.style.setProperty(name, values[name]);
+      });
+      outgoing.inert = true;
+      outgoing.classList.add('ww-page-leaving');
+      incoming.classList.add('ww-page-arriving');
+      function slide(element, start, end, id) {
+        var effect = element.animate([
+          { transform: 'translate3d(' + start + '%,0,0)' },
+          { transform: 'translate3d(' + end + '%,0,0)' }
+        ], { duration: 220, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'both' });
+        effect.id = id;
+        effects.push(effect);
+        return effect.finished.catch(function () {});
+      }
+      Promise.all([
+        slide(outgoing, 0, forward ? -100 : 100, 'ww-page-out'),
+        slide(incoming, forward ? 100 : -100, 0, 'ww-page-in')
+      ]).then(function () { if (sequence === pageTurnSequence) finish(); });
+    } catch (_) { finish(); }
   }
-  // Native history/hash navigation keeps the existing router and cancels stale snapshots.
+  // History and new selections cancel stale slides before restoring the current panel.
   global.addEventListener('popstate', cancelPageTurn, true);
   global.addEventListener('hashchange', function (event) { if (event.isTrusted) cancelPageTurn(); }, true);
   global.addEventListener('pagehide', cancelPageTurn);

@@ -42,44 +42,16 @@ body > footer .text-button { display:grid; place-items:center; box-sizing:border
   body > footer > span:last-child { grid-column:1; grid-row:2; align-self:start; text-align:left; }
   body > footer .footer-actions { grid-column:2; grid-row:1 / 3; align-self:center; justify-content:center; }
 }
-/* One sheet moves at a time; the existing header/footer never enter the snapshots. */
-html.ww-page-turn { view-transition-name:none; }
-html.ww-page-turn #main { view-transition-name:ww-page; pointer-events:none; }
-html.ww-page-turn::view-transition {
-  pointer-events:none;
-  clip-path:inset(var(--ww-page-top,0px) 0 var(--ww-page-bottom,0px) 0);
-}
-html.ww-page-turn::view-transition-group(ww-page) { animation:none; }
-html.ww-page-turn::view-transition-old(ww-page),
-html.ww-page-turn::view-transition-new(ww-page) {
-  width:100%; height:auto; mix-blend-mode:normal;
-  animation-duration:300ms;
-  animation-timing-function:cubic-bezier(.22,.61,.36,1);
-  animation-fill-mode:both;
-}
-html.ww-page-turn::view-transition-old(ww-page) { animation-name:ww-page-out-next; z-index:0; }
-html.ww-page-turn::view-transition-new(ww-page) {
-  animation-name:ww-page-in-next; z-index:1;
-  box-shadow:-12px 0 20px var(--tar);
-}
-html.ww-page-turn[data-ww-page-direction=previous]::view-transition-old(ww-page) { animation-name:ww-page-out-previous; }
-html.ww-page-turn[data-ww-page-direction=previous]::view-transition-new(ww-page) {
-  animation-name:ww-page-in-previous;
-  box-shadow:12px 0 20px var(--tar);
-}
-@keyframes ww-page-out-next {
-  from { transform:translate(0,var(--ww-page-old-y,0px)); }
-  to { transform:translate(-100%,var(--ww-page-old-y,0px)); }
-}
-@keyframes ww-page-in-next {
-  from { transform:translateX(100%); }
-  to { transform:translateX(0); }
-}
-@keyframes ww-page-out-previous {
-  from { transform:translate(0,var(--ww-page-old-y,0px)); }
-  to { transform:translate(100%,var(--ww-page-old-y,0px)); }
-}
-@keyframes ww-page-in-previous {
-  from { transform:translateX(-100%); }
-  to { transform:translateX(0); }
+/* Keep the existing panel fade out of live horizontal page slides. */
+html.ww-page-slides #main > .panel { animation:none; }
+html.ww-page-turn { overflow-x:clip; }
+html.ww-page-turn #main { pointer-events:none; }
+html.ww-page-turn #main > :is(.ww-page-arriving,.ww-page-leaving) { will-change:transform; }
+html.ww-page-turn #main > .ww-page-arriving { position:relative; z-index:2; }
+html.ww-page-turn #main > .ww-page-leaving[hidden] {
+  display:var(--ww-page-display,block)!important;
+  position:fixed; top:var(--ww-page-y); left:var(--ww-page-x);
+  width:var(--ww-page-width); height:var(--ww-page-height);
+  max-width:none; margin:0; box-sizing:border-box; z-index:1; pointer-events:none;
+  clip-path:inset(max(0px,calc(var(--ww-page-top) - var(--ww-page-y))) 0 max(0px,calc(var(--ww-page-y) + var(--ww-page-height) - (100dvh - var(--ww-page-bottom)))) 0);
 }
