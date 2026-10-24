@@ -274,4 +274,4 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 }
 
 /* GitHub full-opening previews: make the replaceable user name easy to spot. */
-body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:#f8d9e8;color:#38202d;border-radius:2px;text-decoration:underline;text-decoration-color:#b9648c;text-decoration-thickness:1px;text-underline-offset:.14em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:rgba(102,227,217,.2);color:inherit;border-radius:2px;text-decoration:none;box-decoration-break:clone;-webkit-box-decoration-break:clone}
