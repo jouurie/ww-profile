@@ -230,6 +230,16 @@
   mount.innerHTML='<nav class="wg-directory" aria-label="가이드 전체 항목">'+directory+'</nav><div class="wg-control-panel" id="wg-control-panel"><div class="wg-content" id="wg-content">'+data.items.map(entry).join('')+'</div></div>'+platformTabs;
   root.querySelectorAll('.guide-layout,#guide-index,#guide-details,#guide-mosaic,#guide-info,#ww-guide-module').forEach(element=>element.remove());
   root.append(mount);root.classList.add('ww-guide-ready');
+  mount.querySelectorAll('#guide-5 [data-category-platform]>.wg-pieces').forEach(panel=>{
+    let group=null,unit=null;
+    for(const child of [...panel.children]){
+      if(child.matches('.wg-model-support-section')){
+        if(!group){group=document.createElement('div');group.className='wg-settings-table-grid';child.before(group);}
+        unit=document.createElement('div');unit.className='wg-settings-table-unit';group.append(unit);unit.append(child);
+      }else if(group&&child.matches('p')){unit.append(child);}
+      else{group=null;unit=null;}
+    }
+  });
   const mobileTables=matchMedia('(max-width:650px)');
   mount.querySelectorAll('.wg-model-support-section,.wg-status-fields,.wg-model-section').forEach(section=>{
     const table=section.querySelector('table'),grid=section.querySelector('.wg-model-grid'),heading=section.querySelector(':scope>h4');
