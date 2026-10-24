@@ -76,3 +76,7 @@
   :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:first-child { grid-column:2; }
   :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:last-child { grid-column:3; }
 }
+
+/* Horizontal rails contain their full row and never gain a vertical scrollbar. */
+[data-ww-hscroll-rail],.wwtruck-thumbnail-strip,.wwtruck-categories,.ww-npc-film,#guide .wg-groups{overflow-y:hidden}
+.wwtruck-thumbnail-strip,.ww-npc-film{height:auto;min-height:0}

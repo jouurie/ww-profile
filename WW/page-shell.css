@@ -55,3 +55,6 @@ html.ww-page-turn #main > .ww-page-leaving[hidden] {
   max-width:none; margin:0; box-sizing:border-box; z-index:1; pointer-events:none;
   clip-path:inset(max(0px,calc(var(--ww-page-top) - var(--ww-page-y))) 0 max(0px,calc(var(--ww-page-y) + var(--ww-page-height) - (100dvh - var(--ww-page-bottom)))) 0);
 }
+
+/* The playlist is a static surface until the horizontal page slide has ended. */
+html.ww-page-turn #radio *,html.ww-page-turn #radio *::before,html.ww-page-turn #radio *::after{animation-play-state:paused!important;transition:none!important}

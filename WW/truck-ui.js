@@ -450,6 +450,15 @@
         value.panel.dataset.active = String(selected); value.panel.inert = !selected;
         value.panel.setAttribute('aria-hidden', String(!selected));
       });
+      var selectedThumb = thumbnailButtons.get(id);
+      var selectedRail = selectedThumb && selectedThumb.closest('.wwtruck-thumbnail-strip');
+      if (selectedRail && selectedRail.clientWidth > 0) {
+        var railBox = selectedRail.getBoundingClientRect(), thumbBox = selectedThumb.getBoundingClientRect();
+        var availableLeft = railBox.left + selectedRail.clientLeft;
+        var availableRight = availableLeft + selectedRail.clientWidth;
+        var delta = thumbBox.left < availableLeft ? thumbBox.left - availableLeft : thumbBox.right > availableRight ? thumbBox.right - availableRight : 0;
+        if (delta) selectedRail.scrollTo({ left: Math.max(0, Math.min(selectedRail.scrollWidth - selectedRail.clientWidth, selectedRail.scrollLeft + delta)), behavior: 'instant' });
+      }
       if (focus) thumbnailButtons.get(id)?.focus({ preventScroll: true });
     }
     function render(items) {

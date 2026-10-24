@@ -35,9 +35,11 @@
   if (pageTurnSupported && /^https?:$/.test(location.protocol)) document.documentElement.classList.add('ww-page-slides');
   function clearPageTurn() {
     var html = document.documentElement;
+    var wasTurning = html.classList.contains('ww-page-turn');
     html.classList.remove('ww-page-turn');
     delete html.dataset.wwPageDirection;
     ['--ww-page-top', '--ww-page-bottom'].forEach(function (name) { html.style.removeProperty(name); });
+    if (wasTurning) global.dispatchEvent(new CustomEvent('ww-page-transition', { detail: { active: false } }));
   }
   function cancelPageTurn() {
     pageTurnSequence++;
@@ -58,6 +60,8 @@
     }
     var sequence = pageTurnSequence;
     var html = document.documentElement;
+    html.classList.add('ww-page-turn');
+    global.dispatchEvent(new CustomEvent('ww-page-transition', { detail: { active: true } }));
     var oldBox = outgoing.getBoundingClientRect();
     var oldDisplay = getComputedStyle(outgoing).display;
     var header = document.querySelector('.ww-site-header');
@@ -68,7 +72,6 @@
     html.dataset.wwPageDirection = forward ? 'next' : 'previous';
     html.style.setProperty('--ww-page-top', headerBottom + 'px');
     html.style.setProperty('--ww-page-bottom', footerGap + 'px');
-    html.classList.add('ww-page-turn');
     var incoming, effects = [], savedProperties = [], savedInert = outgoing.getAttribute('inert'), done = false;
     function finish() {
       if (done) return;
