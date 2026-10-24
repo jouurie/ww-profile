@@ -31,7 +31,6 @@
   var pageTurnSequence = 0;
   var pageTurnAnimation = null;
   var pageTurnOrder = ['home', 'intro', 'brothers', 'truck', 'world', 'npc', 'openings', 'guide', 'radio'];
-  var pageTurnMotion = global.matchMedia('(prefers-reduced-motion: reduce)');
   function clearPageTurn() {
     var html = document.documentElement;
     html.classList.remove('ww-page-turn');
@@ -49,7 +48,7 @@
     var main = document.getElementById('main');
     var from = pageTurnOrder.indexOf(previous && previous.view);
     var to = pageTurnOrder.indexOf(next.view);
-    if (!main || !document.startViewTransition || pageTurnMotion.matches || from < 0 || to < 0 || from === to || next.key.indexOf('guide-') === 0) {
+    if (!main || !document.startViewTransition || from < 0 || to < 0 || from === to || next.key.indexOf('guide-') === 0) {
       update();
       return;
     }
@@ -87,7 +86,6 @@
   global.addEventListener('popstate', cancelPageTurn, true);
   global.addEventListener('hashchange', function (event) { if (event.isTrusted) cancelPageTurn(); }, true);
   global.addEventListener('pagehide', cancelPageTurn);
-  pageTurnMotion.addEventListener?.('change', function () { if (pageTurnMotion.matches) cancelPageTurn(); });
   function navigate(href, replace) {
     var target = new URL(href, location.href), state = resolve(target.href);
     if (!state || !/^https?:$/.test(location.protocol)) return false;
