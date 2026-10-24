@@ -26,15 +26,80 @@
     }
     return url;
   }
+
+  // Animate only the document body below the persistent navigation and above the footer.
+  var pageTurnSequence = 0;
+  var pageTurnAnimation = null;
+  var pageTurnOrder = ['home', 'intro', 'brothers', 'truck', 'world', 'npc', 'openings', 'guide', 'radio'];
+  var pageTurnMotion = global.matchMedia('(prefers-reduced-motion: reduce)');
+  function clearPageTurn() {
+    var html = document.documentElement;
+    html.classList.remove('ww-page-turn');
+    delete html.dataset.wwPageDirection;
+    ['--ww-page-old-y', '--ww-page-top', '--ww-page-bottom'].forEach(function (name) { html.style.removeProperty(name); });
+  }
+  function cancelPageTurn() {
+    pageTurnSequence++;
+    if (pageTurnAnimation) pageTurnAnimation.skipTransition();
+    pageTurnAnimation = null;
+    clearPageTurn();
+  }
+  function renderNavigation(update, previous, next) {
+    cancelPageTurn();
+    var main = document.getElementById('main');
+    var from = pageTurnOrder.indexOf(previous && previous.view);
+    var to = pageTurnOrder.indexOf(next.view);
+    if (!main || !document.startViewTransition || pageTurnMotion.matches || from < 0 || to < 0 || from === to || next.key.indexOf('guide-') === 0) {
+      update();
+      return;
+    }
+    var sequence = pageTurnSequence;
+    var html = document.documentElement;
+    var oldTop = main.getBoundingClientRect().top;
+    var header = document.querySelector('.ww-site-header');
+    var footer = document.querySelector('body > footer');
+    html.dataset.wwPageDirection = to > from ? 'next' : 'previous';
+    html.style.setProperty('--ww-page-top', Math.max(0, header ? header.getBoundingClientRect().bottom : 0) + 'px');
+    html.style.setProperty('--ww-page-bottom', footer && getComputedStyle(footer).position === 'fixed' ? Math.max(0, innerHeight - footer.getBoundingClientRect().top) + 'px' : '0px');
+    html.classList.add('ww-page-turn');
+    try {
+      var transition = document.startViewTransition(function () {
+        if (sequence !== pageTurnSequence) return;
+        update();
+        // Finish the established section-to-top navigation inside the snapshot swap.
+        global.scrollTo({ top: 0, behavior: 'instant' });
+        html.style.setProperty('--ww-page-old-y', oldTop - main.getBoundingClientRect().top + 'px');
+      });
+      pageTurnAnimation = transition;
+      transition.ready.catch(function () {});
+      function finish() {
+        if (sequence !== pageTurnSequence) return;
+        pageTurnAnimation = null;
+        clearPageTurn();
+      }
+      transition.finished.then(finish, finish);
+    } catch (_) {
+      clearPageTurn();
+      update();
+    }
+  }
+  // Native history/hash navigation keeps the existing router and cancels stale snapshots.
+  global.addEventListener('popstate', cancelPageTurn, true);
+  global.addEventListener('hashchange', function (event) { if (event.isTrusted) cancelPageTurn(); }, true);
+  global.addEventListener('pagehide', cancelPageTurn);
+  pageTurnMotion.addEventListener?.('change', function () { if (pageTurnMotion.matches) cancelPageTurn(); });
   function navigate(href, replace) {
     var target = new URL(href, location.href), state = resolve(target.href);
     if (!state || !/^https?:$/.test(location.protocol)) return false;
     target = canonical(target, state);
     if (target.href === location.href) return true;
     var previous = location.href;
+    var previousView = resolve(previous);
     history[replace ? 'replaceState' : 'pushState'](history.state, '', target.href);
-    // Existing section and guide listeners keep their established reset behavior.
-    global.dispatchEvent(new HashChangeEvent('hashchange', { oldURL: previous, newURL: target.href }));
+    // Keep section and guide listeners together in their established order.
+    renderNavigation(function () {
+      global.dispatchEvent(new HashChangeEvent('hashchange', { oldURL: previous, newURL: target.href }));
+    }, previousView, state);
     return true;
   }
   global.WWPageShell = Object.freeze({ resolve: resolve, navigate: navigate, home: home.href, detail: detail.href });
