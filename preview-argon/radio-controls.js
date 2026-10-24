@@ -29,10 +29,22 @@
   }
   const titleEntries=new Map();
   let titleRoot=null,titleObserver=null,titleResize=null,titleIntersection=null,titleFrame=0;
-  function queueTitles(){if(!titleFrame)titleFrame=requestAnimationFrame(refreshTitles);}
+  let titlePageTurning=false;
+  function queueTitles(){if(!titlePageTurning&&!titleFrame)titleFrame=requestAnimationFrame(refreshTitles);}
+  function pauseTitleMotion(){
+    if(titleFrame)cancelAnimationFrame(titleFrame);titleFrame=0;
+    titleEntries.forEach(entry=>entry.animation?.pause());
+    titleRoot?.classList.add('radio-titles-paused');
+  }
+  global.addEventListener('ww-page-transition',event=>{
+    titlePageTurning=Boolean(event.detail?.active);
+    if(titlePageTurning)pauseTitleMotion();else queueTitles();
+  });
   function refreshTitles(){
     titleFrame=0;if(!titleRoot)return;
-    titleRoot.classList.toggle('radio-titles-paused',document.hidden||titleRoot.hidden);
+    const unavailable=document.hidden||titleRoot.hidden||titlePageTurning;
+    titleRoot.classList.toggle('radio-titles-paused',unavailable);
+    if(unavailable){titleEntries.forEach(entry=>entry.animation?.pause());return;}
     const nodes=new Set(titleRoot.querySelectorAll('#radio-current-title,.tc-title'));
     titleEntries.forEach((entry,host)=>{if(!nodes.has(host)){entry.animation?.cancel();titleResize?.unobserve(host);titleIntersection?.unobserve(host);titleEntries.delete(host);}});
     nodes.forEach(host=>{
