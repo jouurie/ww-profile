@@ -14,7 +14,7 @@
       document.querySelectorAll('.brother-dossier.' + key + ' .portrait,.twin-polaroid.' + key + ' .portrait').forEach(frame => {
         if (frame.querySelector('img')) return;
         const photo = document.createElement('img');
-        photo.src = new URL(key + '.png', portraits).href;
+        photo.src = key === 'wade' ? 'https://cdn.imgchest.com/files/b54dfa3594ae.png' : new URL(key + '.png', portraits).href;
         photo.alt = name;
         photo.width = 832; photo.height = 1216;
         photo.className = 'ww-character-portrait ww-character-portrait-' + key;
