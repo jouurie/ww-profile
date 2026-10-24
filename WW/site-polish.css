@@ -253,3 +253,25 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
  main .panel :is(.kv-line,.wwtruck-detail,.wwtruck-spec,.ww-opening-body,.ww-npc-details p,.wg-pieces p,.wg-model-card p,.wg-command-description,.wg-prompt-block,.wg-summary-prompt){line-height:1.8!important}
  main .panel .prose .kv-stack{gap:16px}
 }
+
+/* Native HTML navigation keeps its current layout after its inline rules move here. */
+.wr .n1,.n0 .ww-site-header .chapter-nav{height:auto;border-top:0;border-right:0;border-left:0;border-image:none;border-bottom:1px solid var(--brass)}.n0 .ww-site-header .chapter-nav{margin:0;padding:0 16px;position:static!important}.n0 .ww-site-header .chapter-nav label{display:flex;align-items:center;gap:6px;min-height:44px;padding:10px 12px;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;font:var(--ww-header-type)}.n0 .ww-site-header .chapter-nav label:hover{background:var(--stamp-red);color:var(--paper);border-bottom-color:var(--paper)}
+
+/* Compact mobile chrome; NODY uses the same footer with its native top jump. */
+.n0>footer{display:none}
+@media(max-width:600px){
+ .ww-site-header>.masthead .brand-name{display:flex;flex-direction:row;align-items:center;white-space:nowrap;line-height:1.4;column-gap:.25em}
+ .ww-site-header>.masthead .brand-name br{display:none}
+ html{--site-footer-height:calc(32px + env(safe-area-inset-bottom,0px))}
+ :is(body>footer,.n0>footer){position:fixed;inset:auto 0 0;z-index:60;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) 32px;grid-template-rows:auto auto;align-items:center;gap:0 8px;min-height:calc(32px + env(safe-area-inset-bottom,0px));margin:0;padding:2px 12px calc(2px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--brass);background:var(--ink-panel);color:var(--muted);font:400 10px/1.2 var(--font-body)}
+ :is(body>footer,.n0>footer)>span:first-child{grid-area:1/1;align-self:end;min-width:0}
+ :is(body>footer,.n0>footer)>span:last-child{grid-area:2/1;align-self:start;min-width:0;text-align:left}
+ body>footer .footer-actions,.n0>footer>label{grid-area:1/2/3;align-self:center;justify-self:center}
+ body>footer .text-button,.n0>footer>label{display:grid;place-items:center;box-sizing:border-box;width:28px;height:26px;min-height:26px;margin:0;padding:0;border:0;background:var(--brass);color:var(--ink);box-shadow:none;font:400 18px/1 var(--font-body);cursor:pointer}
+ .n0>footer{left:8px;right:8px;max-width:1064px;margin-inline:auto}
+ .n0>footer>label:focus-visible{outline:1px solid var(--paper);outline-offset:2px}
+ body main.n0{padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+}
+
+/* GitHub full-opening previews: make the replaceable user name easy to spot. */
+body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:#f8d9e8;color:#38202d;border-radius:2px;text-decoration:underline;text-decoration-color:#b9648c;text-decoration-thickness:1px;text-underline-offset:.14em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
