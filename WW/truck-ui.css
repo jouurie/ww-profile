@@ -59,7 +59,8 @@
 @media (hover: hover) and (pointer: fine) {
   .wwtruck .wwtruck-category:not([aria-selected="true"]):hover,
   .wwtruck .wwtruck-thumbnail:not([aria-pressed="true"]):hover { color: var(--wwtruck-ink); background: var(--wwtruck-paper); }
-}
+}@media (hover:none),(pointer:coarse),(pointer:none){.wwtruck .wwtruck-category:not([aria-selected="true"]):active,
+  .wwtruck .wwtruck-thumbnail:not([aria-pressed="true"]):active { color: var(--wwtruck-ink); background: var(--wwtruck-paper); }}
 
 /* A decoded preview remains visible while the original image downloads. */
 #truck :is(.wwtruck-gallery-image,.wwtruck-sleep-background){background-position:center;background-repeat:no-repeat;background-size:contain}

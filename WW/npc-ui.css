@@ -40,7 +40,7 @@
 .ww-npc .ww-npc-counter { font: 12px/1.6 Consolas, monospace; font-variant-numeric: tabular-nums; }
 .ww-npc .ww-npc-hint { font-size: 10px; line-height: 1.7; }
 .ww-npc :is(button):focus-visible { outline: 2px solid var(--ww-npc-cyan); outline-offset: 3px; }
-@media (hover: hover) and (pointer: fine) { .ww-npc .ww-npc-thumb:hover { translate: 0 -3px; } }
+@media (hover: hover) and (pointer: fine) { .ww-npc .ww-npc-thumb:hover { translate: 0 -3px; } }@media (hover:none),(pointer:coarse),(pointer:none){.ww-npc .ww-npc-thumb:active { translate: 0 -3px; }}
 @media (max-width: 900px) {
   .ww-npc .ww-npc-spread { grid-template-columns: 135px minmax(0, 1fr); gap: 24px; }
   .ww-npc .ww-npc-details { grid-template-columns: minmax(0, 1fr); gap: 14px; }
@@ -58,7 +58,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ww-npc .ww-npc-thumb { transition: none; }
-  .ww-npc .ww-npc-thumb:hover { translate: none; }
+  @media (hover:hover) and (pointer:fine){.ww-npc .ww-npc-thumb:hover { translate: none; }}@media (hover:none),(pointer:coarse),(pointer:none){.ww-npc .ww-npc-thumb:active { translate: none; }}
 }
 
 /* Keep the accepted cream profile layout; decorate only its text hierarchy. */

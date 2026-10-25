@@ -19,13 +19,13 @@
 .ww-site-header .character-menu a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:9px 12px;color:var(--paper);font:var(--ww-header-type);border:1px solid transparent;text-decoration:none}
 .ww-site-header .character-menu a:first-child{background:var(--stamp-red)}
 .ww-site-header .character-menu a+a{background:var(--header-panel);border-color:var(--header-line)}
-.ww-site-header .character-menu a+a:hover{border-color:var(--cyan);color:var(--cyan)}
+@media (hover:hover) and (pointer:fine){.ww-site-header .character-menu a+a:hover{border-color:var(--cyan);color:var(--cyan)}}@media (hover:none),(pointer:coarse),(pointer:none){.ww-site-header .character-menu a+a:active{border-color:var(--cyan);color:var(--cyan)}}
 .ww-site-header .character-menu small{font:400 11px/1.5 var(--font-label);opacity:.85}
 .ww-site-header>.chapter-nav{position:relative;top:auto;z-index:30;display:flex;align-items:stretch;justify-content:flex-start;gap:4px;height:48px;min-height:48px;margin:0;padding:0 max(24px,calc((100% - 1240px)/2));background:var(--header-panel);border-bottom:1px solid var(--brass);overflow-x:auto;scrollbar-width:none;white-space:nowrap}
 .ww-site-header>.chapter-nav::-webkit-scrollbar{display:none}
 .ww-site-header>.chapter-nav a{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;margin:0;padding:0 12px;font:var(--ww-header-type);white-space:nowrap;color:var(--muted);text-decoration:none;border:0;border-bottom:3px solid transparent;background:transparent}
 .ww-site-header>.chapter-nav a small{font:400 10px/1.5 var(--font-label);color:var(--brass)}
-.ww-site-header>.chapter-nav a:hover{background:rgba(241,221,189,.05);color:var(--paper)}
+@media (hover:hover) and (pointer:fine){.ww-site-header>.chapter-nav a:hover{background:rgba(241,221,189,.05);color:var(--paper)}}@media (hover:none),(pointer:coarse),(pointer:none){.ww-site-header>.chapter-nav a:active{background:rgba(241,221,189,.05);color:var(--paper)}}
 .ww-site-header>.chapter-nav a[aria-current=page]{background:var(--stamp-red);color:var(--paper);border-bottom-color:var(--paper)}
 .ww-site-header>.chapter-nav a[aria-current=page] small{color:var(--paper)}
 .ww-site-header>.ww-hscroll-controls{position:relative;top:auto;z-index:20;background:var(--header-tar)}

@@ -47,7 +47,7 @@
 .ww-site-header>.ww-hscroll-shell>.chapter-nav a small { font: 400 10px/1.5 var(--font-label); color: var(--brass); }
 .ww-site-header>.ww-hscroll-shell>.chapter-nav a[aria-current=page] { background: var(--stamp-red); color: var(--paper); border-bottom-color: var(--paper); }
 .ww-site-header>.ww-hscroll-shell>.chapter-nav a[aria-current=page] small { color: var(--paper); }
-@media (hover: hover) { .ww-rail-navigation .ww-rail-arrow:not(:disabled):hover { background: var(--brass); color: var(--tar); } .ww-site-header>.ww-hscroll-shell>.chapter-nav a:hover { background: var(--header-panel); color: var(--paper); } }
+@media (hover: hover)  and (pointer:fine){ .ww-rail-navigation .ww-rail-arrow:not(:disabled):hover { background: var(--brass); color: var(--tar); } .ww-site-header>.ww-hscroll-shell>.chapter-nav a:hover { background: var(--header-panel); color: var(--paper); } }@media (hover:none),(pointer:coarse),(pointer:none){.ww-rail-navigation .ww-rail-arrow:not(:disabled):active { background: var(--brass); color: var(--tar); }.ww-site-header>.ww-hscroll-shell>.chapter-nav a:active { background: var(--header-panel); color: var(--paper); }}
 @media(max-width:720px) { .ww-rail-navigation { gap: 6px; } }
 @media(max-width:600px) { .ww-site-header>.ww-hscroll-shell { padding-inline: 0; } }
 
@@ -86,7 +86,7 @@
 .ww-site-header>.ww-rail-navigation>.ww-rail-arrow{display:flex;align-items:center;justify-content:center;width:30px;min-width:30px;height:100%;min-height:44px;align-self:stretch;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:0;line-height:1;color:var(--paper);filter:none;transform:none;transition:color 120ms ease;-webkit-tap-highlight-color:transparent}
 .ww-site-header>.ww-rail-navigation>.ww-rail-arrow::before{content:"";display:block;width:10px;height:8px;background:currentColor;clip-path:polygon(100% 0,0 50%,100% 100%)}
 .ww-site-header>.ww-rail-navigation>.ww-rail-arrow:last-child::before{clip-path:polygon(0 0,100% 50%,0 100%)}
-.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):hover{color:var(--brass);background:transparent;box-shadow:none;filter:none}
+@media (hover:hover) and (pointer:fine){.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):hover{color:var(--brass);background:transparent;box-shadow:none;filter:none}}@media (hover:none),(pointer:coarse),(pointer:none){.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):active{color:var(--brass);background:transparent;box-shadow:none;filter:none}}
 .ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):active{color:var(--cyan);background:transparent;box-shadow:none;filter:none}
 .ww-site-header>.ww-native-chapters>.ww-rail-arrow{cursor:pointer}
 .ww-native-chapters>.chapter-nav>.ww-chapter-target{display:block;position:static;flex:0 0 1px;align-self:stretch;width:1px;min-width:1px;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;pointer-events:none;scroll-margin-block:100vh}

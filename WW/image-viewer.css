@@ -26,6 +26,6 @@ body > dialog.ww-image-viewer {
 body > dialog.ww-image-viewer[open] { display: block; }
 .ww-image-viewer::backdrop { background: rgba(5,4,4,.84); }
 .ww-image-viewer .wwiv-close { position: absolute; top: -32px; right: 0; display: grid; place-items: center; width: 28px; height: 28px; min-width: 28px; min-height: 28px; padding: 0; border: 0; background: var(--tar); color: var(--paper); font: 400 22px/1 var(--font-body); cursor: pointer; }
-.ww-image-viewer .wwiv-close:hover { filter: brightness(1.18); }
+@media (hover:hover) and (pointer:fine){.ww-image-viewer .wwiv-close:hover { filter: brightness(1.18); }}@media (hover:none),(pointer:coarse),(pointer:none){.ww-image-viewer .wwiv-close:active { filter: brightness(1.18); }}
 .ww-image-viewer .wwiv-close:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .ww-image-viewer .wwiv-image { display: block; width: auto; height: auto; max-width: calc(100vw - 32px); max-height: calc(100svh - 80px); margin: 0; object-fit: contain; }

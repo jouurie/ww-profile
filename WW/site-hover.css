@@ -1,7 +1,7 @@
 /* Component feedback follows the status panel: fixed geometry, local emphasis.
    Key swing and the landing start/dim interaction have their own owners. */
 /* Focus feedback also works on touch keyboards and keeps selected colors intact. */
-@media (hover: hover) {
+@media (hover: hover)  and (pointer:fine){
   :is(.ww-site-header,.ww-landing,main>.panel)
     :is(a[href],button,summary,[role="button"],[role="tab"],input[type="range"],input[type="search"]):not(:disabled,[aria-disabled="true"],.key-tag,.key-tag *,.ww-start,.ww-start *):hover {
     filter: brightness(1.12);
@@ -22,7 +22,20 @@
   main>.panel :is(.prose .kv-line,.ww-npc-details p,.wg-command-row,.wg-model-setting,.wg-progress-lines p,.memo-item,.story-slip):hover {
     filter: brightness(1.15);
   }
-}
+}@media (hover:none),(pointer:coarse),(pointer:none){:is(.ww-site-header,.ww-landing,main>.panel)
+    :is(a[href],button,summary,[role="button"],[role="tab"],input[type="range"],input[type="search"]):not(:disabled,[aria-disabled="true"],.key-tag,.key-tag *,.ww-start,.ww-start *):active {
+    filter: brightness(1.12);
+  }:is(.ww-site-header,.ww-landing,main>.panel)
+    a[href]:not(.key-tag,.key-tag *,.ww-start,.ww-start *):active {
+    text-decoration: none;
+  }:is(.ww-site-header,.ww-landing,main>.panel)
+    :is(a[href],button):not(.key-tag,.ww-start *):active img {
+    filter: brightness(1.1);
+  }main>.panel :is(.brother-dossier,.profile-sheet,.paper-piece,.bento-piece,.ww-npc-spread,.ww-opening-card,.wg-model-card,.wg-status-card,.wg-support-unit,.wwtruck-caption):active {
+    filter: brightness(1.08);
+  }main>.panel :is(.prose .kv-line,.ww-npc-details p,.wg-command-row,.wg-model-setting,.wg-progress-lines p,.memo-item,.story-slip):active {
+    filter: brightness(1.15);
+  }}
 :is(.ww-site-header,.ww-landing,main>.panel)
   :is(a[href],button,summary,[role="button"],[role="tab"],input[type="range"],input[type="search"]):not(:disabled,[aria-disabled="true"],.key-tag,.key-tag *,.ww-start,.ww-start *):focus-visible {
   outline: 2px solid currentColor;
@@ -34,16 +47,16 @@
 }
 /* Existing controls keep their geometry; tag feedback below respects reduced motion. */
 
-@media(hover:hover){
+@media(hover:hover) and (pointer:fine){
   main>.panel :is(a,button,summary):hover:not(:focus-visible){outline:none!important;box-shadow:none!important}
   main>.panel details:has(>summary:hover){box-shadow:none!important}
-}
+}@media (hover:none),(pointer:coarse),(pointer:none){main>.panel :is(a,button,summary):active:not(:focus-visible){outline:none!important;box-shadow:none!important}main>.panel details:has(>summary:active){box-shadow:none!important}}
 
 /* Site-styled hints replace browser title bubbles. */
 .ww-tooltip-host{position:relative}
 .ww-html-tooltip{position:absolute;left:50%;top:calc(100% + 8px);z-index:90;width:max-content;max-width:min(240px,calc(100vw - 32px));padding:7px 10px;border:1px solid var(--brass);background:var(--ink);color:var(--paper);font:400 13px/1.5 var(--font-body);text-align:center;white-space:normal;word-break:keep-all;opacity:0;visibility:hidden;transform:translateX(-50%);pointer-events:none;transition:opacity .15s ease}
-.ww-tooltip-host:is(:hover,:focus-visible)>.ww-html-tooltip{opacity:1;visibility:visible}
-@media(hover:hover){main img{transition:filter .2s ease}main img:hover,main :is(.ww-opening-card,.ww-npc-polaroid,.wwtruck-visual,.key-tag):hover img{filter:brightness(1.18)}}
+.ww-tooltip-host:is(:focus-visible)>.ww-html-tooltip{opacity:1;visibility:visible}@media (hover:hover) and (pointer:fine){.ww-tooltip-host:is(:hover)>.ww-html-tooltip{opacity:1;visibility:visible}}@media (hover:none),(pointer:coarse),(pointer:none){.ww-tooltip-host:is(:active)>.ww-html-tooltip{opacity:1;visibility:visible}}
+@media(hover:hover) and (pointer:fine){main img{transition:filter .2s ease}main img:hover,main :is(.ww-opening-card,.ww-npc-polaroid,.wwtruck-visual,.key-tag):hover img{filter:brightness(1.18)}}@media (hover:none),(pointer:coarse),(pointer:none){main img:active,main :is(.ww-opening-card,.ww-npc-polaroid,.wwtruck-visual,.key-tag):active img{filter:brightness(1.18)}}
 #intro .key-tag:focus-visible>img{filter:brightness(1.18)}
 
 .ww-html-tooltip{position:fixed;top:0;left:50%}
@@ -52,5 +65,5 @@ body>.ww-html-tooltip.is-visible{opacity:1;visibility:visible}
 
 /* Each small information tag responds independently without inventing a click action. */
 main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*){transition:filter .16s ease,transform .16s ease;transform-origin:center}
-@media(hover:hover) and (pointer:fine){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):hover{filter:brightness(1.22);transform:scale(1.04)}}
-@media(prefers-reduced-motion:reduce){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*){transition:none}main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):hover{transform:none}}
+@media(hover:hover) and (pointer:fine){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):hover{filter:brightness(1.22);transform:scale(1.04)}}@media (hover:none),(pointer:coarse),(pointer:none){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):active{filter:brightness(1.22);transform:scale(1.04)}}
+@media(prefers-reduced-motion:reduce){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*){transition:none}@media (hover:hover) and (pointer:fine){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):hover{transform:none}}@media (hover:none),(pointer:coarse),(pointer:none){main :is(.ww-profile-traits>li,.kw-chip,#npc [aria-label="외형"]>*):active{transform:none}}}
