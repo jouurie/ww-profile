@@ -89,5 +89,5 @@
 .ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):hover{color:var(--brass);background:transparent;box-shadow:none;filter:none}
 .ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):active{color:var(--cyan);background:transparent;box-shadow:none;filter:none}
 .ww-site-header>.ww-native-chapters>.ww-rail-arrow{cursor:pointer}
-.ww-native-chapters>.chapter-nav>.ww-chapter-target{display:block;position:static;flex:0 0 1px;align-self:stretch;width:1px;min-width:1px;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;pointer-events:none}
+.ww-native-chapters>.chapter-nav>.ww-chapter-target{display:block;position:static;flex:0 0 1px;align-self:stretch;width:1px;min-width:1px;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;pointer-events:none;scroll-margin-block:100vh}
 @media(min-width:721px){.n0 .ww-site-header>.ww-native-chapters{grid-template-columns:minmax(0,1fr);gap:0}.n0 .ww-native-chapters>.ww-rail-arrow{display:none}.n0 .ww-native-chapters>.chapter-nav{grid-column:1}}
