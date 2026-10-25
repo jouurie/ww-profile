@@ -80,3 +80,14 @@
 /* Horizontal rails contain their full row and never gain a vertical scrollbar. */
 [data-ww-hscroll-rail],.wwtruck-thumbnail-strip,.wwtruck-categories,.ww-npc-film,#guide .wg-groups{overflow-y:hidden}
 .wwtruck-thumbnail-strip,.ww-npc-film{height:auto;min-height:0}
+
+/* Compact header controls shared with the NODY introduction. */
+.ww-site-header>.ww-rail-navigation.ww-hscroll-active{grid-template-columns:30px minmax(0,1fr) 30px;gap:0}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow{display:flex;align-items:center;justify-content:center;width:30px;min-width:30px;height:100%;min-height:44px;align-self:stretch;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:0;line-height:1;color:var(--paper);filter:none;transform:none;transition:color 120ms ease;-webkit-tap-highlight-color:transparent}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow::before{content:"";display:block;width:10px;height:8px;background:currentColor;clip-path:polygon(100% 0,0 50%,100% 100%)}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:last-child::before{clip-path:polygon(0 0,100% 50%,0 100%)}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):hover{color:var(--brass);background:transparent;box-shadow:none;filter:none}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):active{color:var(--cyan);background:transparent;box-shadow:none;filter:none}
+.ww-site-header>.ww-native-chapters>.ww-rail-arrow{cursor:pointer}
+.ww-native-chapters>.chapter-nav>.ww-chapter-target{display:block;position:static;flex:0 0 1px;align-self:stretch;width:1px;min-width:1px;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;pointer-events:none}
+@media(min-width:721px){.n0 .ww-site-header>.ww-native-chapters{grid-template-columns:minmax(0,1fr);gap:0}.n0 .ww-native-chapters>.ww-rail-arrow{display:none}.n0 .ww-native-chapters>.chapter-nav{grid-column:1}}
