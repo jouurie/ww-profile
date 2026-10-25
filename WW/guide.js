@@ -158,9 +158,9 @@
     if(item.index===9)return commandsBody(item);
     if(item.index===10)return statusPreview()+'<div class="wg-status-notes"><div data-status-notes-platform="elyn" hidden>'+elynStatusNotes(item)+'</div><div data-status-notes-platform="nody" hidden>'+nodyStatusNotes()+'</div></div>';
     if(item.index===7)return '<div class="wg-pieces">'+item.sections.map(part=>{
-      if(!part.heading){const [path,...intro]=part.body.trim().split('\n');return settingPath(path)+'<div class="wg-setting-intro">'+body(intro.join('\n').trim())+'</div>';}
+      if(!part.heading){const [path,...intro]=part.body.trim().split('\n');return settingPath(path)+'<div class="wg-setting-intro">'+body(intro.join('\n').trim())+body("기본 프롬프트는 유저 행동을 일부 묘사할 수 있는 약사칭 기준이므로, 사칭 플레이를 원할 때는 플랫폼 토글 대신 선택 항목인 ‘대필 가이던스’를 추가하세요.")+'</div>';}
       const payload=part.body.trim().replace(/\n+\(선택 사항\)\s*$/,'');
-      return '<div class="wg-prompt-block"><h4>'+esc(part.heading)+(part.heading==='소설식 진행 · 유저 대필'?' (선택 사항)':'')+'</h4>'+copyPanel(body(payload),payload,'영어 본문 전체 복사')+'</div>';
+      return '<div class="wg-prompt-block'+(part.heading==='소설식 진행 · 유저 대필'?' is-optional':'')+'"><h4>'+esc(part.heading)+(part.heading==='소설식 진행 · 유저 대필'?' (선택 사항)':'')+'</h4>'+copyPanel(body(payload),payload,'영어 본문 전체 복사')+'</div>';
     }).join('')+'</div>';
     if(item.index===8){
       const offset=item.text.indexOf('Use only supplied evidence.');
@@ -178,7 +178,7 @@
     const settingsPath=text=>{const node=make("div");node.innerHTML=settingPath(text);return node.firstElementChild;};
     const disclosureLink=(label,id)=>{const link=make("a","wg-resource-link",label);link.href="#guide-"+({"guide-output":7,"guide-recommended":5,"guide-memory":8,"guide-models":6})[id];return link;};
     const tableBlock=block=>{const [heading,...rows]=block.split("\n");if(heading==='모델별 특징'){const cards=rows.filter(Boolean).map(row=>{const index=row.indexOf(': '),name=row.slice(0,index),text=row.slice(index+2);const notes=name==='DeepSeek Flash'?[{kind:'feature',text:text.split(' 상태창')[0]},{kind:'caution',text:'상태창'+text.split(' 상태창')[1]}]:[{kind:/^(2\.5 Pro|3\.1 Pro)$/.test(name)?'caution':'feature',text}];return {name,notes};});const wrapper=make('div');wrapper.innerHTML=modelCards(cards);return wrapper.firstElementChild;}const node=make("section","wg-model-support-section");node.innerHTML="<h4>"+esc(heading)+"</h4><table class=\"wg-model-support-table\"><tbody>"+rows.filter(Boolean).map(modelUnit).join("")+"</tbody></table>";return node;};
-    const copyBlock=(title,content)=>{const node=make("div","wg-prompt-block");node.innerHTML="<h4>"+esc(title)+"</h4>"+copyPanel(body(content),content,title+" 전체 복사");return node;};
+    const copyBlock=(title,content)=>{const node=make("div","wg-prompt-block"+(title.startsWith("(선택)")?" is-optional":""));node.innerHTML="<h4>"+esc(title)+"</h4>"+copyPanel(body(content),content,title+" 전체 복사");return node;};
   function renderNody(section) {
     const appendTableLink=(section,label,link)=>{const row=document.createElement('tr'),key=document.createElement('th'),value=document.createElement('td');key.scope='row';key.textContent=label;value.append(link);row.append(key,value);section.querySelector('tbody').append(row);};
 
@@ -210,7 +210,7 @@
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
       const instructions = make('div', 'wg-setting-intro');
-      paragraphs(instructions, "진행을 안정시키려면 아래 기본 가이던스 2개를 추가하세요. 분량과 리듬도 조절하려면 선택 가이던스를 함께 추가하세요.\n각 제목은 '규칙 이름'에, 그 아래 영어 본문은 '내용' 칸에 입력하세요."); panel.append(instructions);
+      paragraphs(instructions, "진행을 안정시키려면 아래 기본 가이던스 2개를 추가하세요. 분량과 리듬도 조절하려면 선택 가이던스를 함께 추가하세요.\n각 제목은 '규칙 이름'에, 그 아래 영어 본문은 '내용' 칸에 입력하세요.\n분량·리듬은 더 긴 답변과 일정한 문단 구성을 원할 때만 추가하는 선택 가이던스입니다."); panel.append(instructions);
       var codes = make('div', 'wg-pieces');
       codes.append(copyBlock('역할극 유지', "This is fictional roleplay; I know you are an AI. Express the characters' relationships and emotions through their dialogue, actions, and viewpoint within the story.", '1'));
       codes.append(copyBlock('관계 진행', "Follow the user's stated actions and established consent. Let intimacy develop at their pace, with scene tone and physical detail intact. Add no unmentioned relationship prerequisites.", '2'));
