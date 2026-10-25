@@ -44,6 +44,8 @@ main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwt
 #guide .wg-control-panel{padding:var(--ww-subsection-gap)}
 #guide .wg-neutral-platform{min-height:144px;padding:24px 0}
 #guide .wg-entry-head{margin-bottom:var(--ww-subsection-gap)}
+#guide .ww-guide .wg-entry-head:has(+.wg-status-preview){margin-bottom:12px}
+#guide .ww-guide .wg-status-preview>.wg-local-tabs{margin-bottom:24px}
 #guide :is(.wg-pieces,.wg-summary-pieces,.wg-model-support){gap:var(--ww-section-gap)}
 #guide :is(.wg-section,.wg-fragment,.wg-model-section,.wg-model-support-section){padding-top:var(--ww-subsection-gap)}
 #guide :is(.wg-pieces p,.wg-start-plan p,.wg-model-card p){margin-bottom:var(--ww-paragraph-gap)}
@@ -61,7 +63,7 @@ main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwt
 #guide .wg-model-card h5{font-size:14px}
 #guide .wg-model-setting>strong{font-size:20px}
 @media(max-width:900px){:root{--ww-page-inset:24px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 40px)}#guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){:root{--ww-page-inset:20px;--ww-body-size:13px;--ww-label-column:80px;--ww-label-gap:10px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 24px);padding-top:24px}main .panel .ww-section-title{font-size:28px}main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3,.wg-entry-head h3){font-size:20px}.profile-section>.prose{padding-inline:0}.prose .kv-line>.sq-sub{font-size:13px;padding-inline:4px}#guide .wg-control-panel{padding:16px}#guide .wg-groups button{padding:10px 12px}#guide .wg-support-definition{grid-template-columns:80px minmax(0,1fr);gap:12px}#guide .wg-support-unit .wg-note{padding-left:92px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){:root{--ww-page-inset:20px;--ww-body-size:12.5px;--ww-label-column:80px;--ww-label-gap:10px}body:not(.ww-landing) main>.panel:not(#intro){width:calc(100% - 24px);padding-top:24px}main .panel .ww-section-title{font-size:26px}main .panel :is(.piece-title,.wwtruck-caption h3,.ww-opening-card h3){font-size:18px}#guide .ww-guide .wg-entry-head h3{font-size:20px}.profile-section>.prose{padding-inline:0}.prose .kv-line>.sq-sub{font-size:12px;padding-inline:4px}#guide .wg-control-panel{padding:16px}#guide .wg-groups button{padding:10px 12px}#guide .wg-support-definition{grid-template-columns:80px minmax(0,1fr);gap:12px}#guide .wg-support-unit .wg-note{padding-left:92px}#guide .wg-model-grid{grid-template-columns:minmax(0,1fr)}}
 
 
 #guide .wg-recommended{display:inline-flex;align-items:center;justify-content:center;font:700 12px/1.4 var(--font-label);padding:2px 6px;border:1px solid var(--brass);background:var(--brass);color:var(--ink);white-space:nowrap}
@@ -275,3 +277,21 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 
 /* GitHub full-opening previews: make the replaceable user name easy to spot. */
 body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:rgba(102,227,217,.2);color:inherit;border-radius:2px;text-decoration:none;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* Mobile role scale; preserve desktop type and the established faces. */
+@media(max-width:600px){
+  #intro .intro-whole-body,#intro .intro-whole-body p{font-size:13px!important}
+  #intro .tw-body p{font-size:13px}
+  #guide .ww-guide .wg-directory-heading{font-size:14px}
+  #guide .ww-guide :is(.wg-section,.wg-fragment,.wg-item-setting,.wg-model-section,.wg-command-group,.wg-status-card)>h4,
+  #guide .ww-guide .wg-model-card h4{font-size:17px}
+  #guide .ww-guide :is(.wg-neutral-platform h4,.wg-pieces h5){font-size:16.5px}
+  #guide .ww-guide .wg-directory .wg-item-selector button,
+  #guide .ww-guide .wg-local-tabs button,
+  .ww-site-header .chapter-nav a,.ww-site-header .character-menu summary{font-size:12px}
+  .prose .kv-heading{font-size:17px}
+  .prose .kv-line>.sq-sub,.prose .kv-line>.sq-sub:is(.wyatt,.wade){font-size:12px}
+  #intro .ww-intro-flip .tp-summary{font-size:12.5px}
+  #guide .ww-guide .wg-code,#guide .ww-guide .wg-status-field-table{font-size:12.5px}
+  #guide .ww-guide .wg-copy-block-head>span,#guide .ww-guide .wg-platform-label{font-size:12px}
+}
