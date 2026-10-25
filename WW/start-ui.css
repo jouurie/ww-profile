@@ -5,3 +5,6 @@
 .truck-photo-frame:has(.ww-start-trigger:is(:hover,:focus-visible,[aria-expanded=true]))>img,.ww-home-hero:has(.ww-start-trigger:is(:hover,:focus-visible,[aria-expanded=true]))>.hero-image{filter:brightness(.62)}
 .ww-start-trigger:is(:hover,:focus-visible){background:var(--paper);color:var(--red);box-shadow:0 0 0 3px var(--red),0 6px 24px #0009}
 @media(prefers-reduced-motion:reduce){.ww-start-trigger,.truck-photo-frame>img,.ww-home-hero>.hero-image{transition:none}}
+
+/* Mobile platform labels stay quieter than the main start action. */
+@media(max-width:600px){.ww-start-platforms a{font-size:13px}}
