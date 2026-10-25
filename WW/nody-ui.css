@@ -42,3 +42,23 @@ body{padding:0!important}
 @media(hover:hover) and (pointer:fine){html,body,.n0,.panel{cursor:url("https://cdn.jsdelivr.net/gh/jouurie/ww-profile@76dc0eb2a40181e822a11c63e53e96af3372c110/WW/assets/cursors/rhodes-arrow.svg") 2 2,auto}.n0 :is(a,button,summary,label[for],[role="button"],[role="tab"],.ww-viewable-image):not(:disabled){cursor:url("https://cdn.jsdelivr.net/gh/jouurie/ww-profile@76dc0eb2a40181e822a11c63e53e96af3372c110/WW/assets/cursors/rhodes-link.svg") 2 2,pointer!important}.n0 :is(a,button,summary,label[for],[role="button"],[role="tab"]):not(:disabled) *{cursor:inherit!important}}
 .n0 label[for]:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .n0 :is(summary,label[for]){transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s,filter 100ms ease-out}.n0 :is(summary,label[for]):active{filter:brightness(1.18)!important}
+
+/* Native WW aliases only. Existing palette, geometry and exclusions are retained. */
+.n0 :is(.ww-profile-traits>li,.kw-chip,.ww-npc-traits>.ww-npc-trait){transition:filter .16s ease,transform .16s ease;transform-origin:center}
+@media(hover:hover) and (pointer:fine){
+.n0 :is(.ww-profile-traits>li,.kw-chip,.ww-npc-traits>.ww-npc-trait):hover{filter:brightness(1.22);transform:scale(1.04)}
+.n0 :is(label[for],.n6>details>summary,.wg details>summary,.wc>summary,.rr>details>summary):not(.key-tag,.key-tag *,.ww-start,.ww-start *):hover{filter:brightness(1.12)}
+.n0 .wwtruck .rr>details:not([open])>summary:hover .wwtruck-thumbnail,.n0 .wwtruck .n6>details:not([open])>summary:hover{color:var(--wwtruck-ink);background:var(--wwtruck-paper)}
+.n0 .rr>details>summary:hover .ra{background:var(--brass);color:var(--tar)}
+#intro .twin-polaroid.ww-intro-flip:hover .tp-card-inner>:is(.tp-card-front,.tp-card-back){border-color:var(--card-accent)}
+}
+.n0 :is(label[for],.n6>details>summary,.wg details>summary,.wc>summary,.rr>details>summary):not(.key-tag,.key-tag *,.ww-start,.ww-start *):active{filter:brightness(1.12)}
+.n0 :is(.n6>details>summary,.wg details>summary,.wc>summary,.rr>details>summary):focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.n0 .rr>details>summary:focus-visible img{filter:brightness(1.15)}
+#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:border-color 200ms ease-out,filter 120ms ease-out!important}
+#intro .twin-polaroid.ww-intro-flip:active .tp-card-inner>:is(.tp-card-front,.tp-card-back){filter:brightness(1.08)!important}
+@media(prefers-reduced-motion:reduce){
+.n0 :is(.ww-profile-traits>li,.kw-chip,.ww-npc-traits>.ww-npc-trait){transition:none}
+.n0 :is(.ww-profile-traits>li,.kw-chip,.ww-npc-traits>.ww-npc-trait):hover{transform:none}
+#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:none!important}
+}
