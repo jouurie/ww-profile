@@ -268,10 +268,13 @@ i {
   border-color: var(--brass-line);
 }
 
-.character-menu a + a:hover {
+@media (hover:hover) and (pointer:fine){.character-menu a + a:hover {
   border-color: var(--cyan);
   color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.character-menu a + a:active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}}
 
 .character-menu small {
   font-family: var(--font-mono);
@@ -318,10 +321,13 @@ i {
   color: var(--brass);
 }
 
-.chapter-nav a:hover {
+@media (hover:hover) and (pointer:fine){.chapter-nav a:hover {
   color: var(--paper);
   background: rgba(241, 221, 189, 0.05);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.chapter-nav a:active {
+  color: var(--paper);
+  background: rgba(241, 221, 189, 0.05);
+}}
 
 .chapter-nav a[aria-current="page"] {
   background: var(--stamp-red);
@@ -806,9 +812,11 @@ i {
   padding-top: 6px;
 }
 
-.key-tag:hover {
+@media (hover:hover) and (pointer:fine){.key-tag:hover {
   animation: key-sway 1.1s ease-in-out infinite;
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.key-tag:active {
+  animation: key-sway 1.1s ease-in-out infinite;
+}}
 
 @keyframes key-sway {
   0%, 100% { transform: rotate(8deg); }
@@ -853,9 +861,11 @@ i {
   border-top: 3px solid var(--status-red);
 }
 
-.twin-polaroid:hover {
+@media (hover:hover) and (pointer:fine){.twin-polaroid:hover {
   transform: translateY(-2px);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.twin-polaroid:active {
+  transform: translateY(-2px);
+}}
 
 .portrait {
   background: #100e0c;
@@ -1041,9 +1051,11 @@ i {
   transition: border-color 0.15s ease;
 }
 
-.obj-tile:hover {
+@media (hover:hover) and (pointer:fine){.obj-tile:hover {
   border-color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.obj-tile:active {
+  border-color: var(--cyan);
+}}
 
 .obj-tile small {
   font-family: var(--font-mono);
@@ -1522,10 +1534,13 @@ i {
   font-size: 20px;
 }
 
-.contact-controls > button:hover {
+@media (hover:hover) and (pointer:fine){.contact-controls > button:hover {
   border-color: var(--cyan);
   color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.contact-controls > button:active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}}
 
 .contact-status {
   text-align: center;
@@ -1664,9 +1679,11 @@ i {
   gap: 10px;
 }
 
-.npc-dir-btn:hover {
+@media (hover:hover) and (pointer:fine){.npc-dir-btn:hover {
   border-color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.npc-dir-btn:active {
+  border-color: var(--cyan);
+}}
 
 /* 9. SCREEN ⑥: OPENINGS (TICKET GRID) */
 .warning-banner-piece {
@@ -1753,10 +1770,13 @@ i {
   color: var(--paper);
 }
 
-.guide-jump-bar a:hover {
+@media (hover:hover) and (pointer:fine){.guide-jump-bar a:hover {
   border-color: var(--cyan);
   color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.guide-jump-bar a:active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}}
 
 .cmd-keypad {
   display: grid;
@@ -1774,9 +1794,11 @@ i {
   text-align: left;
 }
 
-.cmd-key:hover {
+@media (hover:hover) and (pointer:fine){.cmd-key:hover {
   border-color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.cmd-key:active {
+  border-color: var(--cyan);
+}}
 
 .cmd-key code {
   font-family: var(--font-mono);
@@ -1838,10 +1860,13 @@ i {
   border: 1px solid var(--brass);
 }
 
-.copy-btn:hover {
+@media (hover:hover) and (pointer:fine){.copy-btn:hover {
   background: var(--stamp-red);
   border-color: var(--paper);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.copy-btn:active {
+  background: var(--stamp-red);
+  border-color: var(--paper);
+}}
 
 .code-box {
   padding: 12px 14px;
@@ -2063,10 +2088,13 @@ i {
   font-weight: 700;
 }
 
-.t-btn:hover {
+@media (hover:hover) and (pointer:fine){.t-btn:hover {
   border-color: var(--cyan);
   color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.t-btn:active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}}
 
 .t-btn.play-main {
   background: var(--stamp-red);
@@ -2181,10 +2209,13 @@ i {
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.track-card:hover {
+@media (hover:hover) and (pointer:fine){.track-card:hover {
   background: var(--ink-cab);
   border-color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.track-card:active {
+  background: var(--ink-cab);
+  border-color: var(--cyan);
+}}
 
 .track-card[aria-current="true"] {
   background: var(--ink-cab);
@@ -2268,10 +2299,13 @@ footer {
   font-weight: 700;
 }
 
-.text-button:hover {
+@media (hover:hover) and (pointer:fine){.text-button:hover {
   border-color: var(--cyan);
   color: var(--cyan);
-}
+}}@media (hover:none),(pointer:coarse),(pointer:none){.text-button:active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}}
 
 dialog {
   background: var(--paper);
@@ -2654,7 +2688,7 @@ html{overflow-y:scroll;scrollbar-gutter:stable;scrollbar-color:var(--brass) var(
 
 /* Every interactive control responds without changing layout dimensions. */
 :where(button,[role="button"],summary,.piece-jump,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a){transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s,filter .2s}
-@media(hover:hover){:where(button,[role="button"],summary,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a):not(:disabled):hover{filter:brightness(1.15);box-shadow:inset 0 0 0 1px currentColor}.piece-jump:hover{background:var(--cyan);color:var(--tar);border-color:var(--cyan);box-shadow:inset 0 0 0 1px var(--cyan)}.text-button:hover,.character-menu a:hover{background:var(--brass);color:var(--tar);border-color:var(--brass)}}
+@media(hover:hover) and (pointer:fine){:where(button,[role="button"],summary,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a):not(:disabled):hover{filter:brightness(1.15);box-shadow:inset 0 0 0 1px currentColor}.piece-jump:hover{background:var(--cyan);color:var(--tar);border-color:var(--cyan);box-shadow:inset 0 0 0 1px var(--cyan)}.text-button:hover,.character-menu a:hover{background:var(--brass);color:var(--tar);border-color:var(--brass)}}@media (hover:none),(pointer:coarse),(pointer:none){:where(button,[role="button"],summary,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a):not(:disabled):active{filter:brightness(1.15);box-shadow:inset 0 0 0 1px currentColor}.piece-jump:active{background:var(--cyan);color:var(--tar);border-color:var(--cyan);box-shadow:inset 0 0 0 1px var(--cyan)}.text-button:active,.character-menu a:active{background:var(--brass);color:var(--tar);border-color:var(--brass)}}
 :where(button,[role="button"],summary,.piece-jump,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a):focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){:where(button,[role="button"],summary,.piece-jump,.text-button,.jump-ticket,.bp-ticket,.character-menu a,.twin-polaroid,.chapter-nav a){transition:none}}
 
