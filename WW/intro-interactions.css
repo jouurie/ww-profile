@@ -88,3 +88,13 @@
 #brothers .brother-dossier.wyatt .portrait.large > img {
   transform:translate(-20%,-8px) scale(1.08)!important; transform-origin:50% 0!important;
 }
+
+/* Name-only upper twin cards retain the original face and flip geometry. */
+#intro .twin-polaroid.ww-intro-flip{container-type:inline-size}
+#intro .ww-intro-flip .tp-name{width:100%;min-width:0}
+#intro .ww-intro-flip .tp-name strong{display:block;font-size:clamp(16px,10.5cqi,38px);line-height:1.15;letter-spacing:.055em!important}
+#intro .ww-intro-flip .tp-card-front>.tp-body{min-height:0;align-content:center}
+#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:border-color 200ms ease-out,filter 120ms ease-out!important}
+@media(hover:hover) and (pointer:fine){#intro .twin-polaroid.ww-intro-flip:hover .tp-card-inner>:is(.tp-card-front,.tp-card-back){border-color:var(--card-accent)}}
+#intro .twin-polaroid.ww-intro-flip:active .tp-card-inner>:is(.tp-card-front,.tp-card-back){filter:brightness(1.08)!important}
+@media(prefers-reduced-motion:reduce){#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:none!important}}
