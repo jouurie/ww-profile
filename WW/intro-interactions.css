@@ -98,3 +98,7 @@
 @media(hover:hover) and (pointer:fine){#intro .twin-polaroid.ww-intro-flip:hover .tp-card-inner>:is(.tp-card-front,.tp-card-back){border-color:var(--card-accent)}}
 #intro .twin-polaroid.ww-intro-flip:active .tp-card-inner>:is(.tp-card-front,.tp-card-back){filter:brightness(1.08)!important}
 @media(prefers-reduced-motion:reduce){#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:none!important}}
+
+#intro .ww-intro-flip .tp-card-back{container-type:inline-size}
+#intro .ww-intro-flip .tp-card-quote{font-size:min(14px,7.5cqi)}
+#intro .ww-intro-flip .tp-card-quote>span{display:block;white-space:nowrap}
