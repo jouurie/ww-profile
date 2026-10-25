@@ -289,7 +289,7 @@ body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:rgba(
   #guide .ww-guide .wg-directory .wg-item-selector button,
   #guide .ww-guide .wg-local-tabs button,
   .ww-site-header .chapter-nav a,.ww-site-header .character-menu summary{font-size:12px}
-  .prose .kv-heading{font-size:17px}
+  main .panel .prose .kv-heading{font-size:17px}
   .prose .kv-line>.sq-sub,.prose .kv-line>.sq-sub:is(.wyatt,.wade){font-size:12px}
   #intro .ww-intro-flip .tp-summary{font-size:12.5px}
   #guide .ww-guide .wg-code,#guide .ww-guide .wg-status-field-table{font-size:12.5px}
