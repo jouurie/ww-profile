@@ -321,3 +321,6 @@
 
 /* Setting values remain distinct from the surrounding paper cells. */
 #guide .ww-guide .wg-model-support-table td .wg-model-choice{background:#fff8ec}
+
+/* model-highlight-scope */
+#guide .ww-guide .wg-model-operation .wg-model-highlight{background:none}
