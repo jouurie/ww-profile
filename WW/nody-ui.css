@@ -22,3 +22,9 @@
 @media(max-width:600px){.n0.n0{--ww-page-inset:20px}.n0>.n2{width:calc(100% - 24px)!important;padding-top:24px!important}.n0 #guide .n9{grid-template-columns:minmax(0,1fr);gap:18px}.n0 .rg .rr{margin-inline:0;margin-bottom:42px}.n0 .rg .ra{bottom:0;width:36px;height:30px}.n0 .rr:has(>details:last-child[open])>details:first-child .ra,.n0 .rr:not(:has(>details[open]))>details:nth-child(2) .ra,.n0 .rr>details[open]+details .ra{left:calc(50% + 4px);right:auto}.n0 .rr:has(>details:first-child[open])>details:last-child .ra,.n0 .rr:not(:has(>details[open]))>details:last-child .ra,.n0 .rr>details:has(+details[open]) .ra{left:calc(50% - 40px);right:auto}}
 
 .n0 .n5 .rr{padding-top:5px}
+
+/* NODY host inset reset and native fixed-geometry feedback. */
+body{padding:0!important}
+#guide .wg-item-selector summary{transition:filter 100ms ease-out}#guide .wg-item-selector summary:active{filter:brightness(1.18)!important}
+#radio .ntracks{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#radio .cassette-window{width:min(100%,420px);margin:0 auto 20px}#radio .cassette-label-strip{min-width:0}#radio .cassette-label-strip strong{min-width:0;overflow-wrap:anywhere}@media(max-width:600px){#radio .ntracks{grid-template-columns:minmax(0,1fr)}}
+#guide .wg-copy-block-body>.wg-code{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;font:inherit}

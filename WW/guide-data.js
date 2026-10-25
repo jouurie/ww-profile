@@ -22,7 +22,7 @@
     const source=WW?.supplement?.slice(0,12);
     if(!source||source.length!==12)throw Error('가이드 원문 12항목이 필요합니다.');
     const items=source.map((entry,index)=>Object.freeze({
-      id:'guide-'+index,index,title:entry.title.replace(/^⭐\s*/,''),recommended:entry.title.includes('⭐'),
+      id:'guide-'+index,index,title:index===8?'기억 지침':entry.title.replace(/^⭐\s*/,''),recommended:entry.title.includes('⭐'),
       text:entry.text,platform:index<3||index===9?'common':'elyn',
       sections:Object.freeze(divide(entry.text))
     }));
