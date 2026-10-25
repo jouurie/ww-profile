@@ -46,15 +46,15 @@
 
 /* One physical card surface on both the web buttons and native Nody summaries. */
 #intro .twin-polaroid.ww-intro-flip {
-  --card-accent:var(--brass); display:block; position:relative; width:84%; padding:0;
-  min-height:104px; border:0; background:transparent; box-shadow:none!important;
+  --card-accent:var(--brass); display:block; position:relative; width:100%; padding:0;
+  min-height:76px; border:0; background:transparent; box-shadow:none!important;
   perspective:1000px; transform:none!important; transform-style:preserve-3d;
   overflow:visible; isolation:auto; filter:none!important; transition:none!important; animation:none!important;
 }
 #intro .ww-intro-flip.wyatt { --card-accent:var(--cyan); }
 #intro .ww-intro-flip.wade { --card-accent:var(--status-red); }
 #intro .twin-polaroid.ww-intro-flip .tp-card-inner {
-  display:grid; width:100%; min-height:104px; padding:0; list-style:none; box-sizing:border-box;
+  display:grid; width:100%; min-height:76px; padding:0; list-style:none; box-sizing:border-box;
   transform-style:preserve-3d; transform:rotateY(0deg); transform-origin:50% 50%;
   transition:transform 400ms cubic-bezier(.22,.61,.36,1)!important;
   filter:none!important; box-shadow:none!important;
@@ -63,7 +63,7 @@
 #intro .ww-intro-flip:is([aria-pressed=true],[open]) .tp-card-inner { transform:rotateY(180deg); }
 #intro .twin-polaroid.ww-intro-flip .tp-card-inner > :is(.tp-card-front,.tp-card-back) {
   position:relative; inset:auto; display:grid!important; grid-area:1/1; grid-template-columns:minmax(0,1fr);
-  align-content:center; justify-items:center; gap:0; width:100%; min-height:104px; padding:12px 10px;
+  align-content:center; justify-items:center; gap:0; width:100%; min-height:76px; padding:10px 8px;
   box-sizing:border-box; border:1px solid var(--brass-line); border-top:3px solid var(--card-accent);
   color:var(--paper); background:var(--tar); text-align:center;
   backface-visibility:hidden!important; -webkit-backface-visibility:hidden; visibility:visible!important;
@@ -84,7 +84,7 @@
 #brothers .brother-dossier :is(.bd-name-en,.bd-spec-table > div > span) {
   font-family:Anton,sans-serif!important; font-weight:400; letter-spacing:.07em; text-transform:uppercase;
 }
-#intro .ww-intro-flip .tp-card-quote { max-width:100%; font:500 14px/1.65 var(--font-body); text-align:center; word-break:keep-all; }
+#intro .ww-intro-flip .tp-card-quote { max-width:100%; font:500 12px/1.65 var(--font-body); text-align:center; word-break:keep-all; }
 #brothers .brother-dossier.wyatt .portrait.large > img {
   transform:translate(-20%,-8px) scale(1.08)!important; transform-origin:50% 0!important;
 }
@@ -92,7 +92,7 @@
 /* Name-only upper twin cards retain the original face and flip geometry. */
 #intro .twin-polaroid.ww-intro-flip{container-type:inline-size}
 #intro .ww-intro-flip .tp-name{width:100%;min-width:0}
-#intro .ww-intro-flip .tp-name strong{display:block;font-size:clamp(16px,10.5cqi,38px)!important;line-height:1.15;letter-spacing:.055em!important}
+#intro .ww-intro-flip .tp-name strong{display:block;font-size:min(20px,10.5cqi)!important;line-height:1.15;letter-spacing:.055em!important}
 #intro .ww-intro-flip .tp-card-front>.tp-body{min-height:0;align-content:center}
 #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:border-color 200ms ease-out,filter 120ms ease-out!important}
 @media(hover:hover) and (pointer:fine){#intro .twin-polaroid.ww-intro-flip:hover .tp-card-inner>:is(.tp-card-front,.tp-card-back){border-color:var(--card-accent)}}
@@ -100,5 +100,15 @@
 @media(prefers-reduced-motion:reduce){#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:none!important}}
 
 #intro .ww-intro-flip .tp-card-back{container-type:inline-size}
-#intro .ww-intro-flip .tp-card-quote{font-size:min(14px,7.5cqi)}
+#intro .ww-intro-flip .tp-card-quote{font-size:min(12px,7.5cqi)}
 #intro .ww-intro-flip .tp-card-quote>span{display:block;white-space:nowrap}
+
+#intro .twin-polaroid-piece>.twin-mini-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;max-width:480px;margin-inline:auto}
+@media(max-width:720px){
+#intro .twin-polaroid-piece{padding:12px 10px}
+#intro .twin-polaroid-piece>.twin-mini-grid{gap:8px}
+#intro .twin-polaroid.ww-intro-flip,#intro .twin-polaroid.ww-intro-flip .tp-card-inner,#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){min-height:72px}
+#intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){padding:8px 5px}
+#intro .ww-intro-flip .tp-name strong{font-size:min(14px,10.5cqi)!important}
+#intro .ww-intro-flip .tp-card-quote{font-size:min(11px,7.5cqi)}
+}
