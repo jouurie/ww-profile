@@ -254,11 +254,11 @@
     if(!heading||(!grid&&(!table||table.rows.length<3)))return;
     const details=document.createElement('details'),summary=document.createElement('summary');
     details.className='wg-table-disclosure';summary.textContent=heading.textContent;heading.remove();
-    details.open=!mobileTables.matches;summary.tabIndex=mobileTables.matches?0:-1;
+    details.open=true;summary.tabIndex=mobileTables.matches?0:-1;
     summary.addEventListener('click',event=>{if(!mobileTables.matches)event.preventDefault();});
     details.append(summary,...section.childNodes);section.append(details);
   });
-  mobileTables.addEventListener('change',()=>mount.querySelectorAll('.wg-table-disclosure').forEach(details=>{details.open=!mobileTables.matches;details.querySelector('summary').tabIndex=mobileTables.matches?0:-1;}));
+  mobileTables.addEventListener('change',()=>mount.querySelectorAll('.wg-table-disclosure').forEach(details=>{details.querySelector('summary').tabIndex=mobileTables.matches?0:-1;}));
 
   const description=root.querySelector('.head-desc')||root.querySelector('.section-head>p:last-child');
   if(description&&!description.classList.contains('eyebrow'))description.textContent='진행 안내와 설정을 확인하세요.';
@@ -313,9 +313,23 @@
   function navigate(groupID,itemIndex){
     keepPosition(()=>{display(groupID,itemIndex);const hash=itemIndex===undefined?'#guide-'+selected:'#guide-'+chosen[selected];if(location.hash!==hash)history.pushState({...history.state},'',hash);});
   }
+  function alignBookmarkHeading(item){
+    const expected=location.hash,panel=mount.querySelector('#'+item.id);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      if(location.hash!==expected||!panel||panel.hidden)return;
+      const heading=panel.querySelector(':scope>.wg-entry-head>h3'),host=mount.querySelector('#wg-control-panel');
+      if(!heading)return;
+      host.style.minHeight='';
+      const header=document.querySelector('.ww-site-header');
+      const offset=Math.max(0,header?.getBoundingClientRect().bottom||0)+16;
+      host.style.minHeight=Math.ceil(heading.getBoundingClientRect().top-host.getBoundingClientRect().top+innerHeight-offset)+'px';
+      heading.tabIndex=-1;heading.focus({preventScroll:true});
+      window.scrollTo({top:Math.max(0,heading.getBoundingClientRect().top+scrollY-offset),behavior:'instant'});
+    }));
+  }
   function synchronize(){
     const itemRoute=location.hash.match(/^#guide-(\d+)$/);
-    if(itemRoute){const item=data.items[Number(itemRoute[1])];if(item){const group=data.groups.find(group=>group.items.includes(item));display(group.id,item.index);}return;}
+    if(itemRoute){const item=data.items[Number(itemRoute[1])];if(item){const group=data.groups.find(group=>group.items.includes(item));display(group.id,item.index);alignBookmarkHeading(item);}return;}
     const route=location.hash.match(/^#guide-(start|play|commands|recovery)(?:-(common|elyn|nody))?$/);
     if(route)display(route[1]);
     else if(location.hash==='#guide')display(selected);
