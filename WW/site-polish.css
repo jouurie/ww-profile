@@ -164,7 +164,7 @@ body:not(.ww-landing) main>#intro{width:calc(100% - 64px);max-width:var(--ww-pag
 @media(max-width:360px){#profile-0 .kv-heading>.sq-sub:is(.wyatt,.wade){padding-inline:1px}}
 
 /* Mobile corner marks belong to the image row, above the caption. */
-@media(max-width:720px){#intro .truck-photo-frame{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto}#intro .truck-photo-frame>img{grid-area:1/1}#intro .truck-frame-bar{grid-area:2/1}#intro .frame-corner{grid-area:1/1/2/2}#intro .frame-corner.tl{top:6px;left:6px}#intro .frame-corner.tr{top:6px;right:6px}#intro .frame-corner.bl{bottom:70px;left:6px}#intro .frame-corner.br{bottom:6px;right:6px}}
+@media(max-width:720px){#intro .truck-photo-frame{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto}#intro .truck-photo-frame>img{grid-area:1/1}#intro .truck-frame-bar{grid-area:2/1}#intro .frame-corner{grid-area:1/1/2/2}#intro .frame-corner.tl{top:6px;left:6px}#intro .frame-corner.tr{top:6px;right:6px}#intro .frame-corner.bl{bottom:6px;left:6px}#intro .frame-corner.br{bottom:6px;right:6px}}
 
 /* Full-width section bars contain an inset reading area. */
 #brothers .profile-sheet{padding:0}
