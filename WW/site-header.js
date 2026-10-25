@@ -2,7 +2,7 @@
 (function(){'use strict';
   var source=document.currentScript.src;
   var siteRoot=new URL('../',source);
-  var home=new URL('WW/',siteRoot);
+  var home=new URL(siteRoot.href);
   var detail=new URL('preview-argon/',siteRoot);
   var current=document.querySelector('body>.masthead');if(!current)return;
   var previousNav=document.querySelector('body>.chapter-nav');

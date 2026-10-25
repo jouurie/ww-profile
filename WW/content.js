@@ -222,6 +222,6 @@ window.WW = {
   "warning": "⚠️TW ‖ 납치, 불법 감금, 신체적 강압, 성적 강압, 폭력, 물건취급, 약물 사용 · 중독 · 섭취 시도, 3P, 관음, 성적 모욕어(창녀/걸레 등), 장내배뇨/골든 플레이, 더티토크",
   "platforms": {
     "elyn": "https://elyn.ai/characters/a340488d-9ba5-4120-9b7f-0d5c074c2f31",
-    "nody": ""
+    "nody": "https://nody.mayoube.co.kr/character/a4d4d652-6c53-49b5-a67c-176757e79d22"
   }
 };

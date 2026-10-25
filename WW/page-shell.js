@@ -3,25 +3,26 @@
   'use strict';
   if (global.WWPageShell) return;
   var root = new URL('../', document.currentScript.src);
-  var home = new URL('WW/', root);
+  var home = new URL(root.href);
+  var legacyHome = new URL('WW/', root);
   var detail = new URL('preview-argon/', root);
   var panels = new Set(['intro', 'brothers', 'truck', 'world', 'npc', 'openings', 'guide', 'radio']);
   function entry(url, base) { return url.pathname === base.pathname || url.pathname === base.pathname + 'index.html'; }
   function resolve(href) {
     var url = new URL(href || location.href, location.href);
-    if (url.origin !== home.origin || (!entry(url, home) && !entry(url, detail))) return null;
+    if (url.origin !== home.origin || (!entry(url, home) && !entry(url, legacyHome) && !entry(url, detail))) return null;
     var key = url.hash.slice(1);
-    if (!key) return { view: entry(url, home) ? 'home' : 'intro', key: key };
+    if (!key) return { view: entry(url, detail) ? 'intro' : 'home', key: key };
     if (key === 'home') return { view: 'home', key: key };
     if (panels.has(key)) return { view: key, key: key };
     if (/^guide-[a-z0-9-]+$/i.test(key)) return { view: 'guide', key: key };
     return null;
   }
   function canonical(url, state) {
-    if (state.view !== 'home' && entry(url, home)) {
+    if (state.view !== 'home' && (entry(url, home) || entry(url, legacyHome))) {
       var section = new URL(detail.href); section.search = url.search; section.hash = url.hash || '#intro'; return section;
     }
-    if (state.view === 'home' && entry(url, detail)) {
+    if (state.view === 'home' && (entry(url, detail) || entry(url, legacyHome))) {
       var arrival = new URL(home.href); arrival.search = url.search; return arrival;
     }
     return url;
