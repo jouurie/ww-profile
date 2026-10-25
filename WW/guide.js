@@ -51,7 +51,7 @@
     return '<section class="wg-copy-block"><header class="wg-copy-block-head"><span>본문</span>'+copyControl(payload,label)+'</header><div class="wg-copy-block-body">'+content+'</div></section>';
   }
   function modelTitle(name){
-    return esc(name).replace(/3\.8 Flash|4 Argon|Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
+    return esc(name).replace(/(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
   }
   function settingPath(text){return '<ol class="wg-setting-path" aria-label="설정 위치">'+text.split(' → ').map(step=>'<li>'+esc(step)+'</li>').join('')+'</ol>';}
   function modelSettings(item){
@@ -61,7 +61,7 @@
     const support=item.sections.filter(part=>part.heading==='추론 조절'||part.heading==='참고').map(part=>part.heading==='참고'?{...part,heading:'설정 참고',units:part.units.filter(raw=>/^([^:\n]{1,28}):\s*(.+)$/.test(raw.trim().replace(/^· /,'').split('\n')[0]))}:part);
     return metrics+perModel+support.map(modelSupport).join('')+'<p class="wg-note">모델별 추론값이 공통 기본값보다 우선합니다.</p>';
   }
-  function modelCards(models){return '<section class="wg-model-section"><h4>모델별 특징</h4><div class="wg-model-grid">'+models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4></header>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+((card.name==='Opus'&&/^Opus \d/.test(note.text))?note.text.replace(/^(Opus \d+(?:\.\d+)*):\s*/,(_,label)=>(/^Opus (?:4\.6|5\.5)$/.test(label)?modelTitle(label):esc(label))+': '):links(note.text))+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';}
+  function modelCards(models){return '<section class="wg-model-section"><h4>모델별 특징</h4><div class="wg-model-grid">'+models.map(card=>'<article class="wg-model-card"><header><h4>'+modelTitle(card.name)+'</h4></header>'+['feature','caution'].map(kind=>{const notes=card.notes.filter(note=>note.kind===kind);return notes.length?'<section class="wg-model-'+kind+'"><h5>'+(kind==='feature'?'특징':'주의')+'</h5>'+notes.map(note=>'<p>'+((/^(?:Claude )?Opus$/.test(card.name)&&/^(?:Claude )?Opus \d/.test(note.text))?note.text.replace(/^((?:Claude )?Opus \d+(?:\.\d+)*):\s*/,(_,label)=>(/^(?:Claude )?Opus (?:4\.6|5\.5)$/.test(label)?modelTitle(label):esc(label))+': '):links(note.text))+'</p>').join('')+'</section>':'';}).join('')+'</article>').join('')+'</div></section>';}
   function modelBody(item){
     const operation=item.sections.find(part=>part.heading==='운용');
     const cards=modelCards(data.models);
@@ -78,7 +78,7 @@
     const groups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
     return (groups[text]||text.split(' ')).map(part=>'<span class="wg-label-part">'+esc(part)+'</span>').join(' ');
   }
-  function highlightModelNames(text){return links(text).replace(/3\.8 Flash|4 Argon|Opus|GPT[ -]5\.6 Sol/g,match=>'<span class="wg-model-highlight">'+match+'</span>');}
+  function highlightModelNames(text){return links(text).replace(/(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus|GPT[ -]5\.6 Sol/g,match=>'<span class="wg-model-highlight">'+match+'</span>');}
   function modelUnit(raw){
     const rows=raw.split('\n'),first=rows.shift().replace(/^· /,'');
     const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
@@ -204,7 +204,7 @@
       panel.append(make('p', 'wg-note', '요약 주기를 줄이면 요약 횟수가 늘어납니다. 총비용은 답변 사용량과 실제 캐시 차감, 요약 요금의 포함 여부를 함께 확인하세요. DeepSeek Flash로 각 20턴을 시험했을 때는 별도 추가 요약 차감이 확인되지 않았습니다. 위 5턴 주기는 기억을 자주 갱신하기 위한 권장값이며, 최저비용 설정으로 검증된 값은 아닙니다.'));
     } else if (active === 'models') {
       const model = make('div', 'wg-model-support'); model.id = 'wg-model-support';
-      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 저렴한 축이라 긴 대화의 비용 부담이 적습니다. 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus: Opus 4.6: 순애 · 감정선 복원에 강합니다.\n↳ Opus 4.7: 지침을 충실히 따르며, 4.6보다 적극적으로 전개하는 편입니다.\n↳ Opus 4.8: 정돈된 문장과 자연스러운 장면 확장에 강합니다.\n↳ Opus 5: 캐릭터성과 관계를 유지하며 능동적으로 진행합니다.\n↳ Opus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
+      ["운용\n가성비: Gemini 3.7 Flash / Gemini 3.8 Flash ↔ GLM 5.3\n일반: Gemini 3.7 Flash / Gemini 3.8 Flash ↔ Gemini 4 Argon / Gemini 2.5 Pro / Gemini 3.1 Pro / 별도 선택: GPT-6.1 Sol (용도: SFW)\n고가: Claude Opus 5.5 ↔ Gemini 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (용도: SFW)\nNSFW: Gemini 3.7 Flash / Gemini 3.8 Flash / Gemini 4 Argon / Gemini 2.5 Pro / Gemini 3.1 Pro ↔ GLM 5.3 / Claude Opus 5.5","모델별 특징\nGemini 3.7 Flash / Gemini 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 저렴한 축이라 긴 대화의 비용 부담이 적습니다. 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\nGemini 2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\nGemini 3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\nGemini 4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nClaude Opus: Opus 4.6: 순애 · 감정선 복원에 강합니다.\n↳ Claude Opus 4.7: 지침을 충실히 따르며, 4.6보다 적극적으로 전개하는 편입니다.\n↳ Claude Opus 4.8: 정돈된 문장과 자연스러운 장면 확장에 강합니다.\n↳ Claude Opus 5: 캐릭터성과 관계를 유지하며 능동적으로 진행합니다.\n↳ Claude Opus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol: 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\n↳ 용도: SFW\nGPT-6.1 Sol: 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.\n↳ 용도: SFW","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
       const instructions = make('div', 'wg-setting-intro');
