@@ -2,7 +2,7 @@
 (function (global) {
   'use strict';
   var sceneImages = {"01":"https://cdn.imgchest.com/files/9b65036dea36.png","02":"https://cdn.imgchest.com/files/83c52183f6b5.png","03":"https://cdn.imgchest.com/files/15f834822cc5.png","04":"https://cdn.imgchest.com/files/1a2529d842f4.png","05":"https://cdn.imgchest.com/files/5b1541f2ad05.png","06":"https://cdn.imgchest.com/files/9d1a1aa8a1b4.png"};
-  var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자율 도입부'];
+  var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자유 도입부'];
   var plotIds = ['plot1', 'plot2', 'plot3', 'plot4', 'plot5', 'plot_auto_intro'];
   var dialog, previewTitle, previewBody, opener, overflow;
 
@@ -98,7 +98,7 @@
     previewTitle.textContent = card.querySelector('h3').textContent;
     if (card.dataset.plot === 'plot_auto_intro') {
       var frame = element('iframe', 'ww-opening-component');
-      frame.title = '자율 도입부 안내 미리보기';
+      frame.title = '자유 도입부 안내 미리보기';
       frame.src = '../WW/intro-preview/elyn.html?v=20261024-font-preview1';
       frame.setAttribute('scrolling', 'no');
       previewBody.replaceChildren(frame);
@@ -115,7 +115,7 @@
     var text = String(source).replace(/^[⑴⑵⑶⑷⑸⑹]\s*/u, '');
     var warning = text.match(/^🔞\s*/u);
     if (warning) text = text.slice(warning[0].length);
-    var prefix = text.match(/^(납치 직후|납치 후 [^,:，：\n]+|자율 도입부)\s*[,，:：]\s*/u);
+    var prefix = text.match(/^(납치 직후|납치 후 [^,:，：\n]+|자유 도입부)\s*[,，:：]\s*/u);
     return {
       title: (prefix ? prefix[1] : labels[index]) + (warning ? ' 🔞' : ''),
       body: prefix ? text.slice(prefix[0].length) : text
