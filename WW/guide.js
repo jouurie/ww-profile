@@ -75,6 +75,7 @@
     return '<section class="wg-model-support-section'+(part.heading==='운용'?' wg-model-operation':'')+'"><h4>'+esc(part.heading)+'</h4><table class="wg-model-support-table"><tbody>'+units.map(modelUnit).join('')+'</tbody></table>'+(defaults.length?'<aside class="wg-model-defaults wg-support-notes"><h5>기본값</h5>'+body(defaults.join('\n'))+'</aside>':'')+'</section>';
   }
   function settingLabel(text){
+    if (/^(?:Gemini )?3\.7 Flash \/ (?:Gemini )?3\.8 Flash$/.test(text)) return modelTitle(text);
     const groups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
     return (groups[text]||text.split(' ')).map(part=>'<span class="wg-label-part">'+esc(part)+'</span>').join(' ');
   }
