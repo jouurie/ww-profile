@@ -51,7 +51,7 @@
     return '<section class="wg-copy-block"><header class="wg-copy-block-head"><span>본문</span>'+copyControl(payload,label)+'</header><div class="wg-copy-block-body">'+content+'</div></section>';
   }
   function modelTitle(name){
-    return esc(name).replace(/(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
+    return esc(name).replace(/(?:Gemini )?3\.7 Flash|(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
   }
   function settingPath(text){return '<ol class="wg-setting-path" aria-label="설정 위치">'+text.split(' → ').map(step=>'<li>'+esc(step)+'</li>').join('')+'</ol>';}
   function modelSettings(item){
