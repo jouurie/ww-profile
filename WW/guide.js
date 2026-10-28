@@ -197,7 +197,6 @@
       const guidance = tableBlock("출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용\n분량 · 리듬: 선택 적용"); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
       panel.append(tableBlock("AI 연기 방식\n사칭 방지 플레이: 살짝\n사칭 플레이: 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       const statusDisplay = tableBlock("기타\n상태창 표시: 켬");
-      const statusValue = statusDisplay.querySelector("td"); statusValue.replaceChildren(make("strong", "", "켬"));
       statusDisplay.append(make("p", "wg-note", "상태창과 연결된 로어북이 있으므로, 상태창 표시를 켜 주세요.")); panel.append(statusDisplay);
       panel.append(settingsPath('채팅방 설정 → 기억'));
       panel.append(tableBlock("대화 기억 범위\n최근 대화: 5턴"));
