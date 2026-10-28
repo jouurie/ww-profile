@@ -392,3 +392,12 @@
   window.addEventListener('hashchange',synchronize);window.addEventListener('popstate',synchronize);
   display('play');synchronize();
 })();
+
+(() => {
+ let held=null,start=null;
+ const clear=()=>{held?.removeAttribute('data-role-feedback');held=null;start=null;};
+ document.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;clear();held=e.target.closest('table th,table td');if(held){held.dataset.roleFeedback=held.matches('th')?'label':'value';start={x:e.clientX,y:e.clientY};}},{passive:true});
+ document.addEventListener('pointermove',e=>{if(start&&Math.hypot(e.clientX-start.x,e.clientY-start.y)>8)clear();},{passive:true});
+ for(const type of ['pointerup','pointercancel','scroll'])document.addEventListener(type,clear,{passive:true,capture:true});
+ window.addEventListener('blur',clear);
+})();
