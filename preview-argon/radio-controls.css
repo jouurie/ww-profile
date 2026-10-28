@@ -110,3 +110,7 @@
  #radio .memo-item p{font-size:13px;line-height:1.7}
 }
 /* Song-name flow is explicitly requested for readability, including reduced-motion mode. */
+
+#radio .radio-controls-inline .t-btn:not(:disabled):is(:hover,:active,:focus-visible){background:var(--paper);color:var(--ink);border-color:var(--paper);transform:none}
+#radio .radio-controls-inline .t-btn[aria-pressed=true]:not(#radio-play){color:var(--cyan)}
+#radio .radio-controls-inline .t-btn[aria-pressed=true]:not(#radio-play):is(:hover,:active,:focus-visible){color:var(--ink)}

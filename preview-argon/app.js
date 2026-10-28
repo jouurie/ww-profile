@@ -261,9 +261,8 @@
     $$('[data-radio-track]').forEach(button=>button.addEventListener('click',()=>engine.select(Number(button.dataset.radioTrack),true)));
     const filter=()=>{const query=$('#radio-search').value.trim().toLocaleLowerCase();let count=0;$$('[data-radio-track]').forEach(button=>{button.hidden=!tracks[Number(button.dataset.radioTrack)].name.toLocaleLowerCase().includes(query);if(!button.hidden)count++;});$('#radio-count-label').textContent=count+' TRACKS';};
     $('#radio-search').addEventListener('input',filter);$('#radio-search-clear').addEventListener('click',()=>{$('#radio-search').value='';filter();});
-    /* These optional supplied controls need a separate product decision/API; keep them honest. */
-    $('#radio-repeat').disabled=true;$('#radio-repeat').title='이 미리보기에서는 지원하지 않습니다.';
-    $('#radio-shuffle').disabled=true;$('#radio-shuffle').title='이 미리보기에서는 지원하지 않습니다.';
+    $('#radio-repeat').addEventListener('click',()=>engine.repeat());
+    $('#radio-shuffle').addEventListener('click',()=>engine.shuffle());
     window.addEventListener('pagehide',()=>engine.destroy(),{once:true});
   }
 

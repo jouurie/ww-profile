@@ -96,7 +96,7 @@
 
   let host=null,slot=null,mediaRoot=null,listener=null,widget=null,connecting=null;
   let generation=0,request=0,loadedIndex=-1,wantsPlay=false,pendingSeek=null,loadTimer=null;
-  let state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false};
+  let state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false,repeatOne:false,shuffled:false};
   let lastVolume=70;
   const snapshot=()=>({...state,muted:state.volume===0,tracks});
   function publish(){const value=snapshot();try{listener?.(value);}catch{/* A UI observer cannot interrupt playback cleanup. */}window.dispatchEvent(new CustomEvent('ww-radio-state',{detail:value}));return value;}
@@ -133,7 +133,7 @@
         play:()=>{if(!live())return;if(!wantsPlay){widget?.pause();return;}state.playing=true;state.error=null;publish();},
         pause:()=>{if(live()){state.playing=false;publish();}},
         progress:(position,total)=>{if(!live()||loadedIndex!==state.index)return;state.current=Math.max(0,Number(position)||0)/1000;state.duration=Math.max(0,Number(total)||0)/1000;publish();},
-        finish:()=>{if(!live())return;state.playing=false;if(wantsPlay)select((state.index+1)%tracks.length,true);else publish();},
+        finish:()=>{if(!live())return;state.playing=false;if(wantsPlay){if(state.repeatOne){widget.seekTo(0);widget.play();}else next();}else publish();},
         error:code=>{if(live())setError('YouTube 재생 오류 ('+code+'). 다른 곡을 선택해 주세요.');},
         blocked:()=>{if(live())setError('재생 버튼을 다시 눌러 주세요.');}
       });
@@ -154,7 +154,7 @@
     (header&&!header.closest('.panel,[hidden]')?header:document.body).append(mediaRoot);
     host=mediaRoot;
     listener=typeof onState==='function'?onState:null;
-    state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false};
+    state={index:0,playing:false,current:0,duration:0,volume:70,error:null,ready:false,repeatOne:false,shuffled:false};
     lastVolume=state.volume;
     return publish();
   }
@@ -169,7 +169,9 @@
   function pause(){wantsPlay=false;try{widget?.pause();}catch{}state.playing=false;return publish();}
   function toggle(){return wantsPlay?pause():play();}
   function prev(){return select((state.index-1+tracks.length)%tracks.length,true);}
-  function next(){return select((state.index+1)%tracks.length,true);}
+  function next(){const index=state.shuffled?(state.index+1+Math.floor(Math.random()*(tracks.length-1)))%tracks.length:(state.index+1)%tracks.length;return select(index,true);}
+  function repeat(){state.repeatOne=!state.repeatOne;return publish();}
+  function shuffle(){state.shuffled=!state.shuffled;return publish();}
   function seek(seconds){
     const value=Number(seconds);if(!Number.isFinite(value))return snapshot();
     const target=Math.min(state.duration||Infinity,Math.max(0,value));state.current=target;
@@ -188,5 +190,5 @@
     slot?.remove();slot=null;mediaRoot?.remove();mediaRoot=null;host=null;state.ready=false;state.playing=false;state.current=0;state.duration=0;state.error=null;
     const value=publish();listener=null;return value;
   }
-  window.WWRadioEngine=Object.freeze({init,select,play,pause,toggle,prev,next,seek,volume,mute,destroy,get state(){return snapshot();}});
+  window.WWRadioEngine=Object.freeze({init,select,play,pause,toggle,prev,next,repeat,shuffle,seek,volume,mute,destroy,get state(){return snapshot();}});
 })();

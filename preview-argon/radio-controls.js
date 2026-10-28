@@ -21,6 +21,9 @@
   function updateState(state){
     const radio=document.getElementById('radio');if(!radio||!state)return;
     radio.classList.toggle('radio-is-playing',state.playing);
+    for(const [id,on,label] of [['radio-repeat',state.repeatOne,'한 곡 반복'],['radio-shuffle',state.shuffled,'곡 순서 섞기']]){const b=radio.querySelector('#'+id);if(b){b.disabled=false;b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',label+(on?' 끄기':' 켜기'));b.title=b.getAttribute('aria-label');}}
+    const mode=radio.querySelector('#radio-mode-indicator');if(mode)mode.textContent=(state.repeatOne?'REPEAT ONE':'REPEAT OFF')+' · '+(state.shuffled?'SHUFFLE':'NORMAL');
+    const link=radio.querySelector('#radio-fallback-link');if(link)link.title='원본에서 듣기';
     const mute=radio.querySelector('.radio-mute');
     if(mute){mute.setAttribute('aria-pressed',String(state.muted));mute.setAttribute('aria-label',state.muted?'음소거 해제':'음소거');mute.title=mute.getAttribute('aria-label');}
     const slider=radio.querySelector('#radio-volume'),readout=radio.querySelector('#radio-vol-val');
@@ -89,6 +92,8 @@
     const radio=root.matches?.('#radio')?root:root.querySelector('#radio');if(!radio)return false;
     const controls=radio.querySelector('.deck-controls-bar');if(!controls)return false;
     controls.classList.add('radio-controls-inline');
+    const transport=controls.querySelector('.transport-btns');
+    if(transport)for(const id of ['radio-repeat','radio-prev','radio-play','radio-next','radio-shuffle']){const b=radio.querySelector('#'+id);if(b)transport.append(b);}
     [['radio-prev','previous'],['radio-next','next'],['radio-repeat','repeat'],['radio-shuffle','shuffle']].forEach(([id,name])=>{
       const button=radio.querySelector('#'+id);if(!button)return;
       button.innerHTML=icon(name);
