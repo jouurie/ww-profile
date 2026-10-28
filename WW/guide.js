@@ -8,7 +8,7 @@
   const payloads=new Map();
   let copyIndex=0;
   const esc=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-  const clean=value=>String(value).replace(/^\s*#{1,6}\s*/gm,'').replace(/\u{1f517}\s*/gu,'').replace(/\u2b50\s*/g,'');
+  const clean=value=>String(value).replace(/^엘린 (?=FREE)/,'').replace(/^\s*#{1,6}\s*/gm,'').replace(/\u{1f517}\s*/gu,'').replace(/\u2b50\s*/g,'');
   const links=value=>clean(value).split(/(https?:\/\/[^\s<>]+)/g).map(part=>/^https?:\/\//.test(part)?'<a class="wg-resource-link" href="'+esc(part)+'" target="_blank" rel="noreferrer">지침 보기 ↗</a>':esc(part)).join('');
   const badge=()=>'';
   function body(raw){
@@ -133,13 +133,17 @@
     ];
     const values=Object.fromEntries(fields.map(([key])=>[key,key==='n'?'1':key==='duration'?'0':'']));
     const template='```status\n'+JSON.stringify(values,null,2)+'\n```';
-    const input='<p>노디는 status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 아래는 장면 정보를 넣지 않은 최소 예시입니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p>'+copyPanel('<pre class="wg-code"><code>'+esc(template.replace(/\n  /g,'\n'))+'</code></pre>',template,'노디 예시 복사');
+    const sourceExample=data.items.find(item=>item.index===10).sections[3].body;
+    const sourceValues=Object.fromEntries([...sourceExample.matchAll(/(\w+)=(?:"([^"]*)"|\{(\d+)\})/g)].map(match=>[match[1],match[2]??match[3]]));
+    const exampleValues=Object.fromEntries(fields.map(([key])=>[key,key==='loreKeys'?'duration='+sourceValues.duration+' month='+sourceValues.month+' weather='+sourceValues.weather:sourceValues[key]??'']));
+    const example='```status\n'+JSON.stringify(exampleValues,null,2)+'\n```';
+    const input='<p>status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p><h5>입력 형식</h5>'+copyPanel('<pre class="wg-code"><code>'+esc(template)+'</code></pre>',template,'입력 형식 복사')+'<h5>예시</h5>'+copyPanel('<pre class="wg-code"><code>'+esc(example)+'</code></pre>',example,'예시 복사');
     const settings='<h4>값 형식</h4><p>21개 값은 모두 문자열입니다. n과 duration도 따옴표 안에 적습니다. 빈 문자열에는 현재 확인된 값을 넣고, 바뀌지 않은 유효한 상태는 유지합니다.</p><p>loreKeys는 현재 duration, month, weather와 맞춰 갱신합니다.</p>';
     return statusGuide(input,settings,'항목별 의미 · JSON 키',fields);
   }
   function statusPreview(){
     const tabs=['elyn','nody'].map((platform,index)=>'<button type="button" role="tab" id="wg-status-tab-'+platform+'" aria-controls="wg-status-preview-'+platform+'" data-wg-status-platform="'+platform+'" aria-selected="false" tabindex="'+(index===0?'0':'-1')+'">'+platform.toUpperCase()+'</button>').join('');
-    return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=20261024-density1',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
+    return '<div class="wg-status-preview"><nav class="wg-local-tabs" role="tablist" aria-label="상태창 플랫폼">'+tabs+'</nav><div class="wg-status-preview-body"><div class="wg-neutral-platform" data-status-neutral><h4>플랫폼 미선택</h4><p>엘린 또는 노디를 선택하세요.</p></div>'+['elyn','nody'].map(platform=>'<div id="wg-status-preview-'+platform+'" role="tabpanel" aria-labelledby="wg-status-tab-'+platform+'" data-preview-platform="'+platform+'" hidden><iframe class="wg-status-frame" title="상태창 미리보기" src="'+esc(new URL('status-preview/'+platform+'.html?v=20261028-example2',moduleBase).href)+'" data-preview-frame="'+platform+'" scrolling="no" loading="lazy"></iframe></div>').join('')+'</div></div>';
   }
   function budgetPanel(lines){return '<section class="wg-setting-box"><h4>로어북 예산</h4><ul class="wg-setting-list">'+lines.filter(line=>line.trim()).map(line=>'<li>'+(line.includes('권장 예산')?'<strong>권장 예산:</strong> <a class="wg-resource-link" href="#guide-5">추천 설정값</a>':links(line.replace(/^[▸·] /,'')))+'</li>').join('')+'</ul></section>';}
   function handoffBody(platform){
