@@ -1,0 +1,59 @@
+/* Native press feedback also applies on hybrid mouse/touch devices. */
+#guide .ww-guide button:active { filter: brightness(1.08); text-decoration: none; }
+.character-menu a + a:active { border-color: var(--cyan); color: var(--cyan); }
+.chapter-nav a:active { color: var(--paper); background: rgba(241, 221, 189, 0.05); }
+.key-tag:active { animation: 1.1s ease-in-out 0s infinite normal none running key-sway; }
+.twin-polaroid:active { transform: translateY(-2px); }
+.obj-tile:active { border-color: var(--cyan); }
+.contact-controls > button:active { border-color: var(--cyan); color: var(--cyan); }
+.npc-dir-btn:active { border-color: var(--cyan); }
+.guide-jump-bar a:active { border-color: var(--cyan); color: var(--cyan); }
+.cmd-key:active { border-color: var(--cyan); }
+.copy-btn:active { background: var(--stamp-red); border-color: var(--paper); }
+.t-btn:active { border-color: var(--cyan); color: var(--cyan); }
+.track-card:active { background: var(--ink-cab); border-color: var(--cyan); }
+.text-button:active { border-color: var(--cyan); color: var(--cyan); }
+:where(button, [role="button"], summary, .text-button, .jump-ticket, .bp-ticket, .character-menu a, .twin-polaroid, .chapter-nav a):not(:disabled):active { filter: brightness(1.15); box-shadow: currentcolor 0px 0px 0px 1px inset; }
+.piece-jump:active { background: var(--cyan); color: var(--tar); border-color: var(--cyan); box-shadow: inset 0 0 0 1px var(--cyan); }
+.text-button:active, .character-menu a:active { background: var(--brass); color: var(--tar); border-color: var(--brass); }
+.wwtruck .wwtruck-category:not([aria-selected="true"]):active, .wwtruck .wwtruck-thumbnail:not([aria-pressed="true"]):active { color: var(--wwtruck-ink); background: var(--wwtruck-paper); }
+.ww-npc .ww-npc-thumb:active { translate: 0px -3px; }
+@media (prefers-reduced-motion: reduce){.ww-npc .ww-npc-thumb:active { translate: none; }}
+.ww-opening-card:is(:active) { transform: translateY(-4px) rotate(var(--opening-paper-angle)); animation: 0.48s ease-out 0s 1 normal none running ww-paper-settle; }
+.ww-opening-card:is(:active)::before { box-shadow: 8px 13px 0 var(--opening-ink); }
+@media (prefers-reduced-motion: reduce){.ww-opening-card:is(:active)::before { box-shadow: 8px 11px 0 var(--opening-ink); }}
+#intro .twin-polaroid.ww-intro-flip:active { transform: none; }
+#openings.ww-openings-ui .ww-opening-card:is(:active) { transform: translateY(-4px) rotate(var(--opening-paper-angle)) !important; animation: 0.48s ease-out 0s 1 normal none running ww-paper-settle !important; }
+#intro .key-tag:is(:active) > img { animation: 1.1s ease-in-out 0s infinite normal none running ww-key-swing !important; }
+.n0 .ww-site-header .chapter-nav label:active { background: var(--stamp-red); color: var(--paper); border-bottom-color: var(--paper); }
+:is(.ww-site-header, .ww-landing, main > .panel) :is(a[href], button, summary, [role="button"], [role="tab"], input[type="range"], input[type="search"]):not(:disabled, [aria-disabled="true"], .key-tag, .key-tag *, .ww-start, .ww-start *):active { filter: brightness(1.12); }
+:is(.ww-site-header, .ww-landing, main > .panel) a[href]:not(.key-tag, .key-tag *, .ww-start, .ww-start *):active { text-decoration: none; }
+:is(.ww-site-header, .ww-landing, main > .panel) :is(a[href], button):not(.key-tag, .ww-start *):active img { filter: brightness(1.1); }
+main > .panel :is(.brother-dossier, .profile-sheet, .paper-piece, .bento-piece, .ww-npc-spread, .ww-opening-card, .wg-model-card, .wg-status-card, .wg-support-unit, .wwtruck-caption):active { filter: brightness(1.08); }
+main > .panel :is(.prose .kv-line, .ww-npc-details p, .wg-command-row, .wg-model-setting, .wg-progress-lines p, .memo-item, .story-slip):active { filter: brightness(1.15); }
+main > .panel :is(a, button, summary):active:not(:focus-visible) { outline: none !important; box-shadow: none !important; }
+main > .panel details:has(> summary:active) { box-shadow: none !important; }
+.ww-tooltip-host:is(:active) > .ww-html-tooltip { opacity: 1; visibility: visible; }
+main img:active, main :is(.ww-opening-card, .ww-npc-polaroid, .wwtruck-visual, .key-tag):active img { filter: brightness(1.18); }
+main :is(.ww-profile-traits > li, .kw-chip, #npc [aria-label="외형"] > *):active { filter: brightness(1.22); transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce){main :is(.ww-profile-traits > li, .kw-chip, #npc [aria-label="외형"] > *):active { transform: none; }}
+.ww-site-header .character-menu a + a:active { border-color: var(--cyan); color: var(--cyan); }
+.ww-site-header > .chapter-nav a:active { background: rgba(241, 221, 189, 0.05); color: var(--paper); }
+#intro .key-tag:is(:active) { overflow: visible; animation: auto ease 0s 1 normal none running none; }
+#intro .key-tag:is(:active) > img { animation: 1.1s ease-in-out 0s infinite normal none running ww-key-swing; }
+@media (prefers-reduced-motion: reduce){#intro .key-tag:is(:active) > img { animation: auto ease 0s 1 normal none running none; transform: rotate(-10deg); }}
+#intro .twin-polaroid.ww-intro-flip:active .tp-card-inner > :is(.tp-card-front, .tp-card-back) { border-color: var(--card-accent); }
+#intro .twin-polaroid.ww-intro-flip:active .tp-card-inner > :is(.tp-card-front, .tp-card-back) { filter: brightness(1.08) !important; }
+@media (prefers-reduced-motion: no-preference){.ww-motion-ready[data-motion~="tilt"]:active [data-motion-image] { scale: 1.025; }}
+.chapter-nav.n1 label:active { background: var(--stamp-red); color: var(--paper); border-color: var(--paper); }
+#guide .wg-item-selector summary:active { filter: brightness(1.18) !important; }
+.n0 :is(summary, label[for]):active { filter: brightness(1.18) !important; }
+.n0 :is(.ww-profile-traits > li, .kw-chip, .ww-npc-traits > .ww-npc-trait):active { filter: brightness(1.22); transform: scale(1.04); }
+.n0 :is(label[for], .n6 > details > summary, .wg details > summary, .wc > summary, .rr > details > summary):not(.key-tag, .key-tag *, .ww-start, .ww-start *):active { filter: brightness(1.12); }
+.n0 .wwtruck .rr > details:not([open]) > summary:active .wwtruck-thumbnail, .n0 .wwtruck .n6 > details:not([open]) > summary:active { color: var(--wwtruck-ink); background: var(--wwtruck-paper); }
+.n0 .rr > details > summary:active .ra { background: var(--brass); color: var(--tar); }
+@media (prefers-reduced-motion: reduce){.n0 :is(.ww-profile-traits > li, .kw-chip, .ww-npc-traits > .ww-npc-trait):active { transform: none; }}
+.ww-rail-navigation .ww-rail-arrow:not(:disabled):active { background: var(--brass); color: var(--tar); }
+.ww-site-header > .ww-hscroll-shell > .chapter-nav a:active { background: var(--header-panel); color: var(--paper); }
+.ww-site-header > .ww-rail-navigation > .ww-rail-arrow:not(:disabled):active { color: var(--brass); background: transparent; box-shadow: none; filter: none; }
+.ww-site-header > .ww-rail-navigation > .ww-rail-arrow:not(:disabled):active { color: var(--cyan); background: transparent; box-shadow: none; filter: none; }
