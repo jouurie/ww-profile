@@ -106,7 +106,7 @@
     const format=item.sections[0],settings=item.sections[1],meaning=item.sections[2],example=item.sections[3];
     const rows=meaning.body.split('\n'),fields=rows.filter(line=>line.startsWith('· ')).map(line=>{const colon=line.indexOf(':');return [line.slice(2,colon),line.slice(colon+1).trimStart()];});
     const notes=body(rows.filter(line=>!line.startsWith('· ')).join('\n'));
-    const input='<h5>'+esc(format.heading)+'</h5>'+body(format.body)+'<h5>'+esc(example.heading)+'</h5>'+body(example.body);
+    const input='<div class="wg-status-example-grid"><div><h5>'+esc(format.heading)+'</h5>'+body(format.body)+'</div><div><h5>'+esc(example.heading)+'</h5>'+body(example.body)+'</div></div>';
     return statusGuide(input,'<h4>'+esc(settings.heading)+'</h4>'+body(settings.body),meaning.heading,fields,notes);
   }
   function nodyStatusNotes(){
@@ -139,7 +139,7 @@
     const sourceValues=Object.fromEntries([...sourceExample.matchAll(/(\w+)=(?:"([^"]*)"|\{(\d+)\})/g)].map(match=>[match[1],match[2]??match[3]]));
     const exampleValues=Object.fromEntries(fields.map(([key])=>[key,key==='loreKeys'?'duration='+sourceValues.duration+' month='+sourceValues.month+' weather='+sourceValues.weather:sourceValues[key]??'']));
     const example='```status\n'+JSON.stringify(exampleValues,null,2)+'\n```';
-    const input='<p>status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p><h5>입력 형식</h5>'+copyPanel('<pre class="wg-code"><code>'+esc(template)+'</code></pre>',template,'입력 형식 복사')+'<h5>예시</h5>'+copyPanel('<pre class="wg-code"><code>'+esc(example)+'</code></pre>',example,'예시 복사');
+    const input='<p>status 코드블록 안의 JSON을 읽어 상태창으로 표시합니다. 첫 줄의 <code>```status</code>와 마지막 줄의 <code>```</code>를 포함해 복사하세요.</p><div class="wg-status-example-grid"><div><h5>입력 형식</h5>'+copyPanel('<pre class="wg-code"><code>'+esc(template)+'</code></pre>',template,'입력 형식 복사')+'</div><div><h5>예시</h5>'+copyPanel('<pre class="wg-code"><code>'+esc(example)+'</code></pre>',example,'예시 복사')+'</div></div>';
     const settings='<h4>값 형식</h4><p>21개 값은 모두 문자열입니다. n과 duration도 따옴표 안에 적습니다. 빈 문자열에는 현재 확인된 값을 넣고, 바뀌지 않은 유효한 상태는 유지합니다.</p><p>loreKeys는 현재 duration, month, weather와 맞춰 갱신합니다.</p>';
     return statusGuide(input,settings,'항목별 의미 · JSON 키',fields);
   }

@@ -328,7 +328,10 @@
 /* Compact status reference keeps all fields readable within the existing paper theme. */
 #guide .ww-guide .wg-status-notes{margin-top:16px}
 #guide .ww-guide .wg-status-guide{grid-template-columns:minmax(0,1fr);gap:12px}
-#guide .ww-guide .wg-status-input-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#guide .ww-guide .wg-status-input-stack{grid-template-columns:minmax(0,1fr);gap:12px}
+#guide .ww-guide .wg-status-example-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+#guide .ww-guide .wg-status-example-grid>div{min-width:0}
+@media(max-width:650px){#guide .ww-guide .wg-status-example-grid{grid-template-columns:minmax(0,1fr)}}
 #guide .ww-guide .wg-status-guide .wg-status-card{padding:12px}
 #guide .ww-guide .wg-status-guide .wg-status-card h4{margin-bottom:8px;font-size:15px}
 #guide .ww-guide .wg-status-guide .wg-status-card h5{margin:10px 0 5px;font-size:13px}
