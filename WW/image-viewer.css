@@ -29,3 +29,37 @@ body > dialog.ww-image-viewer[open] { display: block; }
 @media (hover:hover) and (pointer:fine){.ww-image-viewer .wwiv-close:hover { filter: brightness(1.18); }}@media (hover:none),(pointer:coarse),(pointer:none){.ww-image-viewer .wwiv-close:active { filter: brightness(1.18); }}
 .ww-image-viewer .wwiv-close:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .ww-image-viewer .wwiv-image { display: block; width: auto; height: auto; max-width: calc(100vw - 32px); max-height: calc(100svh - 80px); margin: 0; object-fit: contain; }
+
+/* Retain the pinned dossier framing through the native NODY zoom wrapper. */
+#brothers .brother-dossier>.portrait.large>.nz:not([open]){position:absolute;inset:0}
+#brothers .brother-dossier>.portrait.large>.nz:not([open])>summary{height:100%}
+#brothers .brother-dossier>.portrait.large>img,#brothers .brother-dossier>.portrait.large>.nz:not([open])>summary>img{display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+#brothers .brother-dossier.wyatt>.portrait.large>img,#brothers .brother-dossier.wyatt>.portrait.large>.nz:not([open])>summary>img{transform:translate(-20%,-8px) scale(1.08)!important;transform-origin:50% 0!important;mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+#brothers .brother-dossier.wade>.portrait.large>img,#brothers .brother-dossier.wade>.portrait.large>.nz:not([open])>summary>img{object-position:58% 21%;transform:translateX(-24%);mask-image:linear-gradient(to right,#000 0%,#000 65%,transparent 100%)}
+@media(max-width:720px){#brothers .brother-dossier.wade>.portrait.large>img,#brothers .brother-dossier.wade>.portrait.large>.nz:not([open])>summary>img{object-position:58% 18%}}
+/* Keep one restrained image response; avoid multiplying ancestor brightness. */
+main>.panel .ww-npc-spread:is(:hover,:active){filter:none}
+main .ww-npc-polaroid:is(:hover,:active) img,main .ww-npc-polaroid img:is(:hover,:active){filter:brightness(1.03)!important}
+body>dialog.ww-image-viewer .wwiv-image{filter:none!important;box-shadow:none!important}
+/* All tracks are peers, including the row containing the longest title. */
+#radio :is(.cassette-track-grid,.track-grid){grid-auto-rows:1fr}
+#radio :is(.track-card,.tc-info,.tc-title,.tc-num){font-size:var(--ww-body-size,13px)}
+#radio .tc-title{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.7;overflow-wrap:anywhere}
+#radio .tc-info{min-width:0}
+#radio .tc-title .radio-title-track{display:block;width:auto;white-space:normal;animation:none!important;transform:none!important}
+#radio .tc-title .radio-title-track>span{white-space:normal}
+#radio .tc-title .radio-title-copy{display:none!important}
+/* Native script-free zoom applies only to profile and NPC images. */
+.n0 .nz{display:block;margin:0;min-width:0}
+.n0 .nz>summary{display:block;list-style:none;cursor:zoom-in}
+.n0 .nz>summary::-webkit-details-marker{display:none}
+.n0 .nz:not([open]),.n0 .nz:not([open])>summary{height:100%}
+.n0 .nz img{display:block;width:100%}
+.n0 .nz[open]>summary{position:fixed;inset:0;z-index:99999;background:#171717ef;padding:20px;display:grid;place-items:center;cursor:zoom-out;filter:none!important;box-shadow:none!important}
+.n0 .nz[open]>summary img{width:auto!important;height:auto!important;max-width:100%!important;max-height:calc(100dvh - 40px)!important;object-fit:contain!important;transform:none!important;mask-image:none!important;filter:none!important;box-shadow:none!important}
+.n0 .nz[open]>summary:after{content:'×';position:fixed;right:12px;top:4px;color:white;font:30px/1 sans-serif}
+.n0:has(.nz[open]),.n0 :is(.panel,.mosaic-container,.mosaic-row-2,.brother-dossier,.portrait,.ww-npc-shell,.rg,.rs,.ww-npc-page,.ww-npc-spread,.ww-npc-polaroid):has(.nz[open]){transform:none!important;rotate:none!important;scale:none!important;translate:none!important;filter:none!important;contain:none!important;mask:none!important;isolation:auto!important;overflow:visible!important;z-index:auto!important}
+.n0 .nz[open]{min-height:100px}
+.n0 .ww-npc-polaroid .nz>summary:is(:hover,:active){filter:none!important;box-shadow:none!important}
+/* External addresses are plain selectable text in the NODY host. */
+.n0 #guide p.wg-resource-link,.n0 #guide p.wg-resource-link:is(:hover,:active){font:inherit;letter-spacing:inherit;text-decoration:none;cursor:text;filter:none;box-shadow:none;background:transparent}
