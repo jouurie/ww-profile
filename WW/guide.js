@@ -94,7 +94,14 @@
     return pair?'<tr><th scope="row">'+settingLabel(pair[1])+'</th><td><div class="wg-support-value">'+emphasize(pair[2])+'</div>'+notes+'</td></tr>':'<tr><td colspan="2"><div class="wg-support-statement">'+links(first)+'</div>'+notes+'</td></tr>';
   }
   function commandsBody(item){
-    return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(command=>'<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+(command.pinball?'<small>엘린: 상태창 내장 게임 · 노디: 별도 핀볼 패널</small>':'')+'</div><div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code></div></div></article>').join('')+'</div></section>').join('');
+    const tokens=command=>'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code></div></div>';
+    const row=command=>{
+      if(!command.pinball)return '<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+'</div>'+tokens(command)+'</article>';
+      const play=new URL('assets/pinball/play.webp',moduleBase).href;
+      const still=new URL('assets/pinball/still.webp',moduleBase).href;
+      return '<article class="wg-command-row wg-pinball-row"><picture class="wg-pinball-media"><source media="(prefers-reduced-motion: reduce)" srcset="'+esc(still)+'"><img src="'+esc(play)+'" width="428" height="834" loading="lazy" decoding="async" alt="핀볼 중앙 범퍼를 맞혀 점수가 오르는 플레이 화면"></picture><div class="wg-pinball-copy"><div class="wg-command-description"><p>'+esc(command.description)+'</p><p>공 3개로 플레이하며, 좌우 플리퍼로 범퍼와 표적을 맞혀 점수를 쌓습니다.</p></div>'+tokens(command)+'<p class="wg-pinball-platform-note">엘린은 상태창 안에서, 노디는 별도 핀볼 패널에서 플레이합니다.</p></div></article>';
+    };
+    return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(row).join('')+'</div></section>').join('');
   }
   function statusFields(fields){
     return '<table class="wg-status-field-table"><thead><tr><th scope="col">항목</th><th scope="col">의미</th></tr></thead><tbody>'+fields.map(([key,meaning])=>'<tr><th scope="row"><code>'+esc(key)+'</code></th><td>'+links(meaning)+'</td></tr>').join('')+'</tbody></table>';
