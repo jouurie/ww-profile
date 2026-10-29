@@ -95,12 +95,14 @@
   }
   function commandsBody(item){
     const tokens=command=>'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code></div></div>';
-    const row=command=>{
-      if(!command.pinball)return '<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+'</div>'+tokens(command)+'</article>';
-      return '<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+'<button type="button" class="wg-play-button" data-pinball-preview aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><span>플레이 화면 보기</span></button></div>'+tokens(command)+'</article>';
-    };
-    return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(row).join('')+'</div></section>').join('');
+    const row=command=>'<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+'</div>'+tokens(command)+'</article>';
+    return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>{
+      const hasPinball=data.commands.some(command=>command.pinball&&group.names.includes(command.elyn));
+      const heading=hasPinball?'<div class="wg-command-heading"><h4>'+esc(group.title)+'</h4><span class="wg-copy-control"><button type="button" data-pinball-preview aria-haspopup="dialog">플레이 화면 보기</button></span></div>':'<h4>'+esc(group.title)+'</h4>';
+      return '<section class="wg-command-group">'+heading+'<div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(row).join('')+'</div></section>';
+    }).join('');
   }
+
   function statusFields(fields){
     return '<table class="wg-status-field-table"><thead><tr><th scope="col">항목</th><th scope="col">의미</th></tr></thead><tbody>'+fields.map(([key,meaning])=>'<tr><th scope="row"><code>'+esc(key)+'</code></th><td>'+links(meaning)+'</td></tr>').join('')+'</tbody></table>';
   }
