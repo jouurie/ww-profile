@@ -4,7 +4,12 @@
   var sceneImages = {"01":"https://cdn.imgchest.com/files/9b65036dea36.png","02":"https://cdn.imgchest.com/files/83c52183f6b5.png","03":"https://cdn.imgchest.com/files/15f834822cc5.png","04":"https://cdn.imgchest.com/files/1a2529d842f4.png","05":"https://cdn.imgchest.com/files/5b1541f2ad05.png","06":"https://cdn.imgchest.com/files/9d1a1aa8a1b4.png"};
   var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자유 도입부'];
   var plotIds = ['plot1', 'plot2', 'plot3', 'plot4', 'plot5', 'plot_auto_intro'];
-  var dialog, previewTitle, previewBody, opener, overflow;
+  var dialog, previewTitle, previewBody, opener, overflow, pressedPreview;
+  function clearPreviewPress(){pressedPreview?.classList.remove("is-pressed");pressedPreview=null;}
+  document.addEventListener("pointerup",clearPreviewPress,{passive:true});
+  document.addEventListener("pointercancel",clearPreviewPress,{passive:true});
+  document.addEventListener("scroll",clearPreviewPress,{passive:true,capture:true});
+  global.addEventListener("blur",clearPreviewPress);
 
   function markedText(parent, text) {
     var chunks = text.split(/(\{\{user\}\})/g);
@@ -108,6 +113,7 @@
     document.body.style.overflow = 'hidden';
     dialog.showModal();
     dialog.scrollTop = 0;
+    previewBody.scrollTop = 0;
     dialog.querySelector('.ww-opening-preview-close').focus({ preventScroll: true });
   }
 
@@ -180,6 +186,8 @@
       header.append(count, name);
       var previewButton = element('button', 'ww-opening-preview-button', '전문 보기');
       previewButton.type = 'button';
+      const arrow=document.createElementNS("http://www.w3.org/2000/svg","svg");arrow.setAttribute("viewBox","0 0 16 16");arrow.setAttribute("aria-hidden","true");const arrowPath=document.createElementNS("http://www.w3.org/2000/svg","path");arrowPath.setAttribute("d","M3 13 13 3M4 3h9v9");arrow.append(arrowPath);previewButton.append(arrow);
+      previewButton.addEventListener("pointerdown",function(event){if(event.pointerType!=="mouse"){clearPreviewPress();pressedPreview=previewButton;previewButton.classList.add("is-pressed");}},{passive:true});
       previewButton.setAttribute('aria-haspopup', 'dialog');
       previewButton.setAttribute('aria-label', parts.title + ' 전문 보기');
       previewButton.addEventListener('click', function (event) { event.stopPropagation(); openPreview(card, previewButton); });
