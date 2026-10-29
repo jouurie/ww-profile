@@ -12,7 +12,7 @@
   host.querySelector('.brand').href=home.href;
   var nav=host.querySelector('nav');items.forEach(function(item,index){var a=document.createElement('a');a.href=detail.href+'#'+item[0];var number=document.createElement('small');number.textContent=String(index+1).padStart(2,'0');a.append(number,document.createTextNode(item[1]));nav.append(a);});
   var menu=host.querySelector('.character-menu');
-  [['소개 페이지','https://jouurie.github.io/','전체 캐릭터 ↗'],['와이어트, 웨이드',detail.href+'#intro','현재 소개'],['이결','https://jouurie.github.io/ig-profile/','소개 바로가기 ↗']].forEach(function(item){var a=document.createElement('a');a.href=item[1];a.append(document.createTextNode(item[0]));var small=document.createElement('small');small.textContent=item[2];a.append(small);menu.append(a);});
+  [['소개 페이지','https://jouurie.github.io/','전체 캐릭터 ↗'],['와이어트, 웨이드',detail.href+'#intro','현재 소개'],['이결','https://jouurie.github.io/ig-profile/','소개 바로가기 ↗'],['세혁','https://jouurie.github.io/sh-profile/','소개 바로가기 ↗']].forEach(function(item){var a=document.createElement('a');a.href=item[1];a.append(document.createTextNode(item[0]));var small=document.createElement('small');small.textContent=item[2];a.append(small);menu.append(a);});
   current.replaceWith(host);if(previousNav)previousNav.remove();
   var characters=host.querySelector('.characters');document.addEventListener('click',function(e){if(!characters.contains(e.target))characters.open=false;});characters.addEventListener('keydown',function(e){if(e.key==='Escape'){characters.open=false;characters.querySelector('summary').focus();}});
   function size(){document.documentElement.style.setProperty('--site-header-height',host.getBoundingClientRect().height+'px');}size();if(window.ResizeObserver)new ResizeObserver(size).observe(host);
