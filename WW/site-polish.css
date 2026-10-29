@@ -298,7 +298,7 @@ body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:rgba(
 
 /* Supporting explanations remain subordinate after shared readability rules. */
 #guide .ww-guide{--ww-body-size:13px;--ww-note-size:11px}
-#guide .ww-guide .wg-note,#guide .ww-guide .wg-note p,#guide .ww-guide .wg-support-notes p,#guide .ww-guide .wg-settings-table-unit>p,#guide .ww-guide .wg-model-support-section>p,#guide .ww-guide .wg-pieces>p{font-size:var(--ww-note-size);font-weight:400;line-height:1.65;margin-top:5px;color:var(--muted)}
+#guide .ww-guide .wg-note,#guide .ww-guide .wg-note p,#guide .ww-guide .wg-support-notes p,#guide .ww-guide .wg-settings-table-unit>p,#guide .ww-guide .wg-model-support-section>p,#guide .ww-guide .wg-pieces>p{font-size:var(--ww-note-size);font-weight:400;line-height:1.65;margin-top:5px}
 #guide .ww-guide .wg-support-notes{margin-top:6px;padding-top:6px;padding-bottom:6px}
 #guide .ww-guide .wg-note{padding-left:1em}
 #guide .ww-guide .wg-note :is(a,strong,span){font-size:inherit;line-height:inherit}
