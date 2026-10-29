@@ -1,0 +1,8 @@
+/* A subsection gap already includes its parent stack gap. */
+body main .panel .prose .kv-stack{gap:var(--ww-paragraph-gap)}
+body main .panel .prose .kv-stack>.kv-section{margin-top:calc(var(--ww-subsection-gap) - var(--ww-paragraph-gap))}
+body main .panel .prose .kv-stack>.kv-section:first-child{margin-top:0}
+body main .panel .prose .kv-section+ .kv-line{margin-top:calc(var(--ww-subsection-gap) - var(--ww-paragraph-gap))}
+body main .panel .prose .kv-heading{margin-bottom:var(--ww-heading-gap)}
+#brothers .profile-section>.prose{padding-top:var(--ww-heading-gap)}
+body main .panel .prose .kv-section-body{gap:var(--ww-paragraph-gap)}
