@@ -29,10 +29,13 @@ window.WWRender = (() => {
   function inlineLabel(key, value) {
     return '<span class="sq-sub '+getLabelTone(key)+'">'+escapeHTML(key)+'</span> <span class="kv-value">'+linkify(value)+'</span>';
   }
-  function formatSubLine(rawLine) {
+  function fieldSection(key,value){
+    return '<section class="kv-section"><h4 class="kv-heading"><span class="sq-sub '+getLabelTone(key)+'">'+escapeHTML(key)+'</span></h4><div class="kv-section-body"><p class="kv-line">'+linkify(value)+'</p></div></section>';
+  }
+  function formatSubLine(rawLine,stackedFields=false) {
     const body=rawLine.replace(/^[·↳]\s*/, '').trim();
     const at=body.indexOf(':');
-    if(at>0&&at<=22&&!body.startsWith('http'))return '<p class="kv-line">'+inlineLabel(body.slice(0,at).trim(),body.slice(at+1).trim())+'</p>';
+    if(at>0&&at<=22&&!body.startsWith('http')){const key=body.slice(0,at).trim(),value=body.slice(at+1).trim();return stackedFields?fieldSection(key,value):'<p class="kv-line">'+inlineLabel(key,value)+'</p>';}
     return '<p class="kv-line">'+linkify(body)+'</p>';
   }
   function formatProfileSubLines(lines) {
@@ -47,7 +50,7 @@ window.WWRender = (() => {
     }
     return blocks.join('');
   }
-  function renderStructuredText(rawText, mergeProfileLabels=false) {
+  function renderStructuredText(rawText, mergeProfileLabels=false, stackedFields=false) {
     const lines=String(rawText||'').split('\n'),blocks=[];
     for(let i=0;i<lines.length;){
       const line=lines[i].trim();if(!line){i++;continue;}
@@ -61,9 +64,9 @@ window.WWRender = (() => {
           blocks.push('<section class="kv-section'+(entity?' kv-entity':'')+'"><h4 class="kv-heading"><span class="sq-sub '+getLabelTone(content)+'">'+escapeHTML(content)+'</span></h4><div class="kv-section-body">'+(mergeProfileLabels?formatProfileSubLines(subs):subs.map(sub=>sub.startsWith('<RStatus')?'<pre class="code-box">'+escapeHTML(sub)+'</pre>':formatSubLine(sub)).join(''))+'</div></section>');i=j;continue;
         }
         const pair=content.match(/^(.{1,28}?)(?: → | \| |:\s+)([\s\S]+)$/);
-        blocks.push('<p class="kv-line">'+(pair&&!content.startsWith('http')?inlineLabel(pair[1],pair[2]):linkify(content))+'</p>');i++;continue;
+        blocks.push(pair&&!content.startsWith('http')&&stackedFields?fieldSection(pair[1],pair[2]):'<p class="kv-line">'+(pair&&!content.startsWith('http')?inlineLabel(pair[1],pair[2]):linkify(content))+'</p>');i++;continue;
       }
-      blocks.push(formatSubLine(line));i++;
+      blocks.push(formatSubLine(line,stackedFields));i++;
     }
     return '<div class="kv-stack">'+blocks.join('')+'</div>';
   }
@@ -161,7 +164,7 @@ window.WWRender = (() => {
     sanitizeDOMLabels();
     const put=(id,html)=>{const element=document.getElementById(id);if(element)element.innerHTML=html;};
     const heading=item=>escapeHTML(item.title.replace(/^⭐\s*/,''));
-    const card=(item,id='')=>`<article class="paper-piece guide-source-card" ${id?`id="${id}"`:''}><h3 class="piece-title">${heading(item)}</h3><div class="prose" data-raw="${escapeHTML(item.text)}">${renderStructuredText(item.text)}</div>${/가이던스|요약 지침|^상태창$/.test(item.title)?`<button type="button" class="copy-line" data-copy="${id}">원문 복사</button>`:''}</article>`;
+    const card=(item,id='')=>`<article class="paper-piece guide-source-card" ${id?`id="${id}"`:''}><h3 class="piece-title">${heading(item)}</h3><div class="prose" data-raw="${escapeHTML(item.text)}">${renderStructuredText(item.text,false,item.title==='세계관')}</div>${/가이던스|요약 지침|^상태창$/.test(item.title)?`<button type="button" class="copy-line" data-copy="${id}">원문 복사</button>`:''}</article>`;
     const rows=(items,prefix)=>Array.from({length:Math.ceil(items.length/2)},(_,row)=>`<div class="mosaic-row-2">${items.slice(row*2,row*2+2).map((item,offset)=>card(item,prefix?`${prefix}-${row*2+offset}`:'')).join('')}</div>`).join('');
     put('character-menu',`<a href="https://jouurie.github.io/">소개 페이지<small>전체 캐릭터 ↗</small></a><a href="https://jouurie.github.io/ww-profile/">와이어트, 웨이드<small>현재 소개</small></a><a href="https://jouurie.github.io/ig-profile/">이결<small>소개 바로가기 ↗</small></a><a href="https://jouurie.github.io/sh-profile/">세혁<small>소개 바로가기 ↗</small></a>`);
     const dispatchPlatforms=document.getElementById('platforms');
