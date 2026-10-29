@@ -97,9 +97,7 @@
     const tokens=command=>'<div class="wg-command-pair"><div class="wg-command-token"><span class="wg-platform-label wg-elyn">엘린</span><code>'+esc(command.elyn)+'</code></div><div class="wg-command-token"><span class="wg-platform-label wg-nody">노디</span><code>'+esc(command.nody)+'</code></div></div>';
     const row=command=>{
       if(!command.pinball)return '<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+'</div>'+tokens(command)+'</article>';
-      const play=new URL('assets/pinball/play.webp',moduleBase).href;
-      const still=new URL('assets/pinball/still.webp',moduleBase).href;
-      return '<article class="wg-command-row wg-pinball-row"><picture class="wg-pinball-media"><source media="(prefers-reduced-motion: reduce)" srcset="'+esc(still)+'"><img src="'+esc(play)+'" width="428" height="834" loading="lazy" decoding="async" alt="핀볼 중앙 범퍼를 맞혀 점수가 오르는 플레이 화면"></picture><div class="wg-pinball-copy"><div class="wg-command-description"><p>'+esc(command.description)+'</p><p>공 3개로 플레이하며, 좌우 플리퍼로 범퍼와 표적을 맞혀 점수를 쌓습니다.</p></div>'+tokens(command)+'<p class="wg-pinball-platform-note">엘린은 상태창 안에서, 노디는 별도 핀볼 패널에서 플레이합니다.</p></div></article>';
+      return '<article class="wg-command-row"><div class="wg-command-description">'+esc(command.description)+'<button type="button" class="wg-play-button" data-pinball-preview aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><span>플레이 화면 보기</span></button></div>'+tokens(command)+'</article>';
     };
     return '<p>플랫폼에 맞는 명령어를 입력하거나 상태창의 명령어 버튼을 사용합니다.</p>'+data.commandGroups.map(group=>'<section class="wg-command-group"><h4>'+esc(group.title)+'</h4><div class="wg-command-rows">'+data.commands.filter(command=>group.names.includes(command.elyn)).map(row).join('')+'</div></section>').join('');
   }
@@ -395,6 +393,26 @@
     const platform=event.data.platform;if(!['elyn','nody'].includes(platform))return;
     const frame=mount.querySelector('[data-preview-frame="'+platform+'"]');if(!frame||event.source!==frame.contentWindow||event.origin!==new URL(frame.src).origin)return;
     const height=Number(event.data.height);if(Number.isFinite(height)&&height>0&&height<=20000)frame.style.height=Math.ceil(height)+'px';
+  });
+
+  let pinballDialog;
+  mount.addEventListener('click',event=>{
+    const trigger=event.target.closest('[data-pinball-preview]');
+    if(!trigger)return;
+    if(!pinballDialog){
+      pinballDialog=document.createElement('dialog');
+      pinballDialog.className='wg-play-dialog';
+      pinballDialog.setAttribute('aria-labelledby','wg-play-title');
+      pinballDialog.dataset.horizontalScroll='off';
+      pinballDialog.innerHTML='<header><h2 id="wg-play-title">핀볼 플레이</h2><button type="button" aria-label="플레이 화면 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header><img width="428" height="834" alt="핀볼 중앙 범퍼를 맞혀 점수가 오르는 플레이 영상"><p>공 3개로 플레이하며, 좌우 플리퍼로 범퍼와 표적을 맞혀 점수를 쌓습니다.</p><p>엘린은 상태창 안에서, 노디는 별도 핀볼 패널에서 플레이합니다.</p>';
+      document.body.append(pinballDialog);
+      pinballDialog.querySelector('button').addEventListener('click',()=>pinballDialog.close());
+      pinballDialog.addEventListener('click',e=>{if(e.target!==pinballDialog)return;const r=pinballDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)pinballDialog.close();});
+      pinballDialog.addEventListener('close',()=>{pinballDialog.querySelector('img').removeAttribute('src');});
+    }
+    pinballDialog.querySelector('img').src=new URL('assets/pinball/play.webp',moduleBase).href;
+    pinballDialog.showModal();
+    pinballDialog.scrollTop=0;
   });
   window.addEventListener('hashchange',synchronize);window.addEventListener('popstate',synchronize);
   display('play');synchronize();
