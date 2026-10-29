@@ -6,3 +6,4 @@ body main .panel .prose .kv-section+ .kv-line{margin-top:calc(var(--ww-subsectio
 body main .panel .prose .kv-heading{margin-bottom:var(--ww-heading-gap)}
 #brothers .profile-section>.prose{padding-top:var(--ww-heading-gap)}
 body main .panel .prose .kv-section-body{gap:var(--ww-paragraph-gap)}
+body main #profile-0 .prose .kv-section-body{gap:var(--ww-paragraph-gap)}
