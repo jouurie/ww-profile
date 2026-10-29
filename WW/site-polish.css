@@ -55,7 +55,7 @@ main .panel :is(.prose,.intro-whole-body,.ww-opening-body,.ww-npc-details p,.wwt
 #guide .wg-platform-label.wg-nody{color:var(--status-red,var(--red))}
 #guide .wg-model-highlight{padding:0;background:none;color:inherit;font-weight:700;line-height:inherit;text-decoration:none}
 #guide .wg-support-definition{grid-template-columns:112px minmax(0,1fr);gap:16px}
-#guide .wg-support-unit .wg-note{padding-left:128px;font-size:var(--ww-body-size)}
+#guide .wg-support-unit .wg-note{padding-left:128px;font-size:var(--ww-note-size,11px)}
 #guide .wg-model-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:var(--ww-section-gap)}
 #guide .wg-model-card{padding:20px;border:1px solid var(--brass)}
 #guide .wg-model-card :is(h4,h5){font-family:var(--font-label)}
@@ -295,3 +295,10 @@ body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:rgba(
   #guide .ww-guide .wg-code,#guide .ww-guide .wg-status-field-table{font-size:12.5px}
   #guide .ww-guide .wg-copy-block-head>span,#guide .ww-guide .wg-platform-label{font-size:12px}
 }
+
+/* Supporting explanations remain subordinate after shared readability rules. */
+#guide .ww-guide{--ww-body-size:13px;--ww-note-size:11px}
+#guide .ww-guide .wg-note,#guide .ww-guide .wg-note p,#guide .ww-guide .wg-support-notes p,#guide .ww-guide .wg-settings-table-unit>p,#guide .ww-guide .wg-model-support-section>p,#guide .ww-guide .wg-pieces>p{font-size:var(--ww-note-size);font-weight:400;line-height:1.65;margin-top:5px;color:var(--muted)}
+#guide .ww-guide .wg-support-notes{margin-top:6px;padding-top:6px;padding-bottom:6px}
+#guide .ww-guide .wg-note{padding-left:1em}
+#guide .ww-guide .wg-note :is(a,strong,span){font-size:inherit;line-height:inherit}
