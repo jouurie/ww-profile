@@ -12,7 +12,7 @@
     var url = new URL(href || location.href, location.href);
     if (url.origin !== home.origin || (!entry(url, home) && !entry(url, legacyHome) && !entry(url, detail))) return null;
     var key = url.hash.slice(1);
-    if (!key) return { view: entry(url, detail) ? 'intro' : 'home', key: key };
+    if (!key) return { view: 'home', key: key };
     if (key === 'home') return { view: 'home', key: key };
     if (panels.has(key)) return { view: key, key: key };
     if (/^guide-[a-z0-9-]+$/i.test(key)) return { view: 'guide', key: key };
@@ -22,7 +22,7 @@
     if (state.view !== 'home' && (entry(url, home) || entry(url, legacyHome))) {
       var section = new URL(detail.href); section.search = url.search; section.hash = url.hash || '#intro'; return section;
     }
-    if (state.view === 'home' && (entry(url, detail) || entry(url, legacyHome))) {
+    if (state.view === 'home') {
       var arrival = new URL(home.href); arrival.search = url.search; return arrival;
     }
     return url;
