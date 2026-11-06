@@ -91,3 +91,6 @@
 .ww-site-header>.ww-native-chapters>.ww-rail-arrow{cursor:pointer}
 .ww-native-chapters>.chapter-nav>.ww-chapter-target{display:block;position:static;flex:0 0 1px;align-self:stretch;width:1px;min-width:1px;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;pointer-events:none;scroll-margin-block:100vh}
 @media(min-width:721px){.n0 .ww-site-header>.ww-native-chapters{grid-template-columns:minmax(0,1fr);gap:0}.n0 .ww-native-chapters>.ww-rail-arrow{display:none}.n0 .ww-native-chapters>.chapter-nav{grid-column:1}}
+
+/* Shared slim chevrons for header, truck and NPC rails. */
+.ww-rail-navigation>.ww-rail-arrow{font-size:0!important}.ww-rail-navigation>.ww-rail-arrow::before{content:"";display:block;box-sizing:border-box;width:8px;height:8px;border:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;background:none;clip-path:none;transform:rotate(135deg)}.ww-rail-navigation>.ww-rail-arrow:last-child::before{transform:rotate(-45deg)}.ww-site-header>.ww-rail-navigation>.ww-rail-arrow::before{width:8px;height:8px;background:none;clip-path:none}.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:last-child::before{clip-path:none}
