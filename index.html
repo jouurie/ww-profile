@@ -55,6 +55,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
 <link rel="shortcut icon" href="../favicon.ico">
 <style id="balanced-tags-style">#intro .keyword-tag-piece.balanced-tags{display:flex;flex-wrap:nowrap;align-items:center;justify-content:center;gap:4px;padding:10px 6px}#intro .balanced-tags>.tag-row{display:contents}#intro .balanced-tags>.tag-row>.kw-chip{flex:0 0 auto;white-space:nowrap;word-break:keep-all;overflow-wrap:normal;font-size:clamp(9px,1.5vw,11px);line-height:1.5;padding:3px 4px}@media(max-width:600px){#intro .keyword-tag-piece.balanced-tags{flex-wrap:wrap;gap:4px;padding:10px 2px}#intro .balanced-tags>.tag-row{display:flex;flex:0 0 100%;justify-content:center;gap:2px;min-width:0}#intro .balanced-tags>.tag-row>.kw-chip{font-size:10px;padding:3px 2px}}@media(max-width:380px){#intro .balanced-tags>.tag-row{gap:1px}#intro .balanced-tags>.tag-row>.kw-chip{font-size:9px;padding-inline:1px}}@media(max-width:280px){#intro .balanced-tags>.tag-row>.kw-chip{padding-inline:0}}</style><link rel="stylesheet" href="../WW/spacing.css?v=20261030-semantic-spacing-2">
+<link rel="stylesheet" href="../WW/places.css?v=20261107-six-places">
+<script src="../WW/places.js?v=20261107-six-places" defer></script>
+<link rel="stylesheet" href="../WW/hierarchy.css?v=20261107-a2">
 </head>
 <body class="ww-landing">
 <a class="skip" href="#main">본문으로 이동</a>
@@ -330,6 +333,42 @@
     <figure class="ww-road-atlas"><img src="../WW/assets/road-atlas.png" alt="미국 서부 도로의 이동 경로를 그린 낡은 종이 지도" width="1536" height="1024" loading="lazy" data-image-viewer="on"></figure>
 
     <div id="world-mosaic" class="mosaic-container"></div>
+
+    <section class="ww-places paper-piece" aria-labelledby="places-title">
+      <header class="ww-places-heading">
+        <h3 id="places-title">활동 구역</h3>
+        <p>로즈 형제가 머무는 거점과 이동 중 들르는 장소들입니다.</p>
+      </header>
+      <div class="ww-place-gallery">
+      <figure class="ww-place-stage" id="place-stage">
+        <img id="place-image" src="../WW/assets/place-safehouse.webp" alt="황금빛 들판의 오래된 2층 목조 안전가옥" width="1536" height="1024" loading="lazy">
+        <figcaption aria-live="polite" aria-atomic="true">
+          <h4 id="place-name">안전가옥</h4>
+          <p id="place-description">로즈 형제가 머무는 거점입니다.</p>
+        </figcaption>
+      </figure>
+      <div class="ww-place-selectors" role="group" aria-label="활동 구역 선택">
+        <button class="ww-place-selector" type="button" aria-pressed="true" aria-controls="place-stage" data-place-description="로즈 형제가 머무는 거점입니다.">
+          <img src="../WW/assets/place-safehouse.webp" alt="황금빛 들판의 오래된 2층 목조 안전가옥" width="1536" height="1024" loading="lazy"><span>안전가옥</span>
+        </button>
+        <button class="ww-place-selector" type="button" aria-pressed="false" aria-controls="place-stage" data-place-description="이동 중 잠시 머무는 작은 오두막입니다.">
+          <img src="../WW/assets/place-cabin.webp" alt="푸른 들판과 전봇대 옆의 작은 목조 오두막" width="1536" height="1024" loading="lazy"><span>임시 오두막</span>
+        </button>
+        <button class="ww-place-selector" type="button" aria-pressed="false" aria-controls="place-stage" data-place-description="물건을 보관하는 은신처입니다.">
+          <img src="../WW/assets/place-storage.webp" alt="젖은 콘크리트 마당을 사이에 둔 금속 창고들" width="1536" height="1024" loading="lazy"><span>보관 은신처</span>
+        </button>
+        <button class="ww-place-selector" type="button" aria-pressed="false" aria-controls="place-stage" data-place-description="건물과 교차로가 이어지는 도심 구역입니다.">
+          <img src="../WW/assets/place-city.webp" alt="벽돌 건물과 신호등이 늘어선 미국 도심의 교차로" width="1536" height="1024" loading="lazy"><span>도시</span>
+        </button>
+        <button class="ww-place-selector" type="button" aria-pressed="false" aria-controls="place-stage" data-place-description="주유하고 쉬어 가는 트럭스톱입니다.">
+          <img src="../WW/assets/place-truckstop.webp" alt="주유 캐노피와 대형 트럭이 있는 도로변 트럭스톱" width="1536" height="1024" loading="lazy"><span>트럭스톱</span>
+        </button>
+        <button class="ww-place-selector" type="button" aria-pressed="false" aria-controls="place-stage" data-place-description="사막과 평원을 가로지르는 도로입니다.">
+          <img src="../WW/assets/place-route66.webp" alt="66번 표지판 옆으로 사막의 지평선까지 뻗은 도로" width="1536" height="1024" loading="lazy"><span>Route 66</span>
+        </button>
+      </div>
+      </div>
+    </section>
   </section>
 
   <!-- ⑤ NPC (CONTACT BOOK) -->
