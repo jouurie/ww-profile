@@ -4,7 +4,7 @@ main .panel .ww-section-head .head-desc{margin-top:8px}
 
 /* Keep the desktop image/caption columns; the caption joins the image on mobile. */
 #truck .wwtruck-captions{padding:12px;background:var(--ink-panel)}
-main #truck .wwtruck-caption h3{margin:0 0 8px;padding:0;border:0;font:700 16px/1.5 var(--font-label);color:var(--paper)}
+main #truck .wwtruck-caption h3{margin:0 0 8px;padding:0;border:0;font:700 16px/1.5 var(--font-body);color:var(--paper)}
 #truck .wwtruck-spec{margin:0;padding:0;border:0;font:400 var(--ww-body-size,13px)/1.7 var(--font-body)}
 #truck .wwtruck-detail{margin:8px 0 0;padding:0;border:0;font:400 var(--ww-body-size,13px)/1.7 var(--font-body)}
 #truck :is(.wwtruck-spec,.wwtruck-detail){line-height:1.7!important}
@@ -20,8 +20,8 @@ main #truck .wwtruck-caption h3{margin:0 0 8px;padding:0;border:0;font:700 16px/
   #world #world-mosaic .piece-title,
   #world .ww-places-heading h3{font-size:20px}
 }
-#world #world-mosaic .prose .kv-heading{margin:0 0 8px;font:700 16px/1.5 var(--font-label)}
-#brothers .profile-sheet .prose .kv-heading:not(:has(>.wyatt,>.wade)){margin:0 0 8px;font:700 16px/1.5 var(--font-label)}
+#world #world-mosaic .prose .kv-heading{margin:0 0 8px;font:700 16px/1.5 var(--font-body)}
+#brothers .profile-sheet .prose .kv-heading:not(:has(>.wyatt,>.wade)){margin:0 0 8px;font:700 16px/1.5 var(--font-body)}
 #world #world-mosaic .prose .kv-heading::after,
 #brothers .profile-sheet .prose .kv-heading::after{display:none}
 #world #world-mosaic .prose .kv-heading>.sq-sub,
@@ -53,35 +53,35 @@ main #intro .intro-whole-body,main #intro .intro-whole-body p{font-size:14px!imp
 #brothers .profile-sheet .prose .kv-heading:not(:has(>.wyatt,>.wade)),
 #guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment,.wg-prompt-block,.wg-model-support-section,.wg-model-section,.wg-command-group)>h4,
 #guide .ww-guide .wg-command-heading>h4,
-#guide .ww-guide .wg-status-card>h4{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;padding:0;border:0;background:none;font:700 16px/1.5 var(--font-label)}
+#guide .ww-guide .wg-status-card>h4{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;padding:0;border:0;background:none;font:700 16px/1.5 var(--font-body)}
 
 #world #world-mosaic .prose .kv-heading::before,
 #brothers .profile-section>.prose .kv-section:not(.kv-entity)>.kv-heading:not(:has(>.wyatt,>.wade))::before,
 #guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment,.wg-prompt-block,.wg-model-support-section,.wg-model-section,.wg-command-group)>h4::before,
 #guide .ww-guide .wg-command-heading>h4::before,
 #guide .ww-guide .wg-status-card>h4::before,
-#radio .memo-item>.sq-sub::before{counter-increment:ww-subsection;content:counter(ww-subsection,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:700 14px/1.5 var(--font-label);font-variant-numeric:tabular-nums}
+#radio .memo-item>.sq-sub::before{counter-increment:ww-subsection;content:counter(ww-subsection,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:700 14px/1.5 var(--font-body);font-variant-numeric:tabular-nums}
 
 /* Single selected subjects use one small mark rather than a false sequence. */
 main #truck .wwtruck-caption h3,
 #world .ww-place-stage h4,
-#guide .ww-guide .wg-setting-box>h4{display:flex;align-items:baseline;gap:10px;font:700 16px/1.5 var(--font-label);margin-bottom:8px}
+#guide .ww-guide .wg-setting-box>h4{display:flex;align-items:baseline;gap:10px;font:700 16px/1.5 var(--font-body);margin-bottom:8px}
 main #truck .wwtruck-caption h3::before,
 #world .ww-place-stage h4::before,
-#guide .ww-guide .wg-setting-box>h4::before{content:'\2022';flex:none;color:var(--stamp-red);font:700 14px/1.5 var(--font-label)}
+#guide .ww-guide .wg-setting-box>h4::before{content:'\2022';flex:none;color:var(--stamp-red);font:700 14px/1.5 var(--font-body)}
 main #truck .wwtruck-caption h3::before{color:var(--status-red)}
 #guide .ww-guide .wg-status-card>h4::before{color:var(--status-red)}
 
 /* Deeper notes, model names and controls retain their own non-numbered roles. */
-#guide .ww-guide .wg-pieces h5{font:700 15px/1.5 var(--font-label);margin-bottom:8px}
+#guide .ww-guide .wg-pieces h5{font:700 15px/1.5 var(--font-body);margin-bottom:8px}
 #guide .ww-guide :is(.wg-note p,.wg-support-notes p,.wg-model-defaults p){font-size:12px!important;line-height:1.65!important}
-#guide .ww-guide .wg-model-card>header>h4{font:700 16px/1.5 var(--font-label)}
+#guide .ww-guide .wg-model-card>header>h4{font:700 16px/1.5 var(--font-body)}
 #guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment){border-top:0;padding-top:0}
 #radio .memo-item{gap:8px;border:0;padding-bottom:12px}
-#radio .memo-item>.sq-sub{display:flex;align-items:baseline;gap:10px;width:auto;margin:0;padding:0;border:0;background:none;color:var(--ink);font:700 16px/1.5 var(--font-label)}
-#openings .ww-opening-card-head{gap:10px;min-height:44px}
-#openings .ww-opening-number{font:700 14px/1.5 var(--font-label);color:var(--stamp-red);letter-spacing:0}
-main #openings .ww-opening-card-head h3{font:700 16px/1.5 var(--font-label)}
+#radio .memo-item>.sq-sub{display:flex;align-items:baseline;gap:10px;width:auto;margin:0;padding:0;border:0;background:none;color:var(--ink);font:700 16px/1.5 var(--font-body)}
+#openings .ww-opening-card-head{gap:10px;min-height:44px;align-items:baseline}
+#openings .ww-opening-number{font:700 14px/1.5 var(--font-body)!important;color:var(--stamp-red);letter-spacing:0;font-variant-numeric:tabular-nums}
+main #openings .ww-opening-card-head h3{font:700 16px/1.5 var(--font-body);margin:0}
 @media(max-width:600px){
   #world #world-mosaic .piece-title,
   #world .ww-places-heading h3,
@@ -92,12 +92,12 @@ main #openings .ww-opening-card-head h3{font:700 16px/1.5 var(--font-label)}
 /* Guide branches outside .wg-pieces use the same established role sizes. */
 #guide .ww-guide .wg-command-group>h4,
 #guide .ww-guide .wg-status-guide .wg-status-card h4,
-#guide .ww-guide .wg-neutral-platform h4{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;padding:0;font:700 16px/1.5 var(--font-label)}
-#guide .ww-guide .wg-command-group>h4::before{counter-increment:ww-subsection;content:counter(ww-subsection,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:700 14px/1.5 var(--font-label);font-variant-numeric:tabular-nums}
+#guide .ww-guide .wg-neutral-platform h4{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;padding:0;font:700 16px/1.5 var(--font-body)}
+#guide .ww-guide .wg-command-group>h4::before{counter-increment:ww-subsection;content:counter(ww-subsection,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:700 14px/1.5 var(--font-body);font-variant-numeric:tabular-nums}
 #guide .wg-item{counter-reset:ww-subsection}
 #guide .ww-guide .wg-model-card h5,
 #guide .ww-guide .wg-status-guide .wg-status-card h5,
-#guide .ww-guide .wg-model-defaults>h4{font:700 15px/1.5 var(--font-label);margin-bottom:8px}
+#guide .ww-guide .wg-model-defaults>h4{font:700 15px/1.5 var(--font-body);margin-bottom:8px}
 #guide .ww-guide .wg-status-field-table :is(th,td){font-size:14px;line-height:1.75}
 
 /* Equal section-title geometry also holds when all screens are read in sequence. */
