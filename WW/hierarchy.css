@@ -148,3 +148,8 @@ main #openings .ww-opening-card-head h3{font:600 16px/1.5 Paperozi,sans-serif;ma
 #openings .ww-opening-preview-button{grid-column:2;grid-row:1;justify-self:end;height:auto;min-height:24px;min-width:0;max-width:none;margin:0;padding:0;border:0;background:none;color:var(--ink);box-shadow:none;font:600 12px/1.4 var(--font-body);gap:6px}
 main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22px/1.4 Paperozi,sans-serif;margin:0;padding:0;border:0;background:none;color:var(--ink)}
 @media(max-width:620px){main #openings .ww-opening-card-head h3{font-size:20px}}
+
+/* The preview title bar uses a compact paper surface; the close control stays dark. */
+.ww-opening-preview .ww-opening-preview-head{align-items:center;gap:8px;padding:8px 16px;background:var(--paper);color:var(--ink)}
+.ww-opening-preview .ww-opening-preview-head h2{margin:0;padding:0;border:0;align-self:center;line-height:1.5;color:var(--ink)}
+.ww-opening-preview .ww-opening-preview-close{display:inline-flex;align-items:center;justify-content:center;align-self:center;width:36px;height:36px;min-width:36px;min-height:36px;padding:0}
