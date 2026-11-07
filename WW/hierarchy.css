@@ -166,3 +166,6 @@ main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22p
 #guide .ww-guide .wg-neutral-platform{padding:0;font:400 14px/1.75 var(--font-body)}
 #guide .ww-guide .wg-neutral-platform h4{margin:0 0 8px;font:600 16px/1.5 Paperozi,sans-serif}
 #guide .ww-guide .wg-neutral-platform p{margin:0;font:400 14px/1.75 var(--font-body)}
+
+/* A zoomable atlas keeps keyboard focus, without the shared button hover frame. */
+#world .ww-road-atlas>img:is(:hover,:active){box-shadow:none}
