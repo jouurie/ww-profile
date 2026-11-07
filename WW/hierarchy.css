@@ -159,3 +159,10 @@ main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22p
 
 /* Preserve the atlas box dimensions while leaving its paper outline unframed. */
 #world .ww-road-atlas{border-color:transparent}
+
+/* Platform controls share one content start, including the unselected state. */
+#guide .ww-guide .wg-entry-head:has(.wg-category-platforms:not([hidden])){margin-bottom:24px}
+#guide .ww-guide .wg-status-preview>.wg-local-tabs{margin-bottom:24px}
+#guide .ww-guide .wg-neutral-platform{padding:0;font:400 14px/1.75 var(--font-body)}
+#guide .ww-guide .wg-neutral-platform h4{margin:0 0 8px;font:600 16px/1.5 Paperozi,sans-serif}
+#guide .ww-guide .wg-neutral-platform p{margin:0;font:400 14px/1.75 var(--font-body)}
