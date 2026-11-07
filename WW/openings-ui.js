@@ -5,6 +5,7 @@
   var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자유 도입부'];
   var plotIds = ['plot1', 'plot2', 'plot3', 'plot4', 'plot5', 'plot_auto_intro'];
   var dialog, previewTitle, previewBody, opener, overflow, pressedPreview;
+  var requestedPreviewHandled = false;
   function clearPreviewPress(){pressedPreview?.classList.remove("is-pressed");pressedPreview=null;}
   document.addEventListener("pointerup",clearPreviewPress,{passive:true});
   document.addEventListener("pointercancel",clearPreviewPress,{passive:true});
@@ -229,6 +230,14 @@
     panel.setAttribute('aria-labelledby', 'openings-title');
     panel.replaceChildren(content);
     if (global.WWMotion && typeof global.WWMotion.refresh === 'function') global.WWMotion.refresh(panel);
+    var requested = new URLSearchParams(global.location.search).get('opening');
+    if (!requestedPreviewHandled && global.location.hash === '#openings' && plotIds.indexOf(requested) !== -1) {
+      requestedPreviewHandled = true;
+      global.requestAnimationFrame(function () {
+        var card = panel.querySelector('[data-plot="' + requested + '"]');
+        if (card) openPreview(card, card.querySelector('.ww-opening-preview-button'));
+      });
+    }
     return panel;
   }
 
