@@ -1,0 +1,23 @@
+/* Activity-area gallery: one scene, six native selectors, existing WW tokens. */
+#world .ww-places{margin:32px 0;min-width:0}
+#world .ww-places-heading{margin:0 0 16px;padding:0;border:0}
+#world .ww-places-heading h3{color:var(--ink)}
+#world .ww-places-heading p{margin:0;font:500 var(--ww-body-size,13px)/1.7 var(--font-body);color:var(--ink)}
+#world .ww-place-gallery{min-width:0}
+#world .ww-place-stage{display:block;margin:0;padding:0}
+#world .ww-place-stage>img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
+#world .ww-place-stage figcaption{min-width:0;margin:0;padding:16px 0;color:var(--ink)}
+#world .ww-place-stage h4{margin:0 0 8px;padding:0;border:0;font:700 18px/1.5 var(--font-label);color:var(--ink)}
+#world .ww-place-stage figcaption p{margin:0;font:400 var(--ww-body-size,13px)/1.7 var(--font-body);color:var(--ink)}
+#world .ww-place-selectors{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;min-width:0;padding:0}
+#world .ww-place-selector{display:flex;flex-direction:column;align-items:stretch;gap:0;min-width:0;margin:0;padding:4px;border:1px solid var(--brass);border-radius:0;background:transparent;color:var(--ink);box-shadow:none;transform:none;text-align:center;font:500 var(--ww-body-size,13px)/1.7 var(--font-body);transition:background-color .18s,color .18s,border-color .18s}
+#world .ww-place-selector img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;pointer-events:none}
+#world .ww-place-selector span{display:flex;align-items:center;justify-content:center;min-height:36px;padding:4px 0;white-space:nowrap}
+#world .ww-place-selector[aria-pressed="true"]{background:var(--ink-panel);border-color:var(--stamp-red);color:var(--paper)}
+#world .ww-place-selector:hover{background:var(--paper-deep);color:var(--ink);border-color:var(--brass);filter:none;box-shadow:none;transform:none}
+#world .ww-place-selector:active{background:var(--brass);color:var(--ink);border-color:var(--brass);filter:none;box-shadow:none;transform:none}
+#world .ww-place-selector:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+@media(max-width:720px){
+  #world .ww-places{margin:32px 0}
+  #world .ww-place-selectors{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+}
