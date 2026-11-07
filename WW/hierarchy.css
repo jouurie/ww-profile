@@ -150,9 +150,12 @@ main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22p
 @media(max-width:620px){main #openings .ww-opening-card-head h3{font-size:20px}}
 
 /* The preview title bar uses a compact paper surface; the close control stays dark. */
-.ww-opening-preview .ww-opening-preview-head{align-items:center;gap:8px;padding:8px 16px;background:var(--paper);color:var(--ink)}
+.ww-opening-preview .ww-opening-preview-head{align-items:center;gap:8px;padding:8px 16px;background:var(--brass);color:var(--ink)}
 .ww-opening-preview .ww-opening-preview-head h2{margin:0;padding:0;border:0;align-self:center;line-height:1.5;color:var(--ink)}
-.ww-opening-preview .ww-opening-preview-close{display:inline-flex;align-items:center;justify-content:center;align-self:center;width:36px;height:36px;min-width:36px;min-height:36px;padding:0}
+.ww-opening-preview .ww-opening-preview-close{position:relative;display:inline-flex;align-items:center;justify-content:center;align-self:center;width:36px;height:36px;min-width:36px;min-height:36px;padding:0;font-size:0;line-height:0}
+.ww-opening-preview .ww-opening-preview-close::before,
+.ww-opening-preview .ww-opening-preview-close::after{content:'';position:absolute;top:50%;left:50%;width:18px;height:2px;background:var(--paper);transform:translate(-50%,-50%) rotate(45deg);pointer-events:none}
+.ww-opening-preview .ww-opening-preview-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
 
 /* Preserve the atlas box dimensions while leaving its paper outline unframed. */
 #world .ww-road-atlas{border-color:transparent}
