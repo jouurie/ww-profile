@@ -181,5 +181,11 @@ main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22p
 
 /* Play-mode choices are explanations above the settings tables, not table headings. */
 #guide #ww-guide-module .wg-setting-cards{counter-reset:wg-play-setting}
-#guide #ww-guide-module .wg-setting-cards>:is(.wg-section,.wg-fragment){border-top:1px solid var(--brass)}
+#guide #ww-guide-module .wg-setting-cards>:is(.wg-section,.wg-fragment){border-top:1px solid var(--brass);padding-top:16px}
 #guide #ww-guide-module .wg-setting-cards>:is(.wg-section,.wg-fragment)>h4::before{counter-increment:wg-play-setting;content:counter(wg-play-setting,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:600 14px/1.5 Paperozi,sans-serif;font-variant-numeric:tabular-nums}
+
+/* A title band joins a table; prose keeps its own reading gap. */
+#guide #ww-guide-module .wg-table-title+:not(table):not(.wg-status-field-table){margin-top:12px}
+#guide #ww-guide-module .wg-model-support-table+:is(p,.wg-support-notes),
+#guide #ww-guide-module .wg-settings-table-unit>p{margin-top:12px}
+#guide #ww-guide-module .wg-reference-link{color:var(--stamp-red);font:inherit;text-decoration:underline;text-underline-offset:4px}

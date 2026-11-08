@@ -9,7 +9,7 @@
   let copyIndex=0;
   const esc=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const clean=value=>String(value).replace(/^엘린 (?=FREE)/,'').replace(/^\s*#{1,6}\s*/gm,'').replace(/\u{1f517}\s*/gu,'').replace(/\u2b50\s*/g,'');
-  const links=value=>clean(value).split(/(https?:\/\/[^\s<>]+)/g).map(part=>/^https?:\/\//.test(part)?'<a class="wg-resource-link" href="'+esc(part)+'" target="_blank" rel="noreferrer">지침 보기 ↗</a>':esc(part)).join('');
+  const links=value=>clean(value).split(/(https?:\/\/[^\s<>]+)/g).map(part=>/^https?:\/\//.test(part)?'<a class="wg-resource-link" href="'+esc(part)+'" target="_blank" rel="noreferrer">지침 보기 ↗</a>':esc(part)).join('').replace(/하단\s*\[\s*출력 가이던스\s*\]/g,'<a class="wg-resource-link wg-reference-link" href="#guide-7">출력 가이던스</a>');
   const badge=()=>'';
   function body(raw){
     return raw.split('\n').filter(line=>line.trim()).map(line=>{
