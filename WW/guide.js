@@ -419,6 +419,15 @@
     pinballDialog.showModal();
     pinballDialog.scrollTop=0;
   });
+  // Resolve guide bookmarks in this document, independently of its base URL.
+  mount.addEventListener('click',event=>{
+    const link=event.target.closest('a[href^="#guide-"]');
+    if(!link||!mount.contains(link))return;
+    event.preventDefault();event.stopPropagation();
+    const hash=link.getAttribute('href');
+    if(location.hash!==hash)history.pushState({...history.state},'',hash);
+    synchronize();
+  });
   window.addEventListener('hashchange',synchronize);window.addEventListener('popstate',synchronize);
   display('play');synchronize();
 })();
