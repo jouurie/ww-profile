@@ -247,15 +247,16 @@ body>dialog.wg-play-dialog{box-sizing:border-box;width:min(480px,calc(100vw - 24
 #guide .ww-guide .wg-model-highlight{color:inherit;background:linear-gradient(transparent 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 94%,transparent 94%);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:0;margin:0;border:0}
 
 /* All guide destinations remain visible before platform selection. */
-#guide .ww-guide .wg-directory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;margin:0 0 24px;padding:0;min-width:0}
+#guide .ww-guide .wg-directory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px;margin:0 0 24px;padding:0;min-width:0}
 #guide .ww-guide .wg-directory-group{min-width:0;margin:0;padding:0}
-#guide .ww-guide .wg-directory-heading{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-family:var(--font-label);font-size:16px;line-height:1.5;color:var(--ink)}
-#guide .ww-guide .wg-directory .wg-item-selector{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;height:auto;min-height:0;margin:0;padding:0;overflow:visible}
-#guide .ww-guide .wg-directory .wg-item-selector button{box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex:none;width:100%;min-width:0;height:48px;min-height:48px;max-height:48px;margin:0;padding:4px 6px;font-size:13px;line-height:1.35;white-space:normal;word-break:keep-all;overflow-wrap:normal}
+#guide .ww-guide .wg-directory-heading{display:flex;align-items:center;gap:12px;margin:0 0 6px;font-family:var(--font-label);font-size:13px;line-height:1.5;color:var(--ink)}
+#guide .ww-guide .wg-directory-heading::after{content:'';flex:1;height:1px;background:var(--wg-line)}
+#guide .ww-guide .wg-directory .wg-item-selector{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;width:100%;height:auto;min-height:0;margin:0;padding:0;overflow:visible}
+#guide .ww-guide .wg-directory .wg-item-selector button{box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:auto;max-width:100%;min-width:0;height:44px;min-height:44px;max-height:44px;margin:0;padding:4px 10px;font-size:13px;line-height:1.35;white-space:normal;word-break:keep-all;overflow-wrap:normal}
 #guide .ww-guide .wg-entry-head .wg-platform-slot{height:auto;min-height:0;margin:12px 0 0;padding:0}
 #guide .ww-guide .wg-entry-head .wg-local-tabs{margin:0}
 #guide .ww-guide .wg-entry-head .wg-local-tabs button{height:48px;min-height:48px}
-@media(max-width:600px){#guide .ww-guide .wg-directory{grid-template-columns:minmax(0,1fr);gap:18px}#guide .ww-guide .wg-directory .wg-item-selector button{font-size:13px}}
+@media(max-width:600px){#guide .ww-guide .wg-directory{grid-template-columns:minmax(0,1fr);gap:14px}#guide .ww-guide .wg-directory .wg-item-selector button{font-size:13px;padding-inline:9px}}
 
 #guide .ww-guide .wg-directory-wrap{display:inline}
 @media(max-width:600px){#guide .ww-guide .wg-directory-wrap{display:block}}
