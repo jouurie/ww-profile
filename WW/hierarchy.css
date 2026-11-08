@@ -188,4 +188,4 @@ main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22p
 #guide #ww-guide-module .wg-table-title+:not(table):not(.wg-status-field-table){margin-top:12px}
 #guide #ww-guide-module .wg-model-support-table+:is(p,.wg-support-notes),
 #guide #ww-guide-module .wg-settings-table-unit>p{margin-top:12px}
-#guide #ww-guide-module .wg-reference-link{color:var(--stamp-red);font:inherit;text-decoration:underline;text-underline-offset:4px}
+#guide #ww-guide-module .wg-reference-link{white-space:nowrap;color:var(--stamp-red);font:inherit;text-decoration:underline;text-underline-offset:4px}
