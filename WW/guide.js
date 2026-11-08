@@ -263,12 +263,6 @@
     }
   });
   // Give every equivalent table/settings heading one shared visual role.
-  mount.querySelectorAll('.wg-setting-cards > :is(.wg-section,.wg-fragment)').forEach(card=>{
-    const heading=card.querySelector(':scope > h4');if(!heading)return;
-    card.classList.add('wg-setting-card');heading.classList.add('wg-table-title');
-    const content=document.createElement('div');content.className='wg-setting-card-body';
-    content.append(...[...card.childNodes].filter(node=>node!==heading));card.append(content);
-  });
   mount.querySelectorAll('.wg-model-support-section,.wg-status-card,.wg-setting-box').forEach(section=>{
     const heading=section.querySelector(':scope > h4');if(heading)heading.classList.add('wg-table-title');
   });
