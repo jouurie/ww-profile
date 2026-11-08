@@ -169,3 +169,18 @@ main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22p
 
 /* A zoomable atlas keeps keyboard focus, without the shared button hover frame. */
 #world .ww-road-atlas>img:is(:hover,:active){box-shadow:none}
+
+/* Guide table hierarchy: shared title bands, complete frames and two-line rows. */
+#guide #ww-guide-module :is(h4,summary)::before{content:none;counter-increment:none}
+#guide #ww-guide-module .wg-table-title{box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;min-height:52px;margin:0;padding:13px 16px;border:1px solid var(--brass);background:var(--paper-deep);color:var(--ink);font:500 16px/1.6 var(--font-label);text-align:center;word-break:keep-all}
+#guide #ww-guide-module .wg-setting-cards{align-items:stretch}
+#guide #ww-guide-module .wg-setting-card{box-sizing:border-box;display:flex;flex-direction:column;min-width:0;margin:0;padding:0;border:1px solid var(--brass);background:var(--paper)}
+#guide #ww-guide-module .wg-setting-card>.wg-table-title{border:0;border-bottom:1px solid var(--brass)}
+#guide #ww-guide-module .wg-setting-card-body{min-width:0;padding:14px 16px}
+#guide #ww-guide-module .wg-setting-card-body p{margin:0 0 8px}
+#guide #ww-guide-module .wg-setting-card-body p:last-child{margin-bottom:0}
+#guide #ww-guide-module :is(.wg-model-support-table,.wg-progress-table) tr{height:82px}
+#guide #ww-guide-module :is(.wg-model-support-table,.wg-progress-table,.wg-status-field-table) :is(th,td){vertical-align:middle}
+#guide #ww-guide-module .wg-status-field-table tbody tr{min-height:82px;align-items:center}
+#guide #ww-guide-module .wg-model-label-line{display:block;white-space:nowrap}
+@media(max-width:650px){#guide #ww-guide-module .wg-table-disclosure>.wg-table-title{padding-inline:56px}#guide #ww-guide-module .wg-setting-card-body{padding:14px}}

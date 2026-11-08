@@ -77,7 +77,8 @@
   }
   function settingLabel(text){
     if(text==='엘린 FREE')text='FREE';
-    if (/^(?:Gemini )?3\.7 Flash \/ (?:Gemini )?3\.8 Flash$/.test(text)) return modelTitle(text);
+    if (/^(?:Gemini )?3\.7 Flash \/ (?:Gemini )?3\.8 Flash$/.test(text)) return ['3.7 Flash','3.8 Flash'].map(name=>'<span class="wg-model-label-line">'+modelTitle(name)+'</span>').join('');
+    if (/^(?:3\.[01] (?:Flash|Pro) Preview|GPT.* \(SFW\))$/.test(text)) return text.replace(/ (Preview|\(SFW\))$/, '\n$1').split('\n').map(line=>'<span class="wg-model-label-line">'+esc(line)+'</span>').join('');
     const groups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신하기':['내 캐릭터','대신하기'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
     return (groups[text]||text.split(' ')).map(part=>'<span class="wg-label-part">'+esc(part)+'</span>').join(' ');
   }
@@ -261,12 +262,22 @@
       else{group=null;unit=null;}
     }
   });
+  // Give every equivalent table/settings heading one shared visual role.
+  mount.querySelectorAll('.wg-setting-cards > :is(.wg-section,.wg-fragment)').forEach(card=>{
+    const heading=card.querySelector(':scope > h4');if(!heading)return;
+    card.classList.add('wg-setting-card');heading.classList.add('wg-table-title');
+    const content=document.createElement('div');content.className='wg-setting-card-body';
+    content.append(...[...card.childNodes].filter(node=>node!==heading));card.append(content);
+  });
+  mount.querySelectorAll('.wg-model-support-section,.wg-status-card,.wg-setting-box').forEach(section=>{
+    const heading=section.querySelector(':scope > h4');if(heading)heading.classList.add('wg-table-title');
+  });
   const mobileTables=matchMedia('(max-width:650px)');
   mount.querySelectorAll('.wg-model-support-section,.wg-status-fields,.wg-model-section').forEach(section=>{
     const table=section.querySelector('table'),grid=section.querySelector('.wg-model-grid'),heading=section.querySelector(':scope>h4');
     if(!heading||(!grid&&(!table||table.rows.length<3)))return;
     const details=document.createElement('details'),summary=document.createElement('summary');
-    details.className='wg-table-disclosure';summary.textContent=heading.textContent;heading.remove();
+    details.className='wg-table-disclosure';summary.className=heading.className;summary.textContent=heading.textContent;heading.remove();
     details.open=true;summary.tabIndex=mobileTables.matches?0:-1;
     summary.addEventListener('click',event=>{if(!mobileTables.matches)event.preventDefault();});
     details.append(summary,...section.childNodes);section.append(details);
