@@ -53,7 +53,7 @@
   }
   function modelTitle(name){
     if(name==='엘린 FREE')name='FREE';
-    return '<span class="wg-model-highlight">'+esc(name)+'</span>';
+    return esc(name).replace(/(?:Gemini )?3\.7 Flash|(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g, match=>'<span class="wg-model-highlight">'+match+'</span>');
   }
   function settingPath(text){return '<ol class="wg-setting-path" aria-label="설정 위치">'+text.split(' → ').map(step=>'<li>'+esc(step)+'</li>').join('')+'</ol>';}
   function modelSettings(item){
@@ -90,8 +90,8 @@
     const pair=first.match(/^([^:]{1,28}):\s*(.+)$/);
     const emphasize=text=>{
       const [main,...extra]=text.split(' / 별도 선택: ');
-      const choices=main.split(' ↔ ').map(part=>'<span class="wg-model-choice">'+highlightModelNames(part).split(' / ').map(group=>group.length<=20?'<span class="wg-value-group">'+group+'</span>':group).join(' / ')+'</span>').join('<span class="wg-model-separator"> ↔ </span>');
-      return '<div class="wg-model-choices">'+choices+'</div>'+extra.map(part=>'<div class="wg-model-extra"><span>별도 선택:</span> '+highlightModelNames(part)+'</div>').join('');
+      const choices=main.split(' ↔ ').map(part=>'<span class="wg-model-choice">'+links(part)+'</span>').join('<span class="wg-model-separator"> ↔ </span>');
+      return '<div class="wg-model-choices">'+choices+'</div>'+extra.map(part=>'<div class="wg-model-extra"><span>별도 선택:</span> '+links(part)+'</div>').join('');
     };
     const notes=rows.some(row=>row.trim())?'<div class="wg-support-notes">'+body(rows.join('\n'))+'</div>':'';
     return pair?'<tr><th scope="row">'+settingLabel(pair[1])+'</th><td><div class="wg-support-value">'+emphasize(pair[2])+'</div>'+notes+'</td></tr>':'<tr><td colspan="2"><div class="wg-support-statement">'+links(first)+'</div>'+notes+'</td></tr>';

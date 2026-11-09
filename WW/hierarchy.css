@@ -505,3 +505,10 @@ main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22p
 /* Every settings table heading overrides legacy first-child band geometry equally. */
 #guide #ww-guide-module #wg-content #guide-5 :is(.wg-table-title,.wg-model-support-section>h4,.wg-table-disclosure>summary){box-sizing:border-box;min-height:40px;margin:0;padding:8px 12px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent);background:transparent;color:var(--brass);font:600 16px/24px Paperozi,sans-serif;text-align:left}
 @media(max-width:650px){#guide #ww-guide-module #wg-content #guide-5 .wg-table-disclosure>summary{padding-right:56px}}
+
+/* Operation alternatives are groups; feature highlights retain their original recommendation scope. */
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-choices{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-choice{display:inline-block;max-width:100%;padding:3px 7px;border:0;background:var(--paper-deep);color:var(--ink);line-height:1.65;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-separator{flex:none;color:var(--brass);background:none;padding:0;font-size:15px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-extra{color:var(--muted);background:none}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-section .wg-model-highlight{color:inherit;background:linear-gradient(transparent 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 94%,transparent 94%);padding:0;margin:0;border:0;box-decoration-break:clone;-webkit-box-decoration-break:clone}

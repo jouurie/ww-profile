@@ -524,3 +524,10 @@ main #guide .ww-guide{--ww-body-size: 14px;}
 @media (max-width: 650px) {#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11) #guide-5 .z19 > summary{padding-right: 56px;}}
 #guide .z50{font: inherit; text-decoration: none; cursor: text; overflow-wrap: anywhere;}
 @media(max-width:650px){#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11) .z25{white-space:normal!important;overflow-wrap:anywhere}}
+
+/* Operation alternatives are groups; feature highlights retain their original recommendation scope. */
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z28 .z23{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z28 .z24{display:inline-block;max-width:100%;padding:3px 7px;border:0;background:var(--paper-deep);color:var(--ink);line-height:1.65;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z28 .z30{flex:none;color:var(--brass);background:none;padding:0;font-size:15px}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z28 .z31{color:var(--muted);background:none}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z32 .z29{color:inherit;background:linear-gradient(transparent 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 94%,transparent 94%);padding:0;margin:0;border:0;box-decoration-break:clone;-webkit-box-decoration-break:clone}
