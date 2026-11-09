@@ -410,117 +410,117 @@ main #guide .ww-guide{--ww-body-size: 14px;}
 #guide #ww-guide-module .wg-content ol.z10 > li{background: transparent; color: var(--paper);}
 #guide #ww-guide-module .wg-content ol.z10 > li::before{color: var(--stamp-red);}
 #guide #ww-guide-module .wg-content .z7 code{color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content{background: var(--ink); color: var(--paper); --wg-line: color-mix(in srgb,var(--brass) 45%,transparent);}
-#guide #ww-guide-module .wp.wg-content :is(.wg-status-preview, .wg-status-preview-body, .wg-status-notes, .wg-status-guide, .wg-status-input-stack, .wg-status-card, .wg-status-example-grid){background: transparent;}
-#guide #ww-guide-module .wp.wg-content .wg-status-preview-body{padding: 0px; border: 0px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-frame{display: block; width: 100%; border: 0px; background: transparent;}
-#guide #ww-guide-module .wp.wg-content :is(.z47, .z5, .z38, .z18, .z32, .z42, .z11) > h4{display: flex; align-items: baseline; gap: 8px; margin: 0px 0px 10px; padding: 0px; border: 0px; background: transparent; color: var(--brass); font: 600 16px / 1.5 Paperozi, sans-serif;}
-#guide #ww-guide-module .wp.wg-content :is(.z12, .z19 > summary, .z32 > h4){box-sizing: border-box; position: relative; display: flex; align-items: center; gap: 8px; min-height: 40px; margin: 0px 0px 10px; padding: 8px 12px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent); background: transparent; color: var(--brass); font: 600 16px / 1.5 Paperozi, sans-serif; text-align: left; word-break: keep-all;}
-#guide #ww-guide-module .wp.wg-content .wg-status-card > .z12, #guide #ww-guide-module .wp.wg-content .wg-status-card > .z19 > summary{padding-inline: 0px; margin-bottom: 8px;}
-#guide #ww-guide-module .wp.wg-content :is(.wg-setting-cards, .wg-model-defaults, .wg-support-notes, .z34) :is(h4, h5){color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z34 h5{color: var(--brass); font: 600 12px/1.5 var(--font-label); margin: 0px 0px 4px; padding: 0px; border: 0px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-card h5{color: var(--paper); font: 600 13px/1.5 var(--font-label); margin: 10px 0px 6px;}
-#guide #ww-guide-module .wp.wg-content .wg-model-defaults > h4{min-height: 0px; margin: 0px 0px 6px; padding: 0px; border: 0px; color: var(--paper); font: 600 14px/1.5 var(--font-label);}
-#guide #ww-guide-module .wp.wg-content .wg-model-defaults > h5{min-height: 0px; margin: 0px 0px 4px; padding: 0px; border: 0px; color: var(--muted); font: 600 12px/1.5 var(--font-body);}
-#guide #ww-guide-module .wp.wg-content :is(p, li, .wg-value, .z22, .z36, .wg-default-values, .z45){color: var(--paper); font-size: 14px; line-height: 1.75;}
-#guide #ww-guide-module .wp.wg-content .z26, #guide #ww-guide-module .wp.wg-content .wg-guidance-note, #guide #ww-guide-module .wp.wg-content .wg-auxiliary p{color: var(--muted); padding-left: 12px; font-size: 12px !important; line-height: 1.65 !important;}
-#guide #ww-guide-module .wp.wg-content .wg-auxiliary-label{color: var(--brass); font: 600 12px/1.5 var(--font-body);}
-#guide #ww-guide-module .wp.wg-content .wg-inline-label{color: var(--muted); font: 600 13px/1.7 var(--font-label);}
-#guide #ww-guide-module .wp.wg-content .wg-keyvalue{display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline;}
-#guide #ww-guide-module .wp.wg-content .wg-keyvalue .wg-inline-label{margin: 0px;}
-#guide #ww-guide-module .wp.wg-content .z14{color: var(--stamp-red); text-underline-offset: 3px;}
-#guide #ww-guide-module .wp.wg-content .z20{width: 100%; table-layout: fixed; border-collapse: collapse; border: 0px; background: transparent; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z20 tr{height: auto;}
-#guide #ww-guide-module .wp.wg-content .z18 .z20 :is(th, td){padding: 7px 10px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 28%,transparent); background: transparent; font: 400 14px/1.6 var(--font-body); vertical-align: top; text-align: left; word-break: keep-all; overflow-wrap: anywhere;}
-#guide #ww-guide-module .wp.wg-content .z18 .z20 th{width: 96px; color: var(--muted); font: 600 13px/1.6 var(--font-label); white-space: normal;}
-#guide #ww-guide-module .wp.wg-content .z18 .z20 th + td{border-left: 1px solid color-mix(in srgb,var(--brass) 20%,transparent); padding-left: 12px;}
-#guide #ww-guide-module .wp.wg-content .z20 td{color: var(--paper); font-size: 14px; line-height: 1.65;}
-#guide #ww-guide-module .wp.wg-content .z28 .z20 th{width: 68px;}
-#guide #ww-guide-module .wp.wg-content .z16 .z20 th{width: 104px;}
-#guide #ww-guide-module .wp.wg-content .wg-model-label-line{display: block; white-space: normal;}
-#guide #ww-guide-module .wp.wg-content .z20 p{margin: 6px 0px 0px; white-space: pre-wrap;}
-#guide #ww-guide-module .wp.wg-content .z25{white-space: nowrap;}
-#guide #ww-guide-module .wp.wg-content .z24{background: transparent; border: 0px; padding: 0px; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z30{color: var(--muted); margin: 0px 4px;}
-#guide #ww-guide-module .wp.wg-content .z31{color: var(--muted); font-size: 12px; line-height: 1.7;}
-#guide #ww-guide-module .wp.wg-content .z31 mark{background: none; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z23{line-height: 1.8;}
-#guide #ww-guide-module .wp.wg-content .z34{padding: 10px 12px; border: 0px; background: transparent; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z34 > header{margin: 0px 0px 8px; padding: 0px; border: 0px;}
-#guide #ww-guide-module .wp.wg-content .z34 > header > h4{margin: 0px; color: var(--paper); font: 600 16px / 1.45 Paperozi, sans-serif;}
-#guide #ww-guide-module .wp.wg-content .z34 p{font-size: 14px; line-height: 1.65; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z34 .wg-model-setting{padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 28%,transparent);}
-#guide #ww-guide-module .wp.wg-content .z34 .wg-model-setting > span{color: var(--muted); font-size: 12px;}
-#guide #ww-guide-module .wp.wg-content .z34 .wg-model-setting > strong{color: var(--stamp-red); font-size: 16px; font-weight: 400;}
-#guide #ww-guide-module .wp.wg-content .z34 .wg-model-caution{padding-left: 0px; border-left: 0px;}
-#guide #ww-guide-module .wp.wg-content .z33{gap: 12px;}
-#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms){display: inline-flex; flex-wrap: nowrap; align-items: stretch; gap: 0px; width: auto; max-width: 100%; height: auto; min-height: 0px; margin: 0px 0px 18px; padding: 0px; transform: none; border: 1px solid var(--brass); border-radius: 3px; overflow: hidden; background: transparent;}
-#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms) button{display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; flex: 0 0 auto; min-width: 88px; height: 36px; min-height: 36px; max-height: 36px; margin: 0px; padding: 0px 18px; border: 0px; border-radius: 0px; background: transparent; color: var(--paper); font: 600 13px/1 var(--font-label); letter-spacing: 0.08em; white-space: nowrap; box-shadow: none;}
-#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms) button + button{border-left: 1px solid var(--brass);}
-#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms) button[aria-selected="true"]{background: var(--brass); color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms) button > span{display: block; transform: none; font: inherit; letter-spacing: inherit;}
-#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms) button:focus-visible{outline: 2px solid var(--paper); outline-offset: -3px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-preview > .wg-local-tabs{margin-bottom: 14px;}
-#guide #ww-guide-module .wp.wg-content .z1 .wg-platform-slot{height: auto; min-height: 0px; margin: 10px 0px 0px; padding: 0px;}
-#guide #ww-guide-module .wp.wg-content .z15 li{gap: 6px; margin: 0px; color: inherit; font: inherit;}
-#guide #ww-guide-module .wp.wg-content .z15 li + li::before{content: "→"; color: var(--muted);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content{background: var(--ink); color: var(--paper); --wg-line: color-mix(in srgb,var(--brass) 45%,transparent);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-status-preview, .wg-status-preview-body, .wg-status-notes, .wg-status-guide, .wg-status-input-stack, .wg-status-card, .wg-status-example-grid){background: transparent;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-preview-body{padding: 0px; border: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-frame{display: block; width: 100%; border: 0px; background: transparent;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.z47, .z5, .z38, .z18, .z32, .z42, .z11) > h4{display: flex; align-items: baseline; gap: 8px; margin: 0px 0px 10px; padding: 0px; border: 0px; background: transparent; color: var(--brass); font: 600 16px / 1.5 Paperozi, sans-serif;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.z12, .z19 > summary, .z32 > h4){box-sizing: border-box; position: relative; display: flex; align-items: center; gap: 8px; min-height: 40px; margin: 0px 0px 10px; padding: 8px 12px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent); background: transparent; color: var(--brass); font: 600 16px / 1.5 Paperozi, sans-serif; text-align: left; word-break: keep-all;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-card > .z12, #guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-card > .z19 > summary{padding-inline: 0px; margin-bottom: 8px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-setting-cards, .wg-model-defaults, .wg-support-notes, .z34) :is(h4, h5){color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 h5{color: var(--brass); font: 600 12px/1.5 var(--font-label); margin: 0px 0px 4px; padding: 0px; border: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-card h5{color: var(--paper); font: 600 13px/1.5 var(--font-label); margin: 10px 0px 6px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-model-defaults > h4{min-height: 0px; margin: 0px 0px 6px; padding: 0px; border: 0px; color: var(--paper); font: 600 14px/1.5 var(--font-label);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-model-defaults > h5{min-height: 0px; margin: 0px 0px 4px; padding: 0px; border: 0px; color: var(--muted); font: 600 12px/1.5 var(--font-body);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(p, li, .wg-value, .z22, .z36, .wg-default-values, .z45){color: var(--paper); font-size: 14px; line-height: 1.75;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z26, #guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-guidance-note, #guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-auxiliary p{color: var(--muted); padding-left: 12px; font-size: 12px !important; line-height: 1.65 !important;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-auxiliary-label{color: var(--brass); font: 600 12px/1.5 var(--font-body);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-inline-label{color: var(--muted); font: 600 13px/1.7 var(--font-label);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-keyvalue{display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-keyvalue .wg-inline-label{margin: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z14{color: var(--stamp-red); text-underline-offset: 3px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z20{width: 100%; table-layout: fixed; border-collapse: collapse; border: 0px; background: transparent; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z20 tr{height: auto;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z18 .z20 :is(th, td){padding: 7px 10px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 28%,transparent); background: transparent; font: 400 14px/1.6 var(--font-body); vertical-align: top; text-align: left; word-break: keep-all; overflow-wrap: anywhere;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z18 .z20 th{width: 96px; color: var(--muted); font: 600 13px/1.6 var(--font-label); white-space: normal;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z18 .z20 th + td{border-left: 1px solid color-mix(in srgb,var(--brass) 20%,transparent); padding-left: 12px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z20 td{color: var(--paper); font-size: 14px; line-height: 1.65;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z28 .z20 th{width: 68px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z16 .z20 th{width: 104px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-model-label-line{display: block; white-space: normal;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z20 p{margin: 6px 0px 0px; white-space: pre-wrap;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z25{white-space: nowrap;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z24{background: transparent; border: 0px; padding: 0px; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z30{color: var(--muted); margin: 0px 4px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z31{color: var(--muted); font-size: 12px; line-height: 1.7;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z31 mark{background: none; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z23{line-height: 1.8;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34{padding: 10px 12px; border: 0px; background: transparent; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 > header{margin: 0px 0px 8px; padding: 0px; border: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 > header > h4{margin: 0px; color: var(--paper); font: 600 16px / 1.45 Paperozi, sans-serif;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 p{font-size: 14px; line-height: 1.65; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 .wg-model-setting{padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 28%,transparent);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 .wg-model-setting > span{color: var(--muted); font-size: 12px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 .wg-model-setting > strong{color: var(--stamp-red); font-size: 16px; font-weight: 400;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 .wg-model-caution{padding-left: 0px; border-left: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z33{gap: 12px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms){display: inline-flex; flex-wrap: nowrap; align-items: stretch; gap: 0px; width: auto; max-width: 100%; height: auto; min-height: 0px; margin: 0px 0px 18px; padding: 0px; transform: none; border: 1px solid var(--brass); border-radius: 3px; overflow: hidden; background: transparent;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms) button{display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; flex: 0 0 auto; min-width: 88px; height: 36px; min-height: 36px; max-height: 36px; margin: 0px; padding: 0px 18px; border: 0px; border-radius: 0px; background: transparent; color: var(--paper); font: 600 13px/1 var(--font-label); letter-spacing: 0.08em; white-space: nowrap; box-shadow: none;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms) button + button{border-left: 1px solid var(--brass);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms) button[aria-selected="true"]{background: var(--brass); color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms) button > span{display: block; transform: none; font: inherit; letter-spacing: inherit;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms) button:focus-visible{outline: 2px solid var(--paper); outline-offset: -3px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-preview > .wg-local-tabs{margin-bottom: 14px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z1 .wg-platform-slot{height: auto; min-height: 0px; margin: 10px 0px 0px; padding: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z15 li{gap: 6px; margin: 0px; color: inherit; font: inherit;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z15 li + li::before{content: "→"; color: var(--muted);}
 #guide #ww-guide-module #guide-5 .wg-setting-cards > :is(.z47, .z5) > h4{min-height: 0px; font: 600 14px/1.5 var(--font-label); color: var(--paper); margin: 0px 0px 8px; padding: 0px 0px 6px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 28%,transparent); background: transparent;}
-#guide #ww-guide-module .wp.wg-content .z2{display: block; width: 100%; border: 0px; background: transparent; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z2 tr{display: block; height: auto; padding: 12px 0px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 30%,transparent);}
-#guide #ww-guide-module .wp.wg-content .z2 tr:first-child{padding-top: 0px;}
-#guide #ww-guide-module .wp.wg-content .z2 tr:last-child{padding-bottom: 0px; border-bottom: 0px;}
-#guide #ww-guide-module .wp.wg-content .z2 th{display: block; width: auto; margin: 0px 0px 4px; padding: 0px; border: 0px; background: transparent; color: var(--brass); font: 600 15px / 1.5 Paperozi, sans-serif; text-align: left;}
-#guide #ww-guide-module .wp.wg-content .z2 td{display: block; padding: 0px; border: 0px; background: transparent; color: var(--paper); font-size: 14px; line-height: 1.75; text-align: left;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table{display: block; width: 100%; border: 0px; color: var(--paper); font: 400 13px/1.55 var(--font-body); background: transparent !important;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table :is(thead, tbody, tr, th, td){background: transparent !important;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table thead{position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); background: transparent !important;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table tbody{display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); gap: 0px 18px; max-height: 360px; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table tr{display: grid; grid-template-columns: minmax(92px, 27%) minmax(0px, 1fr); align-items: start; min-height: 0px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 22%,transparent);}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table :is(th, td){border: 0px; font-size: 13px; line-height: 1.55; vertical-align: top; overflow-wrap: anywhere; word-break: keep-all; width: auto !important; padding: 5px 6px !important;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table th{color: var(--muted); font-family: var(--font-mono); font-weight: 600; min-width: 0px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table th code{color: var(--muted); font-size: 12px; line-height: 1.5;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table td{color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-table td code{color: var(--paper); font-size: 12px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-field-notes{margin-top: 8px; padding-top: 8px; border-top: 1px solid color-mix(in srgb,var(--brass) 30%,transparent); color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .wg-status-card{padding: 12px; border: 0px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-card p{margin: 0px 0px 8px; font-size: 14px; line-height: 1.75; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .z39{box-sizing: border-box; border: 1px solid var(--brass); border-radius: 2px; background: var(--paper); color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content .z40{padding: 8px 12px; border-bottom: 1px solid var(--brass); background: color-mix(in srgb,var(--paper) 92%,var(--ink)); color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content .z40 > span{color: var(--ink); font: 600 12px/1.5 var(--font-label);}
-#guide #ww-guide-module .wp.wg-content .z40 [role="status"]{color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content .z41{padding: 12px; background: var(--paper); color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content .z41 :is(p, li, pre, code, span){color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content .z41 .wg-code{background: transparent; border: 0px; padding: 0px; color: var(--ink); font-size: 13px; line-height: 1.6;}
-#guide #ww-guide-module .wp.wg-content .wg-copy-control > button[data-copy-block]{background: var(--brass); color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content .wg-copy-control > [role="status"]{color: var(--paper);}
-@media (hover: hover) {#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms) button[aria-selected="false"]:hover{background: color-mix(in srgb,var(--brass) 18%,transparent);}}
-@media (max-width: 900px) {#guide #ww-guide-module .wp.wg-content .z16{columns: 2;}}
-@media (max-width: 650px) {#guide #ww-guide-module .wp.wg-content .z16{columns: 1;}#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms){margin-bottom: 16px;}#guide #ww-guide-module .wp.wg-content :is(.wg-local-tabs, .wg-category-platforms) button{min-width: 84px; height: 40px; min-height: 40px; max-height: 40px; padding: 0px 16px;}#guide #ww-guide-module .wp.wg-content .z19 > summary{min-height: 40px; padding: 10px 56px 10px 12px;}#guide #ww-guide-module .wp.wg-content .z19 > summary::after{margin-left: auto;}#guide #ww-guide-module .wp.wg-content .wg-status-card > .z19 > summary{padding-left: 0px; padding-right: 56px;}#guide #ww-guide-module .wp.wg-content .wg-status-field-table tbody{grid-template-columns: minmax(0px, 1fr); max-height: 320px;}#guide #ww-guide-module .wp.wg-content .wg-status-field-table tr{grid-template-columns: minmax(84px, 30%) minmax(0px, 1fr);}#guide #ww-guide-module .wp.wg-content .z18 .z20 th{width: 88px;}#guide #ww-guide-module .wp.wg-content .z16 .z20 th{width: 92px;}#guide #ww-guide-module .wp.wg-content .z33{gap: 10px;}}
-#guide #ww-guide-module .wp.wg-content .z32{padding-top: 0px; border-top: 0px;}
-#guide #ww-guide-module .wp.wg-content .z32 > .z19 > .z33{margin-top: 0px; margin-bottom: 0px;}
-#guide #ww-guide-module .wp.wg-content .z34 p{margin: 0px 0px 8px;}
-#guide #ww-guide-module .wp.wg-content .z34 p:last-child{margin-bottom: 0px;}
-#guide #ww-guide-module .wp.wg-content .wg-auxiliary p{padding-left: 0px;}
-#guide #ww-guide-module .wp.wg-content .z41{padding: 10px 12px;}
-#guide #ww-guide-module .wp.wg-content .z41 .wg-code{margin: 0px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5;}
-#guide #ww-guide-module .wp.wg-content .z41 > :first-child{margin-top: 0px;}
-#guide #ww-guide-module .wp.wg-content .z40 .wg-copy-control > [role="status"]{color: var(--ink);}
-#guide #ww-guide-module .wp.wg-content .z20 th{box-sizing: border-box;}
-#guide #ww-guide-module .wp.wg-content .z1 .wg-local-tabs{margin: 0px;}
-#guide #ww-guide-module .wp.wg-content .z1 .wg-platform-slot{margin: 0px;}
-#guide #ww-guide-module .wp.wg-content .z1:has(.wg-category-platforms:not([hidden])){margin-bottom: 16px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-preview > .wg-local-tabs{margin-bottom: 16px;}
-#guide #ww-guide-module .wp.wg-content .z18 > .z19 > summary{margin-bottom: 0px;}
-#guide #ww-guide-module .wp.wg-content .z11 > h4{padding: 8px 12px; min-height: 40px; margin: 0px 0px 10px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent);}
-#guide #ww-guide-module .wp.wg-content #guide-5 .z15{padding: 8px 12px; min-height: 40px; margin: 0px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent);}
-#guide #ww-guide-module .wp.wg-content .z29{background: linear-gradient(transparent 42%,color-mix(in srgb,var(--brass) 80%,transparent) 42%,color-mix(in srgb,var(--brass) 80%,transparent) 96%,transparent 96%); color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content #guide-5 .z20 .z29{background: none; color: inherit;}
-#guide #ww-guide-module .wp.wg-content ol.z10 > li{background: transparent; color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content ol.z10 > li::before{color: var(--stamp-red);}
-#guide #ww-guide-module .wp.wg-content .z7 code{color: var(--paper);}
-#guide #ww-guide-module .wp.wg-content .wg-status-preview{margin-bottom: 0px;}
-#guide #ww-guide-module .wp.wg-content .wg-status-notes{margin-top: 12px;}
-#guide #ww-guide-module .wp #guide-5 :is(.z12, .z18 > h4, .z19 > summary){box-sizing: border-box; min-height: 40px; margin: 0px; padding: 8px 12px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent); background: transparent; color: var(--brass); font: 600 16px / 24px Paperozi, sans-serif; text-align: left;}
-@media (max-width: 650px) {#guide #ww-guide-module .wp #guide-5 .z19 > summary{padding-right: 56px;}}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z2{display: block; width: 100%; border: 0px; background: transparent; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z2 tr{display: block; height: auto; padding: 12px 0px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 30%,transparent);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z2 tr:first-child{padding-top: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z2 tr:last-child{padding-bottom: 0px; border-bottom: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z2 th{display: block; width: auto; margin: 0px 0px 4px; padding: 0px; border: 0px; background: transparent; color: var(--brass); font: 600 15px / 1.5 Paperozi, sans-serif; text-align: left;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z2 td{display: block; padding: 0px; border: 0px; background: transparent; color: var(--paper); font-size: 14px; line-height: 1.75; text-align: left;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table{display: block; width: 100%; border: 0px; color: var(--paper); font: 400 13px/1.55 var(--font-body); background: transparent !important;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table :is(thead, tbody, tr, th, td){background: transparent !important;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table thead{position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); background: transparent !important;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table tbody{display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); gap: 0px 18px; max-height: 360px; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table tr{display: grid; grid-template-columns: minmax(92px, 27%) minmax(0px, 1fr); align-items: start; min-height: 0px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 22%,transparent);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table :is(th, td){border: 0px; font-size: 13px; line-height: 1.55; vertical-align: top; overflow-wrap: anywhere; word-break: keep-all; width: auto !important; padding: 5px 6px !important;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table th{color: var(--muted); font-family: var(--font-mono); font-weight: 600; min-width: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table th code{color: var(--muted); font-size: 12px; line-height: 1.5;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table td{color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table td code{color: var(--paper); font-size: 12px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-notes{margin-top: 8px; padding-top: 8px; border-top: 1px solid color-mix(in srgb,var(--brass) 30%,transparent); color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-card{padding: 12px; border: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-card p{margin: 0px 0px 8px; font-size: 14px; line-height: 1.75; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z39{box-sizing: border-box; border: 1px solid var(--brass); border-radius: 2px; background: var(--paper); color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z40{padding: 8px 12px; border-bottom: 1px solid var(--brass); background: color-mix(in srgb,var(--paper) 92%,var(--ink)); color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z40 > span{color: var(--ink); font: 600 12px/1.5 var(--font-label);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z40 [role="status"]{color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z41{padding: 12px; background: var(--paper); color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z41 :is(p, li, pre, code, span){color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z41 .wg-code{background: transparent; border: 0px; padding: 0px; color: var(--ink); font-size: 13px; line-height: 1.6;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-copy-control > button[data-copy-block]{background: var(--brass); color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-copy-control > [role="status"]{color: var(--paper);}
+@media (hover: hover) {#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms) button[aria-selected="false"]:hover{background: color-mix(in srgb,var(--brass) 18%,transparent);}}
+@media (max-width: 900px) {#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z16{columns: 2;}}
+@media (max-width: 650px) {#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z16{columns: 1;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms){margin-bottom: 16px;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content :is(.wg-local-tabs, .wg-category-platforms) button{min-width: 84px; height: 40px; min-height: 40px; max-height: 40px; padding: 0px 16px;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z19 > summary{min-height: 40px; padding: 10px 56px 10px 12px;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z19 > summary::after{margin-left: auto;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-card > .z19 > summary{padding-left: 0px; padding-right: 56px;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table tbody{grid-template-columns: minmax(0px, 1fr); max-height: 320px;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-field-table tr{grid-template-columns: minmax(84px, 30%) minmax(0px, 1fr);}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z18 .z20 th{width: 88px;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z16 .z20 th{width: 92px;}#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z33{gap: 10px;}}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z32{padding-top: 0px; border-top: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z32 > .z19 > .z33{margin-top: 0px; margin-bottom: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 p{margin: 0px 0px 8px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z34 p:last-child{margin-bottom: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-auxiliary p{padding-left: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z41{padding: 10px 12px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z41 .wg-code{margin: 0px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z41 > :first-child{margin-top: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z40 .wg-copy-control > [role="status"]{color: var(--ink);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z20 th{box-sizing: border-box;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z1 .wg-local-tabs{margin: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z1 .wg-platform-slot{margin: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z1:has(.wg-category-platforms:not([hidden])){margin-bottom: 16px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-preview > .wg-local-tabs{margin-bottom: 16px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z18 > .z19 > summary{margin-bottom: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z11 > h4{padding: 8px 12px; min-height: 40px; margin: 0px 0px 10px; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content #guide-5 .z15{padding: 8px 12px; min-height: 40px; margin: 0px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z29{background: linear-gradient(transparent 42%,color-mix(in srgb,var(--brass) 80%,transparent) 42%,color-mix(in srgb,var(--brass) 80%,transparent) 96%,transparent 96%); color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content #guide-5 .z20 .z29{background: none; color: inherit;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content ol.z10 > li{background: transparent; color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content ol.z10 > li::before{color: var(--stamp-red);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .z7 code{color: var(--paper);}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-preview{margin-bottom: 0px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content .wg-status-notes{margin-top: 12px;}
+#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11) #guide-5 :is(.z12, .z18 > h4, .z19 > summary){box-sizing: border-box; min-height: 40px; margin: 0px; padding: 8px 12px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid color-mix(in srgb,var(--brass) 45%,transparent); background: transparent; color: var(--brass); font: 600 16px / 24px Paperozi, sans-serif; text-align: left;}
+@media (max-width: 650px) {#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11) #guide-5 .z19 > summary{padding-right: 56px;}}
 #guide .z50{font: inherit; text-decoration: none; cursor: text; overflow-wrap: anywhere;}
-@media(max-width:650px){#guide #ww-guide-module .wp .z25{white-space:normal!important;overflow-wrap:anywhere}}
+@media(max-width:650px){#guide #ww-guide-module :is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11) .z25{white-space:normal!important;overflow-wrap:anywhere}}
