@@ -2,6 +2,7 @@
 #guide.ww-guide-ready{width:calc(100% - 80px);max-width:1360px;margin-inline:auto;padding:32px;box-sizing:border-box;min-height:0;background:var(--paper);color:var(--ink)}
 #guide .ww-guide{--wg-paper:var(--paper);--wg-ink:var(--ink);--wg-line:var(--brass,var(--line));display:flex;flex-direction:column;min-width:0;background:var(--paper);color:var(--ink);font:var(--ww-body-size,13px)/1.75 var(--font-body)}
 #guide .ww-guide [hidden]{display:none!important}
+#guide #ww-guide-module .wg-entry-head>h3:focus{outline:none}
 #guide .ww-guide button{cursor:pointer;font:inherit;color:inherit}
 #guide .ww-guide button:focus-visible,#guide .ww-guide a:focus-visible{outline:2px solid var(--wg-ink);outline-offset:3px}
 #guide .wg-groups{display:flex;gap:6px;border-bottom:2px solid var(--wg-ink);margin-bottom:20px;overflow-x:auto;flex-shrink:0}
