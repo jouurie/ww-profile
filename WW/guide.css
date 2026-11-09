@@ -366,3 +366,29 @@ body>dialog.wg-play-dialog{box-sizing:border-box;width:min(480px,calc(100vw - 24
 #guide .wg-command-heading>h4{margin:0;font-size:19px;line-height:1.5}
 #guide .ww-guide .wg-command-heading .wg-copy-control{display:inline-flex;margin:0;flex:none}
 #guide .ww-guide .wg-command-heading [data-pinball-preview]{width:auto;min-width:0;max-width:none;padding-inline:10px}
+
+/* Approved B: open directory and a shared dark guide body. */
+/* Supporting guidance has an explicit role separate from values and headings. */
+#guide #ww-guide-module .wg-content .wg-auxiliary{margin-top:12px;padding-left:12px}
+#guide #ww-guide-module .wg-content .wg-auxiliary-label{display:block;margin:0 0 4px;color:var(--brass);font:600 12px/1.5 var(--font-body)}
+#guide #ww-guide-module .wg-content .wg-auxiliary p{margin:0;color:var(--paper);font-size:13px!important;line-height:1.65!important}
+#guide #ww-guide-module .wg-content .wg-note{padding-left:12px;font-size:12px!important;line-height:1.65!important}
+#guide #ww-guide-module .wg-content .wg-model-defaults .wg-default-values{margin:0;color:var(--paper);font-size:14px!important;line-height:1.75!important}
+#guide #ww-guide-module .wg-content .wg-model-defaults .wg-guidance-note{margin:8px 0 0;padding-left:12px;color:var(--muted);font-size:12px!important;line-height:1.65!important}
+#guide .ww-guide{background:transparent}
+#guide .ww-guide .wg-control-panel{padding:24px;background:var(--ink)}
+#guide .ww-guide .wg-directory{padding:18px;background:var(--paper);margin:0 0 28px;gap:20px 24px;border-top:4px solid var(--brass)}
+#guide .ww-guide .wg-directory-heading{font-size:14px;font-weight:700;margin-bottom:8px}
+#guide .ww-guide .wg-directory .wg-item-selector button{border:0;border-bottom:1px solid var(--brass);background:transparent;color:var(--ink);padding-inline:10px}
+#guide .ww-guide .wg-directory .wg-item-selector button[aria-selected=true]{background:var(--ink);color:var(--paper);font-weight:700}
+#guide .ww-guide .wg-control-panel,#guide .ww-guide .wg-content{background:var(--ink);color:var(--paper);padding:0}
+#guide .ww-guide .wg-control-panel{padding:24px;border:1px solid var(--brass)}
+#guide .ww-guide .wg-item>.wg-entry-head>h3{color:var(--paper);border-color:var(--brass)}
+#guide .ww-guide .wg-progress-table{display:block;border:0;background:transparent;color:var(--paper)}
+#guide .ww-guide .wg-progress-table tbody{display:block}
+#guide .ww-guide .wg-progress-table tr{display:block;height:auto!important;padding:18px 0;border-bottom:1px solid var(--brass)}
+#guide .ww-guide .wg-progress-table tr:first-child{padding-top:0}
+#guide .ww-guide .wg-progress-table tr:last-child{padding-bottom:0;border-bottom:0}
+#guide .ww-guide .wg-progress-table th{display:block;width:auto;padding:0;margin:0 0 8px;border:0;background:transparent;color:var(--brass);font-size:16px;font-weight:700}
+#guide .ww-guide .wg-progress-table td{display:block;padding:0;border:0;background:transparent;color:var(--paper);line-height:1.85}
+@media(max-width:600px){#guide .ww-guide .wg-directory{padding:16px;gap:18px}#guide .ww-guide .wg-control-panel{padding:22px 18px}}
