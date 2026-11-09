@@ -62,3 +62,5 @@ body{padding:0!important}
 @media (hover:hover) and (pointer:fine){.n0 :is(.ww-profile-traits>li,.kw-chip,.ww-npc-traits>.ww-npc-trait):hover{transform:none}}@media (hover:none),(pointer:coarse),(pointer:none){.n0 :is(.ww-profile-traits>li,.kw-chip,.ww-npc-traits>.ww-npc-trait):active{transform:none}}
 #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){transition:none!important}
 }
+.n0 #guide .wg-content h3:focus{outline:none}
+.n0 :is(.n3,.ng-jump):focus{outline:none!important;box-shadow:none!important}
