@@ -778,3 +778,76 @@ body #truck .rr:has(>details:first-child[open])>details:last-child .ra::before,b
 /* A guide-only legacy alias must never force the first truck pane visible. */
 body #truck #tg0>.rs>.rb.z0{display:none!important}
 body #truck #tg0:has(#z0[open])>.rs>.rb.z0,body #truck #tg0:not(:has(.rr>details[open]))>.rs>.rb.z0{display:grid!important}
+
+/* Approved mobile B: compact photo strips above cream polaroid cards. */
+@media(max-width:720px){
+body #npc .ww-npc-shell{display:flex;flex-direction:column}
+body #npc .ww-npc-heading-row{order:0}
+body #npc .ww-npc-navigation{order:1;margin:0 0 12px}
+body #npc .ww-npc-page{order:2;display:grid;min-width:0}
+body #npc .ww-npc-footer{order:3}
+body #npc .ww-npc-page>.ww-npc-spread{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;align-items:stretch;gap:0;box-sizing:border-box;padding:6px;margin:0;background:var(--paper);color:var(--ink)}
+body #npc .ww-npc-page>.ww-npc-spread[hidden]{display:grid!important;visibility:hidden;pointer-events:none}
+body #npc .ww-npc-polaroid{padding:0;margin:0;transform:none!important;rotate:none!important;translate:none!important;aspect-ratio:8/5;overflow:hidden;background:var(--paper)}
+body #npc .ww-npc-profile-image{display:block;width:100%;height:100%;aspect-ratio:8/5;object-fit:cover;object-position:var(--ww-npc-photo-x,50%) var(--ww-npc-photo-y,25%)}
+body #npc .ww-npc-copy{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto 1fr;align-content:start;align-items:start;gap:10px 10px;padding:12px 8px 10px}
+body #npc .ww-npc-name{align-self:center;margin:0;font-size:22px;line-height:1.35;letter-spacing:-.04em;color:var(--ink)}
+body #npc .ww-npc-english{justify-self:start;align-self:center;max-width:100%;box-sizing:border-box;margin:0;padding:3px 8px;border-left:4px solid var(--red);background:var(--ink);color:var(--paper);font-size:12px;line-height:1.5;letter-spacing:0;overflow-wrap:normal;word-break:keep-all}
+body #npc .ww-npc-traits{grid-column:1/-1;gap:4px;margin:0}
+body #npc .ww-npc-trait{padding:3px 5px;font-size:11px;line-height:1.55;border-color:var(--brass);background:none;color:var(--ink)}
+body #npc .ww-npc-details{grid-column:1/-1;align-content:start;color:var(--ink)}
+body #npc .ww-npc-film{justify-content:safe center;gap:4px;padding:0;border:0;scrollbar-width:none}
+body #npc .ww-npc-thumb{flex:0 0 48px;width:48px;padding:3px 3px 4px;border:0;background:var(--paper);color:var(--ink);transform:none;translate:none}
+body #npc .ww-npc-thumb-frame{width:42px;height:36px;aspect-ratio:auto;padding:0;border:0}
+body #npc .ww-npc-thumb-name{margin-top:3px;font-size:9px;line-height:1.3;min-height:2.6em}
+body #npc .ww-npc-thumb[aria-pressed=true]{box-shadow:inset 0 -3px var(--red)}
+body #truck .wwtruck-shell{display:flex;flex-direction:column}
+body #truck .wwtruck-shell>.ww-section-head{order:0}
+body #truck .wwtruck-shell>.ww-hscroll-shell:has(>.wwtruck-categories){order:1!important;margin:0 0 8px!important}
+body #truck .wwtruck-categories{order:1;margin:0 0 8px}
+body #truck .wwtruck-group-panels{order:2;margin:0 0 12px}
+body #truck .wwtruck-gallery-stage{order:3;display:grid;grid-template-columns:minmax(0,1fr);gap:0;padding:6px;background:var(--paper);color:var(--ink)}
+body #truck .wwtruck-concept-note{order:4}
+body #truck .wwtruck-gallery-status{order:5}
+body #truck .wwtruck-captions{min-height:0;padding:10px 8px;background:var(--paper);color:var(--ink)}
+body #truck .wwtruck-caption[data-active=false]{display:none}
+body main #truck .wwtruck-caption h3{color:var(--ink)}
+body #truck .wwtruck-thumbnail-strip{justify-content:safe center;gap:4px;padding:0;scrollbar-width:none}
+body #truck .wwtruck-thumbnail{flex:0 0 52px;width:52px;max-width:52px;padding:3px 3px 4px;border:0;background:var(--paper);color:var(--ink)}
+body #truck .wwtruck-thumbnail-image,body #truck .wwtruck-sleep-diagram.is-thumbnail{height:36px;aspect-ratio:auto;object-fit:cover}
+body #truck .wwtruck-thumbnail-title{margin-top:3px;min-height:3.9em;font-size:9px;line-height:1.3;text-align:center}
+body #truck .wwtruck-thumbnail[aria-pressed=true]{box-shadow:inset 0 -3px var(--red)}
+/* Native details keep the same strip/card order without an inline CSS copy. */
+body #npc .gn{order:1;display:flex;flex-direction:column}
+body #npc .gn>.rr{order:0}
+body #npc .gn>.rs{order:1;display:grid}
+body #npc .gn>.rs>.rb{display:grid!important;visibility:hidden;pointer-events:none;grid-area:1/1}
+body #npc .gn:not(:has(.rr>details[open]))>.rs>.rb:first-child{visibility:visible;pointer-events:auto}
+body #npc .gn>.rs>.rb>.ww-npc-spread{height:100%}
+body #npc .gn .ww-npc-polaroid>.nz:not([open]),body #npc .gn .ww-npc-polaroid>.nz:not([open])>summary{display:block;height:100%;width:100%}
+body #npc .gn .ww-npc-polaroid:has(.nz[open]){overflow:visible}
+body :is(#npc .gn,#truck .n5) .rr{justify-content:safe center;gap:4px;margin:0 40px 12px;padding:0;border:0;scrollbar-width:none;align-items:stretch}
+body #npc .gn .rt{box-sizing:border-box;flex:0 0 48px;width:48px;min-height:0;padding:3px 3px 4px;background:var(--paper);color:var(--ink);border:0}
+body #npc .gn .ww-npc-thumb-frame{margin:0}
+body #npc .gn .ww-npc-thumb-name{font-size:9px}
+body :is(#npc .gn,#truck .n5) .rr details[open] .rt{box-shadow:inset 0 -3px var(--red)}
+body #truck .n5>.n6{order:0;margin:0 0 8px}
+body #truck .n5 .rr{order:1}
+body #truck .n5 .rs{order:2}
+body #truck .n5 .n8{padding:6px;background:var(--paper);gap:0}
+body #truck .n5 .wwtruck-captions{min-height:0}
+body #truck .n5 .rt{box-sizing:border-box;flex:0 0 52px;width:52px;min-height:0;padding:3px 3px 4px;background:var(--paper);color:var(--ink);border:0;font-size:9px;line-height:1.3;text-align:center}
+body #truck .n5 .rt>.ri{display:block;height:36px;margin:0 0 3px}
+body #truck .n5 .rt>span{display:block;min-height:3.9em}
+}
+
+@media(max-width:720px){body #npc .gn:has(#z30[open])>.rs>.z30{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z31[open])>.rs>.z31{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z32[open])>.rs>.z32{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z33[open])>.rs>.z33{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z34[open])>.rs>.z34{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z35[open])>.rs>.z35{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z36[open])>.rs>.z36{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z37[open])>.rs>.z37{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z38[open])>.rs>.z38{visibility:visible;pointer-events:auto}}
+@media(max-width:720px){body #npc .gn:has(#z39[open])>.rs>.z39{visibility:visible;pointer-events:auto}}

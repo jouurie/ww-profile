@@ -54,6 +54,8 @@
     el.src = image.src; el.alt = npc.name;
     el.width = 832; el.height = 1216;
     el.loading = 'lazy'; el.decoding = 'async'; el.draggable = false;
+    el.style.setProperty('--ww-npc-photo-x', image.faceX + '%');
+    el.style.setProperty('--ww-npc-photo-y', image.faceY + '%');
     if (thumbnail) {
       el.style.setProperty('--ww-npc-face-x', image.faceX + '%');
       el.style.setProperty('--ww-npc-face-y', image.faceY + '%');
@@ -144,13 +146,12 @@
     footer.append(hint);
     shell.append(header, page, navigation, footer);
     root.classList.add('ww-npc'); root.replaceChildren(shell);
-    function select(index, scroll, focus) {
-      if (!session.alive || !npcs.length) return;
-      session.index = (index + npcs.length) % npcs.length;
-      var npc = npcs[session.index];
+    var spreads = npcs.map(function (npc, index) {
       var content = parts(npc);
       var spread = node('article', 'ww-npc-spread');
-      spread.dataset.palette = session.index % 2 ? 'cool' : 'warm';
+      spread.dataset.palette = index % 2 ? 'cool' : 'warm';
+      spread.hidden = true;
+      spread.inert = true;
       var portrait = node('figure', 'ww-npc-polaroid');
       portrait.setAttribute('data-motion', 'tilt');
       var image = imageFor(npc);
@@ -170,7 +171,17 @@
       });
       copy.append(korean, english);
       if (content.tags.length) copy.append(tags);
-      copy.append(details); spread.append(portrait, copy); page.replaceChildren(spread);
+      copy.append(details); spread.append(portrait, copy);
+      return spread;
+    });
+    page.replaceChildren.apply(page, spreads);
+    function select(index, scroll, focus) {
+      if (!session.alive || !npcs.length) return;
+      session.index = (index + npcs.length) % npcs.length;
+      spreads.forEach(function (spread, i) {
+        spread.hidden = i !== session.index;
+        spread.inert = i !== session.index;
+      });
       thumbnails.forEach(function (button, i) {
         button.setAttribute('aria-pressed', String(i === session.index));
         button.tabIndex = i === session.index ? 0 : -1;
