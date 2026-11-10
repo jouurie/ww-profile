@@ -474,8 +474,9 @@ body #guide .ww-guide .wg-entry-head h3{border-left:3px solid #b7873d}
 body #world .ww-place-gallery{--ww-place-rail-width:20.5%;position:relative;display:grid;grid-template-columns:var(--ww-place-rail-width) minmax(0,1fr);gap:8px;align-items:start;padding:0;margin:0 22px 20px}
 body #world .ww-place-selectors{position:absolute;inset:0 auto 0 0;width:var(--ww-place-rail-width);grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(6,minmax(0,1fr));gap:3px;align-content:stretch;overflow-y:auto;overflow-x:hidden}
 body #world .ww-place-stage{position:relative;grid-column:2;grid-row:1;min-width:0;container-type:inline-size}
-body #world .ww-place-stage figcaption{position:absolute;inset:6% 5% auto;z-index:1;display:grid;justify-items:center;gap:8px;margin:0;padding:0;background:none;color:var(--paper);text-align:center;pointer-events:none;text-shadow:0 1px 2px var(--ink),0 0 6px color-mix(in srgb,var(--ink) 65%,transparent)}
-body #world .ww-place-stage figcaption :is(h4,p){color:var(--paper);text-align:center;white-space:normal;overflow:visible;text-overflow:clip}
+body #world .ww-place-stage:has(>#place-image){display:flex;flex-direction:column}body #world .ww-place-stage>#place-image{order:-1}
+body #world .ww-place-stage figcaption{position:static;inset:auto;z-index:auto;display:block;gap:0;margin:6px 0 0;padding:6px 0 0;border-top:1px solid var(--brass)!important;background:none;color:var(--ink);text-align:left;pointer-events:none;text-shadow:none}
+body #world .ww-place-stage figcaption :is(h4,p){color:var(--ink);text-align:left;white-space:normal;overflow:visible;text-overflow:clip}
 body #world .ww-place-stage figcaption h4{display:block;max-width:100%;margin:0;padding:0;font:600 clamp(26px,8cqi,68px)/1.15 Paperozi,sans-serif;letter-spacing:-.025em;overflow-wrap:anywhere}
 body #world .ww-place-stage figcaption h4::before{content:none;display:none}
 body #world .ww-place-stage figcaption h4.is-english{font-family:Anton,sans-serif;font-weight:400!important;font-style:italic!important;letter-spacing:.015em}
@@ -483,7 +484,7 @@ body #world .ww-place-stage figcaption #place-name{display:none}
 body #world .ww-place-stage figcaption p{max-width:42ch;margin:0;padding:0;font-size:clamp(13px,2cqi,18px)!important;line-height:1.55!important;font-weight:500}
 body #world .ww-place-stage figcaption p.needs-shadow{text-shadow:0 1px 2px var(--ink),0 0 6px color-mix(in srgb,var(--ink) 78%,transparent)}
 /* Description-only backing: faded ends, bounded to the text, without text shadows. */
-body #world .ww-place-stage figcaption :is(#place-description,p){box-sizing:border-box;width:fit-content;max-width:100%;padding:5px 28px;background:linear-gradient(to right,transparent,color-mix(in srgb,var(--ink) 38%,transparent) 18%,color-mix(in srgb,var(--ink) 38%,transparent) 82%,transparent);text-shadow:none}
+body #world .ww-place-stage figcaption :is(#place-description,p){box-sizing:border-box;width:100%;max-width:100%;padding:0;background:none;text-shadow:none}
 body #world .ww-place-selector{position:relative;display:block;width:100%;min-height:0;align-self:stretch;overflow:hidden;margin:0;padding:0;border:0;background:none;color:var(--paper)}
 body #world .ww-place-selector img{width:100%;height:100%;min-height:0;aspect-ratio:auto;object-fit:cover}
 body #world .ww-place-selector span{position:absolute;inset:auto 0 0;z-index:2;display:block;min-height:0;white-space:normal;overflow-wrap:anywhere;padding:14px 8px 6px;background:linear-gradient(transparent,color-mix(in srgb,var(--ink) 78%,transparent));color:var(--paper);font:600 14px/1.3 Paperozi,sans-serif;text-align:left;text-shadow:0 1px 2px var(--ink)}
@@ -493,7 +494,7 @@ body #world .ww-place-selector::after{content:'';position:absolute;inset:0;z-ind
 body #world .ww-place-selector[aria-pressed="true"]::after{opacity:0}
 body #world .ww-place-selector[aria-pressed="true"]::before{content:'';position:absolute;inset:0 auto 0 0;z-index:1;width:3px;background:var(--brass)}
 body #world .ww-place-selector:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}
-@media(max-width:720px){body #world .ww-place-gallery{grid-template-columns:minmax(0,1fr);gap:6px}body #world .ww-place-selectors{position:static;width:100%;grid-column:1;grid-row:1;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:64px;gap:3px;overflow:visible}body #world .ww-place-stage{grid-column:1;grid-row:2}body #world .ww-place-stage figcaption{inset:6% 4% auto;gap:5px}body #world .ww-place-selector span{padding:9px 2px 3px;font-size:11px;line-height:1.15}}
+@media(max-width:720px){body #world .ww-place-gallery{grid-template-columns:minmax(0,1fr);gap:6px}body #world .ww-place-selectors{position:static;width:100%;grid-column:1;grid-row:1;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:64px;gap:3px;overflow:visible}body #world .ww-place-stage{grid-column:1;grid-row:2}body #world .ww-place-stage figcaption{inset:auto;gap:0}body #world .ww-place-selector span{padding:9px 2px 3px;font-size:11px;line-height:1.15}}
 /* Guide entry titles originally have a lower rule, with no leading accent. */
 body #brothers .ww-profile-c .bd-spec-table small{font:400 12px/1.7 Arial,sans-serif!important;font-style:normal!important;font-variant:normal;letter-spacing:0;text-transform:none;font-feature-settings:normal}
 body #guide #ww-guide-module .wg-content .wg-entry-head>h3{border-left:0;padding:0 0 8px}
