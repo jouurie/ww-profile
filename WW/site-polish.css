@@ -723,3 +723,12 @@ body #world .ww-place-selector[open]::after{opacity:0}
 body #world .ww-place-selector[open]::before{content:"";position:absolute;inset:0 auto 0 0;z-index:1;width:3px;background:var(--brass)}
 @media(max-width:720px){body #world .ww-native-stages{grid-column:1;grid-row:2}}
 body #world .ww-native-places:not(:has(details[open])) .ww-place-selector:first-child::after{opacity:0}
+
+/* Native guide content owns its padding; the close control shares its header row. */
+body .wr #guide #ww-guide-module{display:grid;grid-template-columns:minmax(0,1fr)}
+body .wr #guide #ww-guide-module>.wg-directory{grid-column:1;grid-row:1}
+body .wr #guide #ww-guide-module>:is(#wp0,#wp1,#wp2,#wp3,#wp4,#wp5,#wp6,#wp7,#wp8,#wp10,#wp11).wg-content{grid-column:1;grid-row:2;box-sizing:border-box;padding:16px;margin:0;min-width:0}
+body .wr #guide #ww-guide-module>.wg-control-panel:is(:empty,:has(>.wg-content:empty)){display:none}
+body .wr #guide #ww-guide-module>.wc{grid-column:1;grid-row:2;align-self:start;justify-self:end;z-index:2;margin:12px 12px 0 0}
+body .wr #guide #ww-guide-module>.wc>summary{box-sizing:border-box;display:grid;place-items:center;width:48px;height:28px;min-height:0;padding:0 6px;font:500 12px/1 var(--font-body)}
+body .wr #guide #ww-guide-module>.wg-content>.z0>.z1{padding-right:56px}
