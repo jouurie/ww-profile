@@ -592,8 +592,8 @@ body #brothers .ww-profile-c .profile-sheet .sq-sub.wyatt,
 
 /* The existing motel key overlaps the truck frame; image and action remain one link. */
 #intro .key-tag{width:176px;left:-22px;right:auto;top:32px}
-@media(max-width:720px){#intro .key-tag{width:128px;left:5px;right:auto;top:24px}#intro .intro-truck-stage .key-tag .ww-key-action{font-size:12px;padding:4px 6px;margin-top:-20px;transform:rotate(-8deg)}}
-@media(max-width:360px){#intro .key-tag{width:112px;left:6px;top:24px}}
+@media(max-width:720px){#intro .key-tag{width:88px;left:5px;right:auto;top:24px}#intro .intro-truck-stage .key-tag .ww-key-action{font-size:12px;padding:4px 6px;margin-top:-20px;transform:rotate(-8deg)}}
+@media(max-width:360px){#intro .key-tag{width:76px;left:6px;top:24px}}
 
 /* The intro nameplate shares the existing paper hover emphasis. */
 @media(hover:hover) and (pointer:fine){body #intro .title-poster-piece.ww-wide-title:hover{filter:brightness(1.08)}}
