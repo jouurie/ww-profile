@@ -762,3 +762,19 @@ body #npc .rr:has(>details:first-child[open])>details:last-child .ra,body #npc .
 body #npc .rr .ra::before{content:"";display:block;box-sizing:border-box;width:8px;height:8px;border:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;background:none;transform:rotate(-45deg)}
 body #npc .rr:has(>details:first-child[open])>details:last-child .ra::before,body #npc .rr:not(:has(>details[open]))>details:last-child .ra::before,body #npc .rr>details:has(+details[open]) .ra::before{content:"";transform:rotate(135deg)}
 @supports(top:anchor(top)) and (height:anchor-size(height)){body #npc .rr:has(>details:last-child[open])>details:first-child .ra,body #npc .rr:not(:has(>details[open]))>details:nth-child(2) .ra,body #npc .rr>details[open]+details .ra{left:calc(anchor(--ww-npc-native-gallery right) - 32px);right:auto}body #npc .rr:has(>details:first-child[open])>details:last-child .ra,body #npc .rr:not(:has(>details[open]))>details:last-child .ra,body #npc .rr>details:has(+details[open]) .ra{left:anchor(--ww-npc-native-gallery left);right:auto}}
+
+/* Script-free truck controls reuse the web rail width and slim chevrons. */
+body #truck .n5 .rr{margin:22px 40px 0}
+body #truck .n5{anchor-name:--ww-truck-native-gallery}
+body #truck .rr .rt{anchor-name:--ww-truck-native-thumb}
+body #truck .n5 .ra{box-sizing:border-box;width:32px;height:112px;min-height:0;bottom:19px;margin:0;padding:0;border:1px solid var(--brass);border-radius:0;background:transparent;color:var(--paper);font-size:0}
+@supports(top:anchor(top)) and (height:anchor-size(height)){body #truck .n5 .ra{position:fixed;position-anchor:--ww-truck-native-thumb;top:anchor(top);bottom:auto;height:anchor-size(height);position-visibility:always}}
+body #truck .rr:has(>details:last-child[open])>details:first-child .ra,body #truck .rr:not(:has(>details[open]))>details:nth-child(2) .ra,body #truck .rr>details[open]+details .ra{left:auto;right:0}
+body #truck .rr:has(>details:first-child[open])>details:last-child .ra,body #truck .rr:not(:has(>details[open]))>details:last-child .ra,body #truck .rr>details:has(+details[open]) .ra{left:0;right:auto}
+body #truck .rr .ra::before{content:"";display:block;box-sizing:border-box;width:8px;height:8px;border:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;background:none;transform:rotate(-45deg)}
+body #truck .rr:has(>details:first-child[open])>details:last-child .ra::before,body #truck .rr:not(:has(>details[open]))>details:last-child .ra::before,body #truck .rr>details:has(+details[open]) .ra::before{content:"";transform:rotate(135deg)}
+@supports(top:anchor(top)) and (height:anchor-size(height)){body #truck .rr:has(>details:last-child[open])>details:first-child .ra,body #truck .rr:not(:has(>details[open]))>details:nth-child(2) .ra,body #truck .rr>details[open]+details .ra{left:calc(anchor(--ww-truck-native-gallery right) - 32px);right:auto}body #truck .rr:has(>details:first-child[open])>details:last-child .ra,body #truck .rr:not(:has(>details[open]))>details:last-child .ra,body #truck .rr>details:has(+details[open]) .ra{left:anchor(--ww-truck-native-gallery left);right:auto}}
+
+/* A guide-only legacy alias must never force the first truck pane visible. */
+body #truck #tg0>.rs>.rb.z0{display:none!important}
+body #truck #tg0:has(#z0[open])>.rs>.rb.z0,body #truck #tg0:not(:has(.rr>details[open]))>.rs>.rb.z0{display:grid!important}
