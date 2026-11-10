@@ -892,3 +892,96 @@ body main #truck .wwtruck-caption h3::before{content:none;display:none}
 body #truck .wwtruck-spec{display:flex;flex-wrap:wrap;align-items:start;gap:2px;margin:8px 0 0;padding:0;border:0;font-size:0!important;line-height:0!important}
 body #truck .wwtruck-detail{margin-top:8px;padding-top:6px;border-top:1px solid var(--brass)}
 }
+
+/* Equal cream-box spacing: the row and row-parent now share the existing 18px gap. */
+body #world #world-mosaic{gap:18px}
+/* Desktop shares the approved mobile material, with separate photo/copy columns. */
+@media(min-width:721px){
+body #npc .ww-npc-shell{display:flex;flex-direction:column}
+body #npc .ww-npc-heading-row{order:0}
+body #npc .ww-npc-navigation{order:1;margin:0 0 12px;align-items:stretch}
+body #npc .ww-npc-page{order:2;display:grid;min-width:0}
+body #npc .ww-npc-footer{order:3}
+body #npc .ww-npc-page>.ww-npc-spread{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);grid-template-rows:auto;align-items:stretch;gap:0;box-sizing:border-box;min-height:0;padding:6px;margin:0;background:var(--paper);color:var(--ink)}
+body #npc .ww-npc-page>.ww-npc-spread[hidden]{display:grid!important;visibility:hidden;pointer-events:none}
+body #npc .ww-npc-polaroid{align-self:start;padding:0;margin:0;transform:none!important;rotate:none!important;translate:none!important;aspect-ratio:8/5;overflow:hidden;background:var(--paper)}
+body #npc .ww-npc-profile-image{display:block;width:100%;height:100%;aspect-ratio:8/5;object-fit:cover;object-position:50% clamp(0%,calc((var(--ww-npc-photo-y,25%) - 21.38%) * 1.747),100%)}
+body #npc .ww-npc-copy{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto 1fr;align-items:baseline;align-content:start;gap:12px 10px;padding:12px 16px}
+body #npc .ww-npc-name,body main #truck .wwtruck-caption h3{display:block;align-self:baseline;margin:0;padding:0;border:0;background:none;color:var(--ink);font:700 20px/30px var(--font-label);letter-spacing:0;text-align:left}
+body #npc .ww-npc-english{display:block;justify-self:start;align-self:baseline;box-sizing:border-box;max-width:100%;margin:0;padding:0;border:0;background:none;color:#a63628;font:400 12px/18px var(--font-body);font-weight:400!important;letter-spacing:0;word-break:keep-all;overflow-wrap:normal}
+body #npc .ww-npc-traits{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:start;gap:2px;margin:0;padding:0}
+body #npc .ww-npc-traits>.ww-npc-trait,body #truck .wwtruck-spec>span{display:block;box-sizing:border-box;max-width:100%;margin:0;padding:3px 4px;border:1px solid rgba(241,221,189,.22);border-radius:0;background:#221c17;color:#f1ddbd;font:500 12px/18px var(--font-body);letter-spacing:0;word-break:keep-all;overflow-wrap:normal}
+body #npc .ww-npc-details{grid-column:1/-1;align-self:start;display:grid;gap:6px;color:var(--ink)}
+body main #npc .ww-npc-details>p+p{margin:0;padding:6px 0 0;border:0;border-top:1px solid var(--brass)}
+body #npc .ww-npc-film{justify-content:safe center;gap:4px;padding:0;border:0;scrollbar-width:none}
+body #npc .ww-npc-thumb{flex:0 0 64px;width:64px;padding:3px 3px 4px;border:0;background:var(--paper);color:var(--ink);transform:none;translate:none}
+body #npc .ww-npc-thumb-frame{position:relative;width:58px;height:48px;aspect-ratio:auto;padding:0;border:0}
+body #npc .ww-npc-thumb-name{margin-top:3px;min-height:2.6em;font-size:11px;line-height:1.3}
+body #npc .ww-npc-thumb[aria-pressed=true]{box-shadow:inset 0 -3px var(--red)}
+body #npc .ww-npc-thumb-frame::after{content:"";position:absolute;inset:0;background:#000;opacity:.68;pointer-events:none}
+body #npc .ww-npc-thumb[aria-pressed=true] .ww-npc-thumb-frame::after,body #npc .gn .rr>details[open] .ww-npc-thumb-frame::after,body #npc .gn:not(:has(.rr>details[open])) .rr>details:first-child .ww-npc-thumb-frame::after{opacity:0}
+body #truck .wwtruck-shell{display:flex;flex-direction:column}
+body #truck .wwtruck-shell>.ww-section-head{order:0}
+body #truck .wwtruck-shell>.ww-hscroll-shell:has(>.wwtruck-categories){order:1!important;margin:0 0 8px!important}
+body #truck .wwtruck-categories{order:1;margin:0 0 8px}
+body #truck .wwtruck-group-panels{order:2;margin:0 0 12px}
+body #truck .wwtruck-gallery-stage{order:3;display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);align-items:start;gap:0;padding:6px;background:var(--paper);color:var(--ink)}
+body #truck .wwtruck-concept-note{order:4}
+body #truck .wwtruck-gallery-status{order:5}
+body #truck .wwtruck-captions{display:block;min-height:0;padding:12px 16px;background:var(--paper);color:var(--ink)}
+body #truck .wwtruck-caption[data-active=false]{display:none}
+body main #truck .wwtruck-caption h3::before{content:none;display:none}
+body #truck .wwtruck-spec{display:flex;flex-wrap:wrap;align-items:start;gap:2px;margin:12px 0 0;padding:0;border:0;font-size:0!important;line-height:0!important}
+body #truck .wwtruck-detail{margin-top:12px;padding-top:6px;border-top:1px solid var(--brass);color:var(--ink)}
+body #truck .wwtruck-thumbnail-strip{justify-content:safe center;gap:4px;padding:0;scrollbar-width:none}
+body #truck .wwtruck-thumbnail{flex:0 0 72px;width:72px;max-width:72px;padding:3px 3px 4px;border:0;background:var(--paper);color:var(--ink)}
+body #truck .wwtruck-thumbnail-image,body #truck .wwtruck-sleep-diagram.is-thumbnail{height:48px;aspect-ratio:auto;object-fit:cover}
+body #truck .wwtruck-thumbnail-title{margin-top:3px;min-height:2.6em;font-size:11px;line-height:1.3;text-align:center}
+body #truck .wwtruck-thumbnail[aria-pressed=true]{box-shadow:inset 0 -3px var(--red)}
+body #truck .wwtruck-thumbnail:not([aria-pressed=true]) :is(.wwtruck-thumbnail-image,.wwtruck-sleep-diagram),body #truck .n5 .rr>details:not([open]) .ri{filter:brightness(.32)!important}
+body #truck .n5 .rg:not(:has(.rr>details[open])) .rr>details:first-child .ri{filter:none!important}
+body #npc .gn{order:1;display:flex;flex-direction:column}
+body #npc .gn>.rr{order:0}
+body #npc .gn>.rs{order:1;display:grid}
+body #npc .gn>.rs>.rb{display:grid!important;visibility:hidden;pointer-events:none;grid-area:1/1}
+body #npc .gn:not(:has(.rr>details[open]))>.rs>.rb:first-child{visibility:visible;pointer-events:auto}
+body #npc .gn>.rs>.rb>.ww-npc-spread{height:100%}
+body #npc .gn .ww-npc-polaroid>.nz:not([open]),body #npc .gn .ww-npc-polaroid>.nz:not([open])>summary{display:block;height:100%;width:100%}
+body #npc .gn .ww-npc-polaroid:has(.nz[open]){overflow:visible}
+body .n0 #npc .nz[open]>summary img,body.n0 #npc .nz[open]>summary img,.n0 #npc .nz[open]>summary img{aspect-ratio:auto!important;width:auto!important;height:auto!important;max-width:calc(100vw - 40px)!important;max-height:calc(100dvh - 40px)!important;object-fit:contain!important;object-position:center!important}
+body :is(#npc .gn,#truck .n5) .rr{justify-content:safe center;gap:4px;margin:0 40px 12px;padding:0;border:0;scrollbar-width:none;align-items:stretch}
+body #npc .gn .rt{box-sizing:border-box;flex:0 0 64px;width:64px;min-height:0;padding:3px 3px 4px;background:var(--paper);color:var(--ink);border:0}
+body #npc .gn .ww-npc-thumb-frame{margin:0}
+body #npc .gn .ww-npc-thumb-image{width:calc(100% * var(--ww-npc-face-scale,2.6));max-width:none;height:auto}
+body :is(#npc .gn,#truck .n5) .rr details[open] .rt{box-shadow:inset 0 -3px var(--red)}
+body #truck .n5>.n6{order:0;margin:0 0 8px}
+body #truck .n5 .rr{order:1}
+body #truck .n5 .rs{order:2}
+body #truck .n5 .n8{grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);align-items:start;padding:6px;background:var(--paper);gap:0}
+body #truck .n5 .wwtruck-captions{min-height:0}
+body #truck .n5 .rt{box-sizing:border-box;flex:0 0 72px;width:72px;min-height:0;padding:3px 3px 4px;background:var(--paper);color:var(--ink);border:0;font-size:11px;line-height:1.3;text-align:center}
+body #truck .n5 .rt>.ri{display:block;height:48px;margin:0 0 3px}
+body #truck .n5 .rt>span{display:block;min-height:2.6em}
+}
+@media(min-width:721px){body #npc .gn:has(#z30[open])>.rs>.z30{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(1) .ww-npc-profile-image{--ww-npc-photo-y:26%}}
+@media(min-width:721px){body #npc .gn:has(#z31[open])>.rs>.z31{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(2) .ww-npc-profile-image{--ww-npc-photo-y:23%}}
+@media(min-width:721px){body #npc .gn:has(#z32[open])>.rs>.z32{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(3) .ww-npc-profile-image{--ww-npc-photo-y:16%}}
+@media(min-width:721px){body #npc .gn:has(#z33[open])>.rs>.z33{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(4) .ww-npc-profile-image{--ww-npc-photo-y:16%}}
+@media(min-width:721px){body #npc .gn:has(#z34[open])>.rs>.z34{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(5) .ww-npc-profile-image{--ww-npc-photo-y:29%}}
+@media(min-width:721px){body #npc .gn:has(#z35[open])>.rs>.z35{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(6) .ww-npc-profile-image{--ww-npc-photo-y:28%}}
+@media(min-width:721px){body #npc .gn:has(#z36[open])>.rs>.z36{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(7) .ww-npc-profile-image{--ww-npc-photo-y:28.5%}}
+@media(min-width:721px){body #npc .gn:has(#z37[open])>.rs>.z37{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(8) .ww-npc-profile-image{--ww-npc-photo-y:25%}}
+@media(min-width:721px){body #npc .gn:has(#z38[open])>.rs>.z38{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(9) .ww-npc-profile-image{--ww-npc-photo-y:31.5%}}
+@media(min-width:721px){body #npc .gn:has(#z39[open])>.rs>.z39{visibility:visible;pointer-events:auto}body #npc .gn>.rs>.rb:nth-child(10) .ww-npc-profile-image{--ww-npc-photo-y:34.5%}}
+
+/* Desktop paper follows each object instead of filling an empty shared rectangle. */
+@media(min-width:721px){
+body #npc .ww-npc-page>.ww-npc-spread{align-items:start;gap:12px;padding:0;background:transparent}
+body #npc .ww-npc-polaroid{box-sizing:border-box;padding:6px;aspect-ratio:auto;background:var(--paper)}
+body #npc .ww-npc-polaroid>.ww-npc-profile-image{height:auto;aspect-ratio:8/5}
+body #npc .ww-npc-copy{align-self:start;background:var(--paper)}
+body #truck .wwtruck-gallery-stage,body #truck .n5 .n8{align-items:start;gap:12px;padding:0;background:transparent}
+body #truck .wwtruck-viewer{box-sizing:border-box;aspect-ratio:auto;padding:6px;background:var(--paper)}
+body #truck .wwtruck-visual{position:relative;inset:auto;aspect-ratio:3/2}
+body #truck .wwtruck-captions{align-self:start}
+}
