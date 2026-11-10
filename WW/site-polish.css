@@ -750,3 +750,15 @@ body #intro .twin-polaroid-piece>.piece-head{margin-bottom:6px;padding-bottom:6p
 body #intro .intro-left-stack,body #intro .intro-top-grid{gap:18px}
 body #intro .intro-left-stack>.keyword-tag-piece.balanced-tags{margin-top:.6875px;margin-bottom:-.6875px}
 }
+
+/* Script-free NPC controls reuse the web rail width and slim chevrons. */
+body #npc .gn .rr{margin:22px 40px 0}
+body #npc .gn{anchor-name:--ww-npc-native-gallery}
+body #npc .rr .rt{anchor-name:--ww-npc-native-thumb}
+body #npc .rg .ra{box-sizing:border-box;width:32px;height:112px;min-height:0;bottom:19px;margin:0;padding:0;border:1px solid var(--brass);border-radius:0;background:transparent;color:var(--paper);font-size:0}
+@supports(top:anchor(top)) and (height:anchor-size(height)){body #npc .rg .ra{position:fixed;position-anchor:--ww-npc-native-thumb;top:anchor(top);bottom:auto;height:anchor-size(height);position-visibility:always}}
+body #npc .rr:has(>details:last-child[open])>details:first-child .ra,body #npc .rr:not(:has(>details[open]))>details:nth-child(2) .ra,body #npc .rr>details[open]+details .ra{left:auto;right:0}
+body #npc .rr:has(>details:first-child[open])>details:last-child .ra,body #npc .rr:not(:has(>details[open]))>details:last-child .ra,body #npc .rr>details:has(+details[open]) .ra{left:0;right:auto}
+body #npc .rr .ra::before{content:"";display:block;box-sizing:border-box;width:8px;height:8px;border:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;background:none;transform:rotate(-45deg)}
+body #npc .rr:has(>details:first-child[open])>details:last-child .ra::before,body #npc .rr:not(:has(>details[open]))>details:last-child .ra::before,body #npc .rr>details:has(+details[open]) .ra::before{content:"";transform:rotate(135deg)}
+@supports(top:anchor(top)) and (height:anchor-size(height)){body #npc .rr:has(>details:last-child[open])>details:first-child .ra,body #npc .rr:not(:has(>details[open]))>details:nth-child(2) .ra,body #npc .rr>details[open]+details .ra{left:calc(anchor(--ww-npc-native-gallery right) - 32px);right:auto}body #npc .rr:has(>details:first-child[open])>details:last-child .ra,body #npc .rr:not(:has(>details[open]))>details:last-child .ra,body #npc .rr>details:has(+details[open]) .ra{left:anchor(--ww-npc-native-gallery left);right:auto}}
