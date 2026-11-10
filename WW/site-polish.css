@@ -711,3 +711,15 @@ body #intro .ww-intro-flip.wade .tp-name strong{--ww-name-x:1px;--ww-name-y:3px}
 @media(max-width:720px){body #intro .ww-intro-flip.wade .tp-name strong{--ww-name-x:-2px;--ww-name-y:1px}}
 @keyframes ww-name-rattle{0%,100%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-2deg)}24%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-3.2deg)}52%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-.8deg)}76%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-2.6deg)}}
 @media(hover:hover) and (pointer:fine){body #intro .ww-intro-flip .tp-name strong:hover{animation:ww-name-rattle 350ms ease-out 1!important}}
+
+/* The native and scripted place galleries share one image plane and selection mask. */
+body #world .ww-native-stages{grid-column:2;grid-row:1;min-width:0}
+body #world .ww-place-stage{overflow:hidden}
+body #world .ww-place-stage>img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+body #world .ww-place-stage figcaption h4{display:none}
+body #world .ww-place-selector>summary{box-sizing:border-box;display:block;width:100%;height:100%;margin:0;padding:0;list-style:none}
+body #world .ww-place-selector[open]{background:none;color:var(--paper);border:0}
+body #world .ww-place-selector[open]::after{opacity:0}
+body #world .ww-place-selector[open]::before{content:"";position:absolute;inset:0 auto 0 0;z-index:1;width:3px;background:var(--brass)}
+@media(max-width:720px){body #world .ww-native-stages{grid-column:1;grid-row:2}}
+body #world .ww-native-places:not(:has(details[open])) .ww-place-selector:first-child::after{opacity:0}
