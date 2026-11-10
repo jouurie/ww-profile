@@ -852,3 +852,24 @@ body #truck .n5 .rt>span{display:block;min-height:3.9em}
 @media(max-width:720px){body #npc .gn:has(#z37[open])>.rs>.z37{visibility:visible;pointer-events:auto}}
 @media(max-width:720px){body #npc .gn:has(#z38[open])>.rs>.z38{visibility:visible;pointer-events:auto}}
 @media(max-width:720px){body #npc .gn:has(#z39[open])>.rs>.z39{visibility:visible;pointer-events:auto}}
+
+/* Mobile image state: labels stay readable; full portraits escape card cropping. */
+@media(max-width:720px){
+body #npc .ww-npc-profile-image{object-position:50% clamp(0%,calc((var(--ww-npc-photo-y,25%) - 21.38%) * 1.747),100%)}
+body #npc .gn>.rs>.rb:nth-child(1) .ww-npc-profile-image{--ww-npc-photo-y:26%}
+body #npc .gn>.rs>.rb:nth-child(2) .ww-npc-profile-image{--ww-npc-photo-y:23%}
+body #npc .gn>.rs>.rb:nth-child(3) .ww-npc-profile-image{--ww-npc-photo-y:16%}
+body #npc .gn>.rs>.rb:nth-child(4) .ww-npc-profile-image{--ww-npc-photo-y:16%}
+body #npc .gn>.rs>.rb:nth-child(5) .ww-npc-profile-image{--ww-npc-photo-y:29%}
+body #npc .gn>.rs>.rb:nth-child(6) .ww-npc-profile-image{--ww-npc-photo-y:28%}
+body #npc .gn>.rs>.rb:nth-child(7) .ww-npc-profile-image{--ww-npc-photo-y:28.5%}
+body #npc .gn>.rs>.rb:nth-child(8) .ww-npc-profile-image{--ww-npc-photo-y:25%}
+body #npc .gn>.rs>.rb:nth-child(9) .ww-npc-profile-image{--ww-npc-photo-y:31.5%}
+body #npc .gn>.rs>.rb:nth-child(10) .ww-npc-profile-image{--ww-npc-photo-y:34.5%}
+body #npc .ww-npc-thumb-frame{position:relative}
+body #npc .ww-npc-thumb-frame::after{content:"";position:absolute;inset:0;background:#000;opacity:.68;pointer-events:none}
+body #npc .ww-npc-thumb[aria-pressed=true] .ww-npc-thumb-frame::after,body #npc .gn .rr>details[open] .ww-npc-thumb-frame::after,body #npc .gn:not(:has(.rr>details[open])) .rr>details:first-child .ww-npc-thumb-frame::after{opacity:0}
+body #truck .wwtruck-thumbnail:not([aria-pressed=true]) :is(.wwtruck-thumbnail-image,.wwtruck-sleep-diagram),body #truck .n5 .rr>details:not([open]) .ri{filter:brightness(.32)!important}
+body #truck .n5 .rg:not(:has(.rr>details[open])) .rr>details:first-child .ri{filter:none!important}
+body .n0 #npc .nz[open]>summary img,body.n0 #npc .nz[open]>summary img,.n0 #npc .nz[open]>summary img{aspect-ratio:auto!important;width:auto!important;height:auto!important;max-width:calc(100vw - 40px)!important;max-height:calc(100dvh - 40px)!important;object-fit:contain!important;object-position:center!important}
+}
