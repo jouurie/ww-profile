@@ -140,7 +140,7 @@
     var footer = node('div', 'ww-npc-footer');
     var counter = node('span', 'ww-npc-counter');
     counter.id = 'npc-counter'; counter.setAttribute('role', 'status'); counter.setAttribute('aria-live', 'polite');
-    var hint = node('span', 'ww-npc-hint', '← → 키 · 터치로 선택');
+    var hint = node('span', 'ww-npc-hint', '클릭·터치 또는 ←·→ 버튼으로 선택');
     footer.append(hint);
     shell.append(header, page, navigation, footer);
     root.classList.add('ww-npc'); root.replaceChildren(shell);

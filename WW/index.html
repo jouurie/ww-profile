@@ -15,7 +15,7 @@
 <script src="content.js?v=20261109-live-roles4" defer></script>
 <script src="../WW/profile-traits.js?v=20261024-ui22" defer></script>
 <script src="../WW/intro-cards.js?v=20261025-card-mirror1" defer></script>
-<script src="render-sections.js?v=20261030-world-layout" defer></script>
+<script src="render-sections.js?v=20261110-gallery-reading-r16" defer></script>
 <script src="radio-engine.js?v=20261029-controls-final" defer></script>
 <script src="radio-controls.js?v=20261029-controls-final" defer></script>
 <script src="app.js?v=20261029-controls-final" defer></script>
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="../WW/npc-ui.css?v=20261024-ui22">
 <link rel="stylesheet" href="../WW/openings-ui.css?v=20261030-scroll-space">
 <link rel="stylesheet" href="../WW/guide.css?v=20261110-bookmark-focus">
-<script src="../WW/npc-ui.js?v=20261024-preview1" defer></script>
+<script src="../WW/npc-ui.js?v=20261110-npc-hint-r23" defer></script>
 <script src="../WW/opening-previews.js?v=20261024-preview1" defer></script>
 <script src="../WW/openings-ui.js?v=20261030-preview-controls" defer></script>
 <script src="../WW/guide-data.js?v=20261025-memory-v23" defer></script>
@@ -36,10 +36,10 @@
 <link rel="stylesheet" href="../WW/horizontal-scroll.css?v=06002ad00e42">
 <script src="../WW/horizontal-scroll.js?v=20261024-ui22" defer></script>
 <link rel="stylesheet" href="../WW/site-fonts.css?v=20261024-ui22">
-<link rel="stylesheet" href="../WW/site-polish.css?v=20261029-hierarchy-spin-2">
+<link rel="stylesheet" href="../WW/site-polish.css?v=20261110-name-rattle-r39">
 <link rel="stylesheet" href="../WW/intro-interactions.css?v=20261025-names-only">
 <script src="../WW/intro-interactions.js?v=20261024-ui22" defer></script>
-<script src="../WW/site-polish.js?v=20261024-ui22" defer></script>
+<script src="../WW/site-polish.js?v=20261110-intro-copy-r37" defer></script>
 <link rel="stylesheet" href="../WW/site-header.css?v=20261024-ui22">
 <link rel="stylesheet" href="../WW/site-hover.css?v=20261029-feedback-spacing">
 <link rel="stylesheet" href="../WW/motion.css?v=20261024-ui22">
@@ -104,14 +104,13 @@
       <div class="intro-top-grid">
         <!-- 좌측: 조형 타이틀 스탬프 + 테이프 문구 조각 + 키워드 태그 조각 -->
         <div class="intro-left-stack">
+          <div class="title-poster-piece ww-wide-title">
           <div class="stamp-bar">
             <span class="stamp-year">1996—1999 · UNITED STATES</span>
             <span class="route-mini-badge">I-80</span>
             <span class="route-mini-badge">US-50</span>
             <span class="route-mini-badge">US-66</span>
           </div>
-
-          <div class="title-poster-piece">
             <h1 id="intro-title">
               <span class="poster-twins"><span>WYATT</span><em>&amp;</em><span>WADE</span></span>
               <strong>RHODES</strong>
@@ -156,7 +155,7 @@
             <button class="twin-polaroid wyatt ww-intro-flip" type="button" data-intro-card="wyatt" aria-pressed="false" aria-label="와이어트 로즈 대표 한마디 보기">
               <span class="tp-card-front" aria-hidden="false">
               <span class="tp-body">
-                <span class="tp-name"><strong>WYATT RHODES</strong></span>
+                <span class="tp-name"><strong><span class="tp-first">WYATT</span><span class="tp-last">RHODES</span></strong></span><span class="tp-flip-mark" aria-hidden="true">↔</span>
               </span>
                           </span>
               <span class="tp-card-back" aria-hidden="true" inert><span class="tp-card-quote"><span class="tp-quote-line">"잘했으면 잘했다고 해.</span> <span class="tp-quote-line">나 그런 거 존나 좋아하거든."</span></span></span>
@@ -164,7 +163,7 @@
             <button class="twin-polaroid wade ww-intro-flip" type="button" data-intro-card="wade" aria-pressed="false" aria-label="웨이드 로즈 대표 한마디 보기">
               <span class="tp-card-front" aria-hidden="false">
               <span class="tp-body">
-                <span class="tp-name"><strong>WADE RHODES</strong></span>
+                <span class="tp-name"><strong><span class="tp-first">WADE</span><span class="tp-last">RHODES</span></strong></span><span class="tp-flip-mark" aria-hidden="true">↔</span>
               </span>
                           </span>
               <span class="tp-card-back" aria-hidden="true" inert><span class="tp-card-quote"><span class="tp-quote-line">"그래, 네가 맞았어. 한 번.</span> <span class="tp-quote-line">그걸로 평생 우려먹을 셈이냐?"</span></span></span>
@@ -196,30 +195,32 @@
             <a class="obj-tile" href="#truck">
               <small>03 / TRUCK</small>
               <strong>더 비스트 구조</strong>
-              <span>앞좌석 · 슬리퍼 캡 · 장부 ↗</span>
+              <span>앞좌석 · 슬리퍼 캡 · 장부 <span class="obj-arrow" aria-hidden="true">↗</span></span>
             </a>
             <a class="obj-tile" href="#world">
               <small>04 / ATLAS</small>
               <strong>도로와 생활</strong>
-              <span>노선 · 공범화 · 진행 소재 ↗</span>
+              <span>노선 · 공범화 · 진행 소재 <span class="obj-arrow" aria-hidden="true">↗</span></span>
             </a>
             <a class="obj-tile" href="#npc">
               <small>05 / CONTACTS</small>
               <strong>NPC 10명 장부</strong>
-              <span>브로커 · 트럭커 · 정차지 ↗</span>
+              <span>브로커 · 트럭커 · 정차지 <span class="obj-arrow" aria-hidden="true">↗</span></span>
             </a>
             <a class="obj-tile" href="#radio">
               <small>08 / AUDIO DECK</small>
               <strong>플레이리스트 12곡</strong>
-              <span>내장 카세트 오디오 재생 ↗</span>
+              <span>내장 카세트 오디오 재생 <span class="obj-arrow" aria-hidden="true">↗</span></span>
             </a>
           </div>
+
+
+        </div>
 
           <details class="compact-tw-piece">
             <summary><span>⚠ TW</span></summary>
             <p id="intro-tw-text"></p>
           </details>
-        </div>
       </div>
     </div>
   </section>
@@ -392,7 +393,7 @@
         <p class="eyebrow">08 / CAB CASSETTE &amp; RADIO DECK</p>
         <h2 id="radio-title">플레이리스트</h2>
       </div>
-      <p class="head-desc">동영상 화면 없이 소개 페이지 안에서 바로 음악만 재생되는 대시보드 오디오 데크입니다. 자동재생되지 않습니다.</p>
+      <p class="head-desc">도로 위에서 함께 듣는 12곡입니다.</p>
     </div>
 
     <!-- 동영상 창이 전혀 노출되지 않는 오프스크린 오디오 전용 컨테이너 -->

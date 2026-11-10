@@ -302,3 +302,398 @@ body>dialog.ww-opening-preview .ww-opening-user{padding:0 .12em;background:rgba(
 #guide .ww-guide .wg-support-notes{margin-top:6px;padding-top:6px;padding-bottom:6px}
 #guide .ww-guide .wg-note{padding-left:1em}
 #guide .ww-guide .wg-note :is(a,strong,span){font-size:inherit;line-height:inherit}
+
+/* Centered wide-screen reading shell; retain compact geometry and type scale. */
+@media(min-width:1100px){
+  body:not(.n0){--ww-page-width:clamp(770px,calc(100vw - 330px),1100px)}
+  #intro .intro-left-stack{width:100%;max-width:770px;margin-inline:auto}
+}
+
+/* Accepted C: fixed portrait planes, dark identity cards, separate reading paper. */
+#brothers #brothers-mosaic.ww-profile-c{gap:24px}
+#brothers #brothers-mosaic.ww-profile-c>.mosaic-row-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;width:100%;max-width:none;margin:0}
+#brothers .ww-profile-c .brother-dossier{display:grid;grid-template-columns:204px minmax(0,1fr);gap:0;min-width:0;padding:0;position:relative;overflow:hidden;background:var(--ink-panel)}
+#brothers .ww-profile-c .brother-dossier::before{grid-column:1;grid-row:1;min-height:291.640625px}
+#brothers .ww-profile-c .brother-dossier>.portrait.large{inset:0 auto auto 0;width:254.3125px;height:291.640625px;clip-path:inset(0 50.3125px 0 0)}
+#brothers .ww-profile-c .brother-dossier::after{position:absolute;inset:0 auto auto 176px;width:28px;height:291.640625px;margin:0;background:linear-gradient(to right,transparent,var(--ink-panel))}
+#brothers .ww-profile-c .brother-dossier.wade>.portrait.large>img{object-position:58% 21%}
+#brothers .ww-profile-c .brother-dossier>.bd-head{grid-column:2;grid-row:1;padding:20px 20px 0 12px;min-width:0}
+#brothers .ww-profile-c .bd-head>.bd-role{display:block;margin:0 0 4px;font:500 11px/1.7 var(--font-body);color:var(--muted)}
+#brothers .ww-profile-c .bd-head>h3{margin:0;font:500 24px/1.45 var(--font-body);letter-spacing:0}
+#brothers .ww-profile-c .brother-dossier .bd-name-en{margin:4px 0 0;color:var(--paper);font:400 26px/1.2 Anton,sans-serif!important;letter-spacing:.03em;text-transform:uppercase;white-space:normal}
+#brothers .ww-profile-c .bd-name-en>span{font-weight:400!important}
+#brothers .ww-profile-c .bd-spec-table{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:18px;margin:18px 0 0;padding:12px 0 0;border-top:1px solid var(--brass);border-bottom:0;font:500 14px/1.7 var(--font-body)}
+#brothers .ww-profile-c .bd-spec-table>div{min-width:0;white-space:nowrap}
+#brothers .ww-profile-c .bd-spec-table>div>span{margin-bottom:3px;font:700 11px/1.6 var(--font-label);color:var(--brass)}
+#brothers .ww-profile-c .bd-spec-table small{display:inline;margin-left:3px;white-space:nowrap;font:500 11px/1.7 var(--font-body);color:var(--paper)}
+#brothers .ww-profile-c .ww-profile-traits{position:relative;z-index:2;grid-column:2;grid-row:1;align-self:end;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 20px 22px 12px;padding:0;list-style:none}
+#brothers .ww-profile-c .ww-profile-traits>li{font:500 12px/1.6 var(--font-body);text-align:center;white-space:nowrap;padding:2px 3px}
+#brothers .ww-profile-c .brother-dossier.wyatt{--trait-color:var(--cyan)}
+#brothers .ww-profile-c .brother-dossier.wade{--trait-color:var(--status-red)}
+#brothers .ww-profile-c .ww-profile-traits>li{color:var(--trait-color);border-color:var(--trait-color);transition:background-color .16s ease,color .16s ease;transform:none;filter:none;box-shadow:none}
+#brothers .ww-profile-c .ww-profile-traits>li:is(:active,[data-ww-trait-pressed]){background-color:var(--trait-color);color:var(--ink);transform:none;filter:none;box-shadow:none}
+@media(hover:hover) and (pointer:fine){#brothers .ww-profile-c .ww-profile-traits>li:hover{background-color:var(--trait-color);color:var(--ink);transform:none;filter:none;box-shadow:none}}
+body #intro .kw-chip{transition:background-color .16s ease,color .16s ease;transform:none;filter:none;box-shadow:none}
+body #intro .kw-chip:is(:active,[data-ww-trait-pressed]){background-color:var(--paper);color:var(--ink);transform:none;filter:none;box-shadow:none}
+@media(hover:hover) and (pointer:fine){body #intro .kw-chip:hover{background-color:var(--paper);color:var(--ink);transform:none;filter:none;box-shadow:none}}
+body #npc .ww-npc-traits>.ww-npc-trait{transition:background-color .16s ease,color .16s ease;transform:none;filter:none;box-shadow:none}
+body #npc .ww-npc-traits>.ww-npc-trait:is(:active,[data-ww-trait-pressed]){background-color:var(--brass);color:var(--ink);transform:none;filter:none;box-shadow:none}
+@media(hover:hover) and (pointer:fine){body #npc .ww-npc-traits>.ww-npc-trait:hover{background-color:var(--brass);color:var(--ink);transform:none;filter:none;box-shadow:none}}
+#brothers .ww-profile-c .profile-sheet{margin:0;padding:8px 28px 12px;background:var(--paper);color:var(--ink);border:0}
+#brothers .ww-profile-c .profile-section{display:grid;grid-template-columns:160px minmax(0,1fr);gap:28px;margin:0;padding:24px 0;border-top:1px solid var(--brass)}
+#brothers .ww-profile-c .profile-section:first-child{border-top:0}
+#brothers .ww-profile-c .profile-section>.piece-title{display:block;align-self:start;position:relative;width:auto;margin:0;padding:0 0 0 12px;border:0;background:none;color:var(--ink);font:700 22px/1.5 var(--font-label)}
+#brothers .ww-profile-c .profile-section>.piece-title::before{content:'';position:absolute;left:0;top:5px;height:22px;border-left:1px solid var(--brass)}
+#brothers .ww-profile-c .profile-section>.piece-title::after{display:none}
+#brothers .ww-profile-c .profile-section>.prose{min-width:0;padding:0;max-width:100%;font:500 13px/1.7 var(--font-body)}
+body #brothers .ww-profile-c .prose :is(.kv-stack,.kv-section-body){display:grid;gap:8px;padding:0}
+body #brothers .ww-profile-c .prose .kv-section{min-width:0;margin:0;padding:0;border:0;background:none}
+body #brothers .ww-profile-c .prose .kv-line{min-width:0;max-width:75ch;margin:0;padding:0;font-size:var(--ww-reading-body-size,13px)!important;line-height:1.7!important}
+body #brothers .ww-profile-c .prose .kv-heading{margin:0 0 8px;padding:0;font:700 14px/1.6 var(--font-label)}
+body #brothers .ww-profile-c .prose .kv-heading::before{display:none}
+body #brothers .ww-profile-c .prose .kv-heading>.sq-sub:not(.wyatt,.wade){display:inline-block;width:auto;margin:0;padding:0;border:0;background:none;color:var(--ink);font:inherit}
+body #brothers .ww-profile-c .prose :is(.kv-heading,.kv-line)>.sq-sub:is(.wyatt,.wade){display:inline-block;justify-self:start;width:auto;min-height:0;margin:0;padding:2px 6px;border:0;background:var(--ink-panel);box-shadow:none;font:500 13px/1.7 var(--font-body);text-align:left;white-space:nowrap}
+body #brothers .ww-profile-c .prose .sq-sub.wyatt{color:var(--cyan)}
+body #brothers .ww-profile-c .prose .sq-sub.wade{color:var(--status-red)}
+body #brothers .ww-profile-c .prose .kv-line:has(>.sq-sub){display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:baseline}
+#brothers .ww-profile-c .kv-value-paragraph+.kv-value-paragraph{margin-top:8px}
+body #brothers .ww-profile-c #profile-0>.prose>.kv-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+body #brothers .ww-profile-c #profile-0 .kv-entity{grid-column:1/-1;padding-top:16px;border-top:1px solid var(--brass)}
+body #brothers .ww-profile-c :is(#profile-2,#profile-5)>.prose>.kv-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+#brothers .ww-profile-c :is(#profile-2,#profile-5) .kv-section-body{align-content:start}
+@media(max-width:1230px){
+  #brothers #brothers-mosaic.ww-profile-c>.mosaic-row-2{grid-template-columns:1fr}
+  #brothers .ww-profile-c .brother-dossier>.bd-head{padding-left:18px}
+  #brothers .ww-profile-c .ww-profile-traits{margin-left:18px}
+}
+@media(max-width:720px){
+  #brothers .ww-profile-c .profile-sheet{padding:0 18px}
+  #brothers .ww-profile-c .profile-section{display:block;padding:24px 0}
+  #brothers .ww-profile-c .profile-section>.piece-title{font-size:20px;margin-bottom:16px}
+  body #brothers .ww-profile-c .prose .kv-heading{margin-bottom:6px}
+  body #brothers .ww-profile-c .prose .kv-line:has(>.sq-sub){grid-template-columns:70px minmax(0,1fr);gap:8px}
+  body #brothers .ww-profile-c :is(#profile-0,#profile-2,#profile-5)>.prose>.kv-stack{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:600px){
+  #brothers .ww-profile-c .brother-dossier>.bd-head{padding:18px 10px 0 0}
+  #brothers .ww-profile-c .bd-head>h3{font-size:24px;line-height:1.35}
+  #brothers .ww-profile-c :is(.bd-head>h3,.bd-name-en)>span{display:block}
+  #brothers .ww-profile-c .brother-dossier .bd-name-en{font-size:26px;line-height:1.15;margin-top:6px}
+  #brothers .ww-profile-c .bd-spec-table{gap:7px;margin-top:14px;padding-top:10px;font-size:13px}
+  #brothers .ww-profile-c .bd-spec-table small{display:block;margin:0}
+  #brothers .ww-profile-c .ww-profile-traits{grid-column:1/-1;grid-row:2;align-self:start;margin:0;padding:12px 14px 16px;gap:6px}
+  #brothers .ww-profile-c .ww-profile-traits>li{font-size:12px;padding:3px 4px}
+}
+
+/* Mobile retains the original responsive portrait blend and readable name gutter. */
+@media(max-width:600px){
+  #brothers .ww-profile-c .brother-dossier{grid-template-columns:110px minmax(0,1fr);gap:14px;padding:14px}
+  #brothers .ww-profile-c .brother-dossier::before{min-height:165px}
+  #brothers .ww-profile-c .brother-dossier>.portrait.large{width:68%;height:100%;clip-path:none}
+  #brothers .ww-profile-c .brother-dossier.wade>.portrait.large>img{object-position:58% 18%}
+  #brothers .ww-profile-c .brother-dossier::after{position:static;inset:auto;grid-column:2;grid-row:1;align-self:stretch;justify-self:stretch;width:auto;height:auto;margin:-14px -14px -14px -28px;background:linear-gradient(to right,transparent 0,var(--ink-panel) 28px)}
+  #brothers .ww-profile-c .brother-dossier>.bd-head{padding:0 0 76px}
+  #brothers .ww-profile-c :is(.bd-head>h3,.bd-name-en)>span{display:inline}
+  #brothers .ww-profile-c .bd-head>h3{font-size:24px;line-height:1.45;white-space:nowrap}
+  #brothers .ww-profile-c .brother-dossier .bd-name-en{font:400 12px/1.2 Anton,sans-serif!important;margin-top:0;white-space:nowrap}
+  #brothers .ww-profile-c .bd-spec-table{gap:6px;margin:12px 0 0;padding:10px 0;border-bottom:1px solid var(--brass-line)}
+  #brothers .ww-profile-c .bd-spec-table small{display:inline;margin-left:3px}
+  #brothers .ww-profile-c .ww-profile-traits{grid-column:2;grid-row:1;align-self:end;margin:0;padding:0;gap:6px}
+  #brothers .ww-profile-c .ww-profile-traits>li{font-size:11px;line-height:1.6;padding:2px 1px}
+}
+@media(max-width:380px){
+  #brothers .ww-profile-c .brother-dossier>.bd-head{padding-bottom:106px}
+  #brothers .ww-profile-c .ww-profile-traits{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #brothers .ww-profile-c .bd-spec-table{grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr)}
+}
+
+/* The basic-information names provide the legend; later rows use compact person marks. */
+body #brothers .ww-profile-c .prose .kv-line:has(>.profile-person-icon){grid-template-columns:18px minmax(0,1fr);gap:10px}
+body #brothers .ww-profile-c .prose .kv-line>.sq-sub.profile-person-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:20px;padding:0;background:none;line-height:20px}
+#brothers .ww-profile-c .profile-person-icon>svg{display:block;width:16px;height:18px;overflow:visible}
+body #brothers .ww-profile-c #profile-0 .kv-heading>.sq-sub.profile-person-name{display:inline-flex;align-items:center;gap:8px;width:auto;min-height:0;margin:0;padding:0;border:0;background:none;color:var(--ink);font:inherit}
+body #brothers .ww-profile-c #profile-0 .prose .kv-heading{font:600 16px/1.5 Paperozi,sans-serif}
+#brothers .ww-profile-c .profile-person-name>svg{display:block;flex:none;width:16px;height:18px;overflow:visible}
+#brothers .ww-profile-c .profile-person-name.wyatt>svg{color:var(--cyan)}
+#brothers .ww-profile-c .profile-person-name.wade>svg{color:var(--status-red)}
+
+/* Cream profile hierarchy: existing section face, Paperozi subheads and 13px copy. */
+/* Shared prose roles; page heroes, identities, quotes, models and controls keep their owners. */
+:root{--ww-reading-body-size:13px}
+@media(min-width:721px){:root{--ww-reading-body-size:14px}}
+body main .panel .prose{counter-reset:ww-subsection}
+body main .panel .prose :is(.kv-stack,.kv-section-body){display:grid;gap:6px;padding:0}
+body main .panel .prose .kv-section{min-width:0;margin:0;padding:0}
+body main .panel .prose .kv-stack>.kv-section+*,
+body main .panel .prose .kv-stack>*+.kv-section{margin-top:12px}
+body main .panel .prose .kv-line{font-family:var(--font-body);font-size:var(--ww-reading-body-size)!important;font-weight:500;letter-spacing:normal;line-height:1.7!important;margin:0;padding-block:0}
+body #world .prose .kv-line{margin:0;padding-block:0}
+body #world .prose .kv-section-body{gap:6px}
+body #intro #intro-story-grid .intro-whole-body{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+body #intro #intro-story-grid .intro-whole-body>p{font-size:var(--ww-reading-body-size)!important;line-height:1.7!important;font-weight:500!important;letter-spacing:normal;margin:0!important;padding:0}
+body main .panel .prose .kv-heading{font:600 16px/1.5 Paperozi,sans-serif;margin:0 0 12px}
+body main .panel .prose .kv-heading>.sq-sub{font:inherit;margin:0;padding:0;min-height:0;width:auto;background:none;border:0;box-shadow:none}
+body main .panel :is(.paper-piece,.guide-source-card)>.piece-title,
+body #world .ww-places-heading>h3,
+body #guide .ww-guide .wg-entry-head>h3{font-size:22px;border-left:3px solid #b7873d}
+body main .panel .profile-person-group{display:grid;gap:6px;min-width:0}
+body main .panel :is(.kv-line,.kv-section)+.profile-person-group{margin-top:12px}
+body main .panel .profile-person-row{display:grid;grid-template-columns:16px minmax(0,1fr);column-gap:10px;min-width:0;margin:0;padding:0}
+body main .panel .profile-person-copy{display:grid;gap:6px;min-width:0}
+body main .panel .profile-person-icon{display:block;width:16px;height:16px;margin-top:3px;padding:0;background:none;border:0}
+body main .panel .profile-person-icon>svg{display:block;width:16px;height:16px}
+body main .panel .profile-person-row.wyatt>.profile-person-icon{color:var(--profile-wyatt,var(--cyan))}
+body main .panel .profile-person-row.wade>.profile-person-icon{color:var(--status-red)}
+body #world .paper-piece{--profile-wyatt:#53d2c9}
+body #world .profile-person-copy{color:var(--ink)}
+body main .panel :is(.intro-whole-body>p,.wwtruck-spec,.wwtruck-detail,.ww-npc-details>p,.ww-place-stage figcaption>p,.ww-places-heading>p,.ww-opening-body.ww-openings-prose),
+body #guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment,.wg-unit)>p:not(.wg-note){font-family:var(--font-body);font-size:var(--ww-reading-body-size)!important;font-weight:500;letter-spacing:normal;line-height:1.7!important}
+body #radio .memo-item p{font-family:var(--font-body);font-size:var(--ww-reading-body-size)!important;font-weight:500;letter-spacing:normal;line-height:1.7!important;margin:0}
+body #radio .memo-item{gap:6px}
+body main .panel :is(.intro-whole-body,.ww-npc-details){display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+body #npc .ww-npc-spread[data-palette="cool"]{--ww-npc-accent:var(--red)}
+body main .panel :is(.intro-whole-body>p,.ww-npc-details>p){margin:0;padding:0;border:0}
+body main #truck .wwtruck-detail{margin-top:6px}
+body #guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment,.wg-unit)>p:not(.wg-note)+p:not(.wg-note){margin-top:6px}
+body #world #world-mosaic .prose .kv-heading::before,
+body main #truck .guide-source-card .prose .kv-heading::before,
+body #guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment,.wg-prompt-block,.wg-model-support-section,.wg-model-section,.wg-command-group)>h4::before,
+body #guide .ww-guide .wg-command-heading>h4::before,
+body #guide .ww-guide .wg-status-card>h4::before,
+body #radio .memo-item>.sq-sub::before{content:counter(ww-subsection,decimal-leading-zero);counter-increment:ww-subsection;display:block;flex:0 0 2ch;min-width:2ch;width:2ch;height:auto;padding:0;white-space:nowrap;overflow:visible;background:linear-gradient(#b7873d,#b7873d) no-repeat left top/18px 2px;color:var(--stamp-red);font:600 14px/1.5 Paperozi,sans-serif;font-variant-numeric:tabular-nums}
+@media(max-width:720px){body main .panel :is(.paper-piece,.guide-source-card)>.piece-title,body #world .ww-places-heading>h3,body #guide .ww-guide .wg-entry-head>h3{font-size:20px}}
+/* Header badges share one typographic role across the page panels. */
+body main .panel :is(.piece-head,.clipboard-head)>.sq-label,
+body #intro :is(.piece-head,.clipboard-head)>.sq-label{box-sizing:border-box;flex:0 0 auto;white-space:nowrap;font-family:Anton,sans-serif!important;font-size:12.5px;font-weight:400!important;line-height:1.35;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;margin:0;border-left:3px solid var(--brass)}
+/* Equal heading accents share weight; section rules retain their lighter 1px tier. */
+body main .panel .ww-section-head,
+body #world #world-mosaic .piece-title,
+body #world .ww-places-heading h3,
+body #guide .ww-guide .wg-entry-head h3{border-left:3px solid #b7873d}
+/* The image owns gallery height; the rail shares its exact vertical edges. */
+body #world .ww-place-gallery{--ww-place-rail-width:20.5%;position:relative;display:grid;grid-template-columns:var(--ww-place-rail-width) minmax(0,1fr);gap:8px;align-items:start;padding:0;margin:0 22px 20px}
+body #world .ww-place-selectors{position:absolute;inset:0 auto 0 0;width:var(--ww-place-rail-width);grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(6,minmax(0,1fr));gap:3px;align-content:stretch;overflow-y:auto;overflow-x:hidden}
+body #world .ww-place-stage{position:relative;grid-column:2;grid-row:1;min-width:0;container-type:inline-size}
+body #world .ww-place-stage figcaption{position:absolute;inset:6% 5% auto;z-index:1;display:grid;justify-items:center;gap:8px;margin:0;padding:0;background:none;color:var(--paper);text-align:center;pointer-events:none;text-shadow:0 1px 2px var(--ink),0 0 6px color-mix(in srgb,var(--ink) 65%,transparent)}
+body #world .ww-place-stage figcaption :is(h4,p){color:var(--paper);text-align:center;white-space:normal;overflow:visible;text-overflow:clip}
+body #world .ww-place-stage figcaption h4{display:block;max-width:100%;margin:0;padding:0;font:600 clamp(26px,8cqi,68px)/1.15 Paperozi,sans-serif;letter-spacing:-.025em;overflow-wrap:anywhere}
+body #world .ww-place-stage figcaption h4::before{content:none;display:none}
+body #world .ww-place-stage figcaption h4.is-english{font-family:Anton,sans-serif;font-weight:400!important;font-style:italic!important;letter-spacing:.015em}
+body #world .ww-place-stage figcaption #place-name{display:none}
+body #world .ww-place-stage figcaption p{max-width:42ch;margin:0;padding:0;font-size:clamp(13px,2cqi,18px)!important;line-height:1.55!important;font-weight:500}
+body #world .ww-place-stage figcaption p.needs-shadow{text-shadow:0 1px 2px var(--ink),0 0 6px color-mix(in srgb,var(--ink) 78%,transparent)}
+/* Description-only backing: faded ends, bounded to the text, without text shadows. */
+body #world .ww-place-stage figcaption #place-description{box-sizing:border-box;width:fit-content;max-width:100%;padding:5px 28px;background:linear-gradient(to right,transparent,color-mix(in srgb,var(--ink) 38%,transparent) 18%,color-mix(in srgb,var(--ink) 38%,transparent) 82%,transparent);text-shadow:none}
+body #world .ww-place-selector{position:relative;display:block;width:100%;min-height:0;align-self:stretch;overflow:hidden;margin:0;padding:0;border:0;background:none;color:var(--paper)}
+body #world .ww-place-selector img{width:100%;height:100%;min-height:0;aspect-ratio:auto;object-fit:cover}
+body #world .ww-place-selector span{position:absolute;inset:auto 0 0;z-index:2;display:block;min-height:0;white-space:normal;overflow-wrap:anywhere;padding:14px 8px 6px;background:linear-gradient(transparent,color-mix(in srgb,var(--ink) 78%,transparent));color:var(--paper);font:600 14px/1.3 Paperozi,sans-serif;text-align:left;text-shadow:0 1px 2px var(--ink)}
+body #world .ww-place-selector span.is-english{font-family:Anton,sans-serif;font-weight:400;letter-spacing:.02em}
+body #world .ww-place-selector[aria-pressed="true"]{background:none;color:var(--paper);border:0}
+body #world .ww-place-selector::after{content:'';position:absolute;inset:0;z-index:1;background:color-mix(in srgb,var(--ink) 68%,transparent);pointer-events:none}
+body #world .ww-place-selector[aria-pressed="true"]::after{opacity:0}
+body #world .ww-place-selector[aria-pressed="true"]::before{content:'';position:absolute;inset:0 auto 0 0;z-index:1;width:3px;background:var(--brass)}
+body #world .ww-place-selector:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}
+@media(max-width:720px){body #world .ww-place-gallery{grid-template-columns:minmax(0,1fr);gap:6px}body #world .ww-place-selectors{position:static;width:100%;grid-column:1;grid-row:1;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:64px;gap:3px;overflow:visible}body #world .ww-place-stage{grid-column:1;grid-row:2}body #world .ww-place-stage figcaption{inset:6% 4% auto;gap:5px}body #world .ww-place-selector span{padding:9px 2px 3px;font-size:11px;line-height:1.15}}
+/* Guide entry titles originally have a lower rule, with no leading accent. */
+body #brothers .ww-profile-c .bd-spec-table small{font:400 12px/1.7 Arial,sans-serif!important;font-style:normal!important;font-variant:normal;letter-spacing:0;text-transform:none;font-feature-settings:normal}
+body #guide #ww-guide-module .wg-content .wg-entry-head>h3{border-left:0;padding:0 0 8px}
+body #guide #ww-guide-module #wg-content.wg-content :is(.wg-progress-table td,.wg-play-list>li){font-family:var(--font-body);font-size:var(--ww-reading-body-size)!important;font-weight:500;letter-spacing:normal;line-height:1.7!important}
+/* A text glyph remains after the chevron pseudo-element; flex keeps one centered row. */
+body .ww-rail-navigation>.ww-rail-arrow{display:flex;align-items:center;justify-content:center;line-height:1}
+body .ww-rail-navigation>.ww-rail-arrow::before{flex:none}
+body :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation){grid-template-columns:32px minmax(0,1fr) 32px;column-gap:8px;row-gap:0;align-items:start}
+body :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>:is(.wwtruck-thumbnail-strip,.ww-npc-film){grid-column:2;grid-row:1;width:100%;min-width:0}
+body :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow{grid-row:1;width:32px;min-width:32px;height:var(--ww-photo-arrow-height,48px);min-height:0;align-self:start;margin-top:var(--ww-photo-arrow-top,0px)}
+body :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:first-child{grid-column:1}
+body :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:last-child{grid-column:3}
+#brothers .ww-profile-c .profile-sheet{background:#f1ddbd;--profile-wyatt:#53d2c9}
+#brothers .ww-profile-c .profile-section>.piece-title::before{width:0;border-left:3px solid #b7873d;background:none}
+body #brothers .ww-profile-c .prose .kv-heading{font:600 16px/1.5 Paperozi,sans-serif}
+#brothers .ww-profile-c .profile-section{grid-template-columns:118px minmax(0,1fr);column-gap:36px;padding:24px 0 32px}
+body #brothers .ww-profile-c #profile-0>.prose>.kv-stack{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+body #brothers .ww-profile-c :is(#profile-2,#profile-5)>.prose>.kv-stack{gap:46px}
+body #brothers .ww-profile-c .profile-sheet .kv-stack{gap:6px}
+body #brothers .ww-profile-c .profile-sheet .kv-section-body{gap:6px;align-content:start}
+#brothers .ww-profile-c .profile-sheet .profile-person-name{display:flex;align-items:center;gap:8px;color:var(--ink)}
+#brothers .ww-profile-c .profile-sheet .profile-person-name>svg{width:18px;height:18px;flex:none}
+#brothers .ww-profile-c .profile-sheet .profile-person-name.wade{color:var(--status-red)}
+body #brothers .ww-profile-c .profile-sheet .profile-subheading{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+body #brothers #brothers-mosaic.ww-profile-c .profile-sheet .prose .profile-subheading{color:var(--stamp-red)}
+body #brothers #brothers-mosaic.ww-profile-c .profile-sheet .prose .kv-section>.kv-heading::before{content:none;display:none;counter-increment:none}
+body #brothers #brothers-mosaic.ww-profile-c .profile-sheet .prose .kv-section>.profile-subheading::before{content:counter(ww-subsection,decimal-leading-zero);counter-increment:ww-subsection;display:block;flex:0 0 2ch;min-width:2ch;width:2ch;height:auto;padding:0;white-space:nowrap;overflow:visible;background:linear-gradient(#b7873d,#b7873d) no-repeat left top/18px 2px;color:var(--stamp-red);font:600 14px/1.5 Paperozi,sans-serif;font-variant-numeric:tabular-nums}
+#brothers .ww-profile-c .profile-person-row{display:grid;grid-template-columns:16px minmax(0,1fr);gap:10px;margin-top:0;min-width:0}
+#brothers .ww-profile-c .profile-person-group{display:grid;gap:6px;min-width:0}
+#brothers .ww-profile-c .kv-line+.profile-person-group{margin-top:12px}
+#brothers .ww-profile-c .profile-person-copy{display:grid;gap:6px;min-width:0}
+#brothers .ww-profile-c .profile-person-row>.profile-person-icon{display:block;padding:0;margin:3px 0 0;background:none;width:16px;height:16px}
+#brothers .ww-profile-c .profile-person-row>.profile-person-icon>svg{display:block;width:16px;height:16px}
+#brothers .ww-profile-c .profile-person-row.wyatt{color:var(--profile-wyatt)}
+#brothers .ww-profile-c .profile-person-row.wade{color:var(--status-red)}
+#brothers .ww-profile-c .profile-person-copy>.kv-line{color:var(--ink)}
+body #brothers .ww-profile-c .prose .profile-facts>.kv-line{position:relative;padding-left:14px}
+#brothers .ww-profile-c .profile-facts>.kv-line::before{content:'';position:absolute;left:1px;top:9px;width:3px;height:3px;background:#b7873d}
+@media(max-width:720px){
+  #brothers .ww-profile-c .profile-section{display:block;padding:20px 0 26px}
+  body #brothers .ww-profile-c :is(#profile-0,#profile-2,#profile-5)>.prose>.kv-stack{grid-template-columns:minmax(0,1fr);gap:26px}
+  body #brothers .ww-profile-c #profile-0 .kv-section+.kv-section{padding-top:18px;border-top:1px solid #b7873d}
+}
+body #brothers .ww-profile-c .profile-sheet .sq-sub.wyatt,
+#brothers .ww-profile-c .profile-sheet .profile-person-name.wyatt,
+#brothers .ww-profile-c .profile-sheet .profile-person-name.wyatt>svg{color:var(--profile-wyatt)}
+@supports(color:oklch(from #66e3d9 l c h)){
+  #brothers .ww-profile-c .profile-sheet{--profile-wyatt:oklch(from #66e3d9 calc(l * .94) c h)}
+  body #world .paper-piece{--profile-wyatt:oklch(from #66e3d9 calc(l * .94) c h)}
+}
+
+/* Intro banner only: the selected long nameplate; existing genre tags retain their owner. */
+#intro .title-poster-piece.ww-wide-title{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:8px 20px;padding:20px 24px 16px;border:0;border-left:6px solid var(--stamp-red);background:var(--paper);color:var(--ink)}
+#intro .ww-wide-title::before{content:none}
+#intro .ww-wide-title #intro-title{display:flex;grid-column:1;grid-row:1;align-items:baseline;gap:12px;min-width:0;margin:0;white-space:nowrap}
+#intro .ww-wide-title .poster-twins{font-size:58px;gap:10px;line-height:1;letter-spacing:0}
+#intro .ww-wide-title #intro-title>strong{display:block;margin:0;font-size:58px;line-height:1;letter-spacing:0}
+#intro .ww-wide-title .stamp-bar{grid-column:2;grid-row:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-content:center;gap:7px 6px;min-width:0}
+#intro .ww-wide-title .stamp-year{grid-column:1/-1;margin:0;padding:4px 0;border:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:none;color:var(--ink);font:700 11px/1.4 var(--font-label);letter-spacing:0;white-space:nowrap;text-align:center}
+#intro .ww-wide-title .route-mini-badge{display:block;padding:3px 1px;border:0;background:var(--ink);color:var(--paper);font:400 14px/1.35 Anton,sans-serif;letter-spacing:0;text-align:center;white-space:nowrap}
+#intro .ww-wide-title .poster-sub-row{grid-column:1/-1;grid-row:2;gap:8px 16px;margin:0;padding-top:10px;border-top:1px solid var(--ink)}
+#intro .ww-wide-title .korean-title{font-size:18px;letter-spacing:0}
+#intro .ww-wide-title .poster-serial{font-size:12px;color:var(--ink)}
+#intro .intro-left-stack>.keyword-tag-piece.balanced-tags{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:0;padding:0;border:0;background:none}
+#intro .intro-left-stack>.balanced-tags>.tag-row{display:contents}
+#intro .intro-left-stack>.balanced-tags>.tag-row>.kw-chip{font-size:14px;line-height:1.5;padding:4px 6px}
+@media(min-width:1100px){
+  #intro .title-poster-piece.ww-wide-title{width:var(--ww-page-width);margin-left:calc((100% - var(--ww-page-width))/2)}
+  #intro .intro-left-stack>.keyword-tag-piece.balanced-tags{width:var(--ww-page-width);margin-left:calc((100% - var(--ww-page-width))/2)}
+  #intro .ww-wide-title .poster-twins,#intro .ww-wide-title #intro-title>strong{font-size:clamp(48px,calc((var(--ww-page-width) - 200px)*.09),80px)}
+}
+@media(max-width:1099px) and (min-width:721px){
+  #intro .title-poster-piece.ww-wide-title{grid-template-columns:minmax(0,1fr) 176px;gap:8px 16px}
+  #intro .ww-wide-title .poster-twins,#intro .ww-wide-title #intro-title>strong{font-size:48px}
+}
+@media(max-width:720px){
+  #intro .title-poster-piece.ww-wide-title{grid-template-columns:minmax(0,1fr);gap:12px;padding:18px 14px 16px 18px}
+  #intro .ww-wide-title #intro-title{gap:6px}
+  #intro .ww-wide-title .poster-twins{gap:5px}
+  #intro .ww-wide-title .poster-twins,#intro .ww-wide-title #intro-title>strong{font-size:clamp(27px,7.3vw,42px)}
+  #intro .ww-wide-title .stamp-bar{grid-column:1;grid-row:2;display:flex;flex-wrap:wrap;gap:6px}
+  #intro .ww-wide-title .stamp-year{padding:3px 0;font-size:10px}
+  #intro .ww-wide-title .route-mini-badge{padding:3px 5px;font-size:11px}
+  #intro .ww-wide-title .poster-sub-row{grid-column:1;grid-row:3;padding-top:9px;gap:4px 12px}
+  #intro .ww-wide-title .korean-title{font-size:15px}
+  #intro .ww-wide-title .poster-serial{font-size:10px}
+  #intro .intro-left-stack>.balanced-tags>.tag-row>.kw-chip{font-size:13px;padding:3px 5px}
+}
+
+/* The existing motel key overlaps the truck frame; image and action remain one link. */
+#intro .key-tag{width:176px;left:-22px;right:auto;top:32px}
+@media(max-width:720px){#intro .key-tag{width:128px;left:5px;right:auto;top:24px}#intro .intro-truck-stage .key-tag .ww-key-action{font-size:12px;padding:4px 6px;margin-top:-20px;transform:rotate(-8deg)}}
+@media(max-width:360px){#intro .key-tag{width:112px;left:6px;top:24px}}
+
+/* The intro nameplate shares the existing paper hover emphasis. */
+@media(hover:hover) and (pointer:fine){body #intro .title-poster-piece.ww-wide-title:hover{filter:brightness(1.08)}}
+
+/* The waybill and dispatch share a row; the warning retains its own full-width row. */
+body #intro .intro-shell{gap:18px}
+body #intro .intro-bottom-bento{width:100%;grid-template-columns:minmax(0,700fr) minmax(0,330fr);column-gap:10px;row-gap:18px;align-items:stretch;max-width:1100px;margin-inline:auto}
+body #intro .intro-bottom-bento>.twin-polaroid-piece{grid-column:1/-1}
+body #intro .intro-bottom-bento>.paper-clipboard-piece{grid-column:1;min-width:0}
+body #intro .intro-bottom-bento>.dispatch-side-piece{grid-column:2;min-width:0;gap:0;padding:12px}
+body #intro .dispatch-side-piece .piece-head{margin-bottom:0;padding-bottom:8px;border-bottom:1px solid var(--brass-line)}
+body #intro .dispatch-side-piece .platforms:empty{display:none}
+body #intro .dispatch-side-piece .quick-object-grid{grid-template-columns:minmax(0,1fr);gap:0}
+body #intro .dispatch-side-piece .obj-tile{min-width:0;padding:10px 12px;border:0;border-bottom:1px solid var(--brass-line);background:transparent}
+body #intro .dispatch-side-piece .obj-tile{position:relative;padding-right:34px}
+body #intro .dispatch-side-piece .obj-tile .obj-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);line-height:1}
+body #intro .intro-bottom-bento>.compact-tw-piece{grid-column:1/-1;min-width:0}
+/* A low binder body grips the paper edge; its bent handle stays above the header. */
+body #intro .paper-clipboard-piece>.metal-clip{top:-5px;width:44px;height:10px;background:var(--ink);border:1px solid var(--brass);border-radius:2px}
+body #intro .paper-clipboard-piece>.metal-clip::before{content:'';position:absolute;left:50%;bottom:5px;width:24px;height:9px;box-sizing:border-box;border:2px solid var(--ink);border-bottom:0;border-radius:4px 4px 0 0;transform:translateX(-50%)}
+@media(max-width:720px){
+  body #intro .intro-bottom-bento{grid-template-columns:minmax(0,1fr)}
+  body #intro .intro-bottom-bento>:is(.paper-clipboard-piece,.dispatch-side-piece,.compact-tw-piece){grid-column:1}
+}
+/* Equal panel headers share an inset; the waybill's binding edge accounts for nine pixels. */
+body #intro .intro-bottom-bento>.twin-polaroid-piece{padding-block:18px}
+body #intro .intro-bottom-bento>.paper-clipboard-piece{padding-top:9px;padding-bottom:18px}
+body #intro .intro-bottom-bento>.dispatch-side-piece{padding-block:18px}
+body #intro :is(.twin-polaroid-piece>.piece-head,.paper-clipboard-piece>.clipboard-head,.dispatch-side-piece .piece-head){align-items:flex-start;box-sizing:border-box;min-height:36px;padding-bottom:10px;margin-bottom:12px}
+body #intro .dispatch-side-piece .piece-head{margin-bottom:2px}
+body #intro #intro-story-grid>.intro-whole-body{padding-top:0}
+
+/* Selected flat A: integrated name lanes retain the existing button and flip plane. */
+body #intro .paper-clipboard-piece{border-top-color:var(--brass)}
+body #intro .twin-polaroid-piece>.piece-head>.sq-label{background:transparent;color:var(--paper);border-left-color:transparent}
+body #intro .twin-polaroid-piece>.twin-mini-grid{width:calc(100% + 40px);max-width:none;margin:0 -20px;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip{min-width:0;min-height:144px;width:100%;padding:0;border:0;background:transparent}
+body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip+.ww-intro-flip{border-left:1px solid var(--brass)}
+body #intro .twin-polaroid.ww-intro-flip .tp-card-inner{min-height:144px;height:100%}
+body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){min-height:144px;padding:20px 28px;border:0;background:transparent;text-align:left;justify-items:stretch}
+body #intro .ww-intro-flip .tp-card-front>.tp-body{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;justify-items:start;gap:18px;text-align:left}
+body #intro .ww-intro-flip .tp-name{width:100%;margin:0;text-align:left}
+body #intro .ww-intro-flip .tp-name strong{font-family:Anton,sans-serif!important;font-size:44px!important;font-weight:400!important;line-height:1.04;letter-spacing:0!important;white-space:normal}
+body #intro .ww-intro-flip .tp-name strong>:is(.tp-first,.tp-last){display:block;font:inherit!important;letter-spacing:inherit!important}
+body #intro .ww-intro-flip .tp-first{color:var(--card-accent)}
+body #intro .ww-intro-flip .tp-last{color:var(--paper)}
+body #intro .ww-intro-flip .tp-flip-mark{font-size:24px;line-height:1;color:var(--card-accent)}
+body #intro .ww-intro-flip .tp-card-quote{font-size:14px;line-height:1.7;text-align:left}
+@media(max-width:720px){
+  body #intro .twin-polaroid-piece>.twin-mini-grid{width:calc(100% + 20px);margin-inline:-10px;grid-template-columns:minmax(0,1fr)}
+  body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip+.ww-intro-flip{border-left:0;border-top:1px solid var(--brass)}
+  body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip,
+  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner,
+  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){min-height:96px}
+  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){padding:16px 22px}
+  body #intro .ww-intro-flip .tp-name strong{font-size:16.5px!important}
+  body #intro .ww-intro-flip .tp-flip-mark{font-size:20px}
+}
+
+/* Handwritten names are local assets; the main poster keeps its display face. */
+@font-face{font-family:'Permanent Marker';src:url('fonts/PermanentMarker-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Kalam;src:url('fonts/Kalam-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:'Shadows Into Light';src:url('fonts/ShadowsIntoLight.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+body #intro .ww-intro-flip.wyatt .tp-name strong{font-family:'Permanent Marker',cursive!important;font-weight:400!important}
+body #intro .ww-intro-flip.wade .tp-name strong{font-family:'Shadows Into Light',cursive!important;font-weight:400!important;transform:translate(1px,3px) rotate(-2deg)}
+body #intro .ww-intro-flip .tp-name strong{font-style:normal!important;transform:rotate(-2deg);transform-origin:left center}
+body #intro :is(.twin-polaroid-piece>.piece-head,.paper-clipboard-piece>.clipboard-head,.dispatch-side-piece .piece-head)>.sq-label{font-family:var(--font-body)!important;font-weight:700!important}
+body #intro .ww-intro-flip .tp-last{position:relative;left:.25em}
+@media(max-width:720px){body #intro .ww-intro-flip.wade .tp-name strong{transform:translate(-2px,1px) rotate(-2deg)}}
+@media(min-width:721px){
+  body #intro .paper-clipboard-piece{display:flex;flex-direction:column}
+  body #intro .paper-clipboard-piece>.clipboard-head{flex:none}
+  body #intro .paper-clipboard-piece>#intro-story-grid{flex:1;display:flex;flex-direction:column;justify-content:center}
+}
+
+/* Guide 5/6 reuse guide 1's existing fragment grouping and title level. */
+body #guide #ww-guide-module #wg-content.wg-content{--ww-guide-fragment-padding:16px;--ww-guide-fragment-gap:20px}
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-settings-table-unit>.wg-model-support-section,
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-card{box-sizing:border-box;min-width:0;padding:0 var(--ww-guide-fragment-padding) var(--ww-guide-fragment-padding);margin:0;border:0;border-inline-start:1px solid var(--brass);background:transparent}
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-settings-table-unit{margin-bottom:var(--ww-guide-fragment-gap)}
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-settings-table-grid{column-gap:var(--ww-guide-fragment-gap)}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-grid{gap:var(--ww-guide-fragment-gap)}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-card>header{margin:0;padding:0;border:0}
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-settings-table-unit>.wg-model-support-section>h4,
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-settings-table-unit>.wg-model-support-section>.wg-table-disclosure>summary,
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-card>header>h4{display:flex;align-items:baseline;gap:10px;min-height:0;margin:0 0 10px;padding:0;border:0;background:none;color:var(--paper);font:600 16px/1.5 Paperozi,sans-serif;text-align:left}
+
+/* Peer sections use the same heading rule and rhythm in both platform views. */
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-support{gap:0}
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-settings-table-grid{margin-top:12px}
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-setting-path~.wg-setting-path{margin-top:var(--ww-section-gap)}
+/* Columns retain each fragment's padding and gap at the tallest column's end.
+   Trim only that shared trailing space; the next peer owns the section gap. */
+body #guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-settings-table-grid:has(+.wg-setting-path){margin-bottom:calc(0px - var(--ww-guide-fragment-padding) - var(--ww-guide-fragment-gap))}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-grid{margin-bottom:calc(0px - var(--ww-guide-fragment-padding))}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-support-section+.wg-model-section,
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-section+.wg-model-support-section,
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-section+.wg-model-defaults.wg-support-notes{margin-top:var(--ww-section-gap)}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 :is(.wg-model-support-section,.wg-model-section,.wg-model-defaults.wg-support-notes){border-top:0;padding-top:0}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-grid{margin-top:0}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 :is(.wg-model-support-section>h4,.wg-model-support-section>.wg-table-disclosure>summary,.wg-model-section>h4,.wg-model-section>.wg-table-disclosure>summary,.wg-model-defaults.wg-support-notes>h4){box-sizing:border-box;display:flex;align-items:center;gap:8px;min-height:40px;margin:0 0 12px;padding:8px 12px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent);background:transparent;color:var(--brass);font:600 16px/24px Paperozi,sans-serif;text-align:left}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-defaults.wg-support-notes{padding:0;border:0;background:transparent}
+body #guide #ww-guide-module #wg-content.wg-content #guide-6 .wg-model-defaults.wg-support-notes>p{margin:0;padding:7px 10px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 28%,transparent);color:var(--paper);font:400 14px/1.6 var(--font-body)}
+
+/* One small name rattle per pointer entry; the existing flip plane stays still. */
+body #intro .ww-intro-flip .tp-name strong{--ww-name-x:0px;--ww-name-y:0px}
+body #intro .ww-intro-flip.wade .tp-name strong{--ww-name-x:1px;--ww-name-y:3px}
+@media(max-width:720px){body #intro .ww-intro-flip.wade .tp-name strong{--ww-name-x:-2px;--ww-name-y:1px}}
+@keyframes ww-name-rattle{0%,100%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-2deg)}24%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-3.2deg)}52%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-.8deg)}76%{transform:translate(var(--ww-name-x),var(--ww-name-y)) rotate(-2.6deg)}}
+@media(hover:hover) and (pointer:fine){body #intro .ww-intro-flip .tp-name strong:hover{animation:ww-name-rattle 350ms ease-out 1!important}}
