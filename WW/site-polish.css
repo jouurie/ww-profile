@@ -592,7 +592,7 @@ body #brothers .ww-profile-c .profile-sheet .sq-sub.wyatt,
 
 /* The existing motel key overlaps the truck frame; image and action remain one link. */
 #intro .key-tag{width:176px;left:-22px;right:auto;top:32px}
-@media(max-width:720px){#intro .key-tag{width:88px;left:18px;right:auto;top:24px}#intro .intro-truck-stage .key-tag .ww-key-action{font-size:12px;padding:4px 6px;margin-top:16px;transform:none}}
+@media(max-width:720px){#intro .key-tag{width:88px;left:18px;right:auto;top:24px}#intro .intro-truck-stage .key-tag .ww-key-action{font-size:12px;padding:4px 6px;margin-top:5px;transform:none}}
 @media(max-width:360px){#intro .key-tag{width:76px;left:18px;top:24px}}
 
 /* The intro nameplate shares the existing paper hover emphasis. */
@@ -732,3 +732,13 @@ body .wr #guide #ww-guide-module>.wg-control-panel:is(:empty,:has(>.wg-content:e
 body .wr #guide #ww-guide-module>.wc{grid-column:1;grid-row:2;align-self:start;justify-self:end;z-index:2;margin:12px 12px 0 0}
 body .wr #guide #ww-guide-module>.wc>summary{box-sizing:border-box;display:grid;place-items:center;width:48px;height:28px;min-height:0;padding:0 6px;font:500 12px/1 var(--font-body)}
 body .wr #guide #ww-guide-module>.wg-content>.z0>.z1{padding-right:56px}
+
+/* The header shell owns one continuous baseline across its controls. */
+body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation>.chapter-nav{border-bottom:0}
+@media(max-width:600px){
+body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation,body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation>.chapter-nav,body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation>.ww-rail-arrow{box-sizing:border-box;height:44px;min-height:44px;max-height:44px}
+body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation>.chapter-nav{padding:0;overflow-x:auto;overflow-y:hidden}
+body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation>.chapter-nav :is(a,label){font-size:12px}
+body main .panel :is(.paper-piece,.guide-source-card)>.piece-title,body #brothers .ww-profile-c .profile-section>.piece-title,body #world #world-mosaic .piece-title,body #world .ww-places-heading>h3{font-size:18px}
+body #guide #ww-guide-module .wg-content :is(p,li,th,td,.wg-value,.wg-code):not(.wg-note,.z26){font-size:12.5px!important}
+}
