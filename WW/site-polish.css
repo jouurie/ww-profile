@@ -1284,3 +1284,7 @@ body #npc .ng58:not(:has(details[open])) #nr581 .ra{display:grid!important;left:
 body #npc .ng58 .q5829{display:block;width:100%;aspect-ratio:4/5}body #npc .ng58 .q582{display:block;width:100%;height:100%;object-fit:cover}@media(max-width:720px){body #npc .ng58 .q5829{aspect-ratio:8/5}body #npc .ng58>.rr>details>summary{display:contents}}
 
 @media(min-width:721px){body #npc .ng58 .ra{left:auto!important;right:0!important}body #npc .ng58:has(#nd580[open],#nr580[open]) #nr589 .ra{right:40px!important}body #npc .ng58:has(#nd581[open],#nr581[open]) #nr580 .ra{right:40px!important}body #npc .ng58:has(#nd582[open],#nr582[open]) #nr581 .ra{right:40px!important}body #npc .ng58:has(#nd583[open],#nr583[open]) #nr582 .ra{right:40px!important}body #npc .ng58:has(#nd584[open],#nr584[open]) #nr583 .ra{right:40px!important}body #npc .ng58:has(#nd585[open],#nr585[open]) #nr584 .ra{right:40px!important}body #npc .ng58:has(#nd586[open],#nr586[open]) #nr585 .ra{right:40px!important}body #npc .ng58:has(#nd587[open],#nr587[open]) #nr586 .ra{right:40px!important}body #npc .ng58:has(#nd588[open],#nr588[open]) #nr587 .ra{right:40px!important}body #npc .ng58:has(#nd589[open],#nr589[open]) #nr588 .ra{right:40px!important}body #npc .ng58:not(:has(details[open])) #nr589 .ra{right:40px!important}}
+
+/* Requested NPC transition stays 0.2s under either motion preference. */
+body #npc :is(.ww-npc-overlay,.q5815){transition:opacity .2s ease!important}
+body #npc :is(.ww-npc-catalog-card,.nf58){transition:border-color .2s ease!important}
