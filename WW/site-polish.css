@@ -979,3 +979,47 @@ body #truck .n5 .rt>span{display:block;min-height:2.6em}
 body #truck .wwtruck-viewer{box-sizing:border-box;aspect-ratio:auto;padding:0;background:var(--paper)}
 body #truck .wwtruck-visual{position:relative;inset:auto;aspect-ratio:3/2}
 }
+
+/* Approved A: a two-column directory beside the continuous photo-and-copy card. */
+@media(min-width:721px){
+body #npc .ww-npc-shell{display:grid;grid-template-columns:minmax(180px,24%) minmax(0,1fr);gap:0 24px;align-items:start}
+body #npc .ww-npc-heading-row{grid-column:1/-1;grid-row:1}
+body #npc .ww-npc-navigation{grid-column:1;grid-row:2;display:grid;grid-template-columns:1fr 1fr!important;gap:8px 4px;margin:0;align-items:start}
+body #npc .ww-npc-navigation>.ww-npc-film{grid-column:1/-1!important;grid-row:1!important}
+body #npc .ww-npc-navigation>.ww-rail-arrow{grid-row:2!important;width:100%!important;height:30px!important;min-height:0!important;align-self:start!important}
+body #npc .ww-npc-navigation>.ww-rail-arrow:first-child{grid-column:1!important}
+body #npc .ww-npc-navigation>.ww-rail-arrow:last-child{grid-column:2!important}
+body #npc .ww-npc-page{grid-column:2;grid-row:2}
+body #npc .ww-npc-footer{grid-column:2;grid-row:3}
+body :is(#npc .ww-npc-film,#npc .gn>.rr,#truck .wwtruck-thumbnail-strip,#truck .n5 .rr){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;width:100%;height:auto;max-height:none;margin:0;padding:0;overflow:visible!important;scroll-snap-type:none;align-items:stretch}
+body #npc :is(.ww-npc-thumb,.gn .rt){box-sizing:border-box;width:100%;max-width:none;min-width:0;flex-basis:auto;padding:3px 3px 4px}
+body #npc .ww-npc-thumb-frame{width:100%;height:76px}
+body #npc .ww-npc-thumb-name{display:block;min-height:2.6em;font-size:11px;line-height:1.3}
+body #truck .wwtruck-shell{display:grid;grid-template-columns:minmax(180px,24%) minmax(0,1fr);gap:0 24px;align-items:start}
+body #truck .wwtruck-shell>.ww-section-head{grid-column:1/-1;grid-row:1}
+body #truck .wwtruck-shell>.ww-hscroll-shell:has(>.wwtruck-categories){grid-column:1;grid-row:2;margin:0 0 8px!important}
+body #truck .wwtruck-group-panels{grid-column:1;grid-row:3;margin:0}
+body #truck .wwtruck-gallery-stage{grid-column:2;grid-row:2/4}
+body #truck .wwtruck-concept-note{grid-column:2;grid-row:4}
+body #truck .wwtruck-gallery-status{grid-column:2;grid-row:5}
+body #truck .wwtruck-categories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:100%;margin:0}
+body #truck .wwtruck-category{min-width:0;padding:8px 2px;font-size:12px;white-space:nowrap}
+body #truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip){display:block}
+body #truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip)>.ww-rail-arrow{display:none}
+body #truck .wwtruck-thumbnail{box-sizing:border-box;width:100%;max-width:none;min-width:0;flex-basis:auto}
+body #truck :is(.wwtruck-thumbnail-image,.wwtruck-sleep-diagram.is-thumbnail){width:100%;height:64px}
+body #npc .gn{display:grid;grid-template-columns:minmax(180px,24%) minmax(0,1fr);gap:0 24px;align-items:start}
+body #npc .gn>.rr{grid-column:1;grid-row:1}
+body #npc .gn>.rs{grid-column:2;grid-row:1;min-width:0}
+body #npc .gn .ra{display:none!important}
+body #truck .n5{display:grid;grid-template-columns:minmax(180px,24%) minmax(0,1fr);gap:0 24px;align-items:start}
+body #truck .n5>.n6{grid-column:1;grid-row:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;position:static;margin:0 0 8px}
+body #truck .n5>.n6 summary{min-width:0;min-height:36px;padding:8px 2px;font-size:12px;white-space:nowrap}
+body #truck .n5 .rr{grid-column:1;grid-row:2}
+body #truck .n5 .rs{grid-column:2;grid-row:1/3;min-width:0}
+body #truck .n5 .rt{box-sizing:border-box;width:100%;max-width:none;min-width:0;flex-basis:auto}
+body #truck .n5 .rt>.ri{width:100%;height:64px}
+body #truck .n5 .ra{display:none!important}
+body #npc .ww-npc-shell>.gn{grid-column:1/-1;grid-row:2}
+body #truck .wwtruck-shell>.n5{grid-column:1/-1;grid-row:2/4}
+}
