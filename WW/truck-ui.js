@@ -473,7 +473,12 @@
         button.append(picture(item, true), node('span', 'wwtruck-thumbnail-title', item.title));
         groupPanels.get(item.group).strip.append(button); thumbnailButtons.set(item.id, button);
         var caption = node('section', 'wwtruck-caption');
-        caption.append(node('h3', '', item.title), node('p', 'wwtruck-spec', item.spec));
+        var spec = node('p', 'wwtruck-spec');
+        var units = item.id === 'exterior-overview' ? item.spec.split(/( · |(?<=계열) )/) : item.spec.split(/( · | \+ )/);
+        units.forEach(function (text, index) {
+          spec.append(index % 2 ? document.createTextNode(text) : node('span', '', text));
+        });
+        caption.append(node('h3', '', item.title), spec);
         (extra[item.id] || []).forEach(function (text) { caption.append(node('p', 'wwtruck-detail', text)); });
         captions.append(caption); captionPanels.set(item.id, caption);
       });

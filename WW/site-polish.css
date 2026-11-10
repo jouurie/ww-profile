@@ -873,3 +873,22 @@ body #truck .wwtruck-thumbnail:not([aria-pressed=true]) :is(.wwtruck-thumbnail-i
 body #truck .n5 .rg:not(:has(.rr>details[open])) .rr>details:first-child .ri{filter:none!important}
 body .n0 #npc .nz[open]>summary img,body.n0 #npc .nz[open]>summary img,.n0 #npc .nz[open]>summary img{aspect-ratio:auto!important;width:auto!important;height:auto!important;max-width:calc(100vw - 40px)!important;max-height:calc(100dvh - 40px)!important;object-fit:contain!important;object-position:center!important}
 }
+
+/* Existing NODY-only rules, moved verbatim from its final inline stylesheet. */
+body .wr #intro .intro-bottom-bento{grid-template-columns:minmax(0,1fr)}body .wr #intro .intro-bottom-bento>:is(.paper-clipboard-piece,.dispatch-side-piece){grid-column:1/-1;width:100%;max-width:1100px}body .wr #intro #intro-story-grid{display:flex;flex-direction:column;justify-content:center;text-align:left}body .wr #intro .intro-whole-body{margin-inline:auto;text-align:left}body .wr #intro .tp-card-inner{height:144px}body .wr .npm{display:block;width:18px;height:18px;flex:none;background:currentColor;mask:var(--profile-mark) center/contain no-repeat}body .wr .profile-person-icon>.npm{width:16px;height:16px}body .wr :is(#wp4 .z17>.z18,#wp5 .z34){padding:0 16px 16px!important;border:0!important;border-left:1px solid var(--brass)!important;background:0 0!important}body .wr :is(#wp4 .z18 .z12,#wp5 .z34 h4){font:600 16px/1.5 Paperozi,sans-serif!important;color:var(--paper)!important;padding:0!important;margin:0 0 10px!important;border:0!important;background:0 0!important;min-height:0!important}body .wr #wp5 .z27{gap:0!important}body .wr #wp5 .z27>:is(.z18,.z32)+:is(.z18,.z32){margin-top:32px!important;padding-top:0!important;border-top:0!important}body .wr #wp5 :is(.z18,.z32)>.z19>.z12{color:var(--brass)!important}@media(max-width:720px){body .wr #intro .tp-card-inner{height:88px}}body .wr .wyatt{--profile-mark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.7'%3E%3Cpath d='M4.4 12.6 10 6.8l5.6 5.8M4.4 16.2h11.2'/%3E%3C/svg%3E")}body .wr .wade{--profile-mark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.7'%3E%3Ccircle cx='14.2' cy='10.2' r='2.6'/%3E%3Cpath d='M11.6 10.2H4.2M6.6 10.2v2.8M9.4 10.2v2.8'/%3E%3C/svg%3E")}body .wr .beast{--profile-mark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.7'%3E%3Cpath d='M3 7.2h8.2v5.4H3zM11.2 9.2h3.1l2.9 3.2v.2h-6z'/%3E%3Ccircle cx='6.4' cy='14.8' r='1.6'/%3E%3Ccircle cx='14' cy='14.8' r='1.6'/%3E%3C/svg%3E")}
+
+/* Approved mobile cream cards: unboxed names and the introduction's Rose chips. */
+.wwtruck-spec>span{display:contents}
+@media(max-width:720px){
+body #npc .ww-npc-copy{grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto 1fr;align-items:baseline;gap:8px 10px;padding:10px 8px}
+body #npc .ww-npc-name,body main #truck .wwtruck-caption h3{display:block;align-self:baseline;margin:0;padding:0;border:0;background:none;color:var(--ink);font:700 18px/27px var(--font-label);letter-spacing:0;text-align:left}
+body #npc .ww-npc-english{display:block;justify-self:start;align-self:baseline;margin:0;padding:0;border:0;background:none;color:#a63628;font:400 12px/18px var(--font-body);font-weight:400!important;letter-spacing:0;word-break:keep-all;overflow-wrap:normal}
+body #npc .ww-npc-traits{display:flex;flex-wrap:wrap;align-items:start;gap:2px;margin:0;padding:0}
+body #npc .ww-npc-traits>.ww-npc-trait,body #truck .wwtruck-spec>span{display:block;box-sizing:border-box;max-width:100%;margin:0;padding:3px clamp(2px,.7vw,4px);border:1px solid rgba(241,221,189,.22);border-radius:0;background:#221c17;color:#f1ddbd;font:500 clamp(9.5px,2.8vw,11px)/1.5 var(--font-body);letter-spacing:0;word-break:keep-all;overflow-wrap:normal}
+body #npc .ww-npc-details{align-self:start;gap:6px}
+body main #npc .ww-npc-details>p+p{margin:0;padding:6px 0 0;border:0;border-top:1px solid var(--brass)}
+body #truck .wwtruck-captions{display:block;padding:10px 8px}
+body main #truck .wwtruck-caption h3::before{content:none;display:none}
+body #truck .wwtruck-spec{display:flex;flex-wrap:wrap;align-items:start;gap:2px;margin:8px 0 0;padding:0;border:0;font-size:0!important;line-height:0!important}
+body #truck .wwtruck-detail{margin-top:8px;padding-top:6px;border-top:1px solid var(--brass)}
+}
