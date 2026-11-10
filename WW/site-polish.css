@@ -829,6 +829,7 @@ body #npc .gn .ww-npc-polaroid:has(.nz[open]){overflow:visible}
 body :is(#npc .gn,#truck .n5) .rr{justify-content:safe center;gap:4px;margin:0 40px 12px;padding:0;border:0;scrollbar-width:none;align-items:stretch}
 body #npc .gn .rt{box-sizing:border-box;flex:0 0 48px;width:48px;min-height:0;padding:3px 3px 4px;background:var(--paper);color:var(--ink);border:0}
 body #npc .gn .ww-npc-thumb-frame{margin:0}
+body #npc .gn .ww-npc-thumb-image{width:calc(100% * var(--ww-npc-face-scale,2.6));max-width:none;height:auto}
 body #npc .gn .ww-npc-thumb-name{font-size:9px}
 body :is(#npc .gn,#truck .n5) .rr details[open] .rt{box-shadow:inset 0 -3px var(--red)}
 body #truck .n5>.n6{order:0;margin:0 0 8px}
