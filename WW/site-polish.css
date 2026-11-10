@@ -544,6 +544,13 @@ body #brothers .ww-profile-c .profile-sheet .sq-sub.wyatt,
   #brothers .ww-profile-c .profile-sheet{--profile-wyatt:oklch(from #66e3d9 calc(l * .94) c h)}
   body #world .paper-piece{--profile-wyatt:oklch(from #66e3d9 calc(l * .94) c h)}
 }
+/* Cream-paper Wyatt lettering has its own quieter text role. */
+body #brothers .ww-profile-c .profile-sheet .sq-sub.wyatt,
+#brothers .ww-profile-c .profile-sheet .profile-person-name.wyatt{color:#4dcdc3}
+@supports(color:oklch(from #66e3d9 l c h)){
+  body #brothers .ww-profile-c .profile-sheet .sq-sub.wyatt,
+  #brothers .ww-profile-c .profile-sheet .profile-person-name.wyatt{color:oklch(from #66e3d9 calc(l * .92) c h)}
+}
 
 /* Intro banner only: the selected long nameplate; existing genre tags retain their owner. */
 #intro .title-poster-piece.ww-wide-title{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:8px 20px;padding:20px 24px 16px;border:0;border-left:6px solid var(--stamp-red);background:var(--paper);color:var(--ink)}
