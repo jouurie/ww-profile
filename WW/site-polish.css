@@ -592,8 +592,8 @@ body #brothers .ww-profile-c .profile-sheet .sq-sub.wyatt,
 
 /* The existing motel key overlaps the truck frame; image and action remain one link. */
 #intro .key-tag{width:176px;left:-22px;right:auto;top:32px}
-@media(max-width:720px){#intro .key-tag{width:88px;left:5px;right:auto;top:24px}#intro .intro-truck-stage .key-tag .ww-key-action{font-size:12px;padding:4px 6px;margin-top:-20px;transform:rotate(-8deg)}}
-@media(max-width:360px){#intro .key-tag{width:76px;left:6px;top:24px}}
+@media(max-width:720px){#intro .key-tag{width:88px;left:18px;right:auto;top:24px}#intro .intro-truck-stage .key-tag .ww-key-action{font-size:12px;padding:4px 6px;margin-top:16px;transform:none}}
+@media(max-width:360px){#intro .key-tag{width:76px;left:18px;top:24px}}
 
 /* The intro nameplate shares the existing paper hover emphasis. */
 @media(hover:hover) and (pointer:fine){body #intro .title-poster-piece.ww-wide-title:hover{filter:brightness(1.08)}}
@@ -643,14 +643,21 @@ body #intro .ww-intro-flip .tp-last{color:var(--paper)}
 body #intro .ww-intro-flip .tp-flip-mark{font-size:24px;line-height:1;color:var(--card-accent)}
 body #intro .ww-intro-flip .tp-card-quote{font-size:14px;line-height:1.7;text-align:left}
 @media(max-width:720px){
-  body #intro .twin-polaroid-piece>.twin-mini-grid{width:calc(100% + 20px);margin-inline:-10px;grid-template-columns:minmax(0,1fr)}
-  body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip+.ww-intro-flip{border-left:0;border-top:1px solid var(--brass)}
+  body #intro .twin-polaroid-piece>.twin-mini-grid{width:calc(100% + 20px);margin-inline:-10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+  body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip+.ww-intro-flip{border-left:1px solid var(--brass);border-top:0}
   body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip,
   body #intro .twin-polaroid.ww-intro-flip .tp-card-inner,
-  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){min-height:96px}
-  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){padding:16px 22px}
+  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){min-height:112px}
+  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){padding:12px 10px}
+  body #intro .ww-intro-flip .tp-card-front>.tp-body{gap:8px}
+  body #intro .ww-intro-flip .tp-card-quote{font-size:12px}
   body #intro .ww-intro-flip .tp-name strong{font-size:16.5px!important}
   body #intro .ww-intro-flip .tp-flip-mark{font-size:20px}
+}
+@media(max-width:720px){
+  body #intro .intro-left-stack>.keyword-tag-piece.balanced-tags{flex-direction:column;flex-wrap:nowrap;gap:4px}
+  body #intro .intro-left-stack>.balanced-tags>.tag-row{display:flex;flex:0 0 auto;width:100%;justify-content:center;gap:2px}
+  body #intro .intro-left-stack>.balanced-tags>.tag-row>.kw-chip{font-size:clamp(9.5px,2.8vw,11px);padding:3px clamp(2px,.7vw,4px)}
 }
 
 /* Handwritten names are local assets; the main poster keeps its display face. */
