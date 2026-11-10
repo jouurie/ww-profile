@@ -647,8 +647,8 @@ body #intro .ww-intro-flip .tp-card-quote{font-size:14px;line-height:1.7;text-al
   body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip+.ww-intro-flip{border-left:1px solid var(--brass);border-top:0}
   body #intro .twin-mini-grid>.twin-polaroid.ww-intro-flip,
   body #intro .twin-polaroid.ww-intro-flip .tp-card-inner,
-  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){min-height:112px}
-  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){padding:12px 10px}
+  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){min-height:88px}
+  body #intro .twin-polaroid.ww-intro-flip .tp-card-inner>:is(.tp-card-front,.tp-card-back){padding:8px 10px}
   body #intro .ww-intro-flip .tp-card-front>.tp-body{gap:8px}
   body #intro .ww-intro-flip .tp-card-quote{font-size:12px}
   body #intro .ww-intro-flip .tp-name strong{font-size:16.5px!important}
@@ -741,4 +741,12 @@ body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation>.chapter-nav{padding:0
 body .ww-site-header>.ww-hscroll-shell.ww-rail-navigation>.chapter-nav :is(a,label){font-size:12px}
 body main .panel :is(.paper-piece,.guide-source-card)>.piece-title,body #brothers .ww-profile-c .profile-section>.piece-title,body #world #world-mosaic .piece-title,body #world .ww-places-heading>h3{font-size:18px}
 body #guide #ww-guide-module .wg-content :is(p,li,th,td,.wg-value,.wg-code):not(.wg-note,.z26){font-size:12.5px!important}
+}
+
+/* Compact mobile dialogue cards; tag rows retain equal visible outer gaps. */
+@media(max-width:720px){
+body #intro .twin-polaroid.ww-intro-flip .tp-card-inner{height:88px}
+body #intro .twin-polaroid-piece>.piece-head{margin-bottom:6px;padding-bottom:6px}
+body #intro .intro-left-stack,body #intro .intro-top-grid{gap:18px}
+body #intro .intro-left-stack>.keyword-tag-piece.balanced-tags{margin-top:.6875px;margin-bottom:-.6875px}
 }
