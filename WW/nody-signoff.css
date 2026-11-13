@@ -1,0 +1,37 @@
+.n0>.ww-nody-signoff{box-sizing:border-box;width:var(--ww-page-width,min(1100px,calc(100% - 24px)));max-width:100%;margin:8px auto 0;padding-block:8px 6px;container-type:inline-size}.n0>.ww-nody-signoff>div:first-child{color:var(--brass);opacity:.85;font:400 clamp(9px,1.3cqi,13px)/1.2 var(--font-display);letter-spacing:.12em;margin-bottom:6px}.n0>.ww-nody-signoff>div:last-child{color:transparent;-webkit-text-stroke:1px var(--brass);opacity:.68;font:400 min(10.5cqi,110px)/.98 var(--font-display);letter-spacing:.02em;white-space:nowrap}
+
+/* Keep the approved desktop photo framing while the cards fit narrow screens. */
+@media(max-width:720px){
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier{grid-template-columns:minmax(0,calc(42.4% - 16px)) minmax(0,1fr)}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier>.portrait.large{inset:0 auto 0 0;width:42.4%;height:100%;aspect-ratio:auto;clip-path:none;transform:none;overflow:hidden;mask-image:none}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier>.portrait.large img{position:absolute;top:0;height:auto!important;max-width:none;object-fit:contain;transform-origin:0 0!important}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier.wyatt>.portrait.large img{left:-9.96%;width:134.91%;transform:translateY(-7.87%)!important}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier.wade>.portrait.large img{left:-16.32%;width:123.12%;transform:translateY(-8.63%)!important}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier .bd-spec-table{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr)!important}
+}
+@media(max-width:360px){
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier{grid-template-columns:minmax(0,calc(42.4% - 12px)) minmax(0,1fr);gap:10px;padding:11px}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier>.bd-head{padding-bottom:60px}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier .bd-spec-table{margin-top:8px;padding-block:6px}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier>.ww-profile-traits{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+ html body main.n0.wr #brothers .mosaic-container.ww-profile-c .brother-dossier>.ww-profile-traits>li{box-sizing:border-box;display:grid;place-items:center;min-height:22px;padding:1px;white-space:normal;line-height:1.25}
+}
+
+/* Native details keep their existing navigation and share the published gallery states. */
+body main.n0.wr #npc .ng58 .nf58{border-color:var(--cab)!important;outline:none}
+body main.n0.wr :is(#truck .n5,#npc .ng58) .ra{border:0;background:transparent;box-shadow:none;color:var(--paper)}
+@media(max-width:720px){
+ body main.n0.wr #npc .ng58{position:relative}
+ body main.n0.wr #npc .ng58>.rr{width:calc(100% - 80px);height:69.4px;margin:0 40px 12px;align-items:stretch}
+ body main.n0.wr #npc .ng58>.rr>details>summary,.n0.wr #npc .ng58 .nt58{width:52px;min-width:52px}
+ body main.n0.wr #npc .ng58 .nt58{font-size:9px;overflow-wrap:anywhere}
+ body main.n0.wr #npc .ng58 .ni58{width:46px;height:36px}
+ body main.n0.wr #npc .ng58 .ni58::after{content:none}
+ body main.n0.wr #npc .ng58 .ni58 img{filter:brightness(.32)}
+ body main.n0.wr #npc :is(.ng58:has(#nd580[open]) #nr580,.ng58:has(#nd581[open]) #nr581,.ng58:has(#nd582[open]) #nr582,.ng58:has(#nd583[open]) #nr583,.ng58:has(#nd584[open]) #nr584,.ng58:has(#nd585[open]) #nr585,.ng58:has(#nd586[open]) #nr586,.ng58:has(#nd587[open]) #nr587,.ng58:has(#nd588[open]) #nr588,.ng58:has(#nd589[open]) #nr589,.ng58>.rr>details[open],.ng58:not(:has(details[open]))>.rr>details:first-child) .nt58{box-shadow:inset 0 -3px var(--red)}
+ body main.n0.wr #npc :is(.ng58:has(#nd580[open]) #nr580,.ng58:has(#nd581[open]) #nr581,.ng58:has(#nd582[open]) #nr582,.ng58:has(#nd583[open]) #nr583,.ng58:has(#nd584[open]) #nr584,.ng58:has(#nd585[open]) #nr585,.ng58:has(#nd586[open]) #nr586,.ng58:has(#nd587[open]) #nr587,.ng58:has(#nd588[open]) #nr588,.ng58:has(#nd589[open]) #nr589,.ng58>.rr>details[open],.ng58:not(:has(details[open]))>.rr>details:first-child) .ni58 img{filter:none}
+ body main.n0.wr #npc .ng58 .ra{top:0!important;width:32px;height:69.4px;min-height:0;align-items:center;justify-content:center}
+}
+
+/* Keep selected emphasis on the thumbnail in the mobile native gallery. */
+@media (max-width:720px){body main.n0.wr #npc .ng58:has(>.rr>#nr580) .nf58{border-color:var(--cab)!important}}

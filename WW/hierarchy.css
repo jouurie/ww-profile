@@ -1,0 +1,514 @@
+@font-face{font-family:Paperozi;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+/* A2: section starts and image captions have different shapes and type roles. */
+main .panel .ww-section-head{padding:0 0 0 20px;border:0;border-left:2px solid var(--brass)}
+main .panel .ww-section-head .head-desc{margin-top:8px}
+
+/* Keep the desktop image/caption columns; the caption joins the image on mobile. */
+#truck .wwtruck-captions{padding:12px;background:var(--ink-panel)}
+main #truck .wwtruck-caption h3{margin:0 0 8px;padding:0;border:0;font:600 16px/1.5 Paperozi,sans-serif;color:var(--paper)}
+#truck .wwtruck-spec{margin:0;padding:0;border:0;font:400 var(--ww-body-size,13px)/1.7 var(--font-body)}
+#truck .wwtruck-detail{margin:8px 0 0;padding:0;border:0;font:400 var(--ww-body-size,13px)/1.7 var(--font-body)}
+#truck :is(.wwtruck-spec,.wwtruck-detail){line-height:1.7!important}
+@media(max-width:900px){
+  #truck .wwtruck-gallery-stage{gap:0}
+  #truck .wwtruck-captions{padding:12px 16px}
+}
+
+/* Paper-card sections keep their material; nested labels become plain subheads. */
+#world #world-mosaic .piece-title,
+#world .ww-places-heading h3{margin:0 0 16px;padding:0 0 0 12px;border-left:2px solid var(--brass);font:700 22px/1.5 var(--font-label)}
+@media(max-width:600px){
+  #world #world-mosaic .piece-title,
+  #world .ww-places-heading h3{font-size:20px}
+}
+#world #world-mosaic .prose .kv-heading{margin:0 0 8px;font:600 16px/1.5 Paperozi,sans-serif}
+#brothers .profile-sheet .prose .kv-heading:not(:has(>.wyatt,>.wade)){margin:0 0 8px;font:600 16px/1.5 Paperozi,sans-serif}
+#world #world-mosaic .prose .kv-heading::after,
+#brothers .profile-sheet .prose .kv-heading::after{display:none}
+#world #world-mosaic .prose .kv-heading>.sq-sub,
+#brothers .profile-sheet .prose .kv-heading>.sq-sub:not(.wyatt):not(.wade){display:block;width:auto;min-height:0;margin:0;padding:0;border:0;background:none;box-shadow:none;color:var(--ink);font:inherit;text-align:left}
+
+/* Shared reading hierarchy: section anchor, numbered subject, then ordinary prose. */
+:root{--ww-body-size:14px;--ww-body-leading:1.75}
+main #guide .ww-guide{--ww-body-size:14px}
+main .panel :is(.kv-line,.intro-whole-body,.intro-whole-body p,.wwtruck-detail,.wwtruck-spec,.ww-opening-body,.ww-npc-details p,.head-desc,.wg-pieces p,.wg-value,.wg-support-value,.wg-support-statement,.wg-command-description,.wg-prompt-block,.wg-summary-prompt){font-size:14px!important;line-height:1.75!important}
+main #intro .tw-body p{font-size:14px!important;line-height:1.75}
+main #intro .intro-whole-body,main #intro .intro-whole-body p{font-size:14px!important;line-height:1.75!important}
+#world .ww-places-heading p,#world .ww-place-stage figcaption p{font-size:14px;line-height:1.75}
+#radio .memo-item p{font-size:14px;line-height:1.75}
+
+/* A vertical accent belongs to each section title, never to its description. */
+#world #world-mosaic .piece-title,
+#world .ww-places-heading h3,
+#brothers .profile-section>.piece-title,
+#guide .ww-guide .wg-entry-head h3{font:700 22px/1.5 var(--font-label);border-left:2px solid var(--brass)}
+
+/* Counters restart within each card/profile or selected guide content group. */
+#world #world-mosaic article>.prose,
+#brothers .profile-section>.prose,
+#guide .wg-pieces,
+#guide .wg-status-guide,
+#radio .memo-lines{counter-reset:ww-subsection}
+
+#world #world-mosaic .prose .kv-heading,
+#brothers .profile-sheet .prose .kv-heading:not(:has(>.wyatt,>.wade)),
+#guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment,.wg-prompt-block,.wg-model-support-section,.wg-model-section,.wg-command-group)>h4,
+#guide .ww-guide .wg-command-heading>h4,
+#guide .ww-guide .wg-status-card>h4{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;padding:0;border:0;background:none;font:600 16px/1.5 Paperozi,sans-serif}
+
+#world #world-mosaic .prose .kv-heading::before,
+#brothers .profile-section>.prose .kv-section:not(.kv-entity)>.kv-heading:not(:has(>.wyatt,>.wade))::before,
+#guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment,.wg-prompt-block,.wg-model-support-section,.wg-model-section,.wg-command-group)>h4::before,
+#guide .ww-guide .wg-command-heading>h4::before,
+#guide .ww-guide .wg-status-card>h4::before,
+#radio .memo-item>.sq-sub::before{counter-increment:ww-subsection;content:counter(ww-subsection,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:600 14px/1.5 Paperozi,sans-serif;font-variant-numeric:tabular-nums}
+
+/* Single selected subjects use one small mark rather than a false sequence. */
+main #truck .wwtruck-caption h3,
+#world .ww-place-stage h4,
+#guide .ww-guide .wg-setting-box>h4{display:flex;align-items:baseline;gap:10px;font:600 16px/1.5 Paperozi,sans-serif;margin-bottom:8px}
+main #truck .wwtruck-caption h3::before,
+#world .ww-place-stage h4::before,
+#guide .ww-guide .wg-setting-box>h4::before{content:'\2022';flex:none;color:var(--stamp-red);font:600 14px/1.5 Paperozi,sans-serif}
+main #truck .wwtruck-caption h3::before{color:var(--status-red)}
+#guide .ww-guide .wg-status-card>h4::before{color:var(--status-red)}
+
+/* Deeper notes, model names and controls retain their own non-numbered roles. */
+#guide .ww-guide .wg-pieces h5{font:600 15px/1.5 Paperozi,sans-serif;margin-bottom:8px}
+#guide .ww-guide :is(.wg-note p,.wg-support-notes p,.wg-model-defaults p){font-size:12px!important;line-height:1.65!important}
+#guide .ww-guide .wg-model-card>header>h4{font:600 16px/1.5 Paperozi,sans-serif}
+#guide .ww-guide .wg-pieces :is(.wg-section,.wg-fragment){border-top:0;padding-top:0}
+#radio .memo-item{gap:8px;border:0;padding-bottom:12px}
+#radio .memo-item>.sq-sub{display:flex;align-items:baseline;gap:10px;width:auto;margin:0;padding:0;border:0;background:none;color:var(--ink);font:600 16px/1.5 Paperozi,sans-serif}
+#openings .ww-opening-card-head{gap:10px;min-height:44px;align-items:baseline}
+#openings .ww-opening-number{font:600 14px/1.5 Paperozi,sans-serif!important;color:var(--stamp-red);letter-spacing:0;font-variant-numeric:tabular-nums}
+main #openings .ww-opening-card-head h3{font:600 16px/1.5 Paperozi,sans-serif;margin:0}
+@media(max-width:600px){
+  #world #world-mosaic .piece-title,
+  #world .ww-places-heading h3,
+  #brothers .profile-section>.piece-title,
+  #guide .ww-guide .wg-entry-head h3{font-size:20px}
+}
+
+/* Guide branches outside .wg-pieces use the same established role sizes. */
+#guide .ww-guide .wg-command-group>h4,
+#guide .ww-guide .wg-status-guide .wg-status-card h4,
+#guide .ww-guide .wg-neutral-platform h4{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;padding:0;font:600 16px/1.5 Paperozi,sans-serif}
+#guide .ww-guide .wg-command-group>h4::before{counter-increment:ww-subsection;content:counter(ww-subsection,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:600 14px/1.5 Paperozi,sans-serif;font-variant-numeric:tabular-nums}
+#guide .wg-item{counter-reset:ww-subsection}
+#guide .ww-guide .wg-model-card h5,
+#guide .ww-guide .wg-status-guide .wg-status-card h5,
+#guide .ww-guide .wg-model-defaults>h4{font:600 15px/1.5 Paperozi,sans-serif;margin-bottom:8px}
+#guide .ww-guide .wg-status-field-table :is(th,td){font-size:14px;line-height:1.75}
+
+/* Equal section-title geometry also holds when all screens are read in sequence. */
+#world #world-mosaic .piece-title,
+#world .ww-places-heading h3,
+#brothers .profile-section>.piece-title,
+#guide .ww-guide .wg-entry-head h3{padding:8px 12px;margin:0 0 16px;border-left:2px solid var(--brass)}
+#brothers .profile-section>.prose{padding-top:0}
+#guide .ww-guide .wg-entry-head,
+#guide .ww-guide .wg-entry-head:has(+.wg-status-preview){margin-bottom:0}
+
+
+
+/* Sibling reading cards share one brass frame and a continuous title band. */
+#world #world-mosaic .guide-source-card,
+#world .ww-places,
+#brothers .profile-sheet{border:1px solid var(--brass);box-sizing:border-box}
+#world #world-mosaic .guide-source-card,
+#world .ww-places{padding:0}
+#world #world-mosaic .guide-source-card>.prose{padding:0 22px 20px}
+#world .ww-places-heading p{padding:0 22px}
+#world .ww-place-gallery{padding:0 22px 20px}
+#world #world-mosaic .piece-title,
+#world .ww-places-heading h3,
+#brothers .profile-section>.piece-title{background:var(--ink-panel);color:var(--paper);border-top:0;border-right:0;border-bottom:0}
+
+/* Equal section-title geometry also holds when all screens are read in sequence. */
+#world #world-mosaic .piece-title,
+#world .ww-places-heading h3,
+#brothers .profile-section>.piece-title,
+#guide .ww-guide .wg-entry-head h3{padding:8px 12px;margin:0 0 16px;border-left:2px solid var(--brass)}
+#brothers .profile-section>.prose{padding-top:0}
+#guide .ww-guide .wg-entry-head,
+#guide .ww-guide .wg-entry-head:has(+.wg-status-preview){margin-bottom:0}
+
+/* Guide entries are internal reading titles, separated with a single rule. */
+#guide .ww-guide .wg-entry-head h3{padding:0 0 8px;margin:0 0 16px;border:0;border-bottom:1px solid var(--brass);background:none;color:var(--ink)}
+
+/* The optional preview control must not enlarge the fourth command heading. */
+#guide .ww-guide .wg-command-heading{align-items:center;gap:8px;margin:0 0 8px}
+#guide .ww-guide .wg-command-heading>h4{margin:0}
+#guide .ww-guide .wg-command-heading [data-pinball-preview]{height:24px;min-height:24px;max-height:24px;padding-inline:6px}
+
+/* Approved opening-card A: small index/action row, then an independent title. */
+#openings .ww-opening-card-head{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;min-height:0;gap:8px;align-items:center;margin:0 0 16px;padding:0}
+#openings .ww-opening-number{grid-column:1;grid-row:1;font:600 14px/1.5 Paperozi,sans-serif!important;font-variant-numeric:tabular-nums;color:var(--stamp-red);letter-spacing:0}
+#openings .ww-opening-preview-button{grid-column:2;grid-row:1;justify-self:end;height:auto;min-height:24px;min-width:0;max-width:none;margin:0;padding:0;border:0;background:none;color:var(--ink);box-shadow:none;font:600 12px/1.4 var(--font-body);gap:6px}
+main #openings .ww-opening-card-head h3{grid-column:1/-1;grid-row:2;font:600 22px/1.4 Paperozi,sans-serif;margin:0;padding:0;border:0;background:none;color:var(--ink)}
+@media(max-width:620px){main #openings .ww-opening-card-head h3{font-size:20px}}
+
+/* The preview title bar uses a compact paper surface; the close control stays dark. */
+.ww-opening-preview .ww-opening-preview-head{align-items:center;gap:8px;padding:8px 16px;background:var(--brass);color:var(--ink)}
+.ww-opening-preview .ww-opening-preview-head h2{margin:0;padding:0;border:0;align-self:center;line-height:1.5;color:var(--ink)}
+.ww-opening-preview .ww-opening-preview-close{position:relative;display:inline-flex;align-items:center;justify-content:center;align-self:center;width:36px;height:36px;min-width:36px;min-height:36px;padding:0;font-size:0;line-height:0}
+.ww-opening-preview .ww-opening-preview-close::before,
+.ww-opening-preview .ww-opening-preview-close::after{content:'';position:absolute;top:50%;left:50%;width:18px;height:2px;background:var(--paper);transform:translate(-50%,-50%) rotate(45deg);pointer-events:none}
+.ww-opening-preview .ww-opening-preview-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
+
+/* Preserve the atlas box dimensions while leaving its paper outline unframed. */
+#world .ww-road-atlas{border-color:transparent}
+
+/* Platform controls share one content start, including the unselected state. */
+#guide .ww-guide .wg-entry-head:has(.wg-category-platforms:not([hidden])){margin-bottom:24px}
+#guide .ww-guide .wg-status-preview>.wg-local-tabs{margin-bottom:24px}
+#guide .ww-guide .wg-neutral-platform{padding:0;font:400 14px/1.75 var(--font-body)}
+#guide .ww-guide .wg-neutral-platform h4{margin:0 0 8px;font:600 16px/1.5 Paperozi,sans-serif}
+#guide .ww-guide .wg-neutral-platform p{margin:0;font:400 14px/1.75 var(--font-body)}
+
+/* A zoomable atlas keeps keyboard focus, without the shared button hover frame. */
+#world .ww-road-atlas>img:is(:hover,:active){box-shadow:none}
+
+/* Guide table hierarchy: shared title bands, complete frames and two-line rows. */
+#guide #ww-guide-module :is(h4,summary)::before{content:none;counter-increment:none}
+#guide #ww-guide-module .wg-table-title{box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;min-height:52px;margin:0;padding:13px 16px;border:1px solid var(--brass);background:var(--paper-deep);color:var(--ink);font:500 16px/1.6 var(--font-label);text-align:center;word-break:keep-all}
+#guide #ww-guide-module :is(.wg-model-support-table,.wg-progress-table) tr{height:82px}
+#guide #ww-guide-module :is(.wg-model-support-table,.wg-progress-table,.wg-status-field-table) :is(th,td){vertical-align:middle}
+#guide #ww-guide-module .wg-status-field-table tbody tr{min-height:82px;align-items:center}
+#guide #ww-guide-module .wg-model-label-line{display:block;white-space:nowrap}
+@media(max-width:650px){#guide #ww-guide-module .wg-table-disclosure>.wg-table-title{padding-inline:56px}}
+
+/* Play-mode choices are explanations above the settings tables, not table headings. */
+#guide #ww-guide-module .wg-setting-cards{counter-reset:wg-play-setting}
+#guide #ww-guide-module .wg-setting-cards>:is(.wg-section,.wg-fragment){border-top:1px solid var(--brass);padding-top:16px}
+#guide #ww-guide-module .wg-setting-cards>:is(.wg-section,.wg-fragment)>h4::before{counter-increment:wg-play-setting;content:counter(wg-play-setting,decimal-leading-zero);flex:none;min-width:2ch;color:var(--stamp-red);font:600 14px/1.5 Paperozi,sans-serif;font-variant-numeric:tabular-nums}
+
+/* A title band joins a table; prose keeps its own reading gap. */
+#guide #ww-guide-module .wg-table-title+:not(table):not(.wg-status-field-table){margin-top:12px}
+#guide #ww-guide-module .wg-model-support-table+:is(p,.wg-support-notes),
+#guide #ww-guide-module .wg-settings-table-unit>p{margin-top:12px}
+#guide #ww-guide-module .wg-reference-link{white-space:nowrap;color:var(--stamp-red);font:inherit;text-decoration:underline;text-underline-offset:4px}
+
+/* Designer proposal A: baseline geometry, dark reading surface. */
+#guide #ww-guide-module :is(.wg-control-panel,.wg-content){background:var(--ink);color:var(--paper)}
+#guide #ww-guide-module .wg-content .wg-entry-head>h3{background:transparent;color:var(--paper);border-color:var(--brass)}
+#guide #ww-guide-module .wg-content :is(.wg-local-platform>[data-wg-local-page],.wg-setting-cards>.wg-section,.wg-setting-cards>.wg-fragment,.wg-setting-box,.wg-status-card,.wg-model-card,.wg-support-notes){background:transparent;color:var(--paper);border-color:transparent}
+#guide #ww-guide-module .wg-content :is(h4,h5,.wg-inline-label,.wg-support-label){color:var(--brass)}
+#guide #ww-guide-module .wg-content :is(p,li,.wg-value,.wg-support-value,.wg-support-statement,.wg-command-description,.wg-setting-path,.wg-model-defaults){color:var(--paper)}
+#guide #ww-guide-module .wg-content :is(.wg-table-title,.wg-model-support-section>h4,.wg-table-disclosure>summary,.wg-setting-cards>.wg-section>h4,.wg-setting-cards>.wg-fragment>h4){background:transparent;color:var(--brass);border-color:transparent}
+#guide #ww-guide-module #guide-5 .wg-settings-table-unit:first-child .wg-table-title{justify-content:flex-start;min-height:0;margin:0 0 8px;padding:0 16px;border-color:transparent;background:transparent;color:var(--brass);font:600 17px/1.5 var(--font-label);text-align:left}
+#guide #ww-guide-module .wg-content :is(.wg-model-support-table,.wg-status-field-table){background:transparent;color:var(--paper);border-color:transparent}
+#guide #ww-guide-module .wg-content :is(.wg-model-support-table,.wg-status-field-table) :is(th,td){background:transparent;border-color:transparent;border-bottom-color:var(--brass)}
+#guide #ww-guide-module .wg-content :is(.wg-model-support-table,.wg-status-field-table) th{color:var(--brass)}
+#guide #ww-guide-module .wg-content :is(.wg-model-support-table,.wg-status-field-table) td{color:var(--paper)}
+#guide #ww-guide-module .wg-content .wg-model-choice{background:transparent;color:var(--paper);border-color:transparent}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-choice{background:linear-gradient(transparent 60%,color-mix(in srgb,var(--brass) 30%,transparent) 60%,color-mix(in srgb,var(--brass) 30%,transparent) 94%,transparent 94%);background-clip:content-box;color:var(--paper);border-color:transparent}
+#guide #ww-guide-module .wg-content .wg-model-highlight,#guide #ww-guide-module .wg-content .wg-model-support-table .wg-model-highlight{background:linear-gradient(transparent 60%,color-mix(in srgb,var(--brass) 30%,transparent) 60%,color-mix(in srgb,var(--brass) 30%,transparent) 94%,transparent 94%);color:var(--paper)}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-choice .wg-model-highlight{background:transparent;color:inherit}
+/* Reading styles stop at functional copy surfaces. */
+#guide #ww-guide-module .wg-content .wg-copy-block-body :is(p,li,pre,code,span){color:var(--ink)}
+#guide #ww-guide-module .wg-content .wg-model-separator{color:var(--brass)}
+#guide #ww-guide-module .wg-content :is(.wg-local-tabs button,.wg-category-platforms button){background:transparent;color:var(--paper);border-color:var(--brass)}
+#guide #ww-guide-module .wg-content :is(.wg-local-tabs button,.wg-category-platforms button)[aria-selected=true]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+/* Revision: prose-like model alternatives, compact readable rows. */
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-choices{display:block;text-align:left;line-height:1.8}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-choice{display:inline;padding:0;margin:0;border:0;line-height:1.8;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-separator{display:inline;margin:0 5px;padding:0;font-size:13px;line-height:inherit;white-space:normal}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-support-table tr{height:auto}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-support-table :is(th,td){padding:14px 10px;vertical-align:top;text-align:left;line-height:1.7}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-support-table th{width:64px}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-extra{display:block;margin-top:6px;line-height:1.7;text-align:left}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-extra mark{display:inline;padding:0;background:transparent;color:inherit}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-support-notes{margin-top:8px;padding:0;border:0;text-align:left}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-support-notes p{margin:0;font-size:12px;line-height:1.6}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-table-title{justify-content:flex-start;text-align:left;padding-inline:10px}
+
+/* Revised proposal: connected table heading and internal rules. */
+#guide #ww-guide-module .wg-content .wg-setting-cards>:is(.wg-section,.wg-fragment)>h4{
+ display:flex;align-items:baseline;justify-content:flex-start;gap:10px;min-height:0;margin:0 0 12px;padding:0 0 8px;border:0;border-bottom:1px solid var(--brass);background:transparent;color:var(--brass);font:600 16px/1.5 Paperozi,sans-serif;text-align:left;
+}
+#guide #ww-guide-module .wg-content .wg-model-support-table{border-collapse:collapse;border:0;background:transparent}
+#guide #ww-guide-module .wg-content .wg-model-support-table :is(th,td){border:0;border-bottom:1px solid var(--brass);background:transparent;padding:12px 10px;vertical-align:top;line-height:1.7}
+#guide #ww-guide-module .wg-content .wg-model-support-table th+td{border-left:1px solid var(--brass);padding-left:12px}
+#guide #ww-guide-module .wg-content .wg-model-support-table th{color:var(--brass)}
+#guide #ww-guide-module .wg-content .wg-model-support-table td{color:var(--paper)}
+#guide #ww-guide-module .wg-content .wg-model-support-table tr{height:auto;min-height:0}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-support-table th{width:56px}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-support-table :is(th,td){padding:12px 10px}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-support-table th+td{padding-left:12px}
+/* Every table title is the attached full-width header, never a floating label. */
+#guide #ww-guide-module .wg-content .wg-table-title,
+#guide #ww-guide-module .wg-content .wg-model-support-section>h4,
+#guide #ww-guide-module .wg-content .wg-model-support-section>.wg-table-disclosure>summary,
+#guide #ww-guide-module #guide-5 .wg-settings-table-unit:first-child .wg-table-title,
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-table-title{
+ display:flex;align-items:center;justify-content:flex-start;min-height:44px;margin:0;padding:10px 54px 10px 12px;border:0;border-top:2px solid var(--brass);border-bottom:1px solid var(--brass);background:var(--tar);color:var(--brass);font:600 16px/1.5 Paperozi,sans-serif;text-align:left;
+}
+#guide #ww-guide-module .wg-content .wg-table-disclosure[open]>.wg-table-title{margin-bottom:0}
+#guide #ww-guide-module .wg-content .wg-model-support-section>.wg-table-disclosure[open]>summary{margin-bottom:0}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-table-title+*{margin-top:0}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-choice{display:inline;margin:0;padding:0;border:0;line-height:inherit}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-model-extra{margin-top:6px}
+#guide #ww-guide-module .wg-content .wg-model-operation .wg-support-notes{margin-top:8px;padding:0;border:0;background:transparent}
+
+/* Output tab and common settings are peer section headings. */
+#guide #ww-guide-module #guide-5 .wg-setting-path,
+#guide #ww-guide-module #guide-5 .wg-settings-table-unit:first-child .wg-model-support-section>h4,
+#guide #ww-guide-module #guide-5 .wg-settings-table-unit:first-child .wg-table-disclosure>summary,
+#guide #ww-guide-module #guide-5 .wg-settings-table-unit:first-child .wg-table-title{
+ box-sizing:border-box;display:flex;align-items:center;justify-content:flex-start;gap:8px;min-height:46px;margin:0;padding:10px 54px 10px 12px;border:0;border-top:2px solid var(--brass);border-bottom:1px solid var(--brass);background:var(--tar);color:var(--brass);font:600 16px/1.5 Paperozi,sans-serif;text-align:left;
+}
+#guide #ww-guide-module #guide-5 .wg-setting-path li{color:inherit;font:inherit;line-height:inherit}
+/* The numbered play options belong inside the output-tab section. */
+#guide #ww-guide-module #guide-5 .wg-pieces:has(>.wg-setting-path){row-gap:0}
+#guide #ww-guide-module #guide-5 .wg-setting-cards{padding:12px 12px 0;margin:0 0 24px;gap:20px}
+#guide #ww-guide-module #guide-5 .wg-setting-cards>:is(.wg-section,.wg-fragment){padding:0;border:0;background:transparent}
+#guide #ww-guide-module #guide-5 .wg-setting-cards>:is(.wg-section,.wg-fragment)>h4{min-height:0;margin:0 0 8px;padding:0 0 8px;border:0;border-bottom:1px solid var(--brass);background:transparent;color:var(--paper);font:600 15px/1.5 Paperozi,sans-serif}
+#guide #ww-guide-module #guide-5 .wg-setting-cards p{margin-bottom:8px;line-height:1.75}
+#guide #ww-guide-module #guide-5 .wg-setting-cards p:last-child{margin-bottom:0}
+
+/* Peer headings override the site's separate summary font rule explicitly. */
+#guide #ww-guide-module .wg-content :is(.wg-table-title,.wg-model-support-section>h4,.wg-model-support-section>.wg-table-disclosure>summary),
+#guide #ww-guide-module #guide-5 .wg-setting-path,
+#guide #ww-guide-module #guide-5 .wg-setting-path li{
+ font-family:Paperozi,sans-serif!important;font-size:16px!important;font-weight:600!important;line-height:24px!important;
+}
+#guide #ww-guide-module #guide-5 .wg-setting-path,
+#guide #ww-guide-module #guide-5 .wg-model-support-section>h4,
+#guide #ww-guide-module #guide-5 .wg-model-support-section>.wg-table-disclosure>summary,
+#guide #ww-guide-module #guide-5 .wg-settings-table-unit:first-child .wg-table-disclosure>summary,
+#guide #ww-guide-module #guide-5 .wg-settings-table-unit:first-child .wg-table-title,
+#guide #ww-guide-module .wg-content .wg-model-operation>.wg-table-disclosure>summary{
+ border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent);background:transparent;min-height:44px;padding-top:10px;padding-bottom:10px;
+}
+#guide #ww-guide-module #guide-5 .wg-setting-cards>:is(.wg-section,.wg-fragment)>h4{border:0;padding-bottom:0}
+#guide #ww-guide-module .wg-content .wg-model-support-table :is(th,td){border-bottom-color:color-mix(in srgb,var(--brass) 25%,transparent)}
+#guide #ww-guide-module .wg-content .wg-model-support-table th+td{border-left-color:color-mix(in srgb,var(--brass) 25%,transparent)}
+#guide #ww-guide-module .wg-content .wg-model-card :is(header,h5,.wg-model-setting){border-color:transparent}
+
+/* Brass identifies section headings; table cells remain reading text. */
+#guide #ww-guide-module .wg-content .wg-model-support-table th,
+#guide #ww-guide-module .wg-content .wg-model-support-table td{
+ color:var(--paper);
+}
+/* A settings reference has no recommendation highlight exceptions. */
+#guide #ww-guide-module #guide-5 .wg-model-support-table .wg-model-highlight{
+ color:inherit;background:none;text-decoration:none;box-shadow:none;
+}
+
+/* Selected reference: joined slanted platform tabs, upright labels. */
+#guide #ww-guide-module .wg-content .wg-local-tabs{display:flex;gap:0;padding:0;margin-left:7px;transform:skewX(-16deg);width:max-content}
+#guide #ww-guide-module .wg-content .wg-local-tabs button{min-width:104px;min-height:40px;height:40px;margin:0;padding:8px 18px;border:1px solid var(--brass);border-radius:0;background:var(--ink);color:var(--paper);font-size:14px}
+#guide #ww-guide-module .wg-content .wg-local-tabs button+button{border-left:0}
+#guide #ww-guide-module .wg-content .wg-local-tabs button[aria-selected=true]{background:var(--brass);color:var(--ink);border-color:var(--brass)}
+#guide #ww-guide-module .wg-content .wg-local-tabs button>span{display:block;transform:skewX(16deg)}
+/* Explicit supplementary roles; never identical to primary setting values. */
+#guide #ww-guide-module .wg-content .wg-auxiliary{margin-top:12px;padding-left:12px}
+#guide #ww-guide-module .wg-content .wg-auxiliary-label{display:block;margin:0 0 4px;color:var(--brass);font:600 12px/1.5 var(--font-body)}
+#guide #ww-guide-module .wg-content .wg-auxiliary p{margin:0;color:var(--paper);font-size:13px!important;line-height:1.65!important}
+#guide #ww-guide-module .wg-content .wg-note{padding-left:12px;font-size:12px!important;line-height:1.65!important}
+#guide #ww-guide-module .wg-content .wg-model-defaults .wg-default-values{margin:0;color:var(--paper);font-size:14px!important;line-height:1.75!important}
+#guide #ww-guide-module .wg-content .wg-model-defaults .wg-guidance-note{margin:8px 0 0;padding-left:12px;color:var(--muted);font-size:12px!important;line-height:1.65!important}
+
+/* Budget headings share the settings heading origin and rhythm. */
+#guide #ww-guide-module .wg-content .wg-setting-box{padding:0;border:0;margin:0}
+#guide #ww-guide-module .wg-content .wg-setting-box>h4{box-sizing:border-box;display:flex;align-items:center;min-height:44px;margin:0 0 12px;padding:10px 12px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent);font:600 16px/24px Paperozi,sans-serif}
+#guide #ww-guide-module .wg-content .wg-setting-box>h4::before{content:none}
+
+/* Guide color-role repair. Preserve existing grids, widths and reading scale. */
+#guide #ww-guide-module .wg-content .wg-status-preview-body,
+#guide #ww-guide-module .wg-content .wg-status-frame{background:transparent}
+#guide #ww-guide-module .wg-content .wg-status-field-table :is(tbody,tr,th,td),
+#guide #ww-guide-module .wg-content .wg-status-field-table tbody tr:nth-child(even){background:transparent}
+#guide #ww-guide-module .wg-content .wg-status-field-table td{color:var(--paper)}
+#guide #ww-guide-module .wg-content .wg-status-field-table th{color:var(--brass)}
+/* Nested labels return to the base tone beneath accent-colored section titles. */
+#guide #ww-guide-module .wg-content .wg-status-card h5{color:var(--paper);font-weight:600}
+#guide #ww-guide-module .wg-content .wg-model-defaults>h5{color:var(--muted);font:600 12px/1.5 var(--font-body);margin-bottom:4px}
+#guide #ww-guide-module .wg-content .wg-note{color:var(--muted)}
+/* Card padding already owns this inset; do not indent its heading twice. */
+#guide #ww-guide-module .wg-content .wg-status-card{border:0}
+#guide #ww-guide-module .wg-content .wg-status-card>.wg-table-title,
+#guide #ww-guide-module .wg-content .wg-status-card>.wg-table-disclosure>summary{padding-left:0;color:var(--brass);background:transparent;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent)}
+/* Model names keep one shared base color and the existing marker. */
+#guide #ww-guide-module .wg-content .wg-model-card>header>h4{color:var(--paper)}
+
+/* User correction: clearly visible shared model highlighter. */
+#guide #ww-guide-module .wg-content .wg-model-highlight{background:linear-gradient(transparent 42%,color-mix(in srgb,var(--brass) 80%,transparent) 42%,color-mix(in srgb,var(--brass) 80%,transparent) 96%,transparent 96%);color:var(--paper);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* One inset owner for every copied text/code body. */
+#guide #ww-guide-module .wg-content .wg-copy-block-body{padding:10px 12px}
+#guide #ww-guide-module .wg-content .wg-copy-block-body .wg-code{margin:0;padding:0;border:0;background:transparent}
+#guide #ww-guide-module .wg-content .wg-copy-block-body>:first-child{margin-top:0}
+
+/* Complete dark-surface coverage for list and command reading text. */
+#guide #ww-guide-module .wg-content ol.wg-play-list>li{background:transparent;color:var(--paper)}
+#guide #ww-guide-module .wg-content ol.wg-play-list>li::before{color:var(--stamp-red)}
+#guide #ww-guide-module .wg-content .wg-command-token code{color:var(--paper)}
+
+/* ===== Guide repair: palette roles, hierarchy, compact tables, upright tabs ===== */
+
+/* 1. One dark reading plane; preview surfaces stay transparent. */
+#guide #ww-guide-module #wg-content.wg-content{background:var(--ink);color:var(--paper);--wg-line:color-mix(in srgb,var(--brass) 45%,transparent)}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-status-preview,.wg-status-preview-body,.wg-status-notes,.wg-status-guide,.wg-status-input-stack,.wg-status-card,.wg-status-example-grid){background:transparent}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-preview-body{padding:0;border:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-frame{display:block;width:100%;border:0;background:transparent}
+
+/* 2. Hierarchy: entry title > peer section/table heading > nested label > body > auxiliary. */
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-section,.wg-fragment,.wg-prompt-block,.wg-model-support-section,.wg-model-section,.wg-command-group,.wg-setting-box)>h4{display:flex;align-items:baseline;gap:8px;margin:0 0 10px;padding:0;border:0;background:transparent;color:var(--brass);font:600 16px/1.5 Paperozi,sans-serif}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-table-title,.wg-table-disclosure>summary,.wg-model-section>h4){box-sizing:border-box;position:relative;display:flex;align-items:center;gap:8px;min-height:40px;margin:0 0 10px;padding:8px 12px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent);background:transparent;color:var(--brass);font:600 16px/1.5 Paperozi,sans-serif;text-align:left;word-break:keep-all}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-card>.wg-table-title,
+#guide #ww-guide-module #wg-content.wg-content .wg-status-card>.wg-table-disclosure>summary{padding-inline:0;margin-bottom:8px}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-setting-cards,.wg-model-defaults,.wg-support-notes,.wg-model-card) :is(h4,h5){color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card h5{color:var(--brass);font:600 12px/1.5 var(--font-label);margin:0 0 4px;padding:0;border:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-card h5{color:var(--paper);font:600 13px/1.5 var(--font-label);margin:10px 0 6px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-defaults>h4{min-height:0;margin:0 0 6px;padding:0;border:0;color:var(--paper);font:600 14px/1.5 var(--font-label)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-defaults>h5{min-height:0;margin:0 0 4px;padding:0;border:0;color:var(--muted);font:600 12px/1.5 var(--font-body)}
+
+/* Body, labeled paragraphs and auxiliary notes. */
+#guide #ww-guide-module #wg-content.wg-content :is(p,li,.wg-value,.wg-support-value,.wg-support-statement,.wg-default-values,.wg-command-description){color:var(--paper);font-size:14px;line-height:1.75}
+#guide #ww-guide-module #wg-content.wg-content .wg-note,
+#guide #ww-guide-module #wg-content.wg-content .wg-guidance-note,
+#guide #ww-guide-module #wg-content.wg-content .wg-auxiliary p{color:var(--muted);font-size:12px!important;line-height:1.65!important;padding-left:12px}
+#guide #ww-guide-module #wg-content.wg-content .wg-auxiliary-label{color:var(--brass);font:600 12px/1.5 var(--font-body)}
+#guide #ww-guide-module #wg-content.wg-content .wg-inline-label{color:var(--muted);font:600 13px/1.7 var(--font-label)}
+#guide #ww-guide-module #wg-content.wg-content .wg-keyvalue{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline}
+#guide #ww-guide-module #wg-content.wg-content .wg-keyvalue .wg-inline-label{margin:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-resource-link{color:var(--stamp-red);text-underline-offset:3px}
+
+/* 3. Settings tables: compact label column, full value width, quiet rules. */
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-table{width:100%;table-layout:fixed;border-collapse:collapse;border:0;background:transparent;color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-table tr{height:auto}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-section .wg-model-support-table :is(th,td){padding:7px 10px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 28%,transparent);background:transparent;font:400 14px/1.6 var(--font-body);vertical-align:top;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-section .wg-model-support-table th{width:96px;color:var(--muted);font:600 13px/1.6 var(--font-label);white-space:normal}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-section .wg-model-support-table th+td{border-left:1px solid color-mix(in srgb,var(--brass) 20%,transparent);padding-left:12px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-table td{color:var(--paper);font-size:14px;line-height:1.65}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-support-table th{width:68px}
+#guide #ww-guide-module #wg-content.wg-content .wg-settings-table-grid .wg-model-support-table th{width:104px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-label-line{display:block;white-space:normal}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-table p{margin:6px 0 0;white-space:pre-wrap}
+
+/* Values keep number/range groups together; no stranded unit on a third line. */
+#guide #ww-guide-module #wg-content.wg-content .wg-value-group{white-space:nowrap}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-choice{background:transparent;border:0;padding:0;color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-separator{color:var(--muted);margin:0 4px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-extra{color:var(--muted);font-size:12px;line-height:1.7}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-extra mark{background:none;color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-choices{line-height:1.8}
+
+/* 4. Model cards: identical ivory names, brass hairline, no box-in-box. */
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card{padding:10px 12px;border:0;background:transparent;color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card>header{margin:0 0 8px;padding:0;border:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card>header>h4{margin:0;color:var(--paper);font:600 16px/1.45 Paperozi,sans-serif}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card p{font-size:14px;line-height:1.65;color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card .wg-model-setting{padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid color-mix(in srgb,var(--brass) 28%,transparent)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card .wg-model-setting>span{color:var(--muted);font-size:12px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card .wg-model-setting>strong{color:var(--stamp-red);font-size:16px;font-weight:400}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card .wg-model-caution{padding-left:0;border-left:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-grid{gap:12px}
+
+/* 5. Upright two-option control: joined, compact, unmissable active state. */
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms){display:inline-flex;flex-wrap:nowrap;align-items:stretch;gap:0;width:auto;max-width:100%;height:auto;min-height:0;margin:0 0 18px;padding:0;transform:none;border:1px solid var(--brass);border-radius:3px;overflow:hidden;background:transparent}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms) button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;flex:0 0 auto;min-width:88px;height:36px;min-height:36px;max-height:36px;margin:0;padding:0 18px;border:0;border-radius:0;background:transparent;color:var(--paper);font:600 13px/1 var(--font-label);letter-spacing:.08em;white-space:nowrap;box-shadow:none}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms) button+button{border-left:1px solid var(--brass)}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms) button[aria-selected=true]{background:var(--brass);color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms) button>span{display:block;transform:none;font:inherit;line-height:inherit;letter-spacing:inherit}
+#guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms) button:focus-visible{outline:2px solid var(--paper);outline-offset:-3px}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-preview>.wg-local-tabs{margin-bottom:14px}
+#guide #ww-guide-module #wg-content.wg-content .wg-entry-head .wg-platform-slot{height:auto;min-height:0;margin:10px 0 0;padding:0}
+
+/* 6. Setting path as a peer heading, never a fill band. */
+#guide #ww-guide-module #wg-content.wg-content .wg-setting-path li{gap:6px;margin:0;color:inherit;font:inherit;line-height:inherit}
+#guide #ww-guide-module #wg-content.wg-content .wg-setting-path li+li::before{content:'\2192';color:var(--muted)}
+#guide #ww-guide-module #guide-5 .wg-setting-cards>:is(.wg-section,.wg-fragment)>h4{min-height:0;font:600 14px/1.5 var(--font-label);color:var(--paper);margin:0 0 8px;padding:0 0 6px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 28%,transparent);background:transparent}
+
+/* 7. Progress table keeps independent rows, tighter rhythm. */
+#guide #ww-guide-module #wg-content.wg-content .wg-progress-table{display:block;width:100%;border:0;background:transparent;color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-progress-table tr{display:block;height:auto;padding:12px 0;border-bottom:1px solid color-mix(in srgb,var(--brass) 30%,transparent)}
+#guide #ww-guide-module #wg-content.wg-content .wg-progress-table tr:first-child{padding-top:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-progress-table tr:last-child{padding-bottom:0;border-bottom:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-progress-table th{display:block;width:auto;margin:0 0 4px;padding:0;border:0;background:transparent;color:var(--brass);font:600 15px/1.5 Paperozi,sans-serif;text-align:left}
+#guide #ww-guide-module #wg-content.wg-content .wg-progress-table td{display:block;padding:0;border:0;background:transparent;color:var(--paper);font-size:14px;line-height:1.75;text-align:left}
+
+/* 8. Status legend: transparent surface, two-column grid, readable keys. */
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table{display:block;width:100%;border:0;background:transparent!important;color:var(--paper);font:400 13px/1.55 var(--font-body)}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table :is(thead,tbody,tr,th,td){background:transparent!important}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);background:transparent!important}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px;max-height:360px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table tr{display:grid;grid-template-columns:minmax(92px,27%) minmax(0,1fr);align-items:start;min-height:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 22%,transparent)}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table :is(th,td){width:auto!important;padding:5px 6px!important;border:0;font-size:13px;line-height:1.55;vertical-align:top;overflow-wrap:anywhere;word-break:keep-all}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table th{color:var(--muted);font-family:var(--font-mono);font-weight:600;min-width:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table th code{color:var(--muted);font-size:12px;line-height:1.5}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table td{color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-table td code{color:var(--paper);font-size:12px}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-field-notes{margin-top:8px;padding-top:8px;border-top:1px solid color-mix(in srgb,var(--brass) 30%,transparent);color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-card{padding:12px;border:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-card p{margin:0 0 8px;font-size:14px;line-height:1.75;color:var(--paper)}
+
+/* 9. Functional copy panels: both cream with ink text. */
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block{box-sizing:border-box;border:1px solid var(--brass);border-radius:2px;background:var(--paper);color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-head{padding:8px 12px;border-bottom:1px solid var(--brass);background:color-mix(in srgb,var(--paper) 92%,var(--ink));color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-head>span{color:var(--ink);font:600 12px/1.5 var(--font-label)}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-head [role=status]{color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-body{padding:12px;background:var(--paper);color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-body :is(p,li,pre,code,span){color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-body .wg-code{background:transparent;border:0;padding:0;color:var(--ink);font-size:13px;line-height:1.6}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-control>button[data-copy-block]{background:var(--brass);color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-control>[role=status]{color:var(--paper)}
+
+/* 10. Responsive states. */
+@media(hover:hover){#guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms) button[aria-selected=false]:hover{background:color-mix(in srgb,var(--brass) 18%,transparent)}}
+@media(max-width:900px){#guide #ww-guide-module #wg-content.wg-content .wg-settings-table-grid{columns:2}}
+@media(max-width:650px){
+ #guide #ww-guide-module #wg-content.wg-content .wg-settings-table-grid{columns:1}
+ #guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms){margin-bottom:16px}
+ #guide #ww-guide-module #wg-content.wg-content :is(.wg-local-tabs,.wg-category-platforms) button{min-width:84px;height:40px;min-height:40px;max-height:40px;padding:0 16px}
+ #guide #ww-guide-module #wg-content.wg-content .wg-table-disclosure>summary{min-height:40px;padding:10px 56px 10px 12px}
+ #guide #ww-guide-module #wg-content.wg-content .wg-table-disclosure>summary::after{margin-left:auto}
+ #guide #ww-guide-module #wg-content.wg-content .wg-status-card>.wg-table-disclosure>summary{padding-left:0;padding-right:56px}
+ #guide #ww-guide-module #wg-content.wg-content .wg-status-field-table tbody{grid-template-columns:minmax(0,1fr);max-height:320px}
+ #guide #ww-guide-module #wg-content.wg-content .wg-status-field-table tr{grid-template-columns:minmax(84px,30%) minmax(0,1fr)}
+ #guide #ww-guide-module #wg-content.wg-content .wg-model-support-section .wg-model-support-table th{width:88px}
+ #guide #ww-guide-module #wg-content.wg-content .wg-settings-table-grid .wg-model-support-table th{width:92px}
+ #guide #ww-guide-module #wg-content.wg-content .wg-model-grid{gap:10px}
+}
+
+/* Integrated later user corrections: compact descendants and one inset owner. */
+#guide #ww-guide-module #wg-content.wg-content .wg-model-section{padding-top:0;border-top:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-section>.wg-table-disclosure>.wg-model-grid{margin-top:0;margin-bottom:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card p{margin:0 0 8px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-card p:last-child{margin-bottom:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-auxiliary p{padding-left:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-body{padding:10px 12px}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-body .wg-code{margin:0;padding:0;border:0;font-size:12px;line-height:1.5}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-body>:first-child{margin-top:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-copy-block-head .wg-copy-control>[role=status]{color:var(--ink)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-table th{box-sizing:border-box}
+#guide #ww-guide-module #wg-content.wg-content .wg-entry-head .wg-local-tabs{margin:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-entry-head .wg-platform-slot{margin:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-entry-head:has(.wg-category-platforms:not([hidden])){margin-bottom:16px}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-preview>.wg-local-tabs{margin-bottom:16px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-support-section>.wg-table-disclosure>summary{margin-bottom:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-setting-box>h4{padding:8px 12px;min-height:40px;margin:0 0 10px;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent)}
+#guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-setting-path{padding:8px 12px;min-height:40px;margin:0;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent)}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-highlight{background:linear-gradient(transparent 42%,color-mix(in srgb,var(--brass) 80%,transparent) 42%,color-mix(in srgb,var(--brass) 80%,transparent) 96%,transparent 96%);color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content #guide-5 .wg-model-support-table .wg-model-highlight{background:none;color:inherit}
+#guide #ww-guide-module #wg-content.wg-content ol.wg-play-list>li{background:transparent;color:var(--paper)}
+#guide #ww-guide-module #wg-content.wg-content ol.wg-play-list>li::before{color:var(--stamp-red)}
+#guide #ww-guide-module #wg-content.wg-content .wg-command-token code{color:var(--paper)}
+
+/* One section gap after the measured status preview; card inset remains unchanged. */
+#guide #ww-guide-module #wg-content.wg-content .wg-status-preview{margin-bottom:0}
+#guide #ww-guide-module #wg-content.wg-content .wg-status-notes{margin-top:12px}
+
+/* Every settings table heading overrides legacy first-child band geometry equally. */
+#guide #ww-guide-module #wg-content #guide-5 :is(.wg-table-title,.wg-model-support-section>h4,.wg-table-disclosure>summary){box-sizing:border-box;min-height:40px;margin:0;padding:8px 12px;border:0;border-bottom:1px solid color-mix(in srgb,var(--brass) 45%,transparent);background:transparent;color:var(--brass);font:600 16px/24px Paperozi,sans-serif;text-align:left}
+@media(max-width:650px){#guide #ww-guide-module #wg-content #guide-5 .wg-table-disclosure>summary{padding-right:56px}}
+
+/* Operation alternatives are groups; feature highlights retain their original recommendation scope. */
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-choices{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-choice{display:inline-block;max-width:100%;padding:3px 7px;border:0;background:var(--paper-deep);color:var(--ink);line-height:1.65;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-separator{flex:none;color:var(--brass);background:none;padding:0;font-size:15px}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-operation .wg-model-extra{color:var(--muted);background:none}
+#guide #ww-guide-module #wg-content.wg-content .wg-model-section .wg-model-highlight{color:inherit;background:linear-gradient(transparent 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 56%,color-mix(in srgb,var(--cyan) 48%,transparent) 94%,transparent 94%);padding:0;margin:0;border:0;box-decoration-break:clone;-webkit-box-decoration-break:clone}

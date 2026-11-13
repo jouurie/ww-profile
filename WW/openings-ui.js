@@ -1,0 +1,250 @@
+/* Six always-open scene photographs. Source content remains in WW. */
+(function (global) {
+  'use strict';
+  var sceneImages = {"01":"https://cdn.imgchest.com/files/9b65036dea36.png","02":"https://cdn.imgchest.com/files/83c52183f6b5.png","03":"https://cdn.imgchest.com/files/15f834822cc5.png","04":"https://cdn.imgchest.com/files/1a2529d842f4.png","05":"https://cdn.imgchest.com/files/5b1541f2ad05.png","06":"https://cdn.imgchest.com/files/9d1a1aa8a1b4.png"};
+  var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자유 도입부'];
+  var plotIds = ['plot1', 'plot2', 'plot3', 'plot4', 'plot5', 'plot_auto_intro'];
+  var dialog, previewTitle, previewBody, opener, overflow, pressedPreview;
+  var requestedPreviewHandled = false;
+  function clearPreviewPress(){pressedPreview?.classList.remove("is-pressed");pressedPreview=null;}
+  document.addEventListener("pointerup",clearPreviewPress,{passive:true});
+  document.addEventListener("pointercancel",clearPreviewPress,{passive:true});
+  document.addEventListener("scroll",clearPreviewPress,{passive:true,capture:true});
+  global.addEventListener("blur",clearPreviewPress);
+
+  function markedText(parent, text) {
+    var chunks = text.split(/(\{\{user\}\})/g);
+    chunks.forEach(function (chunk) {
+      parent.append(chunk === '{{user}}' ? element('mark', 'ww-opening-user', chunk) : document.createTextNode(chunk));
+    });
+  }
+
+  function markedDialogue(parent, text) {
+    text.split(/(\([^)]*[\uac00-\ud7a3][^)]*\))/g).forEach(function (chunk) {
+      if (/^\([^)]*[\uac00-\ud7a3]/.test(chunk)) {
+        var translation = element('span', 'ww-opening-translation');
+        markedText(translation, chunk);
+        parent.append(translation);
+      } else markedText(parent, chunk);
+    });
+  }
+
+  function markedNarration(parent, text) {
+    var pattern = /^[ \t]*["“][^\r\n]+/gm;
+    var cursor = 0, match;
+    while ((match = pattern.exec(text))) {
+      markedText(parent, text.slice(cursor, match.index));
+      var line = element('span', 'ww-opening-npc-dialogue');
+      markedDialogue(line, match[0]);
+      parent.append(line);
+      cursor = pattern.lastIndex;
+    }
+    markedText(parent, text.slice(cursor));
+  }
+
+  // Only the two canonical dialogue spans are interpreted; every other tag stays literal.
+  function renderPreview(source) {
+    var fragment = document.createDocumentFragment();
+    var text = String(source).replace(/<!--[\s\S]*?-->/g, '').replace(/(?:\r?\n)[ \t]*---[ \t]*\s*$/, '');
+    var pattern = /<span style="color:(#10ced9|#ff4b4b);">([\s\S]*?)<\/span>/g;
+    var cursor = 0, match;
+    while ((match = pattern.exec(text))) {
+      markedNarration(fragment, text.slice(cursor, match.index));
+      var span = element('span', 'ww-opening-dialogue');
+      span.style.color = match[1];
+      markedDialogue(span, match[2]);
+      fragment.append(span);
+      cursor = pattern.lastIndex;
+    }
+    markedNarration(fragment, text.slice(cursor));
+    return fragment;
+  }
+
+  function restorePreview() {
+    if (!overflow) return;
+    document.documentElement.style.overflow = overflow.html;
+    document.body.style.overflow = overflow.body;
+    overflow = null;
+    if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+  }
+
+  function closePreview() {
+    if (dialog && dialog.open) dialog.close();
+    restorePreview();
+  }
+
+  function createPreview() {
+    if (dialog) return;
+    dialog = element('dialog', 'ww-opening-preview');
+    dialog.setAttribute('aria-labelledby', 'ww-opening-preview-title');
+    var header = element('header', 'ww-opening-preview-head');
+    previewTitle = element('h2', '', '');
+    previewTitle.id = 'ww-opening-preview-title';
+    var close = element('button', 'ww-opening-preview-close', '×');
+    close.type = 'button';
+    close.setAttribute('aria-label', '도입부 미리보기 닫기');
+    close.addEventListener('click', closePreview);
+    header.append(previewTitle, close);
+    previewBody = element('div', 'ww-opening-preview-body');
+    dialog.append(header, previewBody);
+    document.body.append(dialog);
+    dialog.addEventListener('cancel', function (event) { event.preventDefault(); closePreview(); });
+    dialog.addEventListener('close', restorePreview);
+    dialog.addEventListener('click', function (event) {
+      var bounds = dialog.getBoundingClientRect();
+      if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) closePreview();
+    });
+  }
+
+  function openPreview(card, trigger) {
+    var source = global.WWOpeningPreviews && global.WWOpeningPreviews[card.dataset.plot];
+    if (!source || document.querySelector('dialog[open]')) return;
+    createPreview();
+    opener = trigger || card;
+    previewTitle.textContent = card.querySelector('h3').textContent;
+    if (card.dataset.plot === 'plot_auto_intro') {
+      var frame = element('iframe', 'ww-opening-component');
+      frame.title = '자유 도입부 안내 미리보기';
+      frame.src = '../WW/intro-preview/elyn.html?v=20261024-font-preview1';
+      frame.setAttribute('scrolling', 'no');
+      previewBody.replaceChildren(frame);
+    } else previewBody.replaceChildren(renderPreview(source));
+    overflow = { html: document.documentElement.style.overflow, body: document.body.style.overflow };
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    dialog.showModal();
+    dialog.scrollTop = 0;
+    previewBody.scrollTop = 0;
+    dialog.querySelector('.ww-opening-preview-close').focus({ preventScroll: true });
+  }
+
+  function openingParts(source, index) {
+    var text = String(source).replace(/^[⑴⑵⑶⑷⑸⑹]\s*/u, '');
+    var warning = text.match(/^🔞\s*/u);
+    if (warning) text = text.slice(warning[0].length);
+    var prefix = text.match(/^(납치 직후|납치 후 [^,:，：\n]+|자유 도입부)\s*[,，:：]\s*/u);
+    return {
+      title: (prefix ? prefix[1] : labels[index]) + (warning ? ' 🔞' : ''),
+      body: prefix ? text.slice(prefix[0].length) : text
+    };
+  }
+
+  function element(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  // Build real text and links without interpreting source text as HTML.
+  function prose(className, source) {
+    var node = element('div', className);
+    var text = String(source || '').replace(/#{4}/g, '').replace(/🔗/gu, '');
+    var pattern = /https?:\/\/[^\s<>]+/g;
+    var cursor = 0;
+    var match;
+    while ((match = pattern.exec(text))) {
+      node.append(document.createTextNode(text.slice(cursor, match.index)));
+      var link = element('a', '', match[0]);
+      link.href = match[0];
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      node.append(link);
+      cursor = pattern.lastIndex;
+    }
+    node.append(document.createTextNode(text.slice(cursor)));
+    return node;
+  }
+
+  function mount(root) {
+    var scope = root || document;
+    var panel = scope.matches && scope.matches('#openings') ? scope : scope.querySelector('#openings');
+    var data = global.WW;
+    if (!panel || !data || !Array.isArray(data.openings) || data.openings.length !== 6) return false;
+
+    var content = document.createDocumentFragment();
+    var heading = element('header', 'ww-openings-heading');
+    var title = element('h2', '', '도입부');
+    title.id = 'openings-title';
+    heading.append(title);
+    content.append(heading);
+
+    var grid = element('div', 'ww-openings-grid');
+    grid.id = 'opening-list';
+    data.openings.forEach(function (source, index) {
+      var parts = openingParts(source, index);
+      var number = String(index + 1).padStart(2, '0');
+      var card = element('article', 'ww-opening-card');
+      card.dataset.opening = number;
+      card.dataset.plot = plotIds[index];
+      card.dataset.motion = 'reveal';
+      var header = element('header', 'ww-opening-card-head');
+      var count = element('span', 'ww-opening-number', number);
+      count.setAttribute('aria-hidden', 'true');
+      var name = element('h3', '', parts.title);
+      name.id = 'ww-opening-title-' + number;
+      card.setAttribute('aria-labelledby', name.id);
+      header.append(count, name);
+      var previewButton = element('button', 'ww-opening-preview-button', '전문 보기');
+      previewButton.type = 'button';
+      const arrow=document.createElementNS("http://www.w3.org/2000/svg","svg");arrow.setAttribute("viewBox","0 0 16 16");arrow.setAttribute("aria-hidden","true");const arrowPath=document.createElementNS("http://www.w3.org/2000/svg","path");arrowPath.setAttribute("d","M3 13 13 3M4 3h9v9");arrow.append(arrowPath);previewButton.append(arrow);
+      previewButton.addEventListener("pointerdown",function(event){if(event.pointerType!=="mouse"){clearPreviewPress();pressedPreview=previewButton;previewButton.classList.add("is-pressed");}},{passive:true});
+      previewButton.setAttribute('aria-haspopup', 'dialog');
+      previewButton.setAttribute('aria-label', parts.title + ' 전문 보기');
+      previewButton.addEventListener('click', function (event) { event.stopPropagation(); openPreview(card, previewButton); });
+      header.append(previewButton);
+      var photo = element('div', 'ww-opening-photo');
+      photo.dataset.motion = 'tilt';
+      var image = element('img', '');
+      image.src = sceneImages[number];
+      image.alt = '';
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      image.width = 960;
+      image.height = 640;
+      image.dataset.imageViewer = 'on';
+      image.setAttribute('data-motion-image', '');
+      photo.append(image);
+      var body = prose('ww-openings-prose ww-opening-body', parts.body);
+      body.dataset.openingSource = number;
+      card.append(header, photo);
+      if (card.dataset.plot === 'plot1' || card.dataset.plot === 'plot2') {
+        card.classList.add('ww-opening-masked');
+        var walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+        var textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(function (textNode) {
+          if (!/좆|오럴/.test(textNode.nodeValue)) return;
+          var fragment = document.createDocumentFragment();
+          textNode.nodeValue.split(/(좆|오럴)/g).forEach(function (word) {
+            fragment.append(/^(좆|오럴)$/.test(word) ? element('span', 'ww-opening-masked-word', word) : document.createTextNode(word));
+          });
+          textNode.replaceWith(fragment);
+        });
+      }
+      card.append(body);
+      grid.append(card);
+    });
+    content.append(grid);
+    panel.classList.add('ww-openings-ui');
+    panel.setAttribute('aria-labelledby', 'openings-title');
+    panel.replaceChildren(content);
+    if (global.WWMotion && typeof global.WWMotion.refresh === 'function') global.WWMotion.refresh(panel);
+    var requested = new URLSearchParams(global.location.search).get('opening');
+    if (!requestedPreviewHandled && global.location.hash === '#openings' && plotIds.indexOf(requested) !== -1) {
+      requestedPreviewHandled = true;
+      global.requestAnimationFrame(function () {
+        var card = panel.querySelector('[data-plot="' + requested + '"]');
+        if (card) openPreview(card, card.querySelector('.ww-opening-preview-button'));
+      });
+    }
+    return panel;
+  }
+
+  global.addEventListener('message', function (event) {
+    if (event.origin !== global.location.origin || event.data?.type !== 'ww-intro-preview-height') return;
+    var frame = previewBody?.querySelector('iframe.ww-opening-component');
+    if (frame && event.source === frame.contentWindow && Number.isFinite(event.data.height)) frame.style.height = Math.max(100, Math.min(6000, event.data.height)) + 'px';
+  });
+  global.WWOpeningsUI = { mount: mount };
+})(window);
