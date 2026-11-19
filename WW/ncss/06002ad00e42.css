@@ -1,0 +1,96 @@
+.ww-rail-navigation {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--paper);
+  background: transparent;
+  border: 0;
+  font-family: var(--font-body);
+}
+.ww-hscroll-controls[hidden] { display: none !important; }
+.ww-rail-navigation .ww-rail-arrow {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--brass);
+  border-radius: 0;
+  color: var(--paper);
+  background: transparent;
+  font: 400 23px/1 var(--font-body);
+  cursor: pointer;
+  box-shadow: none;
+}
+.ww-rail-navigation .ww-rail-arrow[hidden] { display: none !important; }
+.ww-rail-navigation .ww-rail-arrow:disabled { opacity: .35; cursor: default; }
+.ww-rail-navigation .ww-rail-arrow:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.ww-hscroll-shell>[data-ww-hscroll-rail] { box-sizing: border-box; min-width: 0; max-width: 100%; width: 100%; margin: 0; grid-column: 2; }
+.ww-hscroll-shell>.ww-hscroll-arrow:first-child { grid-column: 1; }
+.ww-hscroll-shell>.ww-hscroll-arrow:last-child { grid-column: 3; }
+.ww-hscroll-shell:not(.ww-hscroll-active) { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.ww-hscroll-shell:not(.ww-hscroll-active)>[data-ww-hscroll-rail] { grid-column: 1; }
+.ww-site-header>.ww-hscroll-shell { flex-shrink: 0; padding-inline: max(24px,calc((100% - 1240px)/2)); }
+.ww-site-header>.ww-hscroll-shell>.chapter-nav { position: relative; top: auto; z-index: 30; display: flex; align-items: stretch; justify-content: flex-start; gap: 4px; height: 48px; min-height: 48px; padding: 0; background: var(--header-panel); border-bottom: 1px solid var(--brass); overflow-x: auto; scrollbar-width: none; white-space: nowrap; }
+.ww-site-header>.ww-hscroll-shell>.chapter-nav a { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; margin: 0; padding: 0 12px; font: var(--ww-header-type); white-space: nowrap; color: var(--muted); text-decoration: none; border: 0; border-bottom: 3px solid transparent; background: transparent; }
+.ww-site-header>.ww-hscroll-shell>.chapter-nav a small { font: 400 10px/1.5 var(--font-label); color: var(--brass); }
+.ww-site-header>.ww-hscroll-shell>.chapter-nav a[aria-current=page] { background: var(--stamp-red); color: var(--paper); border-bottom-color: var(--paper); }
+.ww-site-header>.ww-hscroll-shell>.chapter-nav a[aria-current=page] small { color: var(--paper); }
+@media (hover: hover)  and (pointer:fine){ .ww-rail-navigation .ww-rail-arrow:not(:disabled):hover { background: var(--brass); color: var(--tar); } .ww-site-header>.ww-hscroll-shell>.chapter-nav a:hover { background: var(--header-panel); color: var(--paper); } }@media (hover:none),(pointer:coarse),(pointer:none){.ww-rail-navigation .ww-rail-arrow:not(:disabled):active { background: var(--brass); color: var(--tar); }.ww-site-header>.ww-hscroll-shell>.chapter-nav a:active { background: var(--header-panel); color: var(--paper); }}
+@media(max-width:720px) { .ww-rail-navigation { gap: 6px; } }
+@media(max-width:600px) { .ww-site-header>.ww-hscroll-shell { padding-inline: 0; } }
+
+/* Mobile image rails keep their full width; their shared arrows sit below. */
+@media(max-width:600px) {
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation) {
+    grid-template-columns:minmax(0,1fr) 36px 36px minmax(0,1fr);
+    column-gap:8px;
+    row-gap:8px;
+  }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>:is(.wwtruck-thumbnail-strip,.ww-npc-film) {
+    grid-column:1/-1;
+    grid-row:1;
+    width:100%;
+    min-width:0;
+    max-width:100%;
+  }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow {
+    grid-row:2;
+    width:36px;
+    min-width:36px;
+    height:30px;
+    min-height:30px;
+    justify-self:center;
+  }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:first-child { grid-column:2; }
+  :is(#truck .ww-hscroll-shell:has(>.wwtruck-thumbnail-strip),#npc .ww-npc-navigation)>.ww-rail-arrow:last-child { grid-column:3; }
+}
+
+/* Horizontal rails contain their full row and never gain a vertical scrollbar. */
+[data-ww-hscroll-rail],.wwtruck-thumbnail-strip,.wwtruck-categories,.ww-npc-film,#guide .wg-groups{overflow-y:hidden}
+.wwtruck-thumbnail-strip,.ww-npc-film{height:auto;min-height:0}
+
+/* Compact header controls shared with the NODY introduction. */
+.ww-site-header>.ww-rail-navigation.ww-hscroll-active{grid-template-columns:30px minmax(0,1fr) 30px;gap:0}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow{display:flex;align-items:center;justify-content:center;width:30px;min-width:30px;height:100%;min-height:44px;align-self:stretch;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:0;line-height:1;color:var(--paper);filter:none;transform:none;transition:color 120ms ease;-webkit-tap-highlight-color:transparent}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow::before{content:"";display:block;width:10px;height:8px;background:currentColor;clip-path:polygon(100% 0,0 50%,100% 100%)}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:last-child::before{clip-path:polygon(0 0,100% 50%,0 100%)}
+@media (hover:hover) and (pointer:fine){.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):hover{color:var(--brass);background:transparent;box-shadow:none;filter:none}}@media (hover:none),(pointer:coarse),(pointer:none){.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):active{color:var(--brass);background:transparent;box-shadow:none;filter:none}}
+.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:not(:disabled):active{color:var(--cyan);background:transparent;box-shadow:none;filter:none}
+.ww-site-header>.ww-native-chapters>.ww-rail-arrow{cursor:pointer}
+.ww-native-chapters>.chapter-nav>.ww-chapter-target{display:block;position:static;flex:0 0 1px;align-self:stretch;width:1px;min-width:1px;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;pointer-events:none;scroll-margin-block:100vh}
+@media(min-width:721px){.n0 .ww-site-header>.ww-native-chapters{grid-template-columns:minmax(0,1fr);gap:0}.n0 .ww-native-chapters>.ww-rail-arrow{display:none}.n0 .ww-native-chapters>.chapter-nav{grid-column:1}}
+
+/* Shared slim chevrons for header, truck and NPC rails. */
+.ww-rail-navigation>.ww-rail-arrow{font-size:0!important}.ww-rail-navigation>.ww-rail-arrow::before{content:"";display:block;box-sizing:border-box;width:8px;height:8px;border:0;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;background:none;clip-path:none;transform:rotate(135deg)}.ww-rail-navigation>.ww-rail-arrow:last-child::before{transform:rotate(-45deg)}.ww-site-header>.ww-rail-navigation>.ww-rail-arrow::before{width:8px;height:8px;background:none;clip-path:none}.ww-site-header>.ww-rail-navigation>.ww-rail-arrow:last-child::before{clip-path:none}

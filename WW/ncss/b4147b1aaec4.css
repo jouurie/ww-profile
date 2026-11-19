@@ -1,0 +1,53 @@
+/* 2026-11 refresh. 모든 스타일 뒤에 불러온다.
+   1) 판형: 넓은 화면에서 본문 폭이 화면 폭 1430px 이 되어야 1100px 에 닿던 것을, 1040px 부터 바로
+      화면에 맞춰 넓힌다(최대 1100px). 표시 폭이 1100px 로 묶이는 틀에서 양옆이 비지 않는다.
+   2) 넓은 판에 맞춰 형제 · 도로와 생활 · 도입부 · 가이드 · 플레이리스트를 다시 짠다.
+   3) 글자 계층: 장 제목 › 조각 제목 › 소제목 › 본문 › 주석.
+   4) 새 그림 자리(.image-slot). */
+
+@media(min-width:1040px){
+  body:not(.n0){--ww-page-width:min(1100px,calc(100vw - 64px))}
+  :root{--ww-body-size:16px;--ww-body-leading:1.8;--ww-label-column:120px}
+  main #guide .ww-guide,#guide .ww-guide{--ww-body-size:15.5px;--ww-note-size:13px}
+  #intro .intro-left-stack{max-width:none}
+
+  /* 장 제목(h2) */
+  main .panel .ww-section-title{font-size:52px;line-height:1.2}
+  main .panel .ww-section-head .head-desc{font-size:17px;max-width:60ch}
+
+  /* 조각 제목(h3) › 소제목(h4) */
+  main .panel .piece-title,#world .ww-places-heading h3,#guide .wg-entry-head h3{font-size:27px;line-height:1.3}
+  main .panel .kv-heading{font-size:18.5px;line-height:1.5}
+}
+
+@media(min-width:1040px){
+  /* 형제: 두 사람의 신상 카드를 나란히 */
+  #brothers #brothers-mosaic.ww-profile-c>.mosaic-row-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+}
+
+@media(min-width:1040px){
+  /* 넓은 판에서 따로 px 로 박혀 있던 작은 글자들 */
+  #brothers .ww-profile-c .ww-profile-traits>li{font-size:13.5px}
+  #brothers .ww-profile-c .bd-head>.bd-role{font-size:12.5px}
+  #npc .ww-npc-name{font-size:23px}
+  #npc .ww-npc-english{font-size:13.5px}
+  #npc .ww-npc-trait{font-size:13px}
+  #openings .ww-opening-card-head h3{font-size:25px}
+  #openings .ww-opening-preview-button{font-size:13.5px}
+  #guide .wg-directory-heading{font-size:16px}
+  #guide .wg-item-selector button{font-size:14.5px}
+  #guide .ww-guide th{font-size:16.5px}
+  #truck .wwtruck-caption h3{font-size:24px}
+  #truck .wwtruck-category{font-size:13.5px}
+  #truck .wwtruck-thumbnail{font-size:13px}
+  #world .ww-place-stage figcaption h4{font-size:20px}
+  #radio .memo-item p{font-size:15px}
+}
+
+/* 고침: 플레이리스트의 흐르는 곡명이 화면 밖으로 새어 가로 스크롤이 생기던 것(휴대폰 폭 390px 에서 466px). */
+main>#radio{overflow-x:clip}
+#radio .tc-info{min-width:0;overflow:hidden}
+#radio .tc-title{display:block;overflow:hidden;text-overflow:ellipsis}
+
+/* Separate existing introduction paragraphs without changing their copy. */
+body #intro #intro-story-grid .intro-whole-body>p+p::before{content:'';display:block;height:1px;margin:12px 0;background:var(--brass-line);opacity:.55}
