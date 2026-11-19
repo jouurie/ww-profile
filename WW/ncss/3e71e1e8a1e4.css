@@ -1,10 +1,10 @@
 /* Preserve display and label faces; use Paybooc for reader text. */
-@font-face{font-family:Taenada;src:url('https://jouurie.github.io/ww-profile/WW/fonts/Tenada.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
-@font-face{font-family:Mujeokhaebeong;src:url('https://jouurie.github.io/ww-profile/WW/fonts/MarinesRegular.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
-@font-face{font-family:Mujeokhaebeong;src:url('https://jouurie.github.io/ww-profile/WW/fonts/MarinesBold.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
-@font-face{font-family:YUniverse;src:url('https://jouurie.github.io/ww-profile/WW/fonts/YUniverse-L.woff2') format('woff2');font-style:normal;font-weight:300 600;font-display:swap}
-@font-face{font-family:YUniverse;src:url('https://jouurie.github.io/ww-profile/WW/fonts/YUniverse-B.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
-@font-face{font-family:PureJeonnam;src:url('https://jouurie.github.io/ww-profile/WW/fonts/PureunJeonnam.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Taenada;src:url('../fonts/Tenada.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Mujeokhaebeong;src:url('../fonts/MarinesRegular.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
+@font-face{font-family:Mujeokhaebeong;src:url('../fonts/MarinesBold.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
+@font-face{font-family:YUniverse;src:url('../fonts/YUniverse-L.woff2') format('woff2');font-style:normal;font-weight:300 600;font-display:swap}
+@font-face{font-family:YUniverse;src:url('../fonts/YUniverse-B.woff2') format('woff2');font-style:normal;font-weight:700 900;font-display:swap}
+@font-face{font-family:PureJeonnam;src:url('../fonts/PureunJeonnam.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Light.woff2') format('woff2');font-style:normal;font-weight:300;font-display:swap}
 @font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:Sweet;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2');font-style:normal;font-weight:500;font-display:swap}

@@ -2458,7 +2458,7 @@ dialog .close-dialog {
   }
 }
 
-@font-face{font-family:'Pretendard Variable';src:url('https://jouurie.github.io/ww-profile/preview-argon/Pretendard-Regular.woff2') format('woff2');font-weight:400;font-display:swap}@font-face{font-family:'Pretendard Variable';src:url('https://jouurie.github.io/ww-profile/preview-argon/Pretendard-SemiBold.woff2') format('woff2');font-weight:500 900;font-display:swap}@font-face{font-family:'WWTitle';src:url('https://jouurie.github.io/ww-profile/preview-argon/Pretendard-SemiBold.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Pretendard Variable';src:url('../../preview-argon/Pretendard-Regular.woff2') format('woff2');font-weight:400;font-display:swap}@font-face{font-family:'Pretendard Variable';src:url('../../preview-argon/Pretendard-SemiBold.woff2') format('woff2');font-weight:500 900;font-display:swap}@font-face{font-family:'WWTitle';src:url('../../preview-argon/Pretendard-SemiBold.woff2') format('woff2');font-weight:400;font-display:swap}
 /* 도입부 6개 상시 펼침 카드 그리드 (PC 3x2, 좁은 화면 2x3) */
 #opening-list,
 .opening-grid {

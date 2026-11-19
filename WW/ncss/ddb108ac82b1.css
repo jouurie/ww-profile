@@ -663,9 +663,9 @@ body #intro .ww-intro-flip .tp-card-quote{font-size:14px;line-height:1.7;text-al
 }
 
 /* Handwritten names are local assets; the main poster keeps its display face. */
-@font-face{font-family:'Permanent Marker';src:url('https://jouurie.github.io/ww-profile/WW/fonts/PermanentMarker-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
-@font-face{font-family:Kalam;src:url('https://jouurie.github.io/ww-profile/WW/ncss/Kalam-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
-@font-face{font-family:'Shadows Into Light';src:url('https://jouurie.github.io/ww-profile/WW/fonts/ShadowsIntoLight.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'Permanent Marker';src:url('../fonts/PermanentMarker-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Kalam;src:url('Kalam-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:'Shadows Into Light';src:url('../fonts/ShadowsIntoLight.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
 body #intro .ww-intro-flip.wyatt .tp-name strong{font-family:'Permanent Marker',cursive!important;font-weight:400!important}
 body #intro .ww-intro-flip.wade .tp-name strong{font-family:'Shadows Into Light',cursive!important;font-weight:400!important;transform:translate(1px,3px) rotate(-2deg)}
 body #intro .ww-intro-flip .tp-name strong{font-style:normal!important;transform:rotate(-2deg);transform-origin:left center}
