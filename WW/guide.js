@@ -418,7 +418,7 @@
       pinballDialog.addEventListener('click',e=>{if(e.target!==pinballDialog)return;const r=pinballDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)pinballDialog.close();});
       pinballDialog.addEventListener('close',()=>{pinballDialog.querySelector('img').removeAttribute('src');});
     }
-    pinballDialog.querySelector('img').src=new URL('assets/pinball/play.webp',moduleBase).href;
+    pinballDialog.querySelector('img').src=new URL('https://cdn.imgchest.com/files/0ef0ff76aacf.webp',moduleBase).href;
     pinballDialog.showModal();
     pinballDialog.scrollTop=0;
   });

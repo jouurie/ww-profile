@@ -1,8 +1,6 @@
 /* Shared original-image viewer. Replacing an image src requires no viewer changes. */
 (function (global) {
   'use strict';
-  const scriptURL = document.currentScript?.src || new URL('../WW/image-viewer.js', location.href).href;
-  const portraits = new URL('assets/portraits/', scriptURL);
   const functional = 'a,button,label,summary,[role="button"],[role="tab"],[data-no-image-viewer],.ww-image-viewer';
   let dialog, image, opener;
   let previousOverflow = null;
@@ -14,7 +12,7 @@
       document.querySelectorAll('.brother-dossier.' + key + ' .portrait,.twin-polaroid.' + key + ' .portrait').forEach(frame => {
         if (frame.querySelector('img')) return;
         const photo = document.createElement('img');
-        photo.src = key === 'wade' ? 'https://cdn.imgchest.com/files/521b5f09c20f.png' : new URL(key + '.png', portraits).href;
+        photo.src = key === 'wade' ? 'https://cdn.imgchest.com/files/24f1f2d40601.png' : 'https://cdn.imgchest.com/files/ffda658d4a16.png';
         photo.alt = name;
         photo.width = 832; photo.height = 1216;
         photo.className = 'ww-character-portrait ww-character-portrait-' + key;

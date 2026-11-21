@@ -198,9 +198,9 @@ main:has(#guide:not([hidden])){padding:38px 0 55px;background:url('assets/guide-
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.curtain-stage .sleeper-photo{transition:none}}
 
 /* Rejected generated art is never displayed while NAIS replacements arrive. */
-body[data-art-pending] *{background-image:none!important}body[data-art-pending] img:is([src="hero.png"],[src="assets/guide-backdrop.png"],[src="assets/radio-dashboard.png"],[src="assets/truck-cab.png"],[src="assets/truck-sleeper.png"],[src="assets/motel.png"],[src="assets/road.png"],[src="assets/road-atlas.png"],[src="assets/keyring.png"]){visibility:hidden!important}
+body[data-art-pending] *{background-image:none!important}body[data-art-pending] img:is([src="https://cdn.imgchest.com/files/860206c7a235.png"],[src="assets/guide-backdrop.png"],[src="assets/radio-dashboard.png"],[src="assets/truck-cab.png"],[src="assets/truck-sleeper.png"],[src="assets/motel.png"],[src="assets/road.png"],[src="https://cdn.imgchest.com/files/6bb57af713c3.png"],[src="assets/keyring.png"]){visibility:hidden!important}
 
-body[data-art-pending] #intro .hero-image,body[data-art-pending] #truck img[src="hero.png"]{visibility:visible!important}body[data-art-pending] #intro .hero-shade{background-image:linear-gradient(180deg,#09080766,transparent 42%,#09080777)!important}
+body[data-art-pending] #intro .hero-image,body[data-art-pending] #truck img[src="https://cdn.imgchest.com/files/860206c7a235.png"]{visibility:visible!important}body[data-art-pending] #intro .hero-shade{background-image:linear-gradient(180deg,#09080766,transparent 42%,#09080777)!important}
 
 .physical-keyring{width:170px;height:240px;bottom:70px;right:4%}.physical-keyring img{width:100%;height:100%;object-fit:cover}
 

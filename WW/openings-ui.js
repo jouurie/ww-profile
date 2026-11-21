@@ -1,7 +1,7 @@
 /* Six always-open scene photographs. Source content remains in WW. */
 (function (global) {
   'use strict';
-  var sceneImages = {"01":"https://cdn.imgchest.com/files/9b65036dea36.png","02":"https://cdn.imgchest.com/files/83c52183f6b5.png","03":"https://cdn.imgchest.com/files/15f834822cc5.png","04":"https://cdn.imgchest.com/files/1a2529d842f4.png","05":"https://cdn.imgchest.com/files/5b1541f2ad05.png","06":"https://cdn.imgchest.com/files/9d1a1aa8a1b4.png"};
+  var sceneImages = {"01":"https://cdn.imgchest.com/files/07772bb9b2e5.png","02":"https://cdn.imgchest.com/files/32944eaa0ecb.png","03":"https://cdn.imgchest.com/files/9159b85b4ca3.png","04":"https://cdn.imgchest.com/files/087260cae7e1.png","05":"https://cdn.imgchest.com/files/ef72bbb9167f.png","06":"https://cdn.imgchest.com/files/03adc45430b5.png"};
   var labels = ['납치 직후', '납치 후 며칠', '납치 후 며칠', '납치 후 일주일', '납치 후 몇 주', '자유 도입부'];
   var plotIds = ['plot1', 'plot2', 'plot3', 'plot4', 'plot5', 'plot_auto_intro'];
   var dialog, previewTitle, previewBody, opener, overflow, pressedPreview;
